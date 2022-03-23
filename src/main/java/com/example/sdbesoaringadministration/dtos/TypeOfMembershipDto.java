@@ -6,12 +6,12 @@ public class TypeOfMembershipDto {
     public TypeOfMembershipDto() {
     }
 
-    public TypeOfMembershipDto(Long id, String typeOfMembership, int price ) {
+    public TypeOfMembershipDto(Long id, String title, int price ) {
         this.id = id;
-        this.typeOfMembership = typeOfMembership;
+        this.title = title;
         this.price = price;
     }
-    private String typeOfMembership;
+    private String title;
     private int price;
 
     public Long getId() {
@@ -22,4 +22,19 @@ public class TypeOfMembershipDto {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle( String typeOfMembership ) {
+        this.title = title;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice( int price ) {
+        this.price = price;
+    }
 }

@@ -42,7 +42,7 @@ public class MemberController {
 
     //    Check if member type is allready in db, if so do nothing and reply is already in db
     @PostMapping("/members")
-    public ResponseEntity<Object> addTelevision( @Valid @RequestBody MemberDto memberDto, BindingResult br ) {
+    public ResponseEntity<Object> addMember( @Valid @RequestBody MemberDto memberDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
             for ( FieldError fe : br.getFieldErrors() ) {
@@ -65,7 +65,7 @@ public class MemberController {
     }
 
     @PutMapping("/members/{id}")
-    public MemberDto updateTelevision( @PathVariable("id") Long id, @RequestBody MemberDto memberDto ) {
+    public MemberDto updateMember( @PathVariable("id") Long id, @RequestBody MemberDto memberDto ) {
 
         MemberDto dto = memberService.updateMember( id, memberDto );
 

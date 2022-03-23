@@ -40,7 +40,7 @@ public class PersonController {
 
     //    Check if person type is allready in db, if so do nothing and reply is already in db
     @PostMapping("/persons")
-    public ResponseEntity<Object> addTelevision( @Valid @RequestBody PersonDto personDto, BindingResult br ) {
+    public ResponseEntity<Object> addPerson( @Valid @RequestBody PersonDto personDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
             for ( FieldError fe : br.getFieldErrors() ) {
@@ -63,7 +63,7 @@ public class PersonController {
     }
 
     @PutMapping("/persons/{id}")
-    public PersonDto updateTelevision( @PathVariable("id") Long id, @RequestBody PersonDto person ) {
+    public PersonDto updatePerson( @PathVariable("id") Long id, @RequestBody PersonDto person ) {
 
         PersonDto dto = personService.updatePerson( id, person );
 

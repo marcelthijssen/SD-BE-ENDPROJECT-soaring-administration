@@ -16,22 +16,22 @@ import java.util.List;
 public class TypeOfMembershipController {
 
 
-    private final TypeOfMembershipService service;
+    private final TypeOfMembershipService tomService;
 
-    public TypeOfMembershipController( TypeOfMembershipService service ) {
-        this.service = service;
+    public TypeOfMembershipController( TypeOfMembershipService tomService ) {
+        this.tomService = tomService;
     }
 
 
     @GetMapping("/toms")
     public ResponseEntity<Object> getAllTypeOfMemberships() {
-        List<TypeOfMembershipDto> listTypeOfMembershipDto = service.getAllTypeOfMemberships();
+        List<TypeOfMembershipDto> listTypeOfMembershipDto = tomService.getAllTypeOfMemberships();
         return new ResponseEntity<>( listTypeOfMembershipDto, HttpStatus.OK );
     }
 
     @GetMapping("/toms/{id}")
     public ResponseEntity<Object> getTypeOfMembershipById( @PathVariable(name = "id") Long id ) {
-        TypeOfMembershipDto typeOfMembershipDto = service.getTypeOfMembershipById(id );
+        TypeOfMembershipDto typeOfMembershipDto = tomService.getTypeOfMembershipById(id );
         try {
             return ResponseEntity.ok( typeOfMembershipDto );
         } catch ( Exception ex ) {
@@ -50,7 +50,7 @@ public class TypeOfMembershipController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            service.addTypeOfMembership( typeOfMembershipDto );
+            tomService.addTypeOfMembership( typeOfMembershipDto );
             return new ResponseEntity( "Type of Membership added", HttpStatus.CREATED );
         }
     }
@@ -58,7 +58,7 @@ public class TypeOfMembershipController {
     @DeleteMapping("/toms/{id}")
     public void deleteTypeOfMembershipById(@PathVariable("id") Long id) {
 
-        service.deleteTypeOfMembershipById(id);
+        tomService.deleteTypeOfMembershipById(id);
 
     }
 
@@ -67,7 +67,7 @@ public class TypeOfMembershipController {
 
     public TypeOfMembershipDto updateTypeOfMembership(@PathVariable("id") Long id, @RequestBody TypeOfMembershipDto dto) {
 
-        TypeOfMembershipDto typeOfMembershipDto = service.updateTypeOfMembership(id, dto);
+        TypeOfMembershipDto typeOfMembershipDto = tomService.updateTypeOfMembership(id, dto);
 
         return typeOfMembershipDto;
 
