@@ -1,12 +1,12 @@
 package com.example.sdbesoaringadministration.dtos;
 
-public class MemberShipDto {
+public class TypeOfMembershipDto {
     private Long id;
 
-    public MemberShipDto() {
+    public TypeOfMembershipDto() {
     }
 
-    public MemberShipDto( Long id, String typeOfMembership, int price ) {
+    public TypeOfMembershipDto(Long id, String typeOfMembership, int price ) {
         this.id = id;
         this.typeOfMembership = typeOfMembership;
         this.price = price;

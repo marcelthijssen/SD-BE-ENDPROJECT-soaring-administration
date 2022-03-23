@@ -71,8 +71,6 @@ public class PlaneServiceImpl implements PlaneService {
         pl.setCallSign( planeDto.getCallSign() );
 //        pl.setPrivatePlane( planeDto.isPrivatePlane() );
         return this.planeRepository.save(pl);
-
-
     }
 
     @Override

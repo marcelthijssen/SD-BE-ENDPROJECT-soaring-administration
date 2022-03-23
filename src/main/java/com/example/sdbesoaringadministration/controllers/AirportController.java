@@ -50,24 +50,22 @@ public class AirportController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             service.addAirport( airportDto );
-            return new ResponseEntity( "CI-Module is aangemaakt", HttpStatus.CREATED );
+            return new ResponseEntity( "Airport added to list of airports", HttpStatus.CREATED );
         }
     }
 
     @DeleteMapping("/airports/{id}")
-    public void deleteCiModuleById(@PathVariable("id") Long id) {
+    public void deleteAirportById(@PathVariable("id") Long id) {
 
         service.deleteAirportById(id);
 
     }
 
     @PutMapping("/airports/{id}")
-    public AirportDto updateCiModule(@PathVariable("id") Long id, @RequestBody AirportDto ciModule) {
+    public AirportDto updateAirport(@PathVariable("id") Long id, @RequestBody AirportDto dto) {
 
-        AirportDto airportDto = service.updateAirport(id, ciModule);
-
+        AirportDto airportDto = service.updateAirport(id, dto);
         return airportDto;
-
     }
 
 }

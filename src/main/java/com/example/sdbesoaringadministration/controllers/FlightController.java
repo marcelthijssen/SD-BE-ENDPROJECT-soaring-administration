@@ -51,7 +51,7 @@ public class FlightController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             flightService.addFlight( flightDto );
-            return new ResponseEntity( "Televisie aangemaakt", HttpStatus.CREATED );
+            return new ResponseEntity( "Flight has been added", HttpStatus.CREATED );
         }
     }
 
