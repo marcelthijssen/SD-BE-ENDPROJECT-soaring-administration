@@ -1,27 +1,36 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
+
 public class AirportDto {
 
     private Long id;
-    private String ICAO;
+
+    @Length(min=4, max=4, message = "Must have exactly 4 characters")
+    private String Icao;
+
+    @NotBlank(message = "Location can not be empty")
     private String location;
 
+    // CONSTRUCTORS
     public AirportDto() {
     }
 
-
     public AirportDto( Long id, String ICAO, String location ) {
         this.id = id;
-        this.ICAO = ICAO;
+        this.Icao = ICAO;
         this.location = location;
     }
 
-    public String getICAO() {
-        return ICAO;
+//    GETTERS AND SETTERS
+    public String getIcao() {
+        return Icao;
     }
 
-    public void setICAO( String ICAO ) {
-        this.ICAO = ICAO;
+    public void setIcao( String icao ) {
+        this.Icao = icao;
     }
 
     public Long getId() {

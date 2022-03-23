@@ -2,18 +2,30 @@ package com.example.sdbesoaringadministration.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @Table(name = "airports")
 public class Airport {
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
+
+    private String Icao;
+    private String location;
+
+
+//    GETTERS AND SETTERS
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId( Long id ) {
+        this.id = id;
+    }
 
     public String getLocation() {
         return location;
@@ -23,23 +35,12 @@ public class Airport {
         this.location = location;
     }
 
-    private String ICAO;
-    private String location;
-
-
-    public String getICAO() {
-        return ICAO;
+    public String getIcao() {
+        return Icao;
     }
 
-    public void setICAO( String ICAO ) {
-        this.ICAO = ICAO;
+    public void setIcao( String Icao ) {
+        this.Icao = Icao;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId( Long id ) {
-        this.id = id;
-    }
 }

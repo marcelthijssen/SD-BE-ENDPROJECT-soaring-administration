@@ -23,7 +23,7 @@ public class AirportServiceImpl implements AirportService {
         List<Airport> listAirports = this.repos.findAll();
         List<AirportDto> listAirportsDto = new ArrayList<>();
 
-        listAirports.forEach( a -> listAirportsDto.add( new AirportDto( a.getId(), a.getICAO(), a.getLocation() ) ) );
+        listAirports.forEach( a -> listAirportsDto.add( new AirportDto( a.getId(), a.getIcao(), a.getLocation() ) ) );
         return listAirportsDto;
     }
 
@@ -33,7 +33,7 @@ public class AirportServiceImpl implements AirportService {
         if ( repos.findById( id ).isPresent() ) {
             Airport airport = repos.findById( id ).get();
             dto.setId( airport.getId() );
-            dto.setICAO( airport.getICAO() );
+            dto.setIcao( airport.getIcao() );
             dto.setLocation( airport.getLocation() );
             return dto;
         } else {
@@ -45,7 +45,7 @@ public class AirportServiceImpl implements AirportService {
     public Airport addAirport( AirportDto airportDto ) {
         Airport airport = new Airport();
         airport.setId( airportDto.getId() );
-        airport.setICAO( airportDto.getICAO() );
+        airport.setIcao( airportDto.getIcao() );
         airport.setLocation( airportDto.getLocation() );
 
         return this.repos.save( airport );
@@ -68,7 +68,7 @@ public class AirportServiceImpl implements AirportService {
         if ( repos.findById( id ).isPresent() ) {
             Airport airport = repos.findById( id ).get();
             dto.setId( airport.getId() );
-            dto.setICAO( airport.getICAO() );
+            dto.setIcao( airport.getIcao() );
             dto.setLocation( airport.getLocation() );
 
             repos.save(airport);

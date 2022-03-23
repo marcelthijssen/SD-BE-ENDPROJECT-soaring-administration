@@ -2,10 +2,8 @@ package com.example.sdbesoaringadministration.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -14,21 +12,27 @@ import java.util.Date;
 public class Person {
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String gender;
-    private String fname;
-    private String lname;
-    private Date doBirth;
-    private String streetname;
+    private String firstName;
+    private String lastName;
+    private Date dateOfBirth;
+    private String streetName;
+    private String houseNumber;
     private String postalcode;
     private String city;
+    private String country;
+
+    @Email
+    private String email;
+
     private int phone;
 
 
     public Long getId() {
-
         return id;
     }
 
@@ -44,36 +48,44 @@ public class Person {
         this.gender = gender;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFname( String fname ) {
-        this.fname = fname;
+    public void setFirstName( String firstName ) {
+        this.firstName = firstName;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLname( String lname ) {
-        this.lname = lname;
+    public void setLastName( String lastName ) {
+        this.lastName = lastName;
     }
 
-    public Date getDoBirth() {
-        return doBirth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDobirth( Date dobirth ) {
-        this.doBirth = dobirth;
+    public void setDateOfBirth( Date dateOfBirth ) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getStreetname() {
-        return streetname;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setStreetname( String streetname ) {
-        this.streetname = streetname;
+    public void setStreetName( String streetName ) {
+        this.streetName = streetName;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber( String houseNumber ) {
+        this.houseNumber = houseNumber;
     }
 
     public String getPostalcode() {
@@ -90,6 +102,22 @@ public class Person {
 
     public void setCity( String city ) {
         this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry( String country ) {
+        this.country = country;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail( String email ) {
+        this.email = email;
     }
 
     public int getPhone() {

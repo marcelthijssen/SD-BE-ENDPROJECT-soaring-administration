@@ -2,20 +2,19 @@ package com.example.sdbesoaringadministration.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "memberships")
-public class MemberShip {
+@Table(name = "typeOfMemberships")
+public class TypeOfMembership {
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String typeOfMembership;
+
     private int price;
 
     public Long getId() {
@@ -25,6 +24,5 @@ public class MemberShip {
     public void setId( Long id ) {
         this.id = id;
     }
-
 
 }
