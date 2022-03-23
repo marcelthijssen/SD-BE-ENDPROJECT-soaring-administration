@@ -62,7 +62,7 @@ public class PersonServiceImpl implements PersonService {
             dto.setPhone( p.getPhone() );
             return dto;
         } else {
-            throw new RecordNotFoundException( "Person not fuond" );
+            throw new RecordNotFoundException( "Person not found" );
         }
     }
 
@@ -109,8 +109,10 @@ public class PersonServiceImpl implements PersonService {
             p.setEmail( p.getEmail() );
             p.setPhone( p.getPhone() );
             personRepository.save( p );
-        }
+            return null;
+        } else {
 
-        return null;
+            throw new RecordNotFoundException( "Person not found" );
+        }
     }
 }

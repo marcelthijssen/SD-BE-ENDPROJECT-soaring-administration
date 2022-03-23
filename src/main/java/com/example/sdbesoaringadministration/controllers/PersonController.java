@@ -62,7 +62,7 @@ public class PersonController {
 
     }
 
-    @PutMapping("televisions/{id}")
+    @PutMapping("/persons/{id}")
     public PersonDto updateTelevision( @PathVariable("id") Long id, @RequestBody PersonDto person ) {
 
         PersonDto dto = personService.updatePerson( id, person );
