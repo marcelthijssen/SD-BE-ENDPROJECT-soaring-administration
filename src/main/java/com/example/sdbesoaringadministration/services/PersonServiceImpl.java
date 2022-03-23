@@ -18,7 +18,6 @@ public class PersonServiceImpl implements PersonService {
         this.personRepository = personRepository;
     }
 
-
     @Override
     public List<PersonDto> getAllPersons() {
         List<Person> personsList = this.personRepository.findAll();
@@ -27,7 +26,6 @@ public class PersonServiceImpl implements PersonService {
         for ( Person p : personsList ) {
             PersonDto dto = new PersonDto();
 
-            dto.setId( p.getId() );
             dto.setId( p.getId() );
             dto.setGender( p.getGender() );
             dto.setFirstName( p.getFirstName() );

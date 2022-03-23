@@ -69,19 +69,21 @@ public class PlaneDto {
         this.registration = registration;
     }
 
-    public boolean isTwoSeater() {
-        return twoSeater;
+    public boolean isTwoSeater( boolean twoSeater ) {
+        return this.twoSeater;
     }
 
     public void setTwoSeater( boolean twoSeater ) {
         this.twoSeater = twoSeater;
     }
 
-    public boolean isPrivatePlane() {
-        return privatePlane;
+    public boolean isPrivatePlane( boolean privatePlane ) {
+        return this.privatePlane;
     }
 
     public void setPrivatePlane( boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
+
+
 }
