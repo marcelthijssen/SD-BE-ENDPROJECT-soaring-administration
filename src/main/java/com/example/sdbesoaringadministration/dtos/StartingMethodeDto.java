@@ -1,21 +1,19 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 public class StartingMethodeDto {
 
     private Long id;
 
     private String title;
-    private String price;
+    private BigDecimal price;
 
     // constructors
     public StartingMethodeDto() {
     }
 
-    public StartingMethodeDto( String title, String price ) {
+    public StartingMethodeDto( String title, BigDecimal price ) {
         this.title = title;
         this.price = price;
     }
@@ -29,14 +27,13 @@ public class StartingMethodeDto {
         this.title = title;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice( String price ) {
+    public void setPrice( BigDecimal price ) {
         this.price = price;
     }
-
 
     public Long getId() {
         return id;

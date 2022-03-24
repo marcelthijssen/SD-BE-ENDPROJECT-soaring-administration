@@ -49,12 +49,12 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
     }
 
     @Override
-    public TypeOfMembership addTypeOfMembership( TypeOfMembershipDto typeOfMembershipDto ) {
+    public void addTypeOfMembership( TypeOfMembershipDto typeOfMembershipDto ) {
         TypeOfMembership tom = new TypeOfMembership();
         tom.setId( typeOfMembershipDto.getId() );
         tom.setTitle( typeOfMembershipDto.getTitle() );
         tom.setCostsPerMonth( typeOfMembershipDto.getCostsPerMonth() );
-        return this.tomRepository.save( tom );
+        this.tomRepository.save( tom );
     }
 
     @Override

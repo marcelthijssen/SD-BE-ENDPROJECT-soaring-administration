@@ -1,9 +1,7 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class FlightDto {
 

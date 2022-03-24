@@ -12,17 +12,14 @@ public class MemberDto extends PersonDto {
 
     private String pilotLicense;
 
-    private String ownerOfPlane;
+   public MemberDto(){}
 
-    public MemberDto(){}
-
-    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, int phone, String userName, String password, String membership, String pilotLicense, String ownerOfPlane ) {
+    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, int phone, String userName, String password, String membership, String pilotLicense ) {
         super( id, gender, firstName, lastName, dateOfBirth, streetName, houseNumber, postalcode, city, country, email, phone );
         this.userName = userName;
         this.password = password;
         this.membership = membership;
         this.pilotLicense = pilotLicense;
-        this.ownerOfPlane = ownerOfPlane;
     }
 
     public String getUserName() {
@@ -57,11 +54,4 @@ public class MemberDto extends PersonDto {
         this.pilotLicense = pilotLicense;
     }
 
-    public String getOwnerOfPlane() {
-        return ownerOfPlane;
-    }
-
-    public void setOwnerOfPlane( String ownerOfPlane ) {
-        this.ownerOfPlane = ownerOfPlane;
-    }
 }

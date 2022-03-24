@@ -1,14 +1,11 @@
 package com.example.sdbesoaringadministration.models;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+
 
 @Entity
 @Data
-@Table(name = "members")
 public class Member extends Person {
 
     private String userName;
@@ -18,9 +15,9 @@ public class Member extends Person {
     private String membership;
 
     private String pilotLicense;
-    private String ownerOfPlane;
 
 
+//GETTERS en setters
 
     public String getUserName() {
         return userName;
@@ -54,11 +51,4 @@ public class Member extends Person {
         this.pilotLicense = pilotLicense;
     }
 
-    public String getOwnerOfPlane() {
-        return ownerOfPlane;
-    }
-
-    public void setOwnerOfPlane( String ownerOfPlane ) {
-        this.ownerOfPlane = ownerOfPlane;
-    }
 }

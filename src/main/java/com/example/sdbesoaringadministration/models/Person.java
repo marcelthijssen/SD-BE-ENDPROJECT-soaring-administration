@@ -21,18 +21,14 @@ public class Person {
 
     private String firstName;
 
-    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
     private String postalcode;
     private String city;
     private String country;
-
-    @Email
     private String email;
     private int phone;
 

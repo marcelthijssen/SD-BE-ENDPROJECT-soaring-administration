@@ -1,17 +1,29 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import net.bytebuddy.implementation.bind.annotation.Empty;
+
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
+
 public class TypeOfMembershipDto {
 
     private Long id;
 
+    @NotBlank(message = "Must have a title")
     private String title;
-    private int costsPerMonth;
+
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer=4, fraction=2)
+    private BigDecimal costsPerMonth;
 
     //    Constructors
     public TypeOfMembershipDto() {
     }
 
-    public TypeOfMembershipDto( Long id, String title, int costsPerMonth ) {
+    public TypeOfMembershipDto( Long id, String title, BigDecimal costsPerMonth ) {
         this.id = id;
         this.title = title;
         this.costsPerMonth = costsPerMonth;
@@ -35,11 +47,11 @@ public class TypeOfMembershipDto {
         this.title = title;
     }
 
-    public int getCostsPerMonth() {
+    public BigDecimal getCostsPerMonth() {
         return costsPerMonth;
     }
 
-    public void setCostsPerMonth( int costsPerMonth ) {
+    public void setCostsPerMonth( BigDecimal costsPerMonth ) {
         this.costsPerMonth = costsPerMonth;
     }
 }

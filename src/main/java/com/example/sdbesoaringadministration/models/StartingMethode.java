@@ -3,7 +3,10 @@ package com.example.sdbesoaringadministration.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -17,8 +20,9 @@ public class StartingMethode {
     @NotBlank
     private String title;
 
-    @NotBlank
-    private String price;
+    @DecimalMin(value = "0.0", message="value = 0.0")
+    @Digits(integer=1, fraction=2)
+    private BigDecimal price;
 
 
     //getters an setters
@@ -30,14 +34,13 @@ public class StartingMethode {
         this.title = title;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice( String price ) {
+    public void setPrice( BigDecimal price ) {
         this.price = price;
     }
-
 
     public Long getId() {
         return id;

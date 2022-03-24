@@ -1,5 +1,9 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
@@ -7,15 +11,23 @@ public class PersonDto {
 
     private Long id;
     private String gender;
+
     @NotBlank(message = "Firstname can not be empty")
     private String firstName;
+
+    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
+
+    @DateTimeFormat
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
     private String postalcode;
     private String city;
     private String country;
+
+    @Email
     private String email;
     private int phone;
 

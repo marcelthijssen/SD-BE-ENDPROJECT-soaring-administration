@@ -77,13 +77,11 @@ public class PlaneDto {
         this.twoSeater = twoSeater;
     }
 
-    public boolean isPrivatePlane( boolean privatePlane ) {
-        return this.privatePlane;
+    public boolean isPrivatePlane() {
+        return privatePlane;
     }
 
     public void setPrivatePlane( boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
-
-
 }

@@ -34,12 +34,10 @@ public class PlaneServiceImpl implements PlaneService {
             dto.isTwoSeater( pl.isTwoSeater() );
             dto.setRegistration( pl.getRegistration() );
             dto.setCallSign( pl.getCallSign() );
-            dto.isPrivatePlane( pl.isPrivatePlane() );
+            dto.setPrivatePlane( pl.isPrivatePlane() );
             planeDtoList.add( dto );
-
         }
         return planeDtoList;
-
     }
 
     @Override
@@ -50,10 +48,10 @@ public class PlaneServiceImpl implements PlaneService {
             dto.setId( pl.getId() );
             dto.setBrand( pl.getBrand() );
             dto.setType( pl.getType() );
-            dto.isTwoSeater( pl.isTwoSeater() );
+            dto.setTwoSeater( pl.isTwoSeater() );
             dto.setRegistration( pl.getRegistration() );
             dto.setCallSign( pl.getCallSign() );
-            dto.isPrivatePlane( pl.isPrivatePlane() );
+            dto.setPrivatePlane( pl.isPrivatePlane() );
             return dto;
         } else {
             throw new RecordNotFoundException("No such plane here");
@@ -66,10 +64,10 @@ public class PlaneServiceImpl implements PlaneService {
         pl.setId( planeDto.getId() );
         pl.setBrand( planeDto.getBrand() );
         pl.setType( planeDto.getType() );
-//        pl.setTwoSeater( planeDto.isTwoSeater() );
+        pl.setTwoSeater( planeDto.isTwoSeater( pl.isTwoSeater() ) );
         pl.setRegistration( planeDto.getRegistration() );
         pl.setCallSign( planeDto.getCallSign() );
-//        pl.setPrivatePlane( planeDto.isPrivatePlane() );
+        pl.setPrivatePlane( planeDto.isPrivatePlane() );
         return this.planeRepository.save(pl);
     }
 

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -14,11 +15,10 @@ public class TypeOfMembership {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotBlank
     private String title;
+    private BigDecimal costsPerMonth;
 
-    @NotBlank
-    private int costsPerMonth;
+//    GETTERS en SETTERS
 
     public Long getId() {
         return id;
@@ -36,11 +36,11 @@ public class TypeOfMembership {
         this.title = title;
     }
 
-    public int getCostsPerMonth() {
+    public BigDecimal getCostsPerMonth() {
         return costsPerMonth;
     }
 
-    public void setCostsPerMonth( int costsPerMonth ) {
+    public void setCostsPerMonth( BigDecimal costsPerMonth ) {
         this.costsPerMonth = costsPerMonth;
     }
 }

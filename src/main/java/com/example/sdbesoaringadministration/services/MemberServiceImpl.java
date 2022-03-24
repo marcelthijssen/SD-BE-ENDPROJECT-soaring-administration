@@ -31,7 +31,6 @@ public class MemberServiceImpl implements MemberService {
             dto.setUserName( m.getUserName() );
             dto.setPassword( m.getPassword() );
             dto.setPilotLicense( m.getPilotLicense() );
-            dto.setOwnerOfPlane( m.getOwnerOfPlane() );
             dto.setGender( m.getGender() );
             dto.setFirstName( m.getFirstName() );
             dto.setLastName( m.getLastName() );
@@ -59,7 +58,6 @@ public class MemberServiceImpl implements MemberService {
             dto.setUserName( m.getUserName() );
             dto.setPassword( m.getPassword() );
             dto.setPilotLicense( m.getPilotLicense() );
-            dto.setOwnerOfPlane( m.getOwnerOfPlane() );
             dto.setGender( m.getGender() );
             dto.setFirstName( m.getFirstName() );
             dto.setLastName( m.getLastName() );
@@ -77,14 +75,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member addMember( MemberDto memberDto ) {
+    public void addMember( MemberDto memberDto ) {
         Member m = new Member();
         m.setId( memberDto.getId() );
         m.setMembership( memberDto.getMembership() );
         m.setUserName( memberDto.getUserName() );
         m.setPassword( memberDto.getPassword() );
         m.setPilotLicense( memberDto.getPilotLicense() );
-        m.setOwnerOfPlane( memberDto.getOwnerOfPlane() );
         m.setGender( memberDto.getGender() );
         m.setFirstName( memberDto.getFirstName() );
         m.setLastName( memberDto.getLastName() );
@@ -96,7 +93,7 @@ public class MemberServiceImpl implements MemberService {
         m.setEmail( memberDto.getEmail() );
         m.setPhone( memberDto.getPhone() );
 
-        return this.memberRepository.save( m );
+        this.memberRepository.save( m );
     }
 
     @Override
@@ -118,7 +115,6 @@ public class MemberServiceImpl implements MemberService {
             m.setUserName( m.getUserName() );
             m.setPassword( m.getPassword() );
             m.setPilotLicense( m.getPilotLicense() );
-            m.setOwnerOfPlane( m.getOwnerOfPlane() );
             m.setGender( m.getGender() );
             m.setFirstName( m.getFirstName() );
             m.setLastName( m.getLastName() );
