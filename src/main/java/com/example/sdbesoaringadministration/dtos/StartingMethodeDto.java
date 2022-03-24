@@ -6,14 +6,9 @@ import javax.validation.constraints.NotBlank;
 
 public class StartingMethodeDto {
 
-    @Id
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotBlank
     private String title;
-
-    @NotBlank
     private String price;
 
     // constructors

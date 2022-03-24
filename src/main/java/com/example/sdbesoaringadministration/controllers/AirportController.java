@@ -15,22 +15,22 @@ import java.util.List;
 @RestController
 public class AirportController {
 
-    private final AirportService service;
+    private final AirportService airportService;
 
     public AirportController( AirportService service ) {
-        this.service = service;
+        this.airportService = service;
     }
 
 
     @GetMapping("/airports")
     public ResponseEntity<Object> getAllAirports() {
-        List<AirportDto> listAirportsDto = service.getAllAirports();
+        List<AirportDto> listAirportsDto = airportService.getAllAirports();
         return new ResponseEntity<>( listAirportsDto, HttpStatus.OK );
     }
 
     @GetMapping("/airports/{id}")
     public ResponseEntity<Object> getAirportById( @PathVariable(name = "id") Long id ) {
-        AirportDto airportDto = service.getAirportsById( id );
+        AirportDto airportDto = airportService.getAirportsById( id );
         try {
             return ResponseEntity.ok( airportDto );
         } catch ( Exception ex ) {
@@ -49,7 +49,7 @@ public class AirportController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            service.addAirport( airportDto );
+            airportService.addAirport( airportDto );
             return new ResponseEntity( "Airport added to list of airports", HttpStatus.CREATED );
         }
     }
@@ -57,14 +57,14 @@ public class AirportController {
     @DeleteMapping("/airports/{id}")
     public void deleteAirportById(@PathVariable("id") Long id) {
 
-        service.deleteAirportById(id);
+        airportService.deleteAirportById(id);
 
     }
 
     @PutMapping("/airports/{id}")
     public AirportDto updateAirport(@PathVariable("id") Long id, @RequestBody AirportDto dto) {
 
-        AirportDto airportDto = service.updateAirport(id, dto);
+        AirportDto airportDto = airportService.updateAirport(id, dto);
         return airportDto;
     }
 

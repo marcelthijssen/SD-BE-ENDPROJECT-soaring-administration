@@ -11,18 +11,16 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "members")
 public class Member extends Person {
 
-    @NotBlank
     private String userName;
 
-    @NotBlank
     private String password;
 
-    @NotBlank
     private String membership;
 
     private String pilotLicense;
-
     private String ownerOfPlane;
+
+
 
     public String getUserName() {
         return userName;

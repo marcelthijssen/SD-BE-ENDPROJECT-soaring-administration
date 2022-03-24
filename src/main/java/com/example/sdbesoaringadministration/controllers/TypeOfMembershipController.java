@@ -51,7 +51,7 @@ public class TypeOfMembershipController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             tomService.addTypeOfMembership( typeOfMembershipDto );
-            return new ResponseEntity( "Type of Membership added", HttpStatus.CREATED );
+            return new ResponseEntity( "Type of Membership added to the system", HttpStatus.CREATED );
         }
     }
 

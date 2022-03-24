@@ -1,8 +1,10 @@
 package com.example.sdbesoaringadministration.models;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -13,12 +15,14 @@ public class Airport {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Length(min=4, max=4, message = "Must have exactly 4 characters")
     private String Icao;
+
+    @NotBlank(message = "Location can not be empty")
     private String location;
 
 
 //    GETTERS AND SETTERS
-
     public Long getId() {
         return id;
     }

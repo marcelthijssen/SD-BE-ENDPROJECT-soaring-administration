@@ -1,10 +1,11 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -17,9 +18,14 @@ public class Person {
     private Long id;
 
     private String gender;
+
     private String firstName;
+
+    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
-    private Date dateOfBirth;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate birthday;
     private String streetName;
     private String houseNumber;
     private String postalcode;
@@ -28,7 +34,6 @@ public class Person {
 
     @Email
     private String email;
-
     private int phone;
 
 
@@ -64,12 +69,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setDateOfBirth( Date dateOfBirth ) {
-        this.dateOfBirth = dateOfBirth;
+    public void setBirthday( LocalDate dateOfBirth ) {
+        this.birthday = dateOfBirth;
     }
 
     public String getStreetName() {

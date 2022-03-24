@@ -1,18 +1,23 @@
 package com.example.sdbesoaringadministration.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
+@Data
+@Table(name = "startingmethods")
 public class StartingMethode {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String price;
 
 

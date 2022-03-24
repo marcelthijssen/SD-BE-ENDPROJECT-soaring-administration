@@ -30,9 +30,10 @@ public class PersonServiceImpl implements PersonService {
             dto.setGender( p.getGender() );
             dto.setFirstName( p.getFirstName() );
             dto.setLastName( p.getLastName() );
-            dto.setDateOfBirth( p.getDateOfBirth() );
+            dto.setBirthday( p.getBirthday() );
             dto.setStreetName( p.getStreetName() );
             dto.setHouseNumber( p.getHouseNumber() );
+            dto.setPostalcode( p.getPostalcode() );
             dto.setCity( p.getCity() );
             dto.setCountry( p.getCountry() );
             dto.setEmail( p.getEmail() );
@@ -51,9 +52,10 @@ public class PersonServiceImpl implements PersonService {
             dto.setGender( p.getGender() );
             dto.setFirstName( p.getFirstName() );
             dto.setLastName( p.getLastName() );
-            dto.setDateOfBirth( p.getDateOfBirth() );
+            dto.setBirthday( p.getBirthday() );
             dto.setStreetName( p.getStreetName() );
             dto.setHouseNumber( p.getHouseNumber() );
+            dto.setPostalcode( p.getPostalcode() );
             dto.setCity( p.getCity() );
             dto.setCountry( p.getCountry() );
             dto.setEmail( p.getEmail() );
@@ -71,9 +73,10 @@ public class PersonServiceImpl implements PersonService {
         p.setGender( personDto.getGender() );
         p.setFirstName( personDto.getFirstName() );
         p.setLastName( personDto.getLastName() );
-        p.setDateOfBirth( personDto.getDateOfBirth() );
+        p.setBirthday( personDto.getBirthday() );
         p.setStreetName( personDto.getStreetName() );
         p.setHouseNumber( personDto.getHouseNumber() );
+        p.setPostalcode( personDto.getPostalcode() );
         p.setCity( personDto.getCity() );
         p.setCountry( personDto.getCountry() );
         p.setEmail( personDto.getEmail() );
@@ -99,18 +102,19 @@ public class PersonServiceImpl implements PersonService {
             p.setGender( p.getGender() );
             p.setFirstName( p.getFirstName() );
             p.setLastName( p.getLastName() );
-            p.setDateOfBirth( p.getDateOfBirth() );
+            p.setBirthday( p.getBirthday() );
             p.setStreetName( p.getStreetName() );
             p.setHouseNumber( p.getHouseNumber() );
+            p.setPostalcode( p.getPostalcode() );
             p.setCity( p.getCity() );
             p.setCountry( p.getCountry() );
             p.setEmail( p.getEmail() );
             p.setPhone( p.getPhone() );
             personRepository.save( p );
-            return null;
         } else {
 
             throw new RecordNotFoundException( "Person not found" );
         }
+        return null;
     }
 }

@@ -23,7 +23,7 @@ public class FlightServiceImpl implements FlightService {
         List<Flight> flightList = this.repository.findAll();
         List<FlightDto> flightDtoList = new ArrayList<>();
 
-        flightList.forEach( f -> flightDtoList.add( new FlightDto( f.getId(), f.getStartTime(), f.getEndTime(), f.getGezagvoerder(), f.getPassenger(), f.isInstructionFlight(), f.getRemarks() ) ) );
+        flightList.forEach( f -> flightDtoList.add( new FlightDto( f.getId(), f.getStartTime(), f.getEndTime(), f.getCaptain(), f.getPassenger(), f.isInstructionFlight(), f.getRemarks() ) ) );
 
         return flightDtoList;
     }
@@ -36,7 +36,7 @@ public class FlightServiceImpl implements FlightService {
             dto.setId( f.getId() );
             dto.setStartTime( f.getStartTime() );
             dto.setEndTime( f.getEndTime() );
-            dto.setGezagvoerder( f.getGezagvoerder() );
+            dto.setCaptain( f.getCaptain() );
             dto.setPassenger( f.getPassenger() );
             dto.setInstructionFlight( f.isInstructionFlight() );
             dto.setRemarks( f.getRemarks() );
@@ -52,7 +52,7 @@ public class FlightServiceImpl implements FlightService {
         f.setId( flightDto.getId() );
         f.setStartTime( flightDto.getStartTime() );
         f.setEndTime( flightDto.getEndTime() );
-        f.setGezagvoerder( flightDto.getGezagvoerder() );
+        f.setCaptain( flightDto.getCaptain() );
         f.setPassenger( flightDto.getPassenger() );
         f.setInstructionFlight( flightDto.isInstructionFlight() );
         f.setRemarks( flightDto.getRemarks() );
@@ -76,7 +76,7 @@ public class FlightServiceImpl implements FlightService {
             f.setId( flightDto.getId() );
             f.setStartTime( flightDto.getStartTime() );
             f.setEndTime( flightDto.getEndTime() );
-            f.setGezagvoerder( flightDto.getGezagvoerder() );
+            f.setCaptain( flightDto.getCaptain() );
             f.setPassenger( flightDto.getPassenger() );
             f.setInstructionFlight( flightDto.isInstructionFlight() );
             f.setRemarks( flightDto.getRemarks() );

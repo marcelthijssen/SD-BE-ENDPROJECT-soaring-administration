@@ -3,6 +3,7 @@ package com.example.sdbesoaringadministration.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -13,9 +14,11 @@ public class TypeOfMembership {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotBlank
     private String title;
 
-    private int price;
+    @NotBlank
+    private int costsPerMonth;
 
     public Long getId() {
         return id;
@@ -33,11 +36,11 @@ public class TypeOfMembership {
         this.title = title;
     }
 
-    public int getPrice() {
-        return price;
+    public int getCostsPerMonth() {
+        return costsPerMonth;
     }
 
-    public void setPrice( int price ) {
-        this.price = price;
+    public void setCostsPerMonth( int costsPerMonth ) {
+        this.costsPerMonth = costsPerMonth;
     }
 }

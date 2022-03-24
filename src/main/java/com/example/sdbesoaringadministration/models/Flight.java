@@ -1,6 +1,10 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -10,10 +14,14 @@ public class Flight {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Date startTime;
-    private Date endTime;
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime startTime;
 
-    private String gezagvoerder;
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime endTime;
+
+    @NotBlank
+    private String captain;
     private String passenger;
 
     private boolean instructionFlight;
@@ -37,28 +45,28 @@ public class Flight {
         this.id = id;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime( Date startTime ) {
+    public void setStartTime( LocalDateTime startTime ) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime( Date endTime ) {
+    public void setEndTime( LocalDateTime endTime ) {
         this.endTime = endTime;
     }
 
-    public String getGezagvoerder() {
-        return gezagvoerder;
+    public String getCaptain() {
+        return captain;
     }
 
-    public void setGezagvoerder( String gezagvoerder ) {
-        this.gezagvoerder = gezagvoerder;
+    public void setCaptain( String gezagvoerder ) {
+        this.captain = gezagvoerder;
     }
 
     public String getPassenger() {

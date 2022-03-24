@@ -3,6 +3,7 @@ package com.example.sdbesoaringadministration.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -19,6 +20,7 @@ public class Plane {
 
     private String type;
 
+    @NotBlank(message = "Registration can not be empty")
     private String registration;
 
     private boolean twoSeater;

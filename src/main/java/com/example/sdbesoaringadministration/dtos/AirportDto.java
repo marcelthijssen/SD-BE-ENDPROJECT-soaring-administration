@@ -1,17 +1,10 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-
 public class AirportDto {
 
     private Long id;
 
-    @Length(min=4, max=4, message = "Must have exactly 4 characters")
     private String Icao;
-
-    @NotBlank(message = "Location can not be empty")
     private String location;
 
     // CONSTRUCTORS

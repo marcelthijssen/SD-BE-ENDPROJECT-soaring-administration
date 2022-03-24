@@ -1,7 +1,7 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.StartingMethodeDto;
-import com.example.sdbesoaringadministration.models.Person;
+import com.example.sdbesoaringadministration.models.StartingMethode;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     }
 
     @Override
-    public Person addStartingMethode( StartingMethodeDto startingMethodeDto ) {
+    public StartingMethode addStartingMethode( StartingMethodeDto startingMethodeDto ) {
         return null;
     }
 

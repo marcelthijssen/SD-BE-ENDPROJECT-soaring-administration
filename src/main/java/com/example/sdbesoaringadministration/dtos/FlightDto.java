@@ -1,15 +1,19 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class FlightDto {
 
     private Long id;
 
-    private Date startTime;
-    private Date endTime;
+    private LocalDateTime startTime;
 
-    private String gezagvoerder;
+    private LocalDateTime endTime;
+
+    private String captain;
     private String passenger;
 
     private boolean instructionFlight;
@@ -21,15 +25,14 @@ public class FlightDto {
     public FlightDto() {
     }
 
-    public FlightDto( Long id, Date startTime, Date endTime, String gezagvoerder, String passenger, boolean instructionFlight, String remarks ) {
+    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, String captain, String passenger, boolean instructionFlight, String remarks ) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.gezagvoerder = gezagvoerder;
+        this.captain = captain;
         this.passenger = passenger;
         this.instructionFlight = instructionFlight;
         this.remarks = remarks;
-
     }
 
 
@@ -41,28 +44,28 @@ public class FlightDto {
         this.id = id;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime( Date startTime ) {
+    public void setStartTime( LocalDateTime startTime ) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime( Date endTime ) {
+    public void setEndTime( LocalDateTime endTime ) {
         this.endTime = endTime;
     }
 
-    public String getGezagvoerder() {
-        return gezagvoerder;
+    public String getCaptain() {
+        return captain;
     }
 
-    public void setGezagvoerder( String gezagvoerder ) {
-        this.gezagvoerder = gezagvoerder;
+    public void setCaptain( String captain ) {
+        this.captain = captain;
     }
 
     public String getPassenger() {

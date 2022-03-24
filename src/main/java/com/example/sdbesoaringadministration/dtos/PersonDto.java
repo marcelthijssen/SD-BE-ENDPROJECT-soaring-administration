@@ -1,14 +1,16 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 public class PersonDto {
 
     private Long id;
     private String gender;
+    @NotBlank(message = "Firstname can not be empty")
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private LocalDate birthday;
     private String streetName;
     private String houseNumber;
     private String postalcode;
@@ -20,12 +22,12 @@ public class PersonDto {
     public PersonDto(){
     }
 
-    public PersonDto( Long id, String gender, String firstName, String lastName, Date dateOfBirth, String streetName, String houseNumber, String postalcode,String city, String country, String email, int phone ) {
+    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode,String city, String country, String email, int phone ) {
         this.id = id;
         this.gender = gender;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
+        this.birthday = birthday;
         this.streetName = streetName;
         this.houseNumber=houseNumber;
         this.postalcode = postalcode;
@@ -68,8 +70,8 @@ public class PersonDto {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
     public String getCountry() {
@@ -80,8 +82,8 @@ public class PersonDto {
         this.country = country;
     }
 
-    public void setDateOfBirth( Date doBirth ) {
-        this.dateOfBirth = dateOfBirth;
+    public void setBirthday( LocalDate doBirth ) {
+        this.birthday = birthday;
     }
 
     public String getStreetName() {

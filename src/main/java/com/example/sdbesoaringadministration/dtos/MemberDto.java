@@ -1,16 +1,13 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MemberDto extends PersonDto {
-    @NotBlank
+
     private String userName;
-
-    @NotBlank
     private String password;
-
-    @NotBlank
     private String membership;
 
     private String pilotLicense;
@@ -19,8 +16,7 @@ public class MemberDto extends PersonDto {
 
     public MemberDto(){}
 
-
-    public MemberDto( Long id, String gender, String firstName, String lastName, Date dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, int phone, String userName, String password, String membership, String pilotLicense, String ownerOfPlane ) {
+    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, int phone, String userName, String password, String membership, String pilotLicense, String ownerOfPlane ) {
         super( id, gender, firstName, lastName, dateOfBirth, streetName, houseNumber, postalcode, city, country, email, phone );
         this.userName = userName;
         this.password = password;

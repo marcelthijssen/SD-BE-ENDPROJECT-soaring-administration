@@ -4,7 +4,6 @@ import com.example.sdbesoaringadministration.dtos.MemberDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Member;
 import com.example.sdbesoaringadministration.repositories.MemberRepository;
-import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
             dto.setGender( m.getGender() );
             dto.setFirstName( m.getFirstName() );
             dto.setLastName( m.getLastName() );
-            dto.setDateOfBirth( m.getDateOfBirth() );
+            dto.setBirthday( m.getBirthday() );
             dto.setStreetName( m.getStreetName() );
             dto.setHouseNumber( m.getHouseNumber() );
             dto.setCity( m.getCity() );
@@ -64,7 +63,7 @@ public class MemberServiceImpl implements MemberService {
             dto.setGender( m.getGender() );
             dto.setFirstName( m.getFirstName() );
             dto.setLastName( m.getLastName() );
-            dto.setDateOfBirth( m.getDateOfBirth() );
+            dto.setBirthday( m.getBirthday() );
             dto.setStreetName( m.getStreetName() );
             dto.setHouseNumber( m.getHouseNumber() );
             dto.setCity( m.getCity() );
@@ -89,7 +88,7 @@ public class MemberServiceImpl implements MemberService {
         m.setGender( memberDto.getGender() );
         m.setFirstName( memberDto.getFirstName() );
         m.setLastName( memberDto.getLastName() );
-        m.setDateOfBirth( memberDto.getDateOfBirth() );
+        m.setBirthday( memberDto.getBirthday() );
         m.setStreetName( memberDto.getStreetName() );
         m.setHouseNumber( memberDto.getHouseNumber() );
         m.setCity( memberDto.getCity() );
@@ -123,7 +122,7 @@ public class MemberServiceImpl implements MemberService {
             m.setGender( m.getGender() );
             m.setFirstName( m.getFirstName() );
             m.setLastName( m.getLastName() );
-            m.setDateOfBirth( m.getDateOfBirth() );
+            m.setBirthday( m.getBirthday() );
             m.setStreetName( m.getStreetName() );
             m.setHouseNumber( m.getHouseNumber() );
             m.setCity( m.getCity() );

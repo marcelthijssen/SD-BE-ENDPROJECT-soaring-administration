@@ -28,7 +28,7 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
             TypeOfMembershipDto dto = new TypeOfMembershipDto();
             dto.setId( tom.getId() );
             dto.setTitle( tom.getTitle() );
-            dto.setPrice( tom.getPrice() );
+            dto.setCostsPerMonth( tom.getCostsPerMonth() );
             tomDtoList.add( dto );
         }
         return tomDtoList;
@@ -36,12 +36,25 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
 
     @Override
     public TypeOfMembershipDto getTypeOfMembershipById( Long id ) {
-        return null;
+        TypeOfMembershipDto dto = new TypeOfMembershipDto();
+        if ( tomRepository.findById( id ).isPresent() ) {
+            TypeOfMembership tom = tomRepository.findById( id ).get();
+            dto.setId( tom.getId() );
+            dto.setTitle( tom.getTitle() );
+            dto.setCostsPerMonth( tom.getCostsPerMonth() );
+            return dto;
+        } else {
+            throw new RecordNotFoundException( "Type of Membership not found" );
+        }
     }
 
     @Override
     public TypeOfMembership addTypeOfMembership( TypeOfMembershipDto typeOfMembershipDto ) {
-        return null;
+        TypeOfMembership tom = new TypeOfMembership();
+        tom.setId( typeOfMembershipDto.getId() );
+        tom.setTitle( typeOfMembershipDto.getTitle() );
+        tom.setCostsPerMonth( typeOfMembershipDto.getCostsPerMonth() );
+        return this.tomRepository.save( tom );
     }
 
     @Override
@@ -49,13 +62,23 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
         if ( tomRepository.findById( id ).isPresent() ) {
             tomRepository.deleteById( id );
         } else {
-            throw new RecordNotFoundException( "Plane not found" );
+            throw new RecordNotFoundException( "Type of Membership not found" );
         }
     }
 
 
     @Override
     public TypeOfMembershipDto updateTypeOfMembership( Long id, TypeOfMembershipDto dto ) {
+        if ( tomRepository.findById( id ).isPresent() ) {
+            TypeOfMembership tom = tomRepository.findById( id ).get();
+
+            tom.setId( tom.getId() );
+            tom.setTitle( tom.getTitle() );
+            tom.setCostsPerMonth( tom.getCostsPerMonth() );
+            tomRepository.save( tom );
+        } else {
+            throw new RecordNotFoundException( "Type of membership not found" );
+        }
         return null;
     }
 }

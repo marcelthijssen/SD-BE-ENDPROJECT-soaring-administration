@@ -1,19 +1,24 @@
 package com.example.sdbesoaringadministration.dtos;
 
 public class TypeOfMembershipDto {
+
     private Long id;
 
+    private String title;
+    private int costsPerMonth;
+
+    //    Constructors
     public TypeOfMembershipDto() {
     }
 
-    public TypeOfMembershipDto(Long id, String title, int price ) {
+    public TypeOfMembershipDto( Long id, String title, int costsPerMonth ) {
         this.id = id;
         this.title = title;
-        this.price = price;
+        this.costsPerMonth = costsPerMonth;
     }
-    private String title;
-    private int price;
 
+
+    //    GETTERS and SETTERS
     public Long getId() {
         return id;
     }
@@ -26,15 +31,15 @@ public class TypeOfMembershipDto {
         return title;
     }
 
-    public void setTitle( String typeOfMembership ) {
+    public void setTitle( String title ) {
         this.title = title;
     }
 
-    public int getPrice() {
-        return price;
+    public int getCostsPerMonth() {
+        return costsPerMonth;
     }
 
-    public void setPrice( int price ) {
-        this.price = price;
+    public void setCostsPerMonth( int costsPerMonth ) {
+        this.costsPerMonth = costsPerMonth;
     }
 }
