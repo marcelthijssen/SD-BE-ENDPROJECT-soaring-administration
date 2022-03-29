@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.sdbesoaringadministration.dtos.PersonDto.modelToDto;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -26,20 +25,7 @@ public class PersonServiceImpl implements PersonService {
         List<PersonDto> personsDtoList = new ArrayList<>();
 
         for ( Person p : personsList ) {
-            PersonDto dto = new PersonDto();
-
-            dto.setId( p.getId() );
-            dto.setGender( p.getGender() );
-            dto.setFirstName( p.getFirstName() );
-            dto.setLastName( p.getLastName() );
-            dto.setBirthday( p.getBirthday() );
-            dto.setStreetName( p.getStreetName() );
-            dto.setHouseNumber( p.getHouseNumber() );
-            dto.setPostalcode( p.getPostalcode() );
-            dto.setCity( p.getCity() );
-            dto.setCountry( p.getCountry() );
-            dto.setEmail( p.getEmail() );
-            dto.setPhone( p.getPhone() );
+            PersonDto dto = PersonDto.modelToDto( p );
             personsDtoList.add( dto );
         }
         return personsDtoList;
@@ -60,19 +46,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person addPerson( PersonDto personDto ) {
-        Person p = new Person();
-        p.setId( personDto.getId() );
-        p.setGender( personDto.getGender() );
-        p.setFirstName( personDto.getFirstName() );
-        p.setLastName( personDto.getLastName() );
-        p.setBirthday( personDto.getBirthday() );
-        p.setStreetName( personDto.getStreetName() );
-        p.setHouseNumber( personDto.getHouseNumber() );
-        p.setPostalcode( personDto.getPostalcode() );
-        p.setCity( personDto.getCity() );
-        p.setCountry( personDto.getCountry() );
-        p.setEmail( personDto.getEmail() );
-        p.setPhone( personDto.getPhone() );
+        Person p = PersonDto.dtoToModel(personDto);
+
         return this.personRepository.save( p );
     }
 
@@ -90,18 +65,18 @@ public class PersonServiceImpl implements PersonService {
         if ( personRepository.findById( id ).isPresent() ) {
             Person p = personRepository.findById( id ).get();
 
-            p.setId( p.getId() );
-            p.setGender( p.getGender() );
-            p.setFirstName( p.getFirstName() );
-            p.setLastName( p.getLastName() );
-            p.setBirthday( p.getBirthday() );
-            p.setStreetName( p.getStreetName() );
-            p.setHouseNumber( p.getHouseNumber() );
-            p.setPostalcode( p.getPostalcode() );
-            p.setCity( p.getCity() );
-            p.setCountry( p.getCountry() );
-            p.setEmail( p.getEmail() );
-            p.setPhone( p.getPhone() );
+//            p.getId( dto.getId() );
+            p.setGender( dto.getGender() );
+            p.setFirstName( dto.getFirstName() );
+            p.setLastName( dto.getLastName() );
+            p.setBirthday( dto.getBirthday() );
+            p.setStreetName( dto.getStreetName() );
+            p.setHouseNumber( dto.getHouseNumber() );
+            p.setPostalcode( dto.getPostalcode() );
+            p.setCity( dto.getCity() );
+            p.setCountry( dto.getCountry() );
+            p.setEmail( dto.getEmail() );
+            p.setPhone( dto.getPhone() );
             personRepository.save( p );
         } else {
 
