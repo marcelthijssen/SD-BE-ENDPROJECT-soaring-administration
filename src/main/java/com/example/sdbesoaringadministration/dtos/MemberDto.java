@@ -14,7 +14,7 @@ public class MemberDto extends PersonDto {
 
    public MemberDto(){}
 
-    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, int phone, String userName, String password, String membership, String pilotLicense ) {
+    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String userName, String password, String membership, String pilotLicense ) {
         super( id, gender, firstName, lastName, dateOfBirth, streetName, houseNumber, postalcode, city, country, email, phone );
         this.userName = userName;
         this.password = password;

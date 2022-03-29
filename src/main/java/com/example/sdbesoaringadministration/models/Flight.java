@@ -16,16 +16,13 @@ public class Flight {
 
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private LocalDateTime startTime;
-
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private LocalDateTime endTime;
-
+// TODO: calc total time flying
     @NotBlank
     private String captain;
     private String passenger;
-
     private boolean instructionFlight;
-
     private String remarks;
 
     @ManyToOne

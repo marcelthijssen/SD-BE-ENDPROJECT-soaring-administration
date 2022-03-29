@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sdbesoaringadministration.dtos.PersonDto.modelToDto;
+
 @Service
 public class PersonServiceImpl implements PersonService {
 
@@ -45,22 +47,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto getPersonById( Long id ) {
-        PersonDto dto = new PersonDto();
+
         if ( personRepository.findById( id ).isPresent() ) {
             Person p = personRepository.findById( id ).get();
-            dto.setId( p.getId() );
-            dto.setGender( p.getGender() );
-            dto.setFirstName( p.getFirstName() );
-            dto.setLastName( p.getLastName() );
-            dto.setBirthday( p.getBirthday() );
-            dto.setStreetName( p.getStreetName() );
-            dto.setHouseNumber( p.getHouseNumber() );
-            dto.setPostalcode( p.getPostalcode() );
-            dto.setCity( p.getCity() );
-            dto.setCountry( p.getCountry() );
-            dto.setEmail( p.getEmail() );
-            dto.setPhone( p.getPhone() );
+            PersonDto dto = PersonDto.modelToDto( p );
             return dto;
+
         } else {
             throw new RecordNotFoundException( "Person not found" );
         }

@@ -1,10 +1,7 @@
 package com.example.sdbesoaringadministration.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
@@ -16,13 +13,9 @@ public class Person {
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String gender;
-
     private String firstName;
-
     private String lastName;
-
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
@@ -30,7 +23,7 @@ public class Person {
     private String city;
     private String country;
     private String email;
-    private int phone;
+    private String phone;
 
 
     public Long getId() {
@@ -70,7 +63,7 @@ public class Person {
     }
 
     public void setBirthday( LocalDate dateOfBirth ) {
-        this.birthday = dateOfBirth;
+        this.birthday = birthday;
     }
 
     public String getStreetName() {
@@ -121,11 +114,11 @@ public class Person {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone( int phone ) {
+    public void setPhone( String phone ) {
         this.phone = phone;
     }
 }

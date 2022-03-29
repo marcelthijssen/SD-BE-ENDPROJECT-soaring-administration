@@ -1,5 +1,6 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.models.Person;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,13 +12,10 @@ public class PersonDto {
 
     private Long id;
     private String gender;
-
     @NotBlank(message = "Firstname can not be empty")
     private String firstName;
-
     @NotBlank(message = "Lastname can not be empty")
     private String lastName;
-
     @DateTimeFormat
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthday;
@@ -26,15 +24,15 @@ public class PersonDto {
     private String postalcode;
     private String city;
     private String country;
-
     @Email
     private String email;
-    private int phone;
+    private String phone;
+
 
     public PersonDto(){
     }
 
-    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode,String city, String country, String email, int phone ) {
+    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode,String city, String country, String email, String phone ) {
         this.id = id;
         this.gender = gender;
         this.firstName = firstName;
@@ -53,6 +51,49 @@ public class PersonDto {
 
         return id;
     }
+
+
+    public static PersonDto modelToDto(Person person) {
+
+        PersonDto personDTO = new PersonDto();
+        personDTO.setId(person.getId());
+        personDTO.setGender(person.getGender());
+        personDTO.setFirstName(person.getFirstName());
+        personDTO.setLastName(person.getLastName());
+        personDTO.setStreetName(person.getStreetName());
+        personDTO.setHouseNumber(person.getHouseNumber());
+        personDTO.setPostalcode(person.getPostalcode());
+        personDTO.setCity(person.getCity());
+        personDTO.setCountry(person.getCountry());
+        personDTO.setPhone(person.getPhone());
+        personDTO.setEmail(person.getEmail());
+
+        return personDTO;
+    }
+
+
+    public static Person dtoToModel( PersonDto personDto) {
+
+        Person person = new Person();
+        person.setId(personDto.getId());
+        person.setGender(personDto.getGender());
+        person.setFirstName(personDto.getFirstName());
+        person.setLastName(personDto.getLastName());
+        person.setBirthday(personDto.getBirthday());
+        person.setStreetName(personDto.getStreetName());
+        person.setHouseNumber(personDto.getHouseNumber());
+        person.setPostalcode(personDto.getPostalcode());
+        person.setCity(personDto.getCity());
+        person.setCountry(personDto.getCountry());
+        person.setPhone(personDto.getPhone());
+        person.setEmail(personDto.getEmail());
+
+        return person;
+    }
+
+
+
+
 
     public void setId( Long id ) {
         this.id = id;
@@ -94,7 +135,7 @@ public class PersonDto {
         this.country = country;
     }
 
-    public void setBirthday( LocalDate doBirth ) {
+    public void setBirthday( LocalDate birthday ) {
         this.birthday = birthday;
     }
 
@@ -138,11 +179,11 @@ public class PersonDto {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone( int phone ) {
+    public void setPhone( String phone ) {
         this.phone = phone;
     }
 }
