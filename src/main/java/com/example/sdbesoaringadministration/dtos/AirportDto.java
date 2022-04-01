@@ -1,5 +1,6 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.models.Airport;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -24,7 +25,29 @@ public class AirportDto {
         this.location = location;
     }
 
-//    GETTERS AND SETTERS
+    public Airport AirportDtoToAirport( AirportDto airportDto) {
+        Airport airport = new Airport();
+//        Airport airport = new Airport();
+        airport.setId( airportDto.getId() );
+        airport.setIcao( airportDto.getIcao() );
+        airport.setLocation( airportDto.getLocation() );
+
+        return airport;
+
+}
+
+
+//    public UserDto userToUserDto( User user){
+//        UserDto userDto = new UserDto();
+//        userDto.setId( user.getId());
+//        userDto.setUsername( user.getUsername() );
+//        userDto.setPassword( user.getPassword() );
+//        userDto.setRole( user.getRole() );
+//
+//        return userDto;
+//    }
+
+    //    GETTERS AND SETTERS
     public String getIcao() {
         return Icao;
     }
