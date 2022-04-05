@@ -1,6 +1,7 @@
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -8,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@Data
+@Table(name = "flights")
 public class Flight {
     @Id
     @GeneratedValue

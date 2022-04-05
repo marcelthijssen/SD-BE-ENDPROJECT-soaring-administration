@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-@Table(name = "typeOfMemberships")
+@Table(name = "type_of_memberships")
 public class TypeOfMembership {
+
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
@@ -17,7 +18,15 @@ public class TypeOfMembership {
 
     private String title;
     private BigDecimal costsPerMonth;
+    private BigDecimal max;
 
+    public BigDecimal getMax() {
+        return max;
+    }
+
+    public void setMax( BigDecimal max ) {
+        this.max = max;
+    }
 //    GETTERS en SETTERS
 
     public Long getId() {

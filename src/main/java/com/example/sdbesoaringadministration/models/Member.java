@@ -1,12 +1,14 @@
 package com.example.sdbesoaringadministration.models;
 
 import lombok.Data;
-import javax.persistence.Entity;
+
+import javax.persistence.*;
 
 
 @Entity
 @Data
 public class Member extends Person {
+
 
     private String userName;
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StartingMethodeServiceImpl implements StartingMethodeService {
@@ -27,7 +28,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
             StartingMethodeDto dto = new StartingMethodeDto();
             dto.setId( sm.getId() );
             dto.setTitle( sm.getTitle() );
-            dto.setPrice( sm.getPrice() );
+            dto.setPrice( sm.getPrice( dto.getPrice( sm.getPrice() ) ) );
             smDtoList.add( dto );
         }
         return smDtoList;
@@ -35,13 +36,15 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
 
     @Override
     public StartingMethodeDto getStartingMethodeById( Long id ) {
-        StartingMethodeDto dto = new StartingMethodeDto();
+        Optional<StartingMethode> startingMethode = smRepository.findById( id );
 
         if ( smRepository.findById( id ).isPresent() ) {
+            StartingMethodeDto dto = startingMethodeToDto(startingMethode.get());
+
             StartingMethode sm = smRepository.findById( id ).get();
             dto.setId( sm.getId() );
             dto.setTitle( sm.getTitle() );
-            dto.setPrice( sm.getPrice() );
+            dto.setPrice( sm.getPrice( dto.getPrice( sm.getPrice() ) ) );
             return dto;
         } else {
             throw new RecordNotFoundException( "Starting methode not found" );
@@ -49,13 +52,19 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     }
 
     @Override
+    public void addStartingMethode( StartingMethodeDto dto ) {
+        StartingMethode sm = dtoToStartingMethode( dto );
+        smRepository.save( sm );
+    }
+
+    /*    @Override
     public void addStartingMethode( StartingMethodeDto startingMethodeDto ) {
         StartingMethode sm = new StartingMethode();
         sm.setId( startingMethodeDto.getId() );
         sm.setTitle( startingMethodeDto.getTitle() );
         sm.setPrice( startingMethodeDto.getPrice() );
         this.smRepository.save( sm );
-    }
+    }*/
 
     @Override
     public void deleteStartingMethodeById( Long id ) {
@@ -67,16 +76,35 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     }
 
     @Override
-    public StartingMethodeDto updateStartingMethode( Long id, StartingMethodeDto dto ) {
+    public void updateStartingMethode( Long id, StartingMethodeDto dto ) {
         if ( smRepository.findById( id ).isPresent() ) {
             StartingMethode sm = smRepository.findById( id ).get();
-            sm.setId( sm.getId() );
-            sm.setTitle( sm.getTitle() );
-            sm.setPrice( sm.getPrice() );
+            sm.setId( dto.getId() );
+            sm.setTitle( dto.getTitle() );
+            sm.setPrice( dto.getPrice( sm.getPrice() ) );
             smRepository.save( sm );
         } else {
             throw new RecordNotFoundException( "StartingMethode does not exist" );
         }
-        return null;
+    }
+
+    public StartingMethode dtoToStartingMethode( StartingMethodeDto dto){
+        StartingMethode sm = new StartingMethode();
+
+        sm.setId(dto.getId());
+        sm.setTitle(dto.getTitle());
+        sm.setPrice(dto.getPrice( sm.getPrice() ));
+
+        return sm;
+    }
+
+    public StartingMethodeDto startingMethodeToDto( StartingMethode sm ) {
+        var dto = new StartingMethodeDto();
+
+        dto.setId( sm.getId() );
+        dto.setTitle( sm.getTitle() );
+        dto.setUnit( sm.getUnit() );
+        dto.getPrice( sm.getPrice() );
+        return dto;
     }
 }

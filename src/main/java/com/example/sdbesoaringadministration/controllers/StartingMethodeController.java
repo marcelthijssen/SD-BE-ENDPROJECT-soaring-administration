@@ -64,8 +64,8 @@ public class StartingMethodeController {
     @PutMapping("/startingmethodes/{id}")
     public StartingMethodeDto updateStartingMethode(@PathVariable("id") Long id, @RequestBody StartingMethodeDto dto) {
 
-        StartingMethodeDto startingMethodeDto = smService.updateStartingMethode(id, dto);
-        return startingMethodeDto;
+        smService.updateStartingMethode(id, dto);
+        return dto;
     }
 
 }

@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Table(name = "planes")
 public class Plane {
+
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)

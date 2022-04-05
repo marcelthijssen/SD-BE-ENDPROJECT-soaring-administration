@@ -1,5 +1,6 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.example.sdbesoaringadministration.dtos.StartingMethodeDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,8 +11,9 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-@Table(name = "startingmethods")
+@Table(name = "starting_methods")
 public class StartingMethode {
+
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
@@ -20,9 +22,14 @@ public class StartingMethode {
     @NotBlank
     private String title;
 
+    @NotBlank
+    private String unit;
+
+
     @DecimalMin(value = "0.0", message="value = 0.0")
     @Digits(integer=1, fraction=2)
     private BigDecimal price;
+
 
 
     //getters an setters
@@ -34,8 +41,16 @@ public class StartingMethode {
         this.title = title;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit( String unit ) {
+        this.unit = unit;
+    }
+
+    public BigDecimal getPrice( BigDecimal price ) {
+        return this.price;
     }
 
     public void setPrice( BigDecimal price ) {

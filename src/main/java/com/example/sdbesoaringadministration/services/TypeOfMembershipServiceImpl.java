@@ -29,6 +29,7 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
             dto.setId( tom.getId() );
             dto.setTitle( tom.getTitle() );
             dto.setCostsPerMonth( tom.getCostsPerMonth() );
+            dto.setMax( tom.getMax() );
             tomDtoList.add( dto );
         }
         return tomDtoList;
@@ -42,6 +43,7 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
             dto.setId( tom.getId() );
             dto.setTitle( tom.getTitle() );
             dto.setCostsPerMonth( tom.getCostsPerMonth() );
+            dto.setMax( tom.getMax() );
             return dto;
         } else {
             throw new RecordNotFoundException( "Type of Membership not found" );
@@ -54,6 +56,7 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
         tom.setId( typeOfMembershipDto.getId() );
         tom.setTitle( typeOfMembershipDto.getTitle() );
         tom.setCostsPerMonth( typeOfMembershipDto.getCostsPerMonth() );
+        tom.setMax( typeOfMembershipDto.getMax() );
         this.tomRepository.save( tom );
     }
 
@@ -73,8 +76,9 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
             TypeOfMembership tom = tomRepository.findById( id ).get();
 
             tom.setId( tom.getId() );
-            tom.setTitle( tom.getTitle() );
-            tom.setCostsPerMonth( tom.getCostsPerMonth() );
+            tom.setTitle( dto.getTitle() );
+            tom.setCostsPerMonth( dto.getCostsPerMonth() );
+            tom.setMax( dto.getMax() );
             tomRepository.save( tom );
         } else {
             throw new RecordNotFoundException( "Type of membership not found" );
