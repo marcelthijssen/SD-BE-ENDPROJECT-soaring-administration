@@ -51,7 +51,7 @@ public class AirportDto {
     }
 
     // DTO transfer
-    public Airport AirportDtoToAirport( AirportDto airportDto ) {
+    public static Airport AirportDtoToAirport( AirportDto airportDto ) {
         Airport airport = new Airport();
 
         airport.setId( airportDto.getId() );
@@ -61,8 +61,8 @@ public class AirportDto {
         return airport;
     }
 
-    public AirportDto airportToAirportDto( Airport airport ) {
-        var dto = new AirportDto();
+    public static AirportDto airportToAirportDto( Airport airport ) {
+        AirportDto dto = new AirportDto();
 
         dto.setId( airport.getId() );
         dto.setIcao( airport.getIcao() );
