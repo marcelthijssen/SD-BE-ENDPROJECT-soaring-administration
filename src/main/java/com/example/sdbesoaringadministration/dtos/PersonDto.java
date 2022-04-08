@@ -12,12 +12,12 @@ public class PersonDto {
 
     private Long id;
     private String gender;
-    @NotBlank(message = "Firstname can not be empty")
+    //    @NotBlank(message = "Firstname can not be empty")
     private String firstName;
-    @NotBlank(message = "Lastname can not be empty")
+    //    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
     @DateTimeFormat
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
@@ -29,21 +29,21 @@ public class PersonDto {
     private String phone;
 
 
-    public PersonDto(){
+    public PersonDto() {
     }
 
-    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode,String city, String country, String email, String phone ) {
+    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone ) {
         this.id = id;
         this.gender = gender;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.streetName = streetName;
-        this.houseNumber=houseNumber;
+        this.houseNumber = houseNumber;
         this.postalcode = postalcode;
         this.city = city;
         this.country = country;
-        this.email=email;
+        this.email = email;
         this.phone = phone;
     }
 
@@ -53,46 +53,43 @@ public class PersonDto {
     }
 
 
-    public static PersonDto modelToDto(Person person) {
-
+    public static PersonDto personToPersonDto( Person person ) {
         PersonDto personDTO = new PersonDto();
-        personDTO.setId(person.getId());
-        personDTO.setGender(person.getGender());
-        personDTO.setFirstName(person.getFirstName());
-        personDTO.setLastName(person.getLastName());
-        personDTO.setStreetName(person.getStreetName());
-        personDTO.setHouseNumber(person.getHouseNumber());
-        personDTO.setPostalcode(person.getPostalcode());
-        personDTO.setCity(person.getCity());
-        personDTO.setCountry(person.getCountry());
-        personDTO.setPhone(person.getPhone());
-        personDTO.setEmail(person.getEmail());
+
+        personDTO.setId( person.getId() );
+        personDTO.setGender( person.getGender() );
+        personDTO.setFirstName( person.getFirstName() );
+        personDTO.setLastName( person.getLastName() );
+        personDTO.setStreetName( person.getStreetName() );
+        personDTO.setHouseNumber( person.getHouseNumber() );
+        personDTO.setPostalcode( person.getPostalcode() );
+        personDTO.setCity( person.getCity() );
+        personDTO.setCountry( person.getCountry() );
+        personDTO.setPhone( person.getPhone() );
+        personDTO.setEmail( person.getEmail() );
 
         return personDTO;
     }
 
 
-    public static Person dtoToModel( PersonDto personDto) {
+    public static Person personDtoToPerson( PersonDto personDto ) {
 
         Person person = new Person();
-        person.setId(personDto.getId());
-        person.setGender(personDto.getGender());
-        person.setFirstName(personDto.getFirstName());
-        person.setLastName(personDto.getLastName());
-        person.setBirthday(personDto.getBirthday());
-        person.setStreetName(personDto.getStreetName());
-        person.setHouseNumber(personDto.getHouseNumber());
-        person.setPostalcode(personDto.getPostalcode());
-        person.setCity(personDto.getCity());
-        person.setCountry(personDto.getCountry());
-        person.setPhone(personDto.getPhone());
-        person.setEmail(personDto.getEmail());
+        person.setId( personDto.getId() );
+        person.setGender( personDto.getGender() );
+        person.setFirstName( personDto.getFirstName() );
+        person.setLastName( personDto.getLastName() );
+        person.setBirthday( personDto.getBirthday() );
+        person.setStreetName( personDto.getStreetName() );
+        person.setHouseNumber( personDto.getHouseNumber() );
+        person.setPostalcode( personDto.getPostalcode() );
+        person.setCity( personDto.getCity() );
+        person.setCountry( personDto.getCountry() );
+        person.setPhone( personDto.getPhone() );
+        person.setEmail( personDto.getEmail() );
 
         return person;
     }
-
-
-
 
 
     public void setId( Long id ) {

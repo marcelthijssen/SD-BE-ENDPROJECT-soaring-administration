@@ -71,5 +71,9 @@ public class FlightController {
 
     }
 
-
+    @PutMapping("/flights/{flid}/plane/{pid}")
+    public ResponseEntity<Object> assignPlaneToFlight( @PathVariable("flid") Long flid, @PathVariable("pid") Long pid ) {
+        flightService.assignPlaneToFlight( flid, pid );
+        return new ResponseEntity<>( "Plane added to flight", HttpStatus.ACCEPTED );
+    }
 }

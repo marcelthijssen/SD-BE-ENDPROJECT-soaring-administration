@@ -1,29 +1,32 @@
 package com.example.sdbesoaringadministration.dtos;
 
 
+import com.example.sdbesoaringadministration.models.Plane;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class FlightDto {
 
     private Long id;
 
+    //    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="Europe/Amsterdam")
     private LocalDateTime startTime;
 
+    //    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="Europe/Amsterdam")
     private LocalDateTime endTime;
-
     private String captain;
     private String passenger;
-
     private boolean instructionFlight;
-
     private String remarks;
 
+    private Plane plane;
     //TODO: Add StartingMethode and Plane
 
     public FlightDto() {
     }
 
-    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, String captain, String passenger, boolean instructionFlight, String remarks ) {
+    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, String captain, String passenger, boolean instructionFlight, String remarks, Plane plane ) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -31,6 +34,7 @@ public class FlightDto {
         this.passenger = passenger;
         this.instructionFlight = instructionFlight;
         this.remarks = remarks;
+        this.plane = plane;
     }
 
 
@@ -90,5 +94,12 @@ public class FlightDto {
         this.remarks = remarks;
     }
 
+    public void setPlane( Plane plane ) {
+        this.plane = plane;
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
 
 }

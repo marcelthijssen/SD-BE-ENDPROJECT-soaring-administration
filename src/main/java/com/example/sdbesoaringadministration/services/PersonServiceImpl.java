@@ -25,7 +25,7 @@ public class PersonServiceImpl implements PersonService {
         List<PersonDto> personsDtoList = new ArrayList<>();
 
         for ( Person p : personsList ) {
-            PersonDto dto = PersonDto.modelToDto( p );
+            PersonDto dto = PersonDto.personToPersonDto( p );
             personsDtoList.add( dto );
         }
         return personsDtoList;
@@ -36,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
 
         if ( personRepository.findById( id ).isPresent() ) {
             Person p = personRepository.findById( id ).get();
-            PersonDto dto = PersonDto.modelToDto( p );
+            PersonDto dto = PersonDto.personToPersonDto( p );
             return dto;
 
         } else {
@@ -46,7 +46,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person addPerson( PersonDto personDto ) {
-        Person p = PersonDto.dtoToModel(personDto);
+        Person p = PersonDto.personDtoToPerson(personDto);
 
         return this.personRepository.save( p );
     }

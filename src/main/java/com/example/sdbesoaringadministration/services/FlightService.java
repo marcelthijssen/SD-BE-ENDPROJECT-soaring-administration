@@ -17,4 +17,7 @@ public interface FlightService {
     void deleteFlightById( Long id );
 
     FlightDto updateFlight( Long id, FlightDto flightDto);
+
+    void assignPlaneToFlight(Long id, Long pid);
+
 }

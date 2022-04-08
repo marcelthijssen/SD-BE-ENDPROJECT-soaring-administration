@@ -4,9 +4,13 @@ INSERT INTO airports (id, icao, location) VALUES (1003, 'EHAL', 'Ameland');
 INSERT INTO airports (id, icao, location) VALUES (1004, 'EHAM', 'Haarlemermeer');
 INSERT INTO airports (id, icao, location) VALUES (1005, 'EHTE', 'Ameland');
 
-INSERT INTO starting_methods (id, title, unit, price) VALUES (1006, 'winch', 1, 5);
-INSERT INTO starting_methods (id, title, unit, price) VALUES (1007, 'tow', 'minute', 0.2);
-INSERT INTO starting_methods (id, title, unit, price) VALUES (1008,'selfstarter', 0, 0);
+INSERT INTO starting_methods (id, title, unit, price) VALUES (1006, 'Winch', 1, 5);
+INSERT INTO starting_methods (id, title, unit, price) VALUES (1007, 'Tow', 'minute', 0.2);
+INSERT INTO starting_methods (id, title, unit, price) VALUES (1008,'Selfstarter', 0, 0);
+--
+-- INSERT INTO persons (id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country, email, phone) VALUES (2001, 'm', 'Marcel', 'Thijssen', '1964-08-19', 'straat', '3', '4817SX', 'Breda', 'Nederland', 'start@e-mailadres.nl', '0612306345');
+-- INSERT INTO persons (id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country, email, phone) VALUES (2002, 'v', 'Femmie', 'Jansen', '1964-08-19', 'Straatnaam', '993', '4811VC', 'Bredea', 'Nederland', 'begin@mailadres.nl', '0691256345');
+-- INSERT INTO persons (id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country, email, phone) VALUES (2003, 'm', 'Toonie', 'de Vries', '1964-08-19', 'Naamstraat', '55a', '4811VC', 'Rotjeknor', 'Nederland', 'begin@mailadres.nl', '0634506109');
 
 INSERT INTO type_of_memberships (id, title, costs_per_month, max) VALUES (1009, 'pupil ≤18', 56, 828);
 INSERT INTO type_of_memberships (id, title, costs_per_month, max) VALUES (1010, 'pupil 18+', 69, 828);

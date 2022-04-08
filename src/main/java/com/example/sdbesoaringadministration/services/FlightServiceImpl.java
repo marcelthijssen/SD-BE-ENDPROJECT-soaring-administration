@@ -4,6 +4,7 @@ import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.repositories.FlightRepository;
+import com.example.sdbesoaringadministration.repositories.PlaneRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,18 +13,20 @@ import java.util.List;
 @Service
 public class FlightServiceImpl implements FlightService {
 
-    private final FlightRepository repository;
+    private final FlightRepository flRepository;
+    private final PlaneRepository plRepository;
 
-    public FlightServiceImpl( FlightRepository repository ) {
-        this.repository = repository;
+    public FlightServiceImpl( FlightRepository flRepository, PlaneRepository plRepository ) {
+        this.flRepository = flRepository;
+        this.plRepository = plRepository;
     }
 
     @Override
     public List<FlightDto> getAllFlights() {
-        List<Flight> flightList = this.repository.findAll();
+        List<Flight> flightList = this.flRepository.findAll();
         List<FlightDto> flightDtoList = new ArrayList<>();
 
-        flightList.forEach( f -> flightDtoList.add( new FlightDto( f.getId(), f.getStartTime(), f.getEndTime(), f.getCaptain(), f.getPassenger(), f.isInstructionFlight(), f.getRemarks() ) ) );
+        flightList.forEach( f -> flightDtoList.add( new FlightDto( f.getId(), f.getStartTime(), f.getEndTime(), f.getCaptain(), f.getPassenger(), f.isInstructionFlight(), f.getRemarks(), f.getPlane() ) ) );
 
         return flightDtoList;
     }
@@ -31,8 +34,8 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public FlightDto getFlightById( Long id ) {
         FlightDto dto = new FlightDto();
-        if ( repository.findById( id ).isPresent() ) {
-            Flight f = repository.findById( id ).get();
+        if ( flRepository.findById( id ).isPresent() ) {
+            Flight f = flRepository.findById( id ).get();
             dto.setId( f.getId() );
             dto.setStartTime( f.getStartTime() );
             dto.setEndTime( f.getEndTime() );
@@ -40,6 +43,8 @@ public class FlightServiceImpl implements FlightService {
             dto.setPassenger( f.getPassenger() );
             dto.setInstructionFlight( f.isInstructionFlight() );
             dto.setRemarks( f.getRemarks() );
+//            flights
+            dto.setPlane( f.getPlane());
             return dto;
         } else {
             throw new RecordNotFoundException( "No flight found" );
@@ -56,14 +61,15 @@ public class FlightServiceImpl implements FlightService {
         f.setPassenger( flightDto.getPassenger() );
         f.setInstructionFlight( flightDto.isInstructionFlight() );
         f.setRemarks( flightDto.getRemarks() );
-
-        return this.repository.save( f );
+//plane
+        f.setPlane( flightDto.getPlane() );
+        return this.flRepository.save( f );
     }
 
     @Override
     public void deleteFlightById( Long id ) {
-        if ( repository.findById( id ).isPresent() ) {
-            repository.deleteById( id );
+        if ( flRepository.findById( id ).isPresent() ) {
+            flRepository.deleteById( id );
         } else {
             throw new RecordNotFoundException( "No flight found" );
         }
@@ -71,8 +77,8 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public FlightDto updateFlight( Long id, FlightDto flightDto ) {
-        if ( repository.findById( id ).isPresent() ) {
-            Flight f = repository.findById( id ).get();
+        if ( flRepository.findById( id ).isPresent() ) {
+            Flight f = flRepository.findById( id ).get();
             f.setId( flightDto.getId() );
             f.setStartTime( flightDto.getStartTime() );
             f.setEndTime( flightDto.getEndTime() );
@@ -80,11 +86,28 @@ public class FlightServiceImpl implements FlightService {
             f.setPassenger( flightDto.getPassenger() );
             f.setInstructionFlight( flightDto.isInstructionFlight() );
             f.setRemarks( flightDto.getRemarks() );
-
-            repository.save( f );
+// plane
+            f.setPlane( flightDto.getPlane() );
+            flRepository.save( f );
             return flightDto;
         } else {
             throw new RecordNotFoundException( "Flight not found" );
+        }
+    }
+
+    @Override
+    public void assignPlaneToFlight( Long id, Long pid ) {
+        var optionalFlight = flRepository.findById( id );
+        var optionalPlane = plRepository.findById( pid );
+
+        if ( optionalFlight.isPresent() && optionalPlane.isPresent() ) {
+            var flight = optionalFlight.get();
+            var plane = optionalPlane.get();
+
+            flight.setPlane( plane );
+            flRepository.save( flight );
+        } else {
+            throw new RecordNotFoundException( "tv of rc bestaat niet" );
         }
     }
 }
