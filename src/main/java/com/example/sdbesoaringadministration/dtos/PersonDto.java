@@ -12,12 +12,12 @@ public class PersonDto {
 
     private Long id;
     private String gender;
-    @NotBlank(message = "Firstname can not be empty")
+//    @NotBlank(message = "Firstname can not be empty")
     private String firstName;
-    @NotBlank(message = "Lastname can not be empty")
+//    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
     @DateTimeFormat
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
@@ -53,7 +53,7 @@ public class PersonDto {
     }
 
 
-    public static PersonDto modelToDto(Person person) {
+    public static PersonDto personToPersonDto(Person person) {
 
         PersonDto personDTO = new PersonDto();
         personDTO.setId(person.getId());
@@ -72,7 +72,7 @@ public class PersonDto {
     }
 
 
-    public static Person dtoToModel( PersonDto personDto) {
+    public static Person personDtoToPerson( PersonDto personDto) {
 
         Person person = new Person();
         person.setId(personDto.getId());

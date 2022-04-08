@@ -1,9 +1,12 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,19 +17,22 @@ public class Plane {
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String callSign;
-
     private String brand;
-
     private String type;
 
     @NotBlank(message = "Registration can not be empty")
     private String registration;
-
     private boolean twoSeater;
-
     private boolean privatePlane;
+
+// A flight can only have on eplane
+    @OneToMany
+            (mappedBy = "plane",
+                    fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Flight> flights;
 
 
     public Long getId() {
@@ -84,4 +90,19 @@ public class Plane {
     public void setPrivatePlane( boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
+
+// Flight
+    public void setFlight(List<Flight> flights) {
+        this.flights = flights;
+    }
+//    @JsonManagedReference
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    void addFlight( Flight flight) {
+        this.flights.add(flight);
+    }
+
+
 }

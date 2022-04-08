@@ -9,7 +9,7 @@ public class AirportDto {
 
     private Long id;
 
-    @Length(min=4, max=4, message = "ICAO notation must have exactly 4 characters")
+    @Length(min = 4, max = 4, message = "ICAO notation must have exactly 4 characters")
     private String Icao;
 
     @NotBlank(message = "Location can not be empty")
@@ -24,28 +24,6 @@ public class AirportDto {
         this.Icao = ICAO;
         this.location = location;
     }
-
-    public Airport AirportDtoToAirport( AirportDto airportDto) {
-        Airport airport = new Airport();
-//        Airport airport = new Airport();
-        airport.setId( airportDto.getId() );
-        airport.setIcao( airportDto.getIcao() );
-        airport.setLocation( airportDto.getLocation() );
-
-        return airport;
-
-}
-
-
-//    public UserDto userToUserDto( User user){
-//        UserDto userDto = new UserDto();
-//        userDto.setId( user.getId());
-//        userDto.setUsername( user.getUsername() );
-//        userDto.setPassword( user.getPassword() );
-//        userDto.setRole( user.getRole() );
-//
-//        return userDto;
-//    }
 
     //    GETTERS AND SETTERS
     public String getIcao() {
@@ -71,4 +49,26 @@ public class AirportDto {
     public void setLocation( String location ) {
         this.location = location;
     }
+
+    // DTO transfer
+    public Airport AirportDtoToAirport( AirportDto airportDto ) {
+        Airport airport = new Airport();
+
+        airport.setId( airportDto.getId() );
+        airport.setIcao( airportDto.getIcao() );
+        airport.setLocation( airportDto.getLocation() );
+
+        return airport;
+    }
+
+    public AirportDto airportToAirportDto( Airport airport ) {
+        var dto = new AirportDto();
+
+        dto.setId( airport.getId() );
+        dto.setIcao( airport.getIcao() );
+        dto.setLocation( airport.getLocation() );
+
+        return dto;
+    }
+
 }

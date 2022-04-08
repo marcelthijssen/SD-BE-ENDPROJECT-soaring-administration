@@ -34,9 +34,7 @@ public class AirportServiceImpl implements AirportService {
         AirportDto dto = new AirportDto();
         if ( repos.findById( id ).isPresent() ) {
             Airport airport = repos.findById( id ).get();
-            dto.setId( airport.getId() );
-            dto.setIcao( airport.getIcao() );
-            dto.setLocation( airport.getLocation() );
+            dto.airportToAirportDto(airport);
             return dto;
         } else {
             throw new RecordNotFoundException( "Airport not found" );
@@ -65,16 +63,7 @@ public class AirportServiceImpl implements AirportService {
 
         return this.repos.save( airport );
     }
-/*    @Override
-    public Airport addAirport( AirportDto airportDto ) {
-        Airport airport = new Airport();
-        airport.setId( airportDto.getId() );
-        airport.setIcao( airportDto.getIcao() );
-        airport.setLocation( airportDto.getLocation() );
 
-        return this.repos.save( airport );
-    }
-*/
     @Override
     public void deleteAirportById( Long id ) {
 //        AirportDto dto = new AirportDto();
@@ -101,19 +90,5 @@ public class AirportServiceImpl implements AirportService {
             throw new RecordNotFoundException( "Airport not found" );
         }
     }
-/*    @Override
-    public AirportDto updateAirport( Long id, AirportDto dto ) {
-        if ( repos.findById( id ).isPresent() ) {
-            Airport airport = repos.findById( id ).get();
-            dto.setId( airport.getId() );
-            dto.setIcao( airport.getIcao() );
-            dto.setLocation( airport.getLocation() );
 
-            repos.save(airport);
-            return dto;
-        } else {
-            throw new RecordNotFoundException( "Airport not found" );
-        }
-    }
-*/
 }

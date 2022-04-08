@@ -29,7 +29,7 @@ public class FlightController {
     }
 
     // changed <FlightDto> to <Object>
-    @GetMapping("/Flights/{id}")
+    @GetMapping("/flights/{id}")
     public ResponseEntity<Object> getFlightById( @PathVariable(name = "id") Long id ) {
         FlightDto tv = flightService.getFlightById( id );
         try {
@@ -71,5 +71,9 @@ public class FlightController {
 
     }
 
-
+    @PutMapping("/flights/{flid}/plane/{pid}")
+    public ResponseEntity<Object> assignCiModuleToTelevision( @PathVariable("flid") Long flid, @PathVariable("pid") Long pid ) {
+        flightService.assignPlaneToFlight( flid, pid );
+        return new ResponseEntity<>( "Plane added to flight", HttpStatus.ACCEPTED );
+    }
 }

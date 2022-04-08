@@ -1,12 +1,13 @@
 package com.example.sdbesoaringadministration.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Data
@@ -17,9 +18,7 @@ public class Flight {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private LocalDateTime startTime;
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private LocalDateTime endTime;
 // TODO: calc total time flying
     @NotBlank
@@ -28,14 +27,15 @@ public class Flight {
     private boolean instructionFlight;
     private String remarks;
 
+//    a plane can have multiple flights
     @ManyToOne
-    @JoinColumn(name = "plane_id")
+    @JsonBackReference
+    @JoinColumn(
+            name = "plane_id",
+            referencedColumnName = "id",
+            nullable = true)
+//    @JsonManagedReference
     private Plane plane;
-
-    @ManyToOne
-    @JoinColumn(name = "starting_methode_id")
-    private StartingMethode startingMethode;
-
 
     public Long getId() {
         return id;
@@ -93,19 +93,23 @@ public class Flight {
         this.remarks = remarks;
     }
 
-    public Plane getPlane() {
-        return plane;
-    }
+//   OneTwoMany  plane
 
     public void setPlane( Plane plane ) {
         this.plane = plane;
     }
 
-    public StartingMethode getStartingMethode() {
-        return startingMethode;
+    public Plane getPlane() {
+        return plane;
     }
 
-    public void setStartingMethode( StartingMethode startingMethode ) {
-        this.startingMethode = startingMethode;
-    }
+//    public StartingMethode getStartingMethode() {
+//        return startingMethode;
+//    }
+//
+//    public void setStartingMethode( StartingMethode startingMethode ) {
+//        this.startingMethode = startingMethode;
+//    }
+
+
 }
