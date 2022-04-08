@@ -42,45 +42,21 @@ public class AirportServiceImpl implements AirportService {
             throw new RecordNotFoundException( "Airport not found" );
         }
     }
-/*
-    @Override
-    public AirportDto getAirportsById( Long id ) {
-        AirportDto dto = new AirportDto();
-        if ( repos.findById( id ).isPresent() ) {
-            Airport airport = repos.findById( id ).get();
-            dto.setId( airport.getId() );
-            dto.setIcao( airport.getIcao() );
-            dto.setLocation( airport.getLocation() );
-            return dto;
-        } else {
-            throw new RecordNotFoundException( "Airport not found" );
-        }
-    }
-    */
+
 
     @Override
     public Airport addAirport( AirportDto airportDto ) {
-        Airport airport = new Airport();
-        airportDto.AirportDtoToAirport( airportDto );
+        Airport a = airportDto.AirportDtoToAirport( airportDto );
 
-        return this.repos.save( airport );
+        return this.repos.save( a );
     }
-/*    @Override
-    public Airport addAirport( AirportDto airportDto ) {
-        Airport airport = new Airport();
-        airport.setId( airportDto.getId() );
-        airport.setIcao( airportDto.getIcao() );
-        airport.setLocation( airportDto.getLocation() );
 
-        return this.repos.save( airport );
-    }
-*/
     @Override
-    public void deleteAirportById( Long id ) {
+    public ResponseEntity<Object> deleteAirportById( Long id ) {
 //        AirportDto dto = new AirportDto();
         if ( repos.findById( id ).isPresent() ) {
             repos.deleteById( id );
-//            return new ResponseEntity("Airport is deleted", HttpStatus.OK);
+            return new ResponseEntity<Object>("Airport is deleted", HttpStatus.OK);
         } else {
             throw new RecordNotFoundException( "Airport not found" );
         }

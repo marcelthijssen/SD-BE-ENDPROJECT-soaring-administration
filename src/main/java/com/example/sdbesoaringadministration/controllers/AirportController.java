@@ -55,10 +55,10 @@ public class AirportController {
     }
 
     @DeleteMapping("/airports/{id}")
-    public void deleteAirportById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> deleteAirportById(@PathVariable("id") Long id) {
 
         airportService.deleteAirportById(id);
-
+return new ResponseEntity<>( "Airport " + getAirportById( id ) + "has been deleted from the system",  HttpStatus.OK);
     }
 
     @PutMapping("/airports/{id}")

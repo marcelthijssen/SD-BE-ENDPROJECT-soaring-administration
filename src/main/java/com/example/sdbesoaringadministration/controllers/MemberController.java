@@ -32,9 +32,9 @@ public class MemberController {
 
     @GetMapping("/members/{id}")
     public ResponseEntity<Object> getMemberById( @PathVariable(name = "id") Long id ) {
-        MemberDto tv = memberService.getMemberById( id );
+        MemberDto member = memberService.getMemberById( id );
         try {
-            return ResponseEntity.ok( tv );
+            return ResponseEntity.ok( member );
         } catch ( Exception ex ) {
             throw new RecordNotFoundException( "Not found" );
         }

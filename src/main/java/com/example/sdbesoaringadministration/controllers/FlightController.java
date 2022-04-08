@@ -29,11 +29,11 @@ public class FlightController {
     }
 
     // changed <FlightDto> to <Object>
-    @GetMapping("/Flights/{id}")
+    @GetMapping("/flights/{id}")
     public ResponseEntity<Object> getFlightById( @PathVariable(name = "id") Long id ) {
-        FlightDto tv = flightService.getFlightById( id );
+        FlightDto flight = flightService.getFlightById( id );
         try {
-            return ResponseEntity.ok( tv );
+            return ResponseEntity.ok( flight );
         } catch ( Exception ex ) {
             throw new RecordNotFoundException( "Not found" );
         }

@@ -30,9 +30,9 @@ public class PersonController {
 
     @GetMapping("/persons/{id}")
     public ResponseEntity<Object> getPersonById( @PathVariable(name = "id") Long id ) {
-        PersonDto tv = personService.getPersonById( id );
+        PersonDto person = personService.getPersonById( id );
         try {
-            return ResponseEntity.ok( tv );
+            return ResponseEntity.ok( person );
         } catch ( Exception ex ) {
             throw new RecordNotFoundException( "Not found" );
         }

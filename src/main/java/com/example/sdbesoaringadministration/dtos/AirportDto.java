@@ -25,27 +25,17 @@ public class AirportDto {
         this.location = location;
     }
 
-    public Airport AirportDtoToAirport( AirportDto airportDto) {
+//    Dto to Model
+    public static Airport AirportDtoToAirport( AirportDto airportDto) {
         Airport airport = new Airport();
-//        Airport airport = new Airport();
+
         airport.setId( airportDto.getId() );
         airport.setIcao( airportDto.getIcao() );
         airport.setLocation( airportDto.getLocation() );
 
         return airport;
-
 }
 
-
-//    public UserDto userToUserDto( User user){
-//        UserDto userDto = new UserDto();
-//        userDto.setId( user.getId());
-//        userDto.setUsername( user.getUsername() );
-//        userDto.setPassword( user.getPassword() );
-//        userDto.setRole( user.getRole() );
-//
-//        return userDto;
-//    }
 
     //    GETTERS AND SETTERS
     public String getIcao() {

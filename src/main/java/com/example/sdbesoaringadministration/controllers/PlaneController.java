@@ -31,9 +31,9 @@ public class PlaneController {
 
     @GetMapping("/planes/{id}")
     public ResponseEntity<Object> getPlaneById( @PathVariable(name = "id") Long id ) {
-        PlaneDto tv = planeService.getPlaneById( id );
+        PlaneDto plane = planeService.getPlaneById( id );
         try {
-            return ResponseEntity.ok( tv );
+            return ResponseEntity.ok( plane );
         } catch ( Exception ex ) {
             throw new RecordNotFoundException( "Plane Not found" );
         }
@@ -51,7 +51,7 @@ public class PlaneController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             planeService.addPlane( planeDto );
-            return new ResponseEntity( "plane added to systeem", HttpStatus.CREATED );
+            return new ResponseEntity<>( "plane added to systeem", HttpStatus.CREATED );
         }
     }
 
