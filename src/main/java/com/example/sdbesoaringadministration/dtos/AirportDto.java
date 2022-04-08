@@ -26,7 +26,7 @@ public class AirportDto {
     }
 
 //    Dto to Model
-    public static Airport AirportDtoToAirport( AirportDto airportDto) {
+    public static Airport airportDtoToAirport( AirportDto airportDto) {
         Airport airport = new Airport();
 
         airport.setId( airportDto.getId() );

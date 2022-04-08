@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.models.Flight;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

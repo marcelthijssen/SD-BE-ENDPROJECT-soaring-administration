@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sdbesoaringadministration.dtos.MemberDto.memberDtoToMember;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -75,31 +77,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void addMember( MemberDto memberDto ) {
-        Member m = new Member();
-        m.setId( memberDto.getId() );
-        m.setMembership( memberDto.getMembership() );
-        m.setUserName( memberDto.getUserName() );
-        m.setPassword( memberDto.getPassword() );
-        m.setPilotLicense( memberDto.getPilotLicense() );
-        m.setGender( memberDto.getGender() );
-        m.setFirstName( memberDto.getFirstName() );
-        m.setLastName( memberDto.getLastName() );
-        m.setBirthday( memberDto.getBirthday() );
-        m.setStreetName( memberDto.getStreetName() );
-        m.setHouseNumber( memberDto.getHouseNumber() );
-        m.setCity( memberDto.getCity() );
-        m.setCountry( memberDto.getCountry() );
-        m.setEmail( memberDto.getEmail() );
-        m.setPhone( memberDto.getPhone() );
+    public Member addMember( MemberDto memberDto ) {
+        Member member = memberDtoToMember( memberDto );
 
-        this.memberRepository.save( m );
+        memberRepository.save( member );
+        return member;
     }
 
     @Override
     public void deleteMemberById( Long id ) {
         if ( memberRepository.findById( id ).isPresent() ) {
             memberRepository.deleteById( id );
+            throw new RecordNotFoundException( "Member deleted from list" );
+
         } else {
             throw new RecordNotFoundException( "Member not found" );
         }

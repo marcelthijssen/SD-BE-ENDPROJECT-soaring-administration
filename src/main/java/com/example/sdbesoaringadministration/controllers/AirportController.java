@@ -55,16 +55,16 @@ public class AirportController {
     }
 
     @DeleteMapping("/airports/{id}")
-    public ResponseEntity<Object> deleteAirportById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> deleteAirportById( @PathVariable("id") Long id ) {
 
-        airportService.deleteAirportById(id);
-return new ResponseEntity<>( "Airport " + getAirportById( id ) + "has been deleted from the system",  HttpStatus.OK);
+        airportService.deleteAirportById( id );
+        return new ResponseEntity<>( "Airport has been deleted from the system.", HttpStatus.ACCEPTED );
     }
 
     @PutMapping("/airports/{id}")
-    public AirportDto updateAirport(@PathVariable("id") Long id, @RequestBody AirportDto dto) {
+    public AirportDto updateAirport( @PathVariable("id") Long id, @RequestBody AirportDto dto ) {
 
-        AirportDto airportDto = airportService.updateAirport(id, dto);
+        AirportDto airportDto = airportService.updateAirport( id, dto );
         return airportDto;
     }
 

@@ -1,10 +1,8 @@
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.MemberDto;
-import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.services.MemberService;
-import com.example.sdbesoaringadministration.services.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -52,15 +50,16 @@ public class MemberController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             memberService.addMember( memberDto );
-            return new ResponseEntity( "Members is added to systeem", HttpStatus.CREATED );
+            return new ResponseEntity<>( "This person is not a member any more. but can still be found in de personslist", HttpStatus.CREATED );
         }
     }
 
 
     @DeleteMapping("/members/{id}")
-    public void deleteMemberById( @PathVariable("id") Long id ) {
+    public ResponseEntity<Object> deleteMemberById( @PathVariable("id") Long id ) {
 
         memberService.deleteMemberById( id );
+        return new ResponseEntity<>( "Member has been deleted from the memberlist.", HttpStatus.ACCEPTED );
 
     }
 

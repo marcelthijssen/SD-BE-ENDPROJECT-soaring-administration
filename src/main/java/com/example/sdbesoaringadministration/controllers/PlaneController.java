@@ -57,10 +57,10 @@ public class PlaneController {
 
 
     @DeleteMapping("/planes/{id}")
-    public void deletePlaneById( @PathVariable("id") Long id ) {
+    public ResponseEntity<String> deletePlaneById( @PathVariable("id") Long id ) {
 
         planeService.deletePlaneById( id );
-
+        return new ResponseEntity<>("Plane deleted from system", HttpStatus.ACCEPTED  );
     }
 
     @PutMapping("/planes/{id}")

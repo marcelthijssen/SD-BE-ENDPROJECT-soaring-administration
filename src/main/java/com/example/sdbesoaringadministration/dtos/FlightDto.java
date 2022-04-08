@@ -1,6 +1,8 @@
 package com.example.sdbesoaringadministration.dtos;
 
 
+import com.example.sdbesoaringadministration.models.Airport;
+import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Plane;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -37,7 +39,21 @@ public class FlightDto {
         this.plane = plane;
     }
 
+    //    Dto to Model
+    public static Flight flightDtoToFlight( FlightDto dto) {
+        Flight fl = new Flight();
 
+        fl.setId( dto.getId() );
+        fl.setStartTime( dto.getStartTime() );
+        fl.setEndTime( dto.getEndTime() );
+        fl.setCaptain( dto.getCaptain() );
+        fl.setPassenger( dto.getPassenger() );
+        fl.setInstructionFlight( dto.instructionFlight );
+        fl.setRemarks( dto.getRemarks() );
+        fl.setPlane( dto.getPlane() );
+
+        return fl;
+    }
     public Long getId() {
         return id;
     }

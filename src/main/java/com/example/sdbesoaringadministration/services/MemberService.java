@@ -1,6 +1,8 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.MemberDto;
+import com.example.sdbesoaringadministration.models.Member;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ public interface MemberService {
 
     MemberDto getMemberById( Long id );
 
-    void addMember( MemberDto memberDto );
+    Member addMember( MemberDto memberDto );
 
     void deleteMemberById( Long id );
 

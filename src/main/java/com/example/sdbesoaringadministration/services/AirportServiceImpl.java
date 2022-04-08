@@ -11,18 +11,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sdbesoaringadministration.dtos.AirportDto.airportDtoToAirport;
+
 @Service
 public class AirportServiceImpl implements AirportService {
 
-    private final AirportRepository repos;
+    private final AirportRepository airportRepository;
 
-    public AirportServiceImpl( AirportRepository repos ) {
-        this.repos = repos;
+    public AirportServiceImpl( AirportRepository airportRepository ) {
+        this.airportRepository = airportRepository;
     }
 
     @Override
     public List<AirportDto> getAllAirports() {
-        List<Airport> listAirports = this.repos.findAll();
+        List<Airport> listAirports = this.airportRepository.findAll();
         List<AirportDto> listAirportsDto = new ArrayList<>();
 
         listAirports.forEach( a -> listAirportsDto.add( new AirportDto( a.getId(), a.getIcao(), a.getLocation() ) ) );
@@ -32,8 +34,8 @@ public class AirportServiceImpl implements AirportService {
     @Override
     public AirportDto getAirportsById( Long id ) {
         AirportDto dto = new AirportDto();
-        if ( repos.findById( id ).isPresent() ) {
-            Airport airport = repos.findById( id ).get();
+        if ( airportRepository.findById( id ).isPresent() ) {
+            Airport airport = airportRepository.findById( id ).get();
             dto.setId( airport.getId() );
             dto.setIcao( airport.getIcao() );
             dto.setLocation( airport.getLocation() );
@@ -46,17 +48,16 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public Airport addAirport( AirportDto airportDto ) {
-        Airport a = airportDto.AirportDtoToAirport( airportDto );
+        Airport airport = airportDtoToAirport( airportDto );
 
-        return this.repos.save( a );
+        return this.airportRepository.save( airport );
     }
 
     @Override
     public ResponseEntity<Object> deleteAirportById( Long id ) {
-//        AirportDto dto = new AirportDto();
-        if ( repos.findById( id ).isPresent() ) {
-            repos.deleteById( id );
-            return new ResponseEntity<Object>("Airport is deleted", HttpStatus.OK);
+        if ( airportRepository.findById( id ).isPresent() ) {
+            airportRepository.deleteById( id );
+            return new ResponseEntity<>("Airport is deleted", HttpStatus.OK);
         } else {
             throw new RecordNotFoundException( "Airport not found" );
         }
@@ -65,31 +66,17 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public AirportDto updateAirport( Long id, AirportDto dto ) {
-        if ( repos.findById( id ).isPresent() ) {
-            Airport airport = repos.findById( id ).get();
+        if ( airportRepository.findById( id ).isPresent() ) {
+            Airport airport = airportRepository.findById( id ).get();
             dto.setId( airport.getId() );
             dto.setIcao( airport.getIcao() );
             dto.setLocation( airport.getLocation() );
 
-            repos.save(airport);
+            airportRepository.save(airport);
             return dto;
         } else {
             throw new RecordNotFoundException( "Airport not found" );
         }
     }
-/*    @Override
-    public AirportDto updateAirport( Long id, AirportDto dto ) {
-        if ( repos.findById( id ).isPresent() ) {
-            Airport airport = repos.findById( id ).get();
-            dto.setId( airport.getId() );
-            dto.setIcao( airport.getIcao() );
-            dto.setLocation( airport.getLocation() );
 
-            repos.save(airport);
-            return dto;
-        } else {
-            throw new RecordNotFoundException( "Airport not found" );
-        }
-    }
-*/
 }

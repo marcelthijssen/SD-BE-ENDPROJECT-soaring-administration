@@ -56,9 +56,10 @@ public class TypeOfMembershipController {
     }
 
     @DeleteMapping("/toms/{id}")
-    public void deleteTypeOfMembershipById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> deleteTypeOfMembershipById(@PathVariable("id") Long id) {
 
         tomService.deleteTypeOfMembershipById(id);
+        return new ResponseEntity<>( "Membership-type has been delted", HttpStatus.ACCEPTED );
 
     }
 

@@ -55,10 +55,10 @@ public class StartingMethodeController {
     }
 
     @DeleteMapping("/startingmethodes/{id}")
-    public void deleteAirportById(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> deleteAirportById(@PathVariable("id") Long id) {
 
         smService.deleteStartingMethodeById( id);
-
+return new ResponseEntity<>( "StartingMethode has been deleted", HttpStatus.ACCEPTED );
     }
 
     @PutMapping("/startingmethodes/{id}")
