@@ -51,7 +51,7 @@ public class FlightController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             flightService.addFlight( flightDto );
-            return new ResponseEntity( "Flight has been added", HttpStatus.CREATED );
+            return new ResponseEntity<>( "Flight has been added", HttpStatus.CREATED );
         }
     }
 
@@ -72,9 +72,38 @@ public class FlightController {
 
     }
 
-    @PutMapping("/flights/{flid}/plane/{pid}")
-    public ResponseEntity<Object> assignPlaneToFlight( @PathVariable("flid") Long flid, @PathVariable("pid") Long pid ) {
-        flightService.assignPlaneToFlight( flid, pid );
+    // Assign plane to flight
+    @PutMapping("/flights/{flid}/plane/{plid}")
+    public ResponseEntity<Object> assignPlaneToFlight( @PathVariable("flid") Long flid, @PathVariable("plid") Long plid ) {
+        flightService.assignPlaneToFlight( flid, plid );
         return new ResponseEntity<>( "Plane added to flight", HttpStatus.ACCEPTED );
     }
+
+    // assign Airport to flight
+    @PutMapping("/flights/{flid}/plane/{apid}")
+    public ResponseEntity<Object> assignAirportToFlight( @PathVariable("flid") Long flid, @PathVariable("apid") Long apid ) {
+        flightService.assignAirportToFlight( flid, apid );
+        return new ResponseEntity<>( "Plane added to flight", HttpStatus.ACCEPTED );
+    }
+
+    //     assign starting method to flight
+    @PutMapping("/flights/{flid}/startingmethodes/{smid}")
+    public ResponseEntity<Object> assignStartingMethodeToFlight( @PathVariable("flid") Long flid, @PathVariable("smid") Long smid ) {
+        flightService.assignStartingMethodeToFlight( flid, smid );
+        return new ResponseEntity<>( "Startingmethode added to flight", HttpStatus.ACCEPTED );
+    }
+
+    //     assign starting method to flight
+    @PutMapping("/flights/{flid}/passenger/{psid}")
+    public ResponseEntity<Object> assignPassengerToFlight( @PathVariable("flid") Long flid, @PathVariable("psid") Long psid ) {
+        flightService.assignPassengerToFlight( flid, psid );
+        return new ResponseEntity<>( "Passenger added to flight", HttpStatus.ACCEPTED );
+    }
+
+    //     assign starting method to flight
+//    @PutMapping("/flights/{flid}/captain/{cpid}")
+//    public ResponseEntity<Object> assigncaptainToFlight( @PathVariable("flid") Long flid, @PathVariable("cpid") Long cpid ) {
+//        flightService.assignCaptainToFlight( flid, cpid );
+//        return new ResponseEntity<>( "Captain added to flight", HttpStatus.ACCEPTED );
+//    }
 }

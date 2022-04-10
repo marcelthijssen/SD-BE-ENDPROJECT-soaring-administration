@@ -1,10 +1,10 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +18,13 @@ public class Airport {
     private String Icao;
     private String location;
 
+    // A flight can only have on airport
+    @OneToMany
+            (mappedBy = "airport",
+                    fetch = FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Flight> flights;
 
 //    GETTERS AND SETTERS
     public Long getId() {
@@ -43,5 +50,18 @@ public class Airport {
     public void setIcao( String Icao ) {
         this.Icao = Icao;
     }
+
+    // Flight
+    public void setFlight(List<Flight> flights) {
+        this.flights = flights;
+    }
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    void addFlight( Flight flight) {
+        this.flights.add(flight);
+    }
+
 
 }

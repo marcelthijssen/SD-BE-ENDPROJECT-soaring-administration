@@ -1,10 +1,7 @@
 package com.example.sdbesoaringadministration.dtos;
 
 
-import com.example.sdbesoaringadministration.models.Airport;
-import com.example.sdbesoaringadministration.models.Flight;
-import com.example.sdbesoaringadministration.models.Plane;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.sdbesoaringadministration.models.*;
 
 import java.time.LocalDateTime;
 
@@ -17,26 +14,32 @@ public class FlightDto {
 
     //    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="Europe/Amsterdam")
     private LocalDateTime endTime;
-    private String captain;
-    private String passenger;
     private boolean instructionFlight;
     private String remarks;
-
+// MayToOne
     private Plane plane;
+    private Airport airport;
+    private StartingMethode startingMethode;
+    private Person passenger;
+//    private Person captain;
+
     //TODO: Add StartingMethode and Plane
 
     public FlightDto() {
     }
 
-    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, String captain, String passenger, boolean instructionFlight, String remarks, Plane plane ) {
+    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, boolean instructionFlight, String remarks, Plane plane, Airport airport, StartingMethode startingMethode, Person passenger ) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.captain = captain;
-        this.passenger = passenger;
         this.instructionFlight = instructionFlight;
         this.remarks = remarks;
         this.plane = plane;
+        this.airport=airport;
+        this.startingMethode=startingMethode;
+        this.passenger=passenger;
+//        this.captain = captain;
+
     }
 
     //    Dto to Model
@@ -46,14 +49,39 @@ public class FlightDto {
         fl.setId( dto.getId() );
         fl.setStartTime( dto.getStartTime() );
         fl.setEndTime( dto.getEndTime() );
-        fl.setCaptain( dto.getCaptain() );
-        fl.setPassenger( dto.getPassenger() );
-        fl.setInstructionFlight( dto.instructionFlight );
+        fl.setInstructionFlight( dto.getInstructionFlight() );
         fl.setRemarks( dto.getRemarks() );
+//        RElationships
         fl.setPlane( dto.getPlane() );
+        fl.setAirport( dto.getAirport() );
+        fl.setStartingMethode( dto.getStartingMethode() );
+        fl.setPassenger( dto.getPassenger());
+//        fl.setCaptain( dto.getCaptain() );
 
         return fl;
     }
+
+
+
+    public FlightDto flightToFlightDto ( Flight fl ) {
+        FlightDto dto = new FlightDto();
+
+        dto.setId( fl.getId() );
+        dto.setStartTime( fl.getStartTime() );
+        dto.setEndTime( fl.getEndTime() );
+        dto.setInstructionFlight( fl.getInstructionFlight() );
+        dto.setRemarks( fl.getRemarks() );
+//        relationships
+        dto.setPlane( fl.getPlane() );
+        dto.setAirport( fl.getAirport() );
+        dto.setStartingMethode( fl.getStartingMethode() );
+        dto.setPassenger(fl.getPassenger());
+//        dto.setCaptain( fl.getCaptain() );
+
+        return dto;
+    }
+    // after update we are ready so using inline
+
     public Long getId() {
         return id;
     }
@@ -78,28 +106,12 @@ public class FlightDto {
         this.endTime = endTime;
     }
 
-    public String getCaptain() {
-        return captain;
-    }
-
-    public void setCaptain( String captain ) {
-        this.captain = captain;
-    }
-
-    public String getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger( String passenger ) {
-        this.passenger = passenger;
-    }
-
-    public boolean isInstructionFlight() {
+    public boolean getInstructionFlight() {
         return instructionFlight;
     }
 
     public void setInstructionFlight( boolean instructionFlight ) {
-        this.instructionFlight = instructionFlight;
+        this.instructionFlight = this.instructionFlight;
     }
 
     public String getRemarks() {
@@ -118,4 +130,35 @@ public class FlightDto {
         return plane;
     }
 
+    public Airport getAirport() {
+        return airport;
+    }
+
+    public void setAirport( Airport airport ) {
+        this.airport = airport;
+    }
+
+    public StartingMethode getStartingMethode() {
+        return startingMethode;
+    }
+
+    public void setStartingMethode( StartingMethode startingMethode ) {
+        this.startingMethode = startingMethode;
+    }
+
+    public Person getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger( Person passenger ) {
+        this.passenger = passenger;
+    }
+
+//    public Person getCaptain() {
+//        return captain;
+//    }
+
+//    public void setCaptain( Person captain ) {
+//        this.captain =  captain ;
+//    }
 }

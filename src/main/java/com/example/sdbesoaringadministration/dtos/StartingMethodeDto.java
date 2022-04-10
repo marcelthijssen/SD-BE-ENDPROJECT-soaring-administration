@@ -1,15 +1,13 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.models.Airport;
 import com.example.sdbesoaringadministration.models.StartingMethode;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 
 public class StartingMethodeDto {
 
     private Long id;
-
     private String title;
     private String unit;
 //    BigDecimal bd1 = new BigDecimal.valueOf(...) OF BigDecimal("...")
@@ -20,22 +18,42 @@ public class StartingMethodeDto {
     public StartingMethodeDto() {
     }
 
-    public StartingMethodeDto( String title, String unit, BigDecimal price, BigDecimal max ) {
+    public StartingMethodeDto( Long id, String title, String unit, BigDecimal price, BigDecimal max ) {
         this.title = title;
         this.unit = unit;
         this.price = price;
-        this.max = max;
     }
 
 
+    //    Dto to Model
+    public static StartingMethode startingMethodeDtoToStartingMethode( StartingMethodeDto dto) {
+        StartingMethode startingMethode = new StartingMethode();
 
+        startingMethode.setId( dto.getId() );
+        startingMethode.setTitle( dto.getTitle());
+        startingMethode.setUnit( dto.getUnit() );
+        startingMethode.setPrice( dto.getPrice() );
+
+        return startingMethode;
+    }
+
+//model to dto
+    public StartingMethodeDto startingMethodeToStartingMethodeDto ( StartingMethode startingMethode ) {
+        var dto = new StartingMethodeDto();
+
+        dto.setId( startingMethode.getId() );
+        dto.setTitle( startingMethode.getTitle() );
+        dto.setUnit( startingMethode.getUnit() );
+        dto.setPrice( startingMethode.getPrice() );
+        return dto;
+    }
     //getters an setters
-    public BigDecimal getMax( @DecimalMin("0.0") @Digits(integer = 1, fraction = 2) BigDecimal max) {
-        return max;
+    public Long getId() {
+        return id;
     }
 
-    public void setMax( BigDecimal max ) {
-        this.max = max;
+    public void setId( Long id ) {
+        this.id = id;
     }
 
     public String getUnit() {
@@ -55,7 +73,7 @@ public class StartingMethodeDto {
         this.title = title;
     }
 
-    public BigDecimal getPrice( @DecimalMin("0.0") @Digits(integer = 1, fraction = 2) BigDecimal price ) {
+    public BigDecimal getPrice() {
         return this.price;
     }
 
@@ -63,11 +81,4 @@ public class StartingMethodeDto {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId( Long id ) {
-        this.id = id;
-    }
 }

@@ -19,6 +19,13 @@ public interface FlightService {
 
     FlightDto updateFlight( Long id, FlightDto flightDto);
 
-    void assignPlaneToFlight(Long id, Long pid);
+    void assignPlaneToFlight(Long id, Long plid);
 
+    void assignAirportToFlight(Long id, Long apid);
+
+    void assignStartingMethodeToFlight(Long id, Long smid);
+
+    void assignPassengerToFlight (Long id, Long psid);
+
+//    void assignCaptainToFlight (Long id, Long cpid);
 }

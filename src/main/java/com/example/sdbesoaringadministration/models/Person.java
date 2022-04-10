@@ -1,8 +1,12 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,6 +29,26 @@ public class Person {
     private String email;
     private String phone;
 
+    // A flight can only have on eplane
+    @OneToMany
+            (mappedBy = "passenger",
+                    fetch = FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Flight> flights;
+
+    // A flight can only have one plane
+//    @OneToMany
+//            (mappedBy = "captain",
+//                    fetch = FetchType.LAZY,
+//                    cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private List<Flight> flights;
+
+
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "persons")
+//    private  Set<Flight> Flights = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -121,4 +145,18 @@ public class Person {
     public void setPhone( String phone ) {
         this.phone = phone;
     }
+
+    public void setFlight(List<Flight> flights) {
+        this.flights = flights;
+    }
+
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    void addFlight( Flight flight) {
+        this.flights.add(flight);
+    }
+
+
 }

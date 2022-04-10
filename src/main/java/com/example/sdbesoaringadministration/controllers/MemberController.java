@@ -50,7 +50,7 @@ public class MemberController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             memberService.addMember( memberDto );
-            return new ResponseEntity<>( "This person is not a member any more. but can still be found in de personslist", HttpStatus.CREATED );
+            return new ResponseEntity<>( "Added to the memberlist", HttpStatus.CREATED );
         }
     }
 

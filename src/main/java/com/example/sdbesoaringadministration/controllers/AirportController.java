@@ -50,7 +50,7 @@ public class AirportController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             airportService.addAirport( airportDto );
-            return new ResponseEntity( "Airport added to list of airports", HttpStatus.CREATED );
+            return new ResponseEntity<>( "Airport added to list of airports", HttpStatus.CREATED );
         }
     }
 
@@ -64,8 +64,8 @@ public class AirportController {
     @PutMapping("/airports/{id}")
     public AirportDto updateAirport( @PathVariable("id") Long id, @RequestBody AirportDto dto ) {
 
-        AirportDto airportDto = airportService.updateAirport( id, dto );
-        return airportDto;
+        // after update we are ready so using inline variable
+        return airportService.updateAirport( id, dto );
     }
 
 }

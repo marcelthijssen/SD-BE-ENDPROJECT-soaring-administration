@@ -26,16 +26,23 @@ public class AirportDto {
     }
 
 //    Dto to Model
-    public static Airport airportDtoToAirport( AirportDto airportDto) {
+    public static Airport airportDtoToAirport( AirportDto dto) {
         Airport airport = new Airport();
 
-        airport.setId( airportDto.getId() );
-        airport.setIcao( airportDto.getIcao() );
-        airport.setLocation( airportDto.getLocation() );
+        airport.setId( dto.getId() );
+        airport.setIcao( dto.getIcao() );
+        airport.setLocation( dto.getLocation() );
 
         return airport;
 }
 
+    public AirportDto airportToAirportDto ( Airport airport ) {
+        AirportDto dto = new AirportDto();
+        dto.setId( airport.getId() );
+        dto.setIcao( airport.getIcao() );
+        dto.setLocation( airport.getLocation() );
+        return dto;
+    }
 
     //    GETTERS AND SETTERS
     public String getIcao() {

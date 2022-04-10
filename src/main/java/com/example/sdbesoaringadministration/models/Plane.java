@@ -95,7 +95,7 @@ public class Plane {
     public void setFlight(List<Flight> flights) {
         this.flights = flights;
     }
-//    @JsonManagedReference
+
     public List<Flight> getFlights() {
         return flights;
     }

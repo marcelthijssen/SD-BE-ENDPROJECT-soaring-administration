@@ -1,12 +1,18 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Person;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class PersonDto {
 

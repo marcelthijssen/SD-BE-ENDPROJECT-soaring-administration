@@ -33,15 +33,14 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public AirportDto getAirportsById( Long id ) {
-        AirportDto dto = new AirportDto();
         if ( airportRepository.findById( id ).isPresent() ) {
+
             Airport airport = airportRepository.findById( id ).get();
-            dto.setId( airport.getId() );
-            dto.setIcao( airport.getIcao() );
-            dto.setLocation( airport.getLocation() );
+            AirportDto dto = new AirportDto().airportToAirportDto(airport);
+
             return dto;
         } else {
-            throw new RecordNotFoundException( "Airport not found" );
+            throw new RecordNotFoundException();
         }
     }
 
@@ -64,7 +63,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
 
-    @Override
+  @Override
     public AirportDto updateAirport( Long id, AirportDto dto ) {
         if ( airportRepository.findById( id ).isPresent() ) {
             Airport airport = airportRepository.findById( id ).get();
@@ -78,5 +77,4 @@ public class AirportServiceImpl implements AirportService {
             throw new RecordNotFoundException( "Airport not found" );
         }
     }
-
 }
