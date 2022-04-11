@@ -17,15 +17,17 @@ public interface FlightService {
 
     void deleteFlightById( Long id );
 
-    FlightDto updateFlight( Long id, FlightDto flightDto);
+    FlightDto updateFlight( Long id, FlightDto flightDto );
 
-    void assignPlaneToFlight(Long id, Long plid);
+    void assignPlaneToFlight( Long id, Long plid );
 
-    void assignAirportStartToFlight(Long id, Long asid);
+    void assignAirportStartToFlight( Long id, Long asid );
 
-    void assignStartingMethodeToFlight(Long id, Long smid);
+    void assignAirportEndToFlight( Long id, Long aeid );
 
-    void assignPassengerToFlight (Long id, Long psid);
+    void assignStartingMethodeToFlight( Long id, Long smid );
 
-//    void assignCaptainToFlight (Long id, Long cpid);
+    void assignPassengerToFlight( Long id, Long psid );
+
+    void assignCaptainToFlight( Long id, Long cpid );
 }

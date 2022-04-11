@@ -30,18 +30,20 @@ public class Person {
     private String email;
     private String phone;
 
-    // A person can only have one passenger
-//    @OneToMany
-//    @JoinColumn(name = "captain_id")
-//    @JsonManagedReference("captain")
-//    @JsonIgnore
-//    private List<Flight> captain;
 
     @OneToMany
-    @JoinColumn(name = "passenger_id")
-    @JsonManagedReference("passenger")
+            (mappedBy = "captain",
+                    fetch= FetchType.LAZY,
+                    cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Person> passenger;
+    private List<Flight> captain;
+
+    @OneToMany
+            (mappedBy = "passenger",
+                    fetch= FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Flight> passenger;
 
     @OneToMany
             (mappedBy = "owner",
@@ -49,8 +51,6 @@ public class Person {
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Plane> planes;
-
-
 
     public Long getId() {
         return id;

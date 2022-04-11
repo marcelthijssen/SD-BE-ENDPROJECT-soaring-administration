@@ -31,15 +31,6 @@ public class Flight {
             referencedColumnName = "id")
     private Plane plane;
 
-//    a airport can have multiple flights
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(
-            name = "airport_start_id",
-            referencedColumnName = "id")
-    private Airport airportStart;
-
-    //    a airport can have multiple flights
     @ManyToOne
     @JsonBackReference
     @JoinColumn(
@@ -53,10 +44,21 @@ public class Flight {
     @JsonBackReference("passenger")
     private Person passenger;
 
-//    @ManyToOne
-//    @JoinColumn(name = "captain_id")
-//    @JsonBackReference("captain")
-//    private Person captain;
+    @ManyToOne
+    @JoinColumn(name = "captain_id")
+    @JsonBackReference("captain")
+    private Person captain;
+
+//    /    a person can have different relations with the flight
+    @ManyToOne
+    @JoinColumn(name = "airport_end_id")
+    @JsonBackReference("airportEnd")
+    private Airport airportEnd;
+
+    @ManyToOne
+    @JoinColumn(name = "airport_start_id")
+    @JsonBackReference("airportStart")
+    private Airport airportStart;
 
 
     public Long getId() {
@@ -109,15 +111,6 @@ public class Flight {
         return plane;
     }
 
-// OneToMany Airport
-
-    public void setAirport( Airport airportStart ) {
-        this.airportStart = airportStart;
-    }
-
-    public Airport getAirportStart() {
-        return airportStart;
-    }
 
 //
     public StartingMethode getStartingMethode() {
@@ -135,13 +128,30 @@ public class Flight {
     public void setPassenger( Person passenger ) {
         this.passenger = passenger;
     }
-//
-//    public Person getCaptain() {
-//        return captain;
-//    }
-//
-//    public void setCaptain( Person captain ) {
-//        this.captain = captain;
-//    }
 
+    public Person getCaptain() {
+        return captain;
+    }
+
+    public void setCaptain( Person captain ) {
+        this.captain = captain;
+    }
+// OneToMany Airport
+
+
+    public Airport getAirportStart() {
+        return airportStart;
+    }
+
+    public Airport getAirportEnd() {
+        return airportEnd;
+    }
+
+    public void setAirportEnd( Airport airportEnd ) {
+        this.airportEnd = airportEnd;
+    }
+
+    public void setAirportStart( Airport airportStart ) {
+        this.airportStart = airportStart;
+    }
 }

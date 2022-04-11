@@ -24,7 +24,15 @@ public class Airport {
                     fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Flight> flights;
+    private List<Flight> airportStart;
+
+    @OneToMany
+            (mappedBy = "airportEnd",
+                    fetch= FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Flight> airportEnd;
+
 
 //    GETTERS AND SETTERS
     public Long getId() {
@@ -52,16 +60,16 @@ public class Airport {
     }
 
     // Flight
-    public void setFlight(List<Flight> flights) {
-        this.flights = flights;
-    }
-    public List<Flight> getFlights() {
-        return flights;
-    }
-
-    void addFlight( Flight flight) {
-        this.flights.add(flight);
-    }
+//    public void setFlight(List<Flight> flights) {
+//        this.flights = flights;
+//    }
+//    public List<Flight> getFlights() {
+//        return flights;
+//    }
+//
+//    void addFlight( Flight flight) {
+//        this.flights.add(flight);
+//    }
 
 
 }
