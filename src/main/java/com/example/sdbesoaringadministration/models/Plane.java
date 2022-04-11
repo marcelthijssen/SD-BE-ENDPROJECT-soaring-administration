@@ -1,5 +1,6 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -26,13 +27,22 @@ public class Plane {
     private boolean twoSeater;
     private boolean privatePlane;
 
-// A flight can only have on eplane
+    // A flight can only have on eplane
     @OneToMany
             (mappedBy = "plane",
                     fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+                    cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Flight> flights;
+
+    //     Owner of plane
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(
+            name = "owner_id",
+            referencedColumnName = "id")
+    private Person owner;
 
 
     public Long getId() {
@@ -91,8 +101,8 @@ public class Plane {
         this.privatePlane = privatePlane;
     }
 
-// Flight
-    public void setFlight(List<Flight> flights) {
+    // Flight
+    public void setFlight( List<Flight> flights ) {
         this.flights = flights;
     }
 
@@ -100,8 +110,8 @@ public class Plane {
         return flights;
     }
 
-    void addFlight( Flight flight) {
-        this.flights.add(flight);
+    void addFlight( Flight flight ) {
+        this.flights.add( flight );
     }
 
 

@@ -80,9 +80,9 @@ public class FlightController {
     }
 
     // assign Airport to flight
-    @PutMapping("/flights/{flid}/plane/{apid}")
-    public ResponseEntity<Object> assignAirportToFlight( @PathVariable("flid") Long flid, @PathVariable("apid") Long apid ) {
-        flightService.assignAirportToFlight( flid, apid );
+    @PutMapping("/flights/{flid}/plane/{asid}")
+    public ResponseEntity<Object> assignAirportToFlight( @PathVariable("flid") Long flid, @PathVariable("asid") Long asid ) {
+        flightService.assignAirportStartToFlight( flid, asid );
         return new ResponseEntity<>( "Plane added to flight", HttpStatus.ACCEPTED );
     }
 
@@ -100,7 +100,7 @@ public class FlightController {
         return new ResponseEntity<>( "Passenger added to flight", HttpStatus.ACCEPTED );
     }
 
-    //     assign starting method to flight
+//         assign starting method to flight
 //    @PutMapping("/flights/{flid}/captain/{cpid}")
 //    public ResponseEntity<Object> assigncaptainToFlight( @PathVariable("flid") Long flid, @PathVariable("cpid") Long cpid ) {
 //        flightService.assignCaptainToFlight( flid, cpid );

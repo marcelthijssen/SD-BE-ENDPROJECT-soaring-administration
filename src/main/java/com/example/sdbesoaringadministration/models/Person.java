@@ -1,6 +1,7 @@
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -29,26 +30,27 @@ public class Person {
     private String email;
     private String phone;
 
-    // A flight can only have on eplane
+    // A person can only have one passenger
+//    @OneToMany
+//    @JoinColumn(name = "captain_id")
+//    @JsonManagedReference("captain")
+//    @JsonIgnore
+//    private List<Flight> captain;
+
     @OneToMany
-            (mappedBy = "passenger",
+    @JoinColumn(name = "passenger_id")
+    @JsonManagedReference("passenger")
+    @JsonIgnore
+    private List<Person> passenger;
+
+    @OneToMany
+            (mappedBy = "owner",
                     fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Flight> flights;
-
-    // A flight can only have one plane
-//    @OneToMany
-//            (mappedBy = "captain",
-//                    fetch = FetchType.LAZY,
-//                    cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private List<Flight> flights;
+    private List<Plane> planes;
 
 
-//    @JsonIgnore
-//    @ManyToMany(mappedBy = "persons")
-//    private  Set<Flight> Flights = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -146,17 +148,29 @@ public class Person {
         this.phone = phone;
     }
 
-    public void setFlight(List<Flight> flights) {
-        this.flights = flights;
+//    public List<Flight> getCaptain() {
+//        return captain;
+//    }
+//
+//    public void setCaptain( List<Flight> captain ) {
+//        this.captain = captain;
+//    }
+//
+//    public List<Flight> getPassenger() {
+//        return passenger;
+//    }
+//
+//    public void setPassenger( List<Flight> passenger ) {
+//        this.passenger = passenger;
+//    }
+
+
+
+    public List<Plane> getPlanes() {
+        return planes;
     }
 
-    public List<Flight> getFlights() {
-        return flights;
+    public void setPlanes( List<Plane> planes ) {
+        this.planes = planes;
     }
-
-    void addFlight( Flight flight) {
-        this.flights.add(flight);
-    }
-
-
 }

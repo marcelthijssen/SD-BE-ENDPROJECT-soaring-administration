@@ -20,7 +20,7 @@ public class Airport {
 
     // A flight can only have on airport
     @OneToMany
-            (mappedBy = "airport",
+            (mappedBy = "airportStart",
                     fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore

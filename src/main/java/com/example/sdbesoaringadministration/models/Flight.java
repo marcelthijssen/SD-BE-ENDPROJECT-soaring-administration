@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 
@@ -36,9 +35,9 @@ public class Flight {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(
-            name = "airport_id",
+            name = "airport_start_id",
             referencedColumnName = "id")
-    private Airport airport;
+    private Airport airportStart;
 
     //    a airport can have multiple flights
     @ManyToOne
@@ -48,13 +47,16 @@ public class Flight {
             referencedColumnName = "id")
     private StartingMethode startingMethode;
 
+//    a person can have different relations with the flight
     @ManyToOne
-    @JsonBackReference
-    @JoinColumn(
-            name = "passenger_id",
-            referencedColumnName = "id")
+    @JoinColumn(name = "passenger_id")
+    @JsonBackReference("passenger")
     private Person passenger;
 
+//    @ManyToOne
+//    @JoinColumn(name = "captain_id")
+//    @JsonBackReference("captain")
+//    private Person captain;
 
 
     public Long getId() {
@@ -109,12 +111,12 @@ public class Flight {
 
 // OneToMany Airport
 
-    public void setAirport( Airport airport ) {
-        this.airport = airport;
+    public void setAirport( Airport airportStart ) {
+        this.airportStart = airportStart;
     }
 
-    public Airport getAirport() {
-        return airport;
+    public Airport getAirportStart() {
+        return airportStart;
     }
 
 //
@@ -126,16 +128,18 @@ public class Flight {
         this.startingMethode = startingMethode;
     }
 
-    public Person getPerson() {
+    public Person getPassenger() {
         return passenger;
-
     }
 
-    public void setPerson( Person passenger ) {
+    public void setPassenger( Person passenger ) {
         this.passenger = passenger;
     }
 //
-//public Person getCaptain() {return captain;}
+//    public Person getCaptain() {
+//        return captain;
+//    }
+//
 //    public void setCaptain( Person captain ) {
 //        this.captain = captain;
 //    }

@@ -33,7 +33,7 @@ public class FlightServiceImpl implements FlightService {
         List<Flight> flightList = this.flRepository.findAll();
         List<FlightDto> flightDtoList = new ArrayList<>();
 
-        flightList.forEach( fl -> flightDtoList.add( new FlightDto( fl.getId(), fl.getStartTime(), fl.getEndTime(), fl.getInstructionFlight(), fl.getRemarks(), fl.getPlane(), fl.getAirport(), fl.getStartingMethode(),
+        flightList.forEach( fl -> flightDtoList.add( new FlightDto( fl.getId(), fl.getStartTime(), fl.getEndTime(), fl.getInstructionFlight(), fl.getRemarks(), fl.getPlane(), fl.getAirportStart(), fl.getStartingMethode(),
                 fl.getPassenger() ) ) );
 
         return flightDtoList;
@@ -75,7 +75,7 @@ public class FlightServiceImpl implements FlightService {
             fl.setInstructionFlight( dto.getInstructionFlight() );
             fl.setRemarks( dto.getRemarks() );
             fl.setPlane( dto.getPlane() );
-            fl.setAirport( dto.getAirport() );
+            fl.setAirportStart( dto.getAirportStart() );
             fl.setStartingMethode( dto.getStartingMethode() );
             fl.setPassenger( dto.getPassenger() );
 //            fl.setCaptain( dto.getCaptain() );
@@ -106,15 +106,15 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignAirportToFlight( Long id, Long apid ) {
+    public void assignAirportStartToFlight( Long id, Long apid ) {
         var optionalFlight = flRepository.findById( id );
-        var optionalAirport = apRepository.findById( apid );
+        var optionalAirportStart = apRepository.findById( apid );
 
-        if ( optionalFlight.isPresent() && optionalAirport.isPresent() ) {
+        if ( optionalFlight.isPresent() && optionalAirportStart.isPresent() ) {
             var flight = optionalFlight.get();
-            var airport = optionalAirport.get();
+            var airportStart = optionalAirportStart.get();
 
-            flight.setAirport( airport );
+            flight.setAirport( airportStart );
             flRepository.save( flight );
         } else {
             throw new RecordNotFoundException( "Airport or flight doesn't exist" );
@@ -151,7 +151,7 @@ public class FlightServiceImpl implements FlightService {
             throw new RecordNotFoundException( "Flight or person doesn't exist" );
         }
     }
-
+//
 //    public void assignCaptainToFlight( Long id, Long cpid ) {
 //        var optionalFlight = flRepository.findById( id );
 //        var optionalPerson = personRepository.findById( cpid );
@@ -163,7 +163,7 @@ public class FlightServiceImpl implements FlightService {
 //            flight.setCaptain( person );
 //            flRepository.save( flight );
 //        } else {
-//            throw new RecordNotFoundException( "Flight or person doesn't exist" );
+//            throw new RecordNotFoundException( "Flight or this person doesn't exist" );
 //        }
 //    }
 

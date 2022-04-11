@@ -21,7 +21,7 @@ public interface FlightService {
 
     void assignPlaneToFlight(Long id, Long plid);
 
-    void assignAirportToFlight(Long id, Long apid);
+    void assignAirportStartToFlight(Long id, Long asid);
 
     void assignStartingMethodeToFlight(Long id, Long smid);
 

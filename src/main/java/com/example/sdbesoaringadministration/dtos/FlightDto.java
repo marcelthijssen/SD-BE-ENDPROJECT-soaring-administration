@@ -16,34 +16,35 @@ public class FlightDto {
     private LocalDateTime endTime;
     private boolean instructionFlight;
     private String remarks;
-// MayToOne
+    // MayToOne
     private Plane plane;
-    private Airport airport;
+    private Airport airportStart;
     private StartingMethode startingMethode;
     private Person passenger;
-//    private Person captain;
+    private Person captain;
 
     //TODO: Add StartingMethode and Plane
 
     public FlightDto() {
     }
 
-    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, boolean instructionFlight, String remarks, Plane plane, Airport airport, StartingMethode startingMethode, Person passenger ) {
+    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, boolean instructionFlight, String remarks, Plane plane, Airport airportStart, StartingMethode startingMethode, Person passenger ) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.instructionFlight = instructionFlight;
         this.remarks = remarks;
         this.plane = plane;
-        this.airport=airport;
-        this.startingMethode=startingMethode;
-        this.passenger=passenger;
+        this.airportStart = airportStart;
+        this.startingMethode = startingMethode;
+        this.passenger = passenger;
 //        this.captain = captain;
 
     }
 
+
     //    Dto to Model
-    public static Flight flightDtoToFlight( FlightDto dto) {
+    public static Flight flightDtoToFlight( FlightDto dto ) {
         Flight fl = new Flight();
 
         fl.setId( dto.getId() );
@@ -51,19 +52,18 @@ public class FlightDto {
         fl.setEndTime( dto.getEndTime() );
         fl.setInstructionFlight( dto.getInstructionFlight() );
         fl.setRemarks( dto.getRemarks() );
-//        RElationships
+//        Relationships
         fl.setPlane( dto.getPlane() );
-        fl.setAirport( dto.getAirport() );
+        fl.setAirportStart( dto.getAirportStart() );
         fl.setStartingMethode( dto.getStartingMethode() );
-        fl.setPassenger( dto.getPassenger());
+        fl.setPassenger( dto.getPassenger() );
 //        fl.setCaptain( dto.getCaptain() );
 
         return fl;
     }
 
 
-
-    public FlightDto flightToFlightDto ( Flight fl ) {
+    public FlightDto flightToFlightDto( Flight fl ) {
         FlightDto dto = new FlightDto();
 
         dto.setId( fl.getId() );
@@ -73,9 +73,9 @@ public class FlightDto {
         dto.setRemarks( fl.getRemarks() );
 //        relationships
         dto.setPlane( fl.getPlane() );
-        dto.setAirport( fl.getAirport() );
+        dto.setAirportStart( fl.getAirportStart() );
         dto.setStartingMethode( fl.getStartingMethode() );
-        dto.setPassenger(fl.getPassenger());
+        dto.setPassenger( fl.getPassenger() );
 //        dto.setCaptain( fl.getCaptain() );
 
         return dto;
@@ -130,12 +130,12 @@ public class FlightDto {
         return plane;
     }
 
-    public Airport getAirport() {
-        return airport;
+    public Airport getAirportStart() {
+        return airportStart;
     }
 
-    public void setAirport( Airport airport ) {
-        this.airport = airport;
+    public void setAirportStart( Airport airportStart ) {
+        this.airportStart = airportStart;
     }
 
     public StartingMethode getStartingMethode() {
@@ -145,6 +145,7 @@ public class FlightDto {
     public void setStartingMethode( StartingMethode startingMethode ) {
         this.startingMethode = startingMethode;
     }
+
 
     public Person getPassenger() {
         return passenger;
@@ -157,8 +158,9 @@ public class FlightDto {
 //    public Person getCaptain() {
 //        return captain;
 //    }
-
+//
 //    public void setCaptain( Person captain ) {
-//        this.captain =  captain ;
+//        this.captain = captain;
 //    }
+
 }
