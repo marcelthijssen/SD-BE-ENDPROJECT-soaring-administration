@@ -1,19 +1,17 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Person;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.*;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+
+@Validated
 public class PersonDto {
 
     private Long id;
@@ -22,14 +20,16 @@ public class PersonDto {
     private String firstName;
     //    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
-    @DateTimeFormat
-    @JsonFormat(pattern = "dd-MM-yyyy")
+//    @DateTimeFormat
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
     private String postalcode;
     private String city;
     private String country;
+    @NotBlank
     @Email
     private String email;
     private String phone;

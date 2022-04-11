@@ -2,9 +2,11 @@ package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Airport;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 
+@Validated
 public class AirportDto {
 
     private Long id;

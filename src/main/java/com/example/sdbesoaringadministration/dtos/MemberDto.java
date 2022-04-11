@@ -1,11 +1,13 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Member;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.Date;
 
+@Validated
 public class MemberDto extends PersonDto {
 
     private String userName;

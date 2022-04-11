@@ -1,19 +1,19 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
+
+@Validated
 public class PlaneDto {
 
     private Long id;
-
     private String callSign;
-
     private String brand;
-
     private String type;
-
+    @NotBlank(message = "Registration can not be empty")
     private String registration;
-
     private boolean twoSeater;
-
     private boolean privatePlane;
 
     public PlaneDto() {

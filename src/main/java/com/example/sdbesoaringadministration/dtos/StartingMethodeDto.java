@@ -1,10 +1,11 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import com.example.sdbesoaringadministration.models.Airport;
 import com.example.sdbesoaringadministration.models.StartingMethode;
+import org.springframework.validation.annotation.Validated;
 
 import java.math.BigDecimal;
 
+@Validated
 public class StartingMethodeDto {
 
     private Long id;
@@ -12,13 +13,12 @@ public class StartingMethodeDto {
     private String unit;
 //    BigDecimal bd1 = new BigDecimal.valueOf(...) OF BigDecimal("...")
     private BigDecimal price;
-    private BigDecimal max;
 
     // constructors
     public StartingMethodeDto() {
     }
 
-    public StartingMethodeDto( Long id, String title, String unit, BigDecimal price, BigDecimal max ) {
+    public StartingMethodeDto( Long id, String title, String unit, BigDecimal price ) {
         this.title = title;
         this.unit = unit;
         this.price = price;

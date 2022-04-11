@@ -2,9 +2,11 @@ package com.example.sdbesoaringadministration.dtos;
 
 
 import com.example.sdbesoaringadministration.models.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 
+@Validated
 public class FlightDto {
 
     private Long id;

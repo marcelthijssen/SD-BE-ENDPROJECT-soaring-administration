@@ -21,8 +21,6 @@ public class Plane {
     private String callSign;
     private String brand;
     private String type;
-
-    @NotBlank(message = "Registration can not be empty")
     private String registration;
     private boolean twoSeater;
     private boolean privatePlane;

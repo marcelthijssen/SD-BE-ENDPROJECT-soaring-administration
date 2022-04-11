@@ -15,18 +15,9 @@ public class TypeOfMembership {
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String title;
     private BigDecimal costsPerMonth;
-    private BigDecimal max;
 
-    public BigDecimal getMax() {
-        return max;
-    }
-
-    public void setMax( BigDecimal max ) {
-        this.max = max;
-    }
 //    GETTERS en SETTERS
 
     public Long getId() {
