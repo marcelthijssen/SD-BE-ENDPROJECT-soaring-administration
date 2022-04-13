@@ -17,10 +17,20 @@ private Long id;
 
     private String membership;
 
+    private String role;
+
     private String pilotLicense;
 
 
 //GETTERS en setters
+public Long getId() {
+
+    return id;
+}
+
+    public void setId( Long id ) {
+        this.id = id;
+    }
 
     public String getUserName() {
         return userName;
@@ -44,6 +54,16 @@ private Long id;
 
     public void setMembership( String membership ) {
         this.membership = membership;
+    }
+
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole( String role ) {
+        this.role = role;
     }
 
     public String getPilotLicense() {

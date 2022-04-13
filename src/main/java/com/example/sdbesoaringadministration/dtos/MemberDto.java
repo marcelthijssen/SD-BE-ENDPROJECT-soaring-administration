@@ -13,26 +13,29 @@ public class MemberDto extends PersonDto {
     private String userName;
     private String password;
     private String membership;
-
+    private String role;
     private String pilotLicense;
 
    public MemberDto(){}
 
-    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String userName, String password, String membership, String pilotLicense ) {
+    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String userName, String password, String membership, String role, String pilotLicense ) {
         super( id, gender, firstName, lastName, birthday, streetName, houseNumber, postalcode, city, country, email, phone );
         this.userName = userName;
         this.password = password;
         this.membership = membership;
+        this.role=role;
         this.pilotLicense = pilotLicense;
     }
 
     public static Member memberDtoToMember( MemberDto dto ) {
         Member m = new Member();
 
+
         m.setId( dto.getId() );
         m.setMembership( dto.getMembership() );
         m.setUserName( dto.getUserName() );
         m.setPassword( dto.getPassword() );
+        m.setRole( dto.getRole() );
         m.setPilotLicense( dto.getPilotLicense() );
         m.setGender( dto.getGender() );
         m.setFirstName( dto.getFirstName() );
@@ -55,6 +58,7 @@ public class MemberDto extends PersonDto {
         dto.setMembership( m.getMembership() );
         dto.setUserName( m.getUserName() );
         dto.setPassword( m.getPassword() );
+        dto.setRole( m.getRole() );
         dto.setPilotLicense( m.getPilotLicense() );
         dto.setGender( m.getGender() );
         dto.setFirstName( m.getFirstName() );
@@ -100,5 +104,14 @@ public class MemberDto extends PersonDto {
     public void setPilotLicense( String pilotLicense ) {
         this.pilotLicense = pilotLicense;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole( String role ) {
+        this.role = role;
+    }
+
 
 }

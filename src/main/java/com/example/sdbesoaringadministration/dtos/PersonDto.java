@@ -62,43 +62,48 @@ public class PersonDto {
     }
 
 
-    public static PersonDto personToPersonDto( Person person ) {
-        PersonDto personDTO = new PersonDto();
 
-        personDTO.setId( person.getId() );
-        personDTO.setGender( person.getGender() );
-        personDTO.setFirstName( person.getFirstName() );
-        personDTO.setLastName( person.getLastName() );
-        personDTO.setBirthday( person.getBirthday() );
-        personDTO.setStreetName( person.getStreetName() );
-        personDTO.setHouseNumber( person.getHouseNumber() );
-        personDTO.setPostalcode( person.getPostalcode() );
-        personDTO.setCity( person.getCity() );
-        personDTO.setCountry( person.getCountry() );
-        personDTO.setPhone( person.getPhone() );
-        personDTO.setEmail( person.getEmail() );
+    public static PersonDto personToPersonDto( Person p ) {
+        PersonDto dto = new PersonDto();
 
-        return personDTO;
+//        PersonDto.convertToDateViaSqlDate( dto.getBirthday() );
+
+        dto.setId( p.getId() );
+        dto.setGender( p.getGender() );
+        dto.setFirstName( p.getFirstName() );
+        dto.setLastName( p.getLastName() );
+        dto.setBirthday( p.getBirthday() );
+        dto.setStreetName( p.getStreetName() );
+        dto.setHouseNumber( p.getHouseNumber() );
+        dto.setPostalcode( p.getPostalcode() );
+        dto.setCity( p.getCity() );
+        dto.setCountry( p.getCountry() );
+        dto.setPhone( p.getPhone() );
+        dto.setEmail( p.getEmail() );
+
+        return dto;
     }
 
 
     public static Person personDtoToPerson( PersonDto personDto ) {
 
-        Person person = new Person();
-        person.setId( personDto.getId() );
-        person.setGender( personDto.getGender() );
-        person.setFirstName( personDto.getFirstName() );
-        person.setLastName( personDto.getLastName() );
-        person.setBirthday( personDto.getBirthday() );
-        person.setStreetName( personDto.getStreetName() );
-        person.setHouseNumber( personDto.getHouseNumber() );
-        person.setPostalcode( personDto.getPostalcode() );
-        person.setCity( personDto.getCity() );
-        person.setCountry( personDto.getCountry() );
-        person.setPhone( personDto.getPhone() );
-        person.setEmail( personDto.getEmail() );
+//        PersonDto.convertToDateViaSqlDate( personDto.getBirthday() );
 
-        return person;
+        Person p = new Person();
+        p.setId( personDto.getId() );
+        p.setGender( personDto.getGender() );
+        p.setFirstName( personDto.getFirstName() );
+        p.setLastName( personDto.getLastName() );
+        p.setBirthday( personDto.getBirthday() );
+        p.setStreetName( personDto.getStreetName() );
+        p.setHouseNumber( personDto.getHouseNumber() );
+        p.setPostalcode( personDto.getPostalcode() );
+        p.setCity( personDto.getCity() );
+        p.setCountry( personDto.getCountry() );
+        p.setPhone( personDto.getPhone() );
+        p.setEmail( personDto.getEmail() );
+
+        return p;
     }
 
 
@@ -193,4 +198,11 @@ public class PersonDto {
     public void setPhone( String phone ) {
         this.phone = phone;
     }
+
+//    public static java.util.Date convertToDateViaSqlDate( LocalDate dateToConvert ) {
+//        return java.sql.Date.valueOf(dateToConvert);
+//    }
+//    public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
+//        return java.sql.Date.valueOf( String.valueOf( dateToConvert ) );
+//    }
 }
