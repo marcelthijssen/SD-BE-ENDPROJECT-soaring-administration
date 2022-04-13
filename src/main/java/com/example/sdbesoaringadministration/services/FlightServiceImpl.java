@@ -4,6 +4,8 @@ import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.repositories.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class FlightServiceImpl implements FlightService {
         List<Flight> flightList = this.flRepository.findAll();
         List<FlightDto> flightDtoList = new ArrayList<>();
 
-        flightList.forEach( fl -> flightDtoList.add( new FlightDto( fl.getId(), fl.getStartTime(), fl.getEndTime(), fl.getInstructionFlight(), fl.getRemarks(), fl.getPlane(), fl.getAirportStart(), fl.getAirportEnd(), fl.getStartingMethode(),
+        flightList.forEach( fl -> flightDtoList.add( new FlightDto( fl.getId(), fl.getTimeStart(), fl.getTimeEnd(), fl.getInstructionFlight(), fl.getRemarks(), fl.getPlane(), fl.getAirportStart(), fl.getAirportEnd(), fl.getStartingMethode(),
                 fl.getPassenger(), fl.getCaptain() ) ) );
 
         return flightDtoList;
@@ -70,8 +72,8 @@ public class FlightServiceImpl implements FlightService {
         if ( flRepository.findById( id ).isPresent() ) {
             Flight fl = flRepository.findById( id ).get();
             fl.setId( fl.getId() );
-            fl.setStartTime( dto.getStartTime() );
-            fl.setEndTime( dto.getEndTime() );
+            fl.setTimeStart( dto.getTimeStart() );
+            fl.setTimeEnd( dto.getTimeEnd() );
             fl.setInstructionFlight( dto.getInstructionFlight() );
             fl.setRemarks( dto.getRemarks() );
             fl.setPlane( dto.getPlane() );
@@ -121,6 +123,7 @@ public class FlightServiceImpl implements FlightService {
             throw new RecordNotFoundException( "Airport or flight doesn't exist" );
         }
     }
+
     @Override
     public void assignAirportEndToFlight( Long id, Long aeid ) {
         var optionalFlight = flRepository.findById( id );
@@ -183,4 +186,22 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
+//    public void assignAlltoflight( Long id, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid ) {
+//        var optionalFlight = flRepository.findById( id );
+//        var optionalPlane = plRepository.findById( plid );
+//        var optionalStartingMethode = smRepository.findById( smid );
+//        var optionalPerson = personRepository.findById( cpid );
+//        var optionalAirport = apRepository.findById( cpid );
+//
+//        if ( optionalFlight.isPresent() && optionalAirport.isPresent() && optionalPerson.isPresent() && optionalPlane.isPresent() && optionalStartingMethode.isPresent() ) {
+//                assignPlaneToFlight( id, plid );
+//            assignStartingMethodeToFlight( id, smid );
+//            assignCaptainToFlight( id, cpid );
+//            assignPassengerToFlight( id, psid );
+//            assignAirportStartToFlight( id, asid );
+//            assignAirportEndToFlight( id, aeid );
+//        } else {
+//            new ResponseEntity<>( "Something went wrong", HttpStatus.BAD_REQUEST );
+//        }
+//    }
 }

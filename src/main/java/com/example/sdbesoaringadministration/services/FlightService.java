@@ -30,4 +30,9 @@ public interface FlightService {
     void assignPassengerToFlight( Long id, Long psid );
 
     void assignCaptainToFlight( Long id, Long cpid );
+
+//    void assignAlltoflight ( Long flid, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid );
+//    startTimer
+
+//    stopTimer
 }

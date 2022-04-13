@@ -113,4 +113,10 @@ public class FlightController {
         flightService.assignCaptainToFlight( flid, cpid );
         return new ResponseEntity<>( "Captain added to flight", HttpStatus.ACCEPTED );
     }
+
+//    @PutMapping("/flights/{flid}/plane/{plid}/startingmethodes/{smid}/captain/{cpid}/passenger/{psid}/airport1/{asid}/airport2/{aeid}/")
+//    public ResponseEntity<Object> assignAlltoflight( @PathVariable("flid") Long flid, @PathVariable("plid") Long plid, @PathVariable("smid") Long smid, @PathVariable("cpid") Long cpid, @PathVariable("psid") Long psid, @PathVariable("asid") Long asid, @PathVariable("aeid") Long aeid ) {
+//        flightService.assignAlltoflight( flid, plid, smid, cpid, psid, asid, aeid );
+//        return new ResponseEntity<>( "Captain added to flight", HttpStatus.ACCEPTED );
+//    }
 }

@@ -12,10 +12,10 @@ public class FlightDto {
     private Long id;
 
     //    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="Europe/Amsterdam")
-    private LocalDateTime startTime;
+    private LocalDateTime timeStart;
 
     //    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="Europe/Amsterdam")
-    private LocalDateTime endTime;
+    private LocalDateTime timeEnd;
     private boolean instructionFlight;
     private String remarks;
     // MayToOne
@@ -31,12 +31,13 @@ public class FlightDto {
     public FlightDto() {
     }
 
-    public FlightDto( Long id, LocalDateTime startTime, LocalDateTime endTime, boolean instructionFlight, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode, Person passenger, Person captain ) {
+    public FlightDto( Long id, LocalDateTime timeStart, LocalDateTime timeEnd, boolean instructionFlight, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode, Person passenger, Person captain ) {
         this.id = id;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
         this.instructionFlight = instructionFlight;
         this.remarks = remarks;
+        //        Relationships
         this.plane = plane;
         this.airportStart = airportStart;
         this.airportEnd = airportEnd;
@@ -52,8 +53,8 @@ public class FlightDto {
         Flight fl = new Flight();
 
         fl.setId( dto.getId() );
-        fl.setStartTime( dto.getStartTime() );
-        fl.setEndTime( dto.getEndTime() );
+        fl.setTimeStart( dto.getTimeStart() );
+        fl.setTimeEnd( dto.getTimeEnd() );
         fl.setInstructionFlight( dto.getInstructionFlight() );
         fl.setRemarks( dto.getRemarks() );
 //        Relationships
@@ -72,8 +73,8 @@ public class FlightDto {
         FlightDto dto = new FlightDto();
 
         dto.setId( fl.getId() );
-        dto.setStartTime( fl.getStartTime() );
-        dto.setEndTime( fl.getEndTime() );
+        dto.setTimeStart( fl.getTimeStart() );
+        dto.setTimeEnd( fl.getTimeEnd() );
         dto.setInstructionFlight( fl.getInstructionFlight() );
         dto.setRemarks( fl.getRemarks() );
 //        relationships
@@ -96,20 +97,20 @@ public class FlightDto {
         this.id = id;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public LocalDateTime getTimeStart() {
+        return timeStart;
     }
 
-    public void setStartTime( LocalDateTime startTime ) {
-        this.startTime = startTime;
+    public void setTimeStart( LocalDateTime timeStart ) {
+        this.timeStart = timeStart;
     }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
+    public LocalDateTime getTimeEnd() {
+        return timeEnd;
     }
 
-    public void setEndTime( LocalDateTime endTime ) {
-        this.endTime = endTime;
+    public void setTimeEnd( LocalDateTime timeEnd ) {
+        this.timeEnd = timeEnd;
     }
 
     public boolean getInstructionFlight() {

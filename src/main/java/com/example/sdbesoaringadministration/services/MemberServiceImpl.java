@@ -27,22 +27,23 @@ public class MemberServiceImpl implements MemberService {
 
         for ( Member m : memberList ) {
             MemberDto dto = new MemberDto();
+            dto.memberToMemberDto(m);
 
-            dto.setId( m.getId() );
-            dto.setMembership( m.getMembership() );
-            dto.setUserName( m.getUserName() );
-            dto.setPassword( m.getPassword() );
-            dto.setPilotLicense( m.getPilotLicense() );
-            dto.setGender( m.getGender() );
-            dto.setFirstName( m.getFirstName() );
-            dto.setLastName( m.getLastName() );
-            dto.setBirthday( m.getBirthday() );
-            dto.setStreetName( m.getStreetName() );
-            dto.setHouseNumber( m.getHouseNumber() );
-            dto.setCity( m.getCity() );
-            dto.setCountry( m.getCountry() );
-            dto.setEmail( m.getEmail() );
-            dto.setPhone( m.getPhone() );
+//            dto.setId( m.getId() );
+//            dto.setMembership( m.getMembership() );
+//            dto.setUserName( m.getUserName() );
+//            dto.setPassword( m.getPassword() );
+//            dto.setPilotLicense( m.getPilotLicense() );
+//            dto.setGender( m.getGender() );
+//            dto.setFirstName( m.getFirstName() );
+//            dto.setLastName( m.getLastName() );
+//            dto.setBirthday( m.getBirthday() );
+//            dto.setStreetName( m.getStreetName() );
+//            dto.setHouseNumber( m.getHouseNumber() );
+//            dto.setCity( m.getCity() );
+//            dto.setCountry( m.getCountry() );
+//            dto.setEmail( m.getEmail() );
+//            dto.setPhone( m.getPhone() );
             memberDtoList.add( dto );
         }
         return memberDtoList;
@@ -51,26 +52,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberDto getMemberById( Long id ) {
-        MemberDto dto = new MemberDto();
+//        MemberDto dto = new MemberDto();
 
         if ( memberRepository.findById( id ).isPresent() ) {
             Member m = memberRepository.findById( id ).get();
-            dto.setId( m.getId() );
-            dto.setMembership( m.getMembership() );
-            dto.setUserName( m.getUserName() );
-            dto.setPassword( m.getPassword() );
-            dto.setPilotLicense( m.getPilotLicense() );
-            dto.setGender( m.getGender() );
-            dto.setFirstName( m.getFirstName() );
-            dto.setLastName( m.getLastName() );
-            dto.setBirthday( m.getBirthday() );
-            dto.setStreetName( m.getStreetName() );
-            dto.setHouseNumber( m.getHouseNumber() );
-            dto.setCity( m.getCity() );
-            dto.setCountry( m.getCountry() );
-            dto.setEmail( m.getEmail() );
-            dto.setPhone( m.getPhone() );
-            return dto;
+            return new MemberDto().memberToMemberDto(m);
         } else {
             throw new RecordNotFoundException( "Nu such member" );
         }

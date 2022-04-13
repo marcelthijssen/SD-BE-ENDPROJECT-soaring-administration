@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -149,24 +150,6 @@ public class Person {
     public void setPhone( String phone ) {
         this.phone = phone;
     }
-
-//    public List<Flight> getCaptain() {
-//        return captain;
-//    }
-//
-//    public void setCaptain( List<Flight> captain ) {
-//        this.captain = captain;
-//    }
-//
-//    public List<Flight> getPassenger() {
-//        return passenger;
-//    }
-//
-//    public void setPassenger( List<Flight> passenger ) {
-//        this.passenger = passenger;
-//    }
-
-
 
     public List<Plane> getPlanes() {
         return planes;

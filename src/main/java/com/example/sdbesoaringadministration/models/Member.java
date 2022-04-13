@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Member extends Person {
 
 
+private Long id;
     private String userName;
 
     private String password;

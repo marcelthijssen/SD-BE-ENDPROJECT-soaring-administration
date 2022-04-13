@@ -3,6 +3,8 @@ package com.example.sdbesoaringadministration.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,13 +18,16 @@ public class Flight {
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
+
+//    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime startTime;
+    private LocalDateTime timeStart = LocalDateTime.now();
+
+
+//    @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime endTime;
-// TODO: calc total time flying
-//    @NotBlank
-//    @Column(nullable = false)
+    private LocalDateTime timeEnd = LocalDateTime.now();
+
     private boolean instructionFlight;
     private String remarks;
 
@@ -72,20 +77,20 @@ public class Flight {
         this.id = id;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public LocalDateTime getTimeStart() {
+        return timeStart;
     }
 
-    public void setStartTime( LocalDateTime startTime ) {
-        this.startTime = startTime;
+    public void setTimeStart( LocalDateTime timeStart ) {
+        this.timeStart = timeStart;
     }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
+    public LocalDateTime getTimeEnd() {
+        return timeEnd;
     }
 
-    public void setEndTime( LocalDateTime endTime ) {
-        this.endTime = endTime;
+    public void setTimeEnd( LocalDateTime timeEnd ) {
+        this.timeEnd = timeEnd;
     }
 
     public boolean getInstructionFlight() {
@@ -157,4 +162,7 @@ public class Flight {
     public void setAirportStart( Airport airportStart ) {
         this.airportStart = airportStart;
     }
+
+
+
 }

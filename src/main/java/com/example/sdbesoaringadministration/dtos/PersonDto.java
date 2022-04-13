@@ -6,9 +6,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 
+import javax.persistence.Temporal;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
+import java.sql.Date;
+import java.time.*;
 
 
 @Validated
@@ -20,17 +22,18 @@ public class PersonDto {
     private String firstName;
     //    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
-//    @DateTimeFormat
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    private java.time.LocalDate LocalDate;
+    //    @DateTimeFormat
+//    @DateTimeFormat(iso =
+    @DateTimeFormat
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
     private String postalcode;
     private String city;
     private String country;
-    @NotBlank
-    @Email
+    @NotBlank(message="Email must be added")
+    @Email(message = "Email is not valid", regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
     private String email;
     private String phone;
 
@@ -66,6 +69,7 @@ public class PersonDto {
         personDTO.setGender( person.getGender() );
         personDTO.setFirstName( person.getFirstName() );
         personDTO.setLastName( person.getLastName() );
+        personDTO.setBirthday( person.getBirthday() );
         personDTO.setStreetName( person.getStreetName() );
         personDTO.setHouseNumber( person.getHouseNumber() );
         personDTO.setPostalcode( person.getPostalcode() );

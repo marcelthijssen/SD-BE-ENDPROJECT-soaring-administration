@@ -18,8 +18,8 @@ public class MemberDto extends PersonDto {
 
    public MemberDto(){}
 
-    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String userName, String password, String membership, String pilotLicense ) {
-        super( id, gender, firstName, lastName, dateOfBirth, streetName, houseNumber, postalcode, city, country, email, phone );
+    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String userName, String password, String membership, String pilotLicense ) {
+        super( id, gender, firstName, lastName, birthday, streetName, houseNumber, postalcode, city, country, email, phone );
         this.userName = userName;
         this.password = password;
         this.membership = membership;
@@ -46,6 +46,28 @@ public class MemberDto extends PersonDto {
         m.setPhone( dto.getPhone() );
 
         return m ;
+    }
+
+    public static MemberDto memberToMemberDto( Member m ) {
+        MemberDto dto = new MemberDto();
+
+        dto.setId( m.getId() );
+        dto.setMembership( m.getMembership() );
+        dto.setUserName( m.getUserName() );
+        dto.setPassword( m.getPassword() );
+        dto.setPilotLicense( m.getPilotLicense() );
+        dto.setGender( m.getGender() );
+        dto.setFirstName( m.getFirstName() );
+        dto.setLastName( m.getLastName() );
+        dto.setBirthday( m.getBirthday() );
+        dto.setStreetName( m.getStreetName() );
+        dto.setHouseNumber( m.getHouseNumber() );
+        dto.setCity( m.getCity() );
+        dto.setCountry( m.getCountry() );
+        dto.setEmail( m.getEmail() );
+        dto.setPhone( m.getPhone() );
+
+        return dto ;
     }
     public String getUserName() {
         return userName;
