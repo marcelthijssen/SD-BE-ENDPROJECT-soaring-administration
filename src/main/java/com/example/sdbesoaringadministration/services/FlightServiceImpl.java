@@ -4,10 +4,9 @@ import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.repositories.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +42,9 @@ public class FlightServiceImpl implements FlightService {
 
 
     @Override
-    public FlightDto getFlightById( Long id ) {
-        if ( flRepository.findById( id ).isPresent() ) {
-            Flight flight = flRepository.findById( id ).get();
+    public FlightDto getFlightById( Long flid ) {
+        if ( flRepository.findById( flid ).isPresent() ) {
+            Flight flight = flRepository.findById( flid ).get();
             return new FlightDto().flightToFlightDto( flight );
         } else {
             throw new RecordNotFoundException();
@@ -59,18 +58,18 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void deleteFlightById( Long id ) {
-        if ( flRepository.findById( id ).isPresent() ) {
-            flRepository.deleteById( id );
+    public void deleteFlightById( Long flid ) {
+        if ( flRepository.findById( flid ).isPresent() ) {
+            flRepository.deleteById( flid );
         } else {
             throw new RecordNotFoundException( "No flight found" );
         }
     }
 
     @Override
-    public FlightDto updateFlight( Long id, FlightDto dto ) {
-        if ( flRepository.findById( id ).isPresent() ) {
-            Flight fl = flRepository.findById( id ).get();
+    public FlightDto updateFlight( Long flid, FlightDto dto ) {
+        if ( flRepository.findById( flid ).isPresent() ) {
+            Flight fl = flRepository.findById( flid ).get();
             fl.setId( fl.getId() );
             fl.setTimeStart( dto.getTimeStart() );
             fl.setTimeEnd( dto.getTimeEnd() );
@@ -93,8 +92,8 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignPlaneToFlight( Long id, Long plid ) {
-        var optionalFlight = flRepository.findById( id );
+    public void assignPlaneToFlight( Long flid, Long plid ) {
+        var optionalFlight = flRepository.findById( flid );
         var optionalPlane = plRepository.findById( plid );
 
         if ( optionalFlight.isPresent() && optionalPlane.isPresent() ) {
@@ -109,8 +108,8 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignAirportStartToFlight( Long id, Long apid ) {
-        var optionalFlight = flRepository.findById( id );
+    public void assignAirportStartToFlight( Long flid, Long apid ) {
+        var optionalFlight = flRepository.findById( flid );
         var optionalAirportStart = apRepository.findById( apid );
 
         if ( optionalFlight.isPresent() && optionalAirportStart.isPresent() ) {
@@ -125,8 +124,8 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignAirportEndToFlight( Long id, Long aeid ) {
-        var optionalFlight = flRepository.findById( id );
+    public void assignAirportEndToFlight( Long flid, Long aeid ) {
+        var optionalFlight = flRepository.findById( flid );
         var optionalAirportEnd = apRepository.findById( aeid );
 
         if ( optionalFlight.isPresent() && optionalAirportEnd.isPresent() ) {
@@ -141,8 +140,8 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignStartingMethodeToFlight( Long id, Long smid ) {
-        var optionalFlight = flRepository.findById( id );
+    public void assignStartingMethodeToFlight( Long flid, Long smid ) {
+        var optionalFlight = flRepository.findById( flid );
         var optionalStartingMethode = smRepository.findById( smid );
 
         if ( optionalFlight.isPresent() && optionalStartingMethode.isPresent() ) {
@@ -156,8 +155,8 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public void assignPassengerToFlight( Long id, Long psid ) {
-        var optionalFlight = flRepository.findById( id );
+    public void assignPassengerToFlight( Long flid, Long psid ) {
+        var optionalFlight = flRepository.findById( flid );
         var optionalPerson = personRepository.findById( psid );
 
         if ( optionalFlight.isPresent() && optionalPerson.isPresent() ) {
@@ -171,8 +170,8 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public void assignCaptainToFlight( Long id, Long cpid ) {
-        var optionalFlight = flRepository.findById( id );
+    public void assignCaptainToFlight( Long flid, Long cpid ) {
+        var optionalFlight = flRepository.findById( flid );
         var optionalPerson = personRepository.findById( cpid );
 
         if ( optionalFlight.isPresent() && optionalPerson.isPresent() ) {
@@ -186,20 +185,33 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-//    public void assignAlltoflight( Long id, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid ) {
-//        var optionalFlight = flRepository.findById( id );
+    public void assignTimeStart( Long flid ) {
+        var optionalFlight = flRepository.findById( flid );
+        var flight = optionalFlight.get();
+        flight.setTimeStart( ( LocalDateTime.now() ) );
+        flRepository.save(flight);
+    }
+
+    public void assignTimeEnd( Long flid ) {
+        var optionalFlight = flRepository.findById( flid );
+        var flight = optionalFlight.get();
+        flight.setTimeEnd( ( LocalDateTime.now() ) );
+        flRepository.save(flight);
+    }
+//    public void assignAlltoflight( Long flid, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid ) {
+//        var optionalFlight = flRepository.findById( flid );
 //        var optionalPlane = plRepository.findById( plid );
 //        var optionalStartingMethode = smRepository.findById( smid );
 //        var optionalPerson = personRepository.findById( cpid );
 //        var optionalAirport = apRepository.findById( cpid );
 //
 //        if ( optionalFlight.isPresent() && optionalAirport.isPresent() && optionalPerson.isPresent() && optionalPlane.isPresent() && optionalStartingMethode.isPresent() ) {
-//                assignPlaneToFlight( id, plid );
-//            assignStartingMethodeToFlight( id, smid );
-//            assignCaptainToFlight( id, cpid );
-//            assignPassengerToFlight( id, psid );
-//            assignAirportStartToFlight( id, asid );
-//            assignAirportEndToFlight( id, aeid );
+//                assignPlaneToFlight( flid, plid );
+//            assignStartingMethodeToFlight( flid, smid );
+//            assignCaptainToFlight( flid, cpid );
+//            assignPassengerToFlight( flid, psid );
+//            assignAirportStartToFlight( flid, asid );
+//            assignAirportEndToFlight( flid, aeid );
 //        } else {
 //            new ResponseEntity<>( "Something went wrong", HttpStatus.BAD_REQUEST );
 //        }

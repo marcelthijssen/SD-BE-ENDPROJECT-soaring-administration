@@ -29,9 +29,9 @@ public class FlightController {
     }
 
     // changed <FlightDto> to <Object>
-    @GetMapping("/flights/{id}")
-    public ResponseEntity<Object> getFlightById( @PathVariable(name = "id") Long id ) {
-        FlightDto flight = flightService.getFlightById( id );
+    @GetMapping("/flights/{flid}")
+    public ResponseEntity<Object> getFlightById( @PathVariable(name = "flid") Long flid ) {
+        FlightDto flight = flightService.getFlightById( flid );
         try {
             return ResponseEntity.ok( flight );
         } catch ( Exception ex ) {
@@ -55,18 +55,18 @@ public class FlightController {
         }
     }
 
-    @DeleteMapping("/flights/{id}")
-    public ResponseEntity<Object> deleteFlightById( @PathVariable("id") Long id ) {
+    @DeleteMapping("/flights/{flid}")
+    public ResponseEntity<Object> deleteFlightById( @PathVariable("flid") Long flid ) {
 
-        flightService.deleteFlightById( id );
+        flightService.deleteFlightById( flid );
         return new ResponseEntity<>( "Flight has been deleted from the system.", HttpStatus.ACCEPTED );
 
     }
 
-    @PutMapping("flights/{id}")
-    public FlightDto updateFlight( @PathVariable("id") Long id, @RequestBody FlightDto flight ) {
+    @PutMapping("flights/{flid}")
+    public FlightDto updateFlight( @PathVariable("flid") Long flid, @RequestBody FlightDto flight ) {
 
-        FlightDto dto = flightService.updateFlight( id, flight );
+        FlightDto dto = flightService.updateFlight( flid, flight );
 
         return dto;
 
@@ -107,16 +107,29 @@ public class FlightController {
         return new ResponseEntity<>( "Passenger added to flight", HttpStatus.ACCEPTED );
     }
 
-//         assign starting method to flight
+    //         assign starting method to flight
     @PutMapping("/flights/{flid}/captain/{cpid}")
     public ResponseEntity<Object> assigncaptainToFlight( @PathVariable("flid") Long flid, @PathVariable("cpid") Long cpid ) {
         flightService.assignCaptainToFlight( flid, cpid );
         return new ResponseEntity<>( "Captain added to flight", HttpStatus.ACCEPTED );
     }
 
-//    @PutMapping("/flights/{flid}/plane/{plid}/startingmethodes/{smid}/captain/{cpid}/passenger/{psid}/airport1/{asid}/airport2/{aeid}/")
+    @PutMapping("/flights/{flid}/start")
+    public ResponseEntity<Object> assignTimeStart( @PathVariable("flid") Long flid ) {
+        flightService.assignTimeStart ( flid );
+        return new ResponseEntity<>( "Flight has started", HttpStatus.CREATED );
+    }
+
+
+    @PutMapping("/flights/{flid}/end")
+    public ResponseEntity<Object> assignTimeEnd( @PathVariable("flid") Long flid ) {
+        flightService.assignTimeEnd ( flid );
+        return  new ResponseEntity<>( "Flight has ended", HttpStatus.OK );
+    }
+
+        //    @PutMapping("/flights/{flid}/plane/{plid}/startingmethodes/{smid}/captain/{cpid}/passenger/{psid}/airport1/{asid}/airport2/{aeid}/")
 //    public ResponseEntity<Object> assignAlltoflight( @PathVariable("flid") Long flid, @PathVariable("plid") Long plid, @PathVariable("smid") Long smid, @PathVariable("cpid") Long cpid, @PathVariable("psid") Long psid, @PathVariable("asid") Long asid, @PathVariable("aeid") Long aeid ) {
 //        flightService.assignAlltoflight( flid, plid, smid, cpid, psid, asid, aeid );
 //        return new ResponseEntity<>( "Captain added to flight", HttpStatus.ACCEPTED );
 //    }
-}
+    }

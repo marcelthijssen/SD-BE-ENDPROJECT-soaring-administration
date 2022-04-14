@@ -1,16 +1,15 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Person;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.example.sdbesoaringadministration.models.Plane;
 import org.springframework.validation.annotation.Validated;
 
-
-import javax.persistence.Temporal;
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
 import java.time.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Validated
@@ -22,10 +21,10 @@ public class PersonDto {
     private String firstName;
     //    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
-    private java.time.LocalDate LocalDate;
-    //    @DateTimeFormat
-//    @DateTimeFormat(iso =
-    @DateTimeFormat
+//    private Set<Plane> planes = new HashSet<>();
+
+    @Column
+//    @Convert(converter = LocalDateAttributeConverter.class)
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
@@ -198,6 +197,10 @@ public class PersonDto {
     public void setPhone( String phone ) {
         this.phone = phone;
     }
+
+//    public Set<Plane> getplanes() {
+//        return planes;
+//    }
 
 //    public static java.util.Date convertToDateViaSqlDate( LocalDate dateToConvert ) {
 //        return java.sql.Date.valueOf(dateToConvert);

@@ -11,26 +11,30 @@ public interface FlightService {
 
     List<FlightDto> getAllFlights();
 
-    FlightDto getFlightById( Long id );
+    FlightDto getFlightById( Long flid );
 
     Flight addFlight( FlightDto flightDto );
 
-    void deleteFlightById( Long id );
+    void deleteFlightById( Long flid );
 
-    FlightDto updateFlight( Long id, FlightDto flightDto );
+    FlightDto updateFlight( Long flid, FlightDto flightDto );
 
-    void assignPlaneToFlight( Long id, Long plid );
+    void assignPlaneToFlight( Long flid, Long plid );
 
-    void assignAirportStartToFlight( Long id, Long asid );
+    void assignAirportStartToFlight( Long flid, Long asid );
 
-    void assignAirportEndToFlight( Long id, Long aeid );
+    void assignAirportEndToFlight( Long flid, Long aeid );
 
-    void assignStartingMethodeToFlight( Long id, Long smid );
+    void assignStartingMethodeToFlight( Long flid, Long smid );
 
-    void assignPassengerToFlight( Long id, Long psid );
+    void assignPassengerToFlight( Long flid, Long psid );
 
-    void assignCaptainToFlight( Long id, Long cpid );
+    void assignCaptainToFlight( Long flid, Long cpid );
 
+    void assignTimeStart( Long flid);
+
+    void assignTimeEnd( Long flid );
+    
 //    void assignAlltoflight ( Long flid, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid );
 //    startTimer
 

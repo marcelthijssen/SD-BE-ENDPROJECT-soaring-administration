@@ -1,8 +1,11 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.models.Person;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Validated
 public class PlaneDto {
@@ -15,11 +18,13 @@ public class PlaneDto {
     private String registration;
     private boolean twoSeater;
     private boolean privatePlane;
+    private Person owner;
+    private Person technician;
 
     public PlaneDto() {
     }
 
-    public PlaneDto( Long id, String callSign, String brand, String type, String registration, boolean twoSeater, boolean privatePlane ) {
+    public PlaneDto( Long id, String callSign, String brand, String type, String registration, boolean twoSeater, boolean privatePlane, Person owner, Person technician ) {
         this.id = id;
         this.callSign = callSign;
         this.brand = brand;
@@ -27,6 +32,8 @@ public class PlaneDto {
         this.registration = registration;
         this.twoSeater = twoSeater;
         this.privatePlane = privatePlane;
+        this.owner = owner;
+        this.technician = technician;
     }
 
     public Long getId() {
@@ -84,4 +91,22 @@ public class PlaneDto {
     public void setPrivatePlane( boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
+
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner( Person owner ) {
+        this.owner = owner;
+    }
+
+    public Person getTechnician() {
+        return technician;
+    }
+
+    public void setTechnician( Person technician ) {
+        this.technician = technician;
+    }
+
 }

@@ -29,9 +29,9 @@ public class PlaneController {
     }
 
 
-    @GetMapping("/planes/{id}")
-    public ResponseEntity<Object> getPlaneById( @PathVariable(name = "id") Long id ) {
-        PlaneDto plane = planeService.getPlaneById( id );
+    @GetMapping("/planes/{plid}")
+    public ResponseEntity<Object> getPlaneById( @PathVariable(name = "plid") Long plid ) {
+        PlaneDto plane = planeService.getPlaneById( plid );
         try {
             return ResponseEntity.ok( plane );
         } catch ( Exception ex ) {
@@ -55,21 +55,35 @@ public class PlaneController {
         }
     }
 
+    @DeleteMapping("/planes/{plid}")
+    public ResponseEntity<String> deletePlaneById( @PathVariable("id") Long plid ) {
 
-    @DeleteMapping("/planes/{id}")
-    public ResponseEntity<String> deletePlaneById( @PathVariable("id") Long id ) {
-
-        planeService.deletePlaneById( id );
+        planeService.deletePlaneById( plid );
         return new ResponseEntity<>("Plane deleted from system", HttpStatus.ACCEPTED  );
     }
 
-    @PutMapping("/planes/{id}")
-    public PlaneDto updatePlane( @PathVariable("id") Long id, @RequestBody PlaneDto plane ) {
+    @PutMapping("/planes/{plid}")
+    public PlaneDto updatePlane( @PathVariable("plid") Long plid, @RequestBody PlaneDto plane ) {
 
-        PlaneDto dto = planeService.updatePlane( id, plane );
+        PlaneDto dto = planeService.updatePlane( plid, plane );
 
         return dto;
-
     }
 
+    //         assign owner to plane
+    @PutMapping("/planes/{plid}/owner/{pid}")
+    public ResponseEntity<Object> assignOwnerToPlane( @PathVariable("plid") Long plid, @PathVariable("pid") Long pid ) {
+        planeService.assignOwnerToPlane( plid, pid );
+        return new ResponseEntity<>( "Owner added to plane", HttpStatus.ACCEPTED );
+    }
+
+
+    //         assign technician to plane
+    @PutMapping("/planes/{plid}/technician/{pid}")
+    public ResponseEntity<Object> assignTechnicianToPlane( @PathVariable("plid") Long plid, @PathVariable("pid") Long pid ) {
+        planeService.assignTechnicianToPlane( plid, pid );
+        return new ResponseEntity<>( "Technician added to plane", HttpStatus.ACCEPTED );
+    }
+
+    // need to upload file for plane
 }

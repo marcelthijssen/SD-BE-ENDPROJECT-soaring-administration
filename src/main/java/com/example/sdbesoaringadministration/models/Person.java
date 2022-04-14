@@ -1,16 +1,15 @@
 package com.example.sdbesoaringadministration.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+//import com.example.sdbesoaringadministration.utils.LocalDateAttributeConverter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -24,6 +23,7 @@ public class Person {
     private String gender;
     private String firstName;
     private String lastName;
+//    @Convert(converter = LocalDateAttributeConverter.class)
     private LocalDate birthday;
     private String streetName;
     private String houseNumber;
@@ -32,7 +32,6 @@ public class Person {
     private String country;
     private String email;
     private String phone;
-
 
     @OneToMany
             (mappedBy = "captain",
@@ -48,12 +47,23 @@ public class Person {
     @JsonIgnore
     private List<Flight> passenger;
 
+
     @OneToMany
             (mappedBy = "owner",
-                    fetch = FetchType.LAZY,
+                    fetch= FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Plane> planes;
+    private List<Plane> owner;
+
+
+    @OneToMany
+            (mappedBy = "technician",
+                    fetch= FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Plane> technician;
+
+
 
     public Long getId() {
         return id;
@@ -91,7 +101,7 @@ public class Person {
         return birthday;
     }
 
-    public void setBirthday( LocalDate dateOfBirth ) {
+    public void setBirthday( LocalDate birthday ) {
         this.birthday = birthday;
     }
 
@@ -151,11 +161,4 @@ public class Person {
         this.phone = phone;
     }
 
-    public List<Plane> getPlanes() {
-        return planes;
-    }
-
-    public void setPlanes( List<Plane> planes ) {
-        this.planes = planes;
-    }
 }

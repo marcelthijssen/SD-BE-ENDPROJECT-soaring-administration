@@ -2,11 +2,9 @@ package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -36,11 +34,15 @@ public class Plane {
     //     Owner of plane
 
     @ManyToOne
-    @JsonBackReference
-    @JoinColumn(
-            name = "owner_id",
-            referencedColumnName = "id")
+    @JoinColumn(name = "owner_id")
+    @JsonBackReference("owner")
     private Person owner;
+
+
+    @ManyToOne
+    @JoinColumn(name = "technician_id")
+    @JsonBackReference("technician")
+    private Person technician;
 
 
     public Long getId() {
@@ -112,5 +114,22 @@ public class Plane {
         this.flights.add( flight );
     }
 
+
+    public Person getOwner( ) {
+        return this.owner;
+    }
+
+    public void setOwner( Person owner ) {
+        this.owner = owner;
+    }
+
+
+    public Person getTechnician() {
+        return technician;
+    }
+
+    public void setTechnician( Person technician ) {
+        this.technician = technician;
+    }
 
 }

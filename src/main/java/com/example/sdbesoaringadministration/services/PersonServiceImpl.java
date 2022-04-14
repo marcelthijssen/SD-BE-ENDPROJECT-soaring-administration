@@ -32,10 +32,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto getPersonById( Long id ) {
+    public PersonDto getPersonById( Long pid ) {
 
-        if ( personRepository.findById( id ).isPresent() ) {
-            Person p = personRepository.findById( id ).get();
+        if ( personRepository.findById( pid ).isPresent() ) {
+            Person p = personRepository.findById( pid ).get();
             PersonDto dto = PersonDto.personToPersonDto( p );
             return dto;
 
@@ -52,18 +52,18 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePersonById( Long id ) {
-        if ( personRepository.findById( id ).isPresent() ) {
-            personRepository.deleteById( id );
+    public void deletePersonById( Long pid ) {
+        if ( personRepository.findById( pid ).isPresent() ) {
+            personRepository.deleteById( pid );
         } else {
             throw new RecordNotFoundException( "Person not found" );
         }
     }
 
     @Override
-    public PersonDto updatePerson( Long id, PersonDto dto ) {
-        if ( personRepository.findById( id ).isPresent() ) {
-            Person p = personRepository.findById( id ).get();
+    public PersonDto updatePerson( Long pid, PersonDto dto ) {
+        if ( personRepository.findById( pid ).isPresent() ) {
+            Person p = personRepository.findById( pid ).get();
 
 //            p.getId( dto.getId() );
             p.setGender( dto.getGender() );

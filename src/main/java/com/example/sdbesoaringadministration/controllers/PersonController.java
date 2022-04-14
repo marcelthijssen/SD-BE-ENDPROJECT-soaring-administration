@@ -30,9 +30,9 @@ public class PersonController {
         return new ResponseEntity<>( personDtoList, HttpStatus.OK );
     }
 
-    @GetMapping("/persons/{id}")
-    public ResponseEntity<Object> getPersonById( @PathVariable(name = "id") Long id ) {
-        PersonDto person = personService.getPersonById( id );
+    @GetMapping("/persons/{pid}")
+    public ResponseEntity<Object> getPersonById( @PathVariable(name = "pid") Long pid ) {
+        PersonDto person = personService.getPersonById( pid );
         try {
             return ResponseEntity.ok( person );
         } catch ( Exception ex ) {
@@ -57,18 +57,18 @@ public class PersonController {
     }
 
 
-    @DeleteMapping("/persons/{id}")
-    public ResponseEntity<Object> deletePersonById( @PathVariable("id") Long id ) {
+    @DeleteMapping("/persons/{pid}")
+    public ResponseEntity<Object> deletePersonById( @PathVariable("pid") Long pid ) {
 
-        personService.deletePersonById( id );
+        personService.deletePersonById( pid );
         return new ResponseEntity( "Person deleted from systeem", HttpStatus.ACCEPTED );
 
     }
 
-    @PutMapping("/persons/{id}")
-    public PersonDto updatePerson( @PathVariable("id") Long id, @RequestBody PersonDto person ) {
+    @PutMapping("/persons/{pid}")
+    public PersonDto updatePerson( @PathVariable("pid") Long pid, @RequestBody PersonDto person ) {
 
-        PersonDto dto = personService.updatePerson( id, person );
+        PersonDto dto = personService.updatePerson( pid, person );
 
         return dto;
 

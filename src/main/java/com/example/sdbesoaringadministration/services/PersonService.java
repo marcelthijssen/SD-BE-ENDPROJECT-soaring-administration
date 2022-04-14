@@ -9,12 +9,12 @@ public interface PersonService {
 
     List<PersonDto> getAllPersons();
 
-    PersonDto getPersonById( Long id );
+    PersonDto getPersonById( Long pid );
 
     Person addPerson( PersonDto personDto );
 
-    void deletePersonById( Long id );
+    void deletePersonById( Long pid );
 
-    PersonDto updatePerson( Long id, PersonDto dto );
+    PersonDto updatePerson( Long pid, PersonDto dto );
 
 }

@@ -19,4 +19,8 @@ public interface PlaneService {
 
     PlaneDto updatePlane( Long id, PlaneDto dto );
 
+    void assignOwnerToPlane( Long plid, Long pid );
+
+    void assignTechnicianToPlane( Long plid, Long pid );
+
 }
