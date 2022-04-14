@@ -1,8 +1,10 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.AirportDto;
+import com.example.sdbesoaringadministration.dtos.PlaneDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Airport;
+import com.example.sdbesoaringadministration.models.Plane;
 import com.example.sdbesoaringadministration.repositories.AirportRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +26,15 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public List<AirportDto> getAllAirports() {
-        List<Airport> listAirports = this.airportRepository.findAll();
-        List<AirportDto> listAirportsDto = new ArrayList<>();
+        List<Airport> airportList = this.airportRepository.findAll();
+        List<AirportDto> airportDtoList = new ArrayList<>();
 
-        listAirports.forEach( a -> listAirportsDto.add( new AirportDto( a.getId(), a.getIcao(), a.getLocation() ) ) );
-        return listAirportsDto;
+        for ( Airport ap : airportList ) {
+            AirportDto dto = new AirportDto().airportToAirportDto( ap );
+
+            airportDtoList.add( dto );
+        }
+        return airportDtoList;
     }
 
     @Override

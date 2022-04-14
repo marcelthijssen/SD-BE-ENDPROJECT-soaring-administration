@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sdbesoaringadministration.dtos.TypeOfMembershipDto.typeOfMembershipDtoToTypeOfMembership;
+
 @Service
 public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
 
@@ -25,35 +27,26 @@ public class TypeOfMembershipServiceImpl implements TypeOfMembershipService {
         List<TypeOfMembershipDto> tomDtoList = new ArrayList<>();
 
         for ( TypeOfMembership tom : tomList ) {
-            TypeOfMembershipDto dto = new TypeOfMembershipDto();
-            dto.setId( tom.getId() );
-            dto.setTitle( tom.getTitle() );
-            dto.setCostsPerMonth( tom.getCostsPerMonth() );
+            TypeOfMembershipDto dto = new TypeOfMembershipDto().typeOfMembershipToTypeOfMembershipDto( tom );
             tomDtoList.add( dto );
         }
         return tomDtoList;
     }
 
     @Override
-    public TypeOfMembershipDto getTypeOfMembershipById( Long id ) {
-        TypeOfMembershipDto dto = new TypeOfMembershipDto();
-        if ( tomRepository.findById( id ).isPresent() ) {
-            TypeOfMembership tom = tomRepository.findById( id ).get();
-            dto.setId( tom.getId() );
-            dto.setTitle( tom.getTitle() );
-            dto.setCostsPerMonth( tom.getCostsPerMonth() );
-            return dto;
+    public TypeOfMembershipDto getTypeOfMembershipById( Long tid ) {
+        if ( tomRepository.findById( tid ).isPresent() ) {
+            TypeOfMembership tom = tomRepository.findById( tid ).get();
+
+            return new TypeOfMembershipDto().typeOfMembershipToTypeOfMembershipDto( tom );
         } else {
             throw new RecordNotFoundException( "Type of Membership not found" );
         }
     }
 
     @Override
-    public void addTypeOfMembership( TypeOfMembershipDto typeOfMembershipDto ) {
-        TypeOfMembership tom = new TypeOfMembership();
-        tom.setId( typeOfMembershipDto.getId() );
-        tom.setTitle( typeOfMembershipDto.getTitle() );
-        tom.setCostsPerMonth( typeOfMembershipDto.getCostsPerMonth() );
+    public void addTypeOfMembership( TypeOfMembershipDto dto ) {
+        TypeOfMembership tom = typeOfMembershipDtoToTypeOfMembership(dto);
         this.tomRepository.save( tom );
     }
 

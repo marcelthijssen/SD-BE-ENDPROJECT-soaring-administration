@@ -26,24 +26,8 @@ public class MemberServiceImpl implements MemberService {
         List<MemberDto> memberDtoList = new ArrayList<>();
 
         for ( Member m : memberList ) {
-            MemberDto dto = new MemberDto();
-            dto.memberToMemberDto(m);
+            MemberDto dto = new MemberDto().memberToMemberDto(m);
 
-//            dto.setId( m.getId() );
-//            dto.setMembership( m.getMembership() );
-//            dto.setUserName( m.getUserName() );
-//            dto.setPassword( m.getPassword() );
-//            dto.setPilotLicense( m.getPilotLicense() );
-//            dto.setGender( m.getGender() );
-//            dto.setFirstName( m.getFirstName() );
-//            dto.setLastName( m.getLastName() );
-//            dto.setBirthday( m.getBirthday() );
-//            dto.setStreetName( m.getStreetName() );
-//            dto.setHouseNumber( m.getHouseNumber() );
-//            dto.setCity( m.getCity() );
-//            dto.setCountry( m.getCountry() );
-//            dto.setEmail( m.getEmail() );
-//            dto.setPhone( m.getPhone() );
             memberDtoList.add( dto );
         }
         return memberDtoList;

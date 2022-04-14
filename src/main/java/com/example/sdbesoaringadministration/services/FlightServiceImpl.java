@@ -34,9 +34,11 @@ public class FlightServiceImpl implements FlightService {
         List<Flight> flightList = this.flRepository.findAll();
         List<FlightDto> flightDtoList = new ArrayList<>();
 
-        flightList.forEach( fl -> flightDtoList.add( new FlightDto( fl.getId(), fl.getTimeStart(), fl.getTimeEnd(), fl.getInstructionFlight(), fl.getRemarks(), fl.getPlane(), fl.getAirportStart(), fl.getAirportEnd(), fl.getStartingMethode(),
-                fl.getPassenger(), fl.getCaptain() ) ) );
+        for ( Flight fl : flightList ) {
+            FlightDto dto = new FlightDto().flightToFlightDto( fl );
 
+            flightDtoList.add(dto);
+        }
         return flightDtoList;
     }
 

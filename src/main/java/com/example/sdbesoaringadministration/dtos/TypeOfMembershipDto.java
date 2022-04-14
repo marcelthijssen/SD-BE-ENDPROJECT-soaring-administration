@@ -1,5 +1,7 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.models.Flight;
+import com.example.sdbesoaringadministration.models.TypeOfMembership;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +20,8 @@ public class TypeOfMembershipDto {
     @NotBlank(message = "Must have a title")
     private String title;
 
-    @Column(precision=10, scale=2)
-    @DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer=4, fraction=2)
+    @Column(precision = 10, scale = 2)
+    @Digits(integer = 4, fraction = 2)
     private BigDecimal costsPerMonth;
 
     //    Constructors
@@ -32,7 +33,6 @@ public class TypeOfMembershipDto {
         this.title = title;
         this.costsPerMonth = costsPerMonth;
     }
-
 
     //    GETTERS and SETTERS
     public Long getId() {
@@ -59,4 +59,24 @@ public class TypeOfMembershipDto {
         this.costsPerMonth = costsPerMonth;
     }
 
+
+    public static TypeOfMembership typeOfMembershipDtoToTypeOfMembership( TypeOfMembershipDto dto ) {
+        TypeOfMembership tom = new TypeOfMembership();
+
+        tom.setId( dto.getId() );
+        tom.setTitle( dto.getTitle() );
+        tom.setCostsPerMonth( dto.getCostsPerMonth() );
+
+        return tom;
+    }
+
+    public static TypeOfMembershipDto typeOfMembershipToTypeOfMembershipDto( TypeOfMembership tom ) {
+        TypeOfMembershipDto dto = new TypeOfMembershipDto();
+
+        dto.setId( tom.getId() );
+        dto.setTitle( tom.getTitle() );
+        dto.setCostsPerMonth( tom.getCostsPerMonth() );
+
+        return dto;
+    }
 }

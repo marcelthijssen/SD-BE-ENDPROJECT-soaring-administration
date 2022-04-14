@@ -10,8 +10,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,7 +38,6 @@ public class PersonController {
         }
     }
 
-    //    Check if person type is allready in db, if so do nothing and reply is already in db
     @PostMapping("/persons")
     public ResponseEntity<Object> addPerson( @Valid @RequestBody PersonDto personDto, BindingResult br ) {
         if ( br.hasErrors() ) {
@@ -52,7 +49,7 @@ public class PersonController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             personService.addPerson( personDto );
-            return new ResponseEntity( "Person added to systeem", HttpStatus.CREATED );
+            return new ResponseEntity<>( "Person added to systeem", HttpStatus.CREATED );
         }
     }
 
@@ -61,7 +58,7 @@ public class PersonController {
     public ResponseEntity<Object> deletePersonById( @PathVariable("pid") Long pid ) {
 
         personService.deletePersonById( pid );
-        return new ResponseEntity( "Person deleted from systeem", HttpStatus.ACCEPTED );
+        return new ResponseEntity<>( "Person deleted from systeem", HttpStatus.ACCEPTED );
 
     }
 

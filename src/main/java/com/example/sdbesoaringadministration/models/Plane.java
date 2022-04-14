@@ -23,7 +23,6 @@ public class Plane {
     private boolean twoSeater;
     private boolean privatePlane;
 
-    // A flight can only have on eplane
     @OneToMany
             (mappedBy = "plane",
                     fetch = FetchType.LAZY,
@@ -31,19 +30,15 @@ public class Plane {
     @JsonIgnore
     private List<Flight> flights;
 
-    //     Owner of plane
-
     @ManyToOne
     @JoinColumn(name = "owner_id")
     @JsonBackReference("owner")
     private Person owner;
 
-
     @ManyToOne
     @JoinColumn(name = "technician_id")
     @JsonBackReference("technician")
     private Person technician;
-
 
     public Long getId() {
         return id;
@@ -85,7 +80,7 @@ public class Plane {
         this.registration = registration;
     }
 
-    public boolean isTwoSeater() {
+    public boolean getTwoSeater() {
         return twoSeater;
     }
 
@@ -93,7 +88,7 @@ public class Plane {
         this.twoSeater = twoSeater;
     }
 
-    public boolean isPrivatePlane() {
+    public boolean getPrivatePlane() {
         return privatePlane;
     }
 

@@ -1,11 +1,10 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Person;
+import com.example.sdbesoaringadministration.models.Plane;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
-import java.util.HashSet;
-import java.util.Set;
 
 @Validated
 public class PlaneDto {
@@ -34,6 +33,37 @@ public class PlaneDto {
         this.privatePlane = privatePlane;
         this.owner = owner;
         this.technician = technician;
+    }
+
+    public static PlaneDto planeToPlaneDto( Plane pl ) {
+        PlaneDto dto = new PlaneDto();
+
+        dto.setId( pl.getId() );
+        dto.setCallSign( pl.getCallSign() );
+        dto.setBrand( pl.getBrand() );
+        dto.setType( pl.getType() );
+        dto.setRegistration( pl.getRegistration() );
+        dto.setTwoSeater( pl.getTwoSeater() );
+        dto.setPrivatePlane( pl.getPrivatePlane() );
+        dto.setOwner( pl.getOwner() );
+        dto.setTechnician( pl.getTechnician() );
+        return dto;
+    }
+
+
+    public static Plane planeDtoToPlane( PlaneDto dto ) {
+        Plane pl = new Plane();
+
+        pl.setId( dto.getId() );
+        pl.setCallSign( dto.getCallSign() );
+        pl.setBrand( dto.getBrand() );
+        pl.setType( dto.getType() );
+        pl.setRegistration( dto.getRegistration() );
+        pl.setTwoSeater( dto.getTwoSeater() );
+        pl.setPrivatePlane( dto.getPrivatePlane() );
+        pl.setOwner( dto.getOwner() );
+        pl.setTechnician( dto.getTechnician() );
+        return pl;
     }
 
     public Long getId() {
@@ -76,7 +106,7 @@ public class PlaneDto {
         this.registration = registration;
     }
 
-    public boolean isTwoSeater( boolean twoSeater ) {
+    public boolean getTwoSeater() {
         return this.twoSeater;
     }
 
@@ -84,7 +114,7 @@ public class PlaneDto {
         this.twoSeater = twoSeater;
     }
 
-    public boolean isPrivatePlane() {
+    public boolean getPrivatePlane() {
         return privatePlane;
     }
 
