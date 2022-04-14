@@ -9,11 +9,11 @@ public interface StartingMethodeService {
 
     List<StartingMethodeDto> getAllStartingMethodes();
 
-    StartingMethodeDto getStartingMethodeById( Long id );
+    StartingMethodeDto getStartingMethodeById( Long smid );
 
     void addStartingMethode( StartingMethodeDto startingMethodeDto );
 
-    void deleteStartingMethodeById( Long id );
+    void deleteStartingMethodeById( Long smid );
 
-    void updateStartingMethode( Long id, StartingMethodeDto dto );
+    void updateStartingMethode( Long smid, StartingMethodeDto dto );
 }

@@ -5,8 +5,12 @@ import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Plane;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.PlaneRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +72,7 @@ public class PlaneServiceImpl implements PlaneService {
     public PlaneDto updatePlane( Long plid, PlaneDto dto ) {
         if ( plRepository.findById( plid ).isPresent() ) {
             Plane pl = plRepository.findById( plid ).get();
-
+            plRepository.save( pl );
         }
         return null;
     }
@@ -107,4 +111,31 @@ public class PlaneServiceImpl implements PlaneService {
         }
     }
 
+    @Override
+    public PlaneDto AddFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
+        if ( plRepository.findById( plid ).isPresent() ) {
+            Plane pl = plRepository.findById( plid ).get();
+
+            pl.setFlightStatus( pdf.getBytes() );
+
+            plRepository.save( pl );
+        } else {
+            throw new RecordNotFoundException("Plane not here");
+        }
+        return null;
+    }
+
+
+    @Override
+    public PlaneDto getPlaneflightStatusById( Long plid ) {
+        if ( plRepository.findById( plid ).isPresent() ) {
+            Plane pl = plRepository.findById( plid ).get();
+            PlaneDto dto = new PlaneDto();
+
+            dto.setFlightStatus( pl.getFlightStatus() );
+            return dto;
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
 }

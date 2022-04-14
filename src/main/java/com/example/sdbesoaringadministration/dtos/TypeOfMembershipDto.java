@@ -1,13 +1,9 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.TypeOfMembership;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Column;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;

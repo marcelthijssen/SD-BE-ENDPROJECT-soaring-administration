@@ -34,10 +34,10 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     }
 
     @Override
-    public StartingMethodeDto getStartingMethodeById( Long id ) {
+    public StartingMethodeDto getStartingMethodeById( Long smid ) {
 
-        if ( smRepository.findById( id ).isPresent() ) {
-            StartingMethode startingMethode = smRepository.findById( id ).get();
+        if ( smRepository.findById( smid ).isPresent() ) {
+            StartingMethode startingMethode = smRepository.findById( smid ).get();
             StartingMethodeDto dto = new StartingMethodeDto().startingMethodeToStartingMethodeDto(startingMethode);
 
 
@@ -55,18 +55,18 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
 
 
     @Override
-    public void deleteStartingMethodeById( Long id ) {
-        if ( smRepository.findById( id ).isPresent() ) {
-            smRepository.deleteById( id );
+    public void deleteStartingMethodeById( Long smid ) {
+        if ( smRepository.findById( smid ).isPresent() ) {
+            smRepository.deleteById( smid );
         } else {
             throw new RecordNotFoundException( "Starting methode not found" );
         }
     }
 
     @Override
-    public void updateStartingMethode( Long id, StartingMethodeDto dto ) {
-        if ( smRepository.findById( id ).isPresent() ) {
-            StartingMethode sm = smRepository.findById( id ).get();
+    public void updateStartingMethode( Long smid, StartingMethodeDto dto ) {
+        if ( smRepository.findById( smid ).isPresent() ) {
+            StartingMethode sm = smRepository.findById( smid ).get();
             sm.setId( dto.getId() );
             sm.setTitle( dto.getTitle() );
             sm.setUnit( dto.getUnit() );

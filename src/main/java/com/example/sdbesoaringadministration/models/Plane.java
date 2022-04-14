@@ -22,6 +22,8 @@ public class Plane {
     private String registration;
     private boolean twoSeater;
     private boolean privatePlane;
+    @Lob
+    public byte[] flightStatus;
 
     @OneToMany
             (mappedBy = "plane",
@@ -94,6 +96,14 @@ public class Plane {
 
     public void setPrivatePlane( boolean privatePlane ) {
         this.privatePlane = privatePlane;
+    }
+
+    public byte[] getFlightStatus() {
+        return flightStatus;
+    }
+
+    public void setFlightStatus( byte[] flightStatus ) {
+        this.flightStatus = flightStatus;
     }
 
     // Flight

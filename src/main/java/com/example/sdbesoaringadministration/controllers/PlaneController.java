@@ -4,12 +4,16 @@ import com.example.sdbesoaringadministration.dtos.PlaneDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.services.PlaneService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -86,4 +90,16 @@ public class PlaneController {
     }
 
     // need to upload file for plane
+    @PutMapping("/planes/{plid}/upload")
+    public String AddFlightStatusPdf(@Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
+               planeService.AddFlightStatusPdf( plid, pdf );
+        return "File uploaded";
+    }
+
+    @GetMapping(value = "/planes/{plid}/flightstatus", produces = MediaType.APPLICATION_PDF_VALUE)
+    public @ResponseBody byte[] getPlaneflightStatusById( @PathVariable(name = "plid") Long plid ) {
+        PlaneDto plane = planeService.getPlaneflightStatusById( plid );
+        return plane.flightStatus;
+
+    }
 }

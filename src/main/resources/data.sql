@@ -16,18 +16,18 @@ VALUES (1007, 'Tow', 'minute', 0.2);
 INSERT INTO starting_methodes (id, title, unit, price)
 VALUES (1008, 'Selfstarter', 0, 0);
 
-INSERT INTO persons (dtype, id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country,
-                     email, phone)
-VALUES (Person, 2001, 'm', 'Jeffrey', 'Johnson', '1994-08-19', 'straat', '3', '4817SX', 'Amsterdam', 'Nederland', 'sdbe@novi.nl',
-        '0612306345');
-INSERT INTO persons (dtype, id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country,
-                     email, phone)
-VALUES (Person, 2002, 'v', 'Johan', 'van oosten', '1984-08-19', 'Straatnaam', '993', '4811VC', 'Drenthe', 'Nederland',
-        'begin@mailadres.nl', '0691256345');
-INSERT INTO persons (dtype, id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country,
-                     email, phone)
-VALUES (Person, 2003, 'm', 'Tonnie', 'de Vries', '1964-08-19', 'Naamstraat', '55a', '4811VC', 'Rotjeknor', 'Nederland',
-        'begin@mailig.nl', '0634506109');
+-- INSERT INTO persons (dtype, id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country,
+--                      email, phone)
+-- VALUES (Person, 2001, 'm', 'Jeffrey', 'Johnson', '1994-08-19', 'straat', '3', '4817SX', 'Amsterdam', 'Nederland', 'sdbe@novi.nl',
+--         '0612306345');
+-- INSERT INTO persons (dtype, id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country,
+--                      email, phone)
+-- VALUES (Person, 2002, 'v', 'Johan', 'van oosten', '1984-08-19', 'Straatnaam', '993', '4811VC', 'Drenthe', 'Nederland',
+--         'begin@mailadres.nl', '0691256345');
+-- INSERT INTO persons (dtype, id, gender, first_name, last_name, birthday, street_name, house_number, postalcode, city, country,
+--                      email, phone)
+-- VALUES (Person, 2003, 'm', 'Tonnie', 'de Vries', '1964-08-19', 'Naamstraat', '55a', '4811VC', 'Rotjeknor', 'Nederland',
+--         'begin@mailig.nl', '0634506109');
 
 INSERT INTO type_of_memberships (id, title, costs_per_month)
 VALUES (1009, 'pupil ≤18', 56.00);

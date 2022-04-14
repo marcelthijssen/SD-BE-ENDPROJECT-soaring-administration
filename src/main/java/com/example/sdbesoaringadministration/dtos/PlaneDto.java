@@ -19,11 +19,12 @@ public class PlaneDto {
     private boolean privatePlane;
     private Person owner;
     private Person technician;
+    public byte[] flightStatus;
 
     public PlaneDto() {
     }
 
-    public PlaneDto( Long id, String callSign, String brand, String type, String registration, boolean twoSeater, boolean privatePlane, Person owner, Person technician ) {
+    public PlaneDto( Long id, String callSign, String brand, String type, String registration, boolean twoSeater, boolean privatePlane, Person owner, Person technician, byte[] flightStatus ) {
         this.id = id;
         this.callSign = callSign;
         this.brand = brand;
@@ -33,6 +34,7 @@ public class PlaneDto {
         this.privatePlane = privatePlane;
         this.owner = owner;
         this.technician = technician;
+        this.flightStatus=flightStatus;
     }
 
     public static PlaneDto planeToPlaneDto( Plane pl ) {
@@ -47,6 +49,7 @@ public class PlaneDto {
         dto.setPrivatePlane( pl.getPrivatePlane() );
         dto.setOwner( pl.getOwner() );
         dto.setTechnician( pl.getTechnician() );
+        dto.setFlightStatus( pl.getFlightStatus() );
         return dto;
     }
 
@@ -63,6 +66,7 @@ public class PlaneDto {
         pl.setPrivatePlane( dto.getPrivatePlane() );
         pl.setOwner( dto.getOwner() );
         pl.setTechnician( dto.getTechnician() );
+        pl.setFlightStatus( dto.getFlightStatus() );
         return pl;
     }
 
@@ -121,7 +125,13 @@ public class PlaneDto {
     public void setPrivatePlane( boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
+    public byte[] getFlightStatus() {
+        return flightStatus;
+    }
 
+    public void setFlightStatus( byte[] flightStatus ) {
+        this.flightStatus = flightStatus;
+    }
 
     public Person getOwner() {
         return owner;
