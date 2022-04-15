@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,7 +42,6 @@ public class PlaneController {
         }
     }
 
-    //    Check if plane type is allready in db, if so do nothing and reply is already in db
     @PostMapping("/planes")
     public ResponseEntity<Object> addPlane( @Valid @RequestBody PlaneDto planeDto, BindingResult br ) {
         if ( br.hasErrors() ) {
@@ -60,7 +58,7 @@ public class PlaneController {
     }
 
     @DeleteMapping("/planes/{plid}")
-    public ResponseEntity<String> deletePlaneById( @PathVariable("id") Long plid ) {
+    public ResponseEntity<String> deletePlaneById( @PathVariable("plid") Long plid ) {
 
         planeService.deletePlaneById( plid );
         return new ResponseEntity<>("Plane deleted from system", HttpStatus.ACCEPTED  );
@@ -91,14 +89,14 @@ public class PlaneController {
 
     // need to upload file for plane
     @PutMapping("/planes/{plid}/upload")
-    public String AddFlightStatusPdf(@Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
-               planeService.AddFlightStatusPdf( plid, pdf );
+    public String AddPlaneFlightStatusPdf(@Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
+        planeService.AddPlaneFlightStatusPdf( plid, pdf );
         return "File uploaded";
     }
 
     @GetMapping(value = "/planes/{plid}/flightstatus", produces = MediaType.APPLICATION_PDF_VALUE)
     public @ResponseBody byte[] getPlaneflightStatusById( @PathVariable(name = "plid") Long plid ) {
-        PlaneDto plane = planeService.getPlaneflightStatusById( plid );
+        PlaneDto plane = planeService.getPlaneFlightStatusById( plid );
         return plane.flightStatus;
 
     }

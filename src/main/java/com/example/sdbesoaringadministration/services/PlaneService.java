@@ -23,8 +23,8 @@ public interface PlaneService {
 
     void assignTechnicianToPlane( Long plid, Long pid );
 
-    PlaneDto AddFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException;
+    PlaneDto AddPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException;
 
-    PlaneDto getPlaneflightStatusById( Long plid );
+    PlaneDto getPlaneFlightStatusById( Long plid );
 
 }

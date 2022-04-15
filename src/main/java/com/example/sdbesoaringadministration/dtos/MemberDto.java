@@ -16,14 +16,15 @@ public class MemberDto extends PersonDto {
     private String role;
     private String pilotLicense;
 
-   public MemberDto(){}
+    public MemberDto() {
+    }
 
     public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String userName, String password, String membership, String role, String pilotLicense ) {
         super( id, gender, firstName, lastName, birthday, streetName, houseNumber, postalcode, city, country, email, phone );
         this.userName = userName;
         this.password = password;
         this.membership = membership;
-        this.role=role;
+        this.role = role;
         this.pilotLicense = pilotLicense;
     }
 
@@ -48,7 +49,7 @@ public class MemberDto extends PersonDto {
         m.setEmail( dto.getEmail() );
         m.setPhone( dto.getPhone() );
 
-        return m ;
+        return m;
     }
 
     public static MemberDto memberToMemberDto( Member m ) {
@@ -71,8 +72,9 @@ public class MemberDto extends PersonDto {
         dto.setEmail( m.getEmail() );
         dto.setPhone( m.getPhone() );
 
-        return dto ;
+        return dto;
     }
+
     public String getUserName() {
         return userName;
     }

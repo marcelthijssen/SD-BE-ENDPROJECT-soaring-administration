@@ -5,8 +5,6 @@ import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Plane;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.PlaneRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -112,7 +110,7 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public PlaneDto AddFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
+    public PlaneDto AddPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
         if ( plRepository.findById( plid ).isPresent() ) {
             Plane pl = plRepository.findById( plid ).get();
 
@@ -125,8 +123,9 @@ public class PlaneServiceImpl implements PlaneService {
         return null;
     }
 
+
     @Override
-    public PlaneDto getPlaneflightStatusById( Long plid ) {
+    public PlaneDto getPlaneFlightStatusById( Long plid ) {
         if ( plRepository.findById( plid ).isPresent() ) {
             Plane pl = plRepository.findById( plid ).get();
             PlaneDto dto = new PlaneDto();
