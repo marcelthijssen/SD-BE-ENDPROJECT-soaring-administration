@@ -125,7 +125,6 @@ public class PlaneServiceImpl implements PlaneService {
         return null;
     }
 
-
     @Override
     public PlaneDto getPlaneflightStatusById( Long plid ) {
         if ( plRepository.findById( plid ).isPresent() ) {
