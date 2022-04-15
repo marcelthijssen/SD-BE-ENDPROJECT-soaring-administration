@@ -14,5 +14,5 @@ public interface TypeOfMembershipService {
 
     void deleteTypeOfMembershipById( Long id );
 
-    TypeOfMembershipDto  updateTypeOfMembership( Long id, TypeOfMembershipDto dto );
+    TypeOfMembershipDto updateTypeOfMembership( Long id, TypeOfMembershipDto dto );
 }

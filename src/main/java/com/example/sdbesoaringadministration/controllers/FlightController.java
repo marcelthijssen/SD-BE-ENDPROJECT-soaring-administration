@@ -3,6 +3,7 @@ package com.example.sdbesoaringadministration.controllers;
 import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.services.FlightService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -14,7 +15,6 @@ import java.util.List;
 
 @RestController
 public class FlightController {
-
     private final FlightService flightService;
 
     public FlightController( FlightService flightService ) {
@@ -116,20 +116,46 @@ public class FlightController {
 
     @PutMapping("/flights/{flid}/start")
     public ResponseEntity<Object> assignTimeStart( @PathVariable("flid") Long flid ) {
-        flightService.assignTimeStart ( flid );
+        flightService.assignTimeStart( flid );
         return new ResponseEntity<>( "Flight has started", HttpStatus.CREATED );
     }
 
 
     @PutMapping("/flights/{flid}/end")
     public ResponseEntity<Object> assignTimeEnd( @PathVariable("flid") Long flid ) {
-        flightService.assignTimeEnd ( flid );
-        return  new ResponseEntity<>( "Flight has ended", HttpStatus.OK );
+        flightService.assignTimeEnd( flid );
+        return new ResponseEntity<>( "Flight has ended", HttpStatus.OK );
     }
 
-        //    @PutMapping("/flights/{flid}/plane/{plid}/startingmethodes/{smid}/captain/{cpid}/passenger/{psid}/airport1/{asid}/airport2/{aeid}/")
+    @GetMapping("/flights/captain/{pid}")
+    public ResponseEntity<List<FlightDto>> getFlightByCaptain( @PathVariable(name = "pid") Long pid ) {
+        List<FlightDto> flights = flightService.getFlightByCaptain( pid );
+
+        return new ResponseEntity<>( flights, HttpStatus.OK );
+    }
+
+    /*
+    @GetMapping("/flights/{flid}")
+    public ResponseEntity<Object> getFlightById( @PathVariable(name = "flid") Long flid ) {
+        FlightDto flight = flightService.getFlightById( flid );
+        try {
+            return ResponseEntity.ok( flight );
+        } catch ( Exception ex ) {
+            throw new RecordNotFoundException( "Not found" );
+        }
+    }//    @PutMapping("/flights/{flid}/plane/{plid}/startingmethodes/{smid}/captain/{cpid}/passenger/{psid}/airport1/{asid}/airport2/{aeid}/")
+     */
 //    public ResponseEntity<Object> assignAlltoflight( @PathVariable("flid") Long flid, @PathVariable("plid") Long plid, @PathVariable("smid") Long smid, @PathVariable("cpid") Long cpid, @PathVariable("psid") Long psid, @PathVariable("asid") Long asid, @PathVariable("aeid") Long aeid ) {
 //        flightService.assignAlltoflight( flid, plid, smid, cpid, psid, asid, aeid );
 //        return new ResponseEntity<>( "Captain added to flight", HttpStatus.ACCEPTED );
 //    }
+}
+
+    /*
+        @GetMapping("/flights")
+    public ResponseEntity<Object> getAllFlights() {
+        List<FlightDto> lt = flightService.getAllFlights();
+
+        return new ResponseEntity<>( lt, HttpStatus.OK );
     }
+     */

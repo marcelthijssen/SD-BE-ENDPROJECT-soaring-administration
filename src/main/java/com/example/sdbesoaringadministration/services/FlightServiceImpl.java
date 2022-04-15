@@ -3,6 +3,7 @@ package com.example.sdbesoaringadministration.services;
 import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
+import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.*;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +20,14 @@ public class FlightServiceImpl implements FlightService {
     private final PlaneRepository plRepository;
     private final AirportRepository apRepository;
     private final StartingMethodeRepository smRepository;
-    private final PersonRepository personRepository;
+    private final PersonRepository psRepository;
 
-    public FlightServiceImpl( FlightRepository flRepository, PlaneRepository plRepository, AirportRepository apRepository, StartingMethodeRepository smRepository, PersonRepository personRepository ) {
+    public FlightServiceImpl( FlightRepository flRepository, PlaneRepository plRepository, AirportRepository apRepository, StartingMethodeRepository smRepository, PersonRepository psRepository ) {
         this.flRepository = flRepository;
         this.plRepository = plRepository;
         this.apRepository = apRepository;
         this.smRepository = smRepository;
-        this.personRepository = personRepository;
+        this.psRepository = psRepository;
     }
 
     @Override
@@ -37,11 +38,10 @@ public class FlightServiceImpl implements FlightService {
         for ( Flight fl : flightList ) {
             FlightDto dto = new FlightDto().flightToFlightDto( fl );
 
-            flightDtoList.add(dto);
+            flightDtoList.add( dto );
         }
         return flightDtoList;
     }
-
 
     @Override
     public FlightDto getFlightById( Long flid ) {
@@ -159,7 +159,7 @@ public class FlightServiceImpl implements FlightService {
 
     public void assignPassengerToFlight( Long flid, Long psid ) {
         var optionalFlight = flRepository.findById( flid );
-        var optionalPerson = personRepository.findById( psid );
+        var optionalPerson = psRepository.findById( psid );
 
         if ( optionalFlight.isPresent() && optionalPerson.isPresent() ) {
             var flight = optionalFlight.get();
@@ -174,7 +174,7 @@ public class FlightServiceImpl implements FlightService {
 
     public void assignCaptainToFlight( Long flid, Long cpid ) {
         var optionalFlight = flRepository.findById( flid );
-        var optionalPerson = personRepository.findById( cpid );
+        var optionalPerson = psRepository.findById( cpid );
 
         if ( optionalFlight.isPresent() && optionalPerson.isPresent() ) {
             var flight = optionalFlight.get();
@@ -191,20 +191,64 @@ public class FlightServiceImpl implements FlightService {
         var optionalFlight = flRepository.findById( flid );
         var flight = optionalFlight.get();
         flight.setTimeStart( ( LocalDateTime.now() ) );
-        flRepository.save(flight);
+        flRepository.save( flight );
     }
 
     public void assignTimeEnd( Long flid ) {
         var optionalFlight = flRepository.findById( flid );
         var flight = optionalFlight.get();
         flight.setTimeEnd( ( LocalDateTime.now() ) );
-        flRepository.save(flight);
+        flRepository.save( flight );
     }
+
+    @Override
+    public List<FlightDto> getFlightByCaptain( Long pid ) {
+//        Person captain = new Person();
+//        if ( !flRepository.findFlightsByCaptainEquals(pid).isEmpty() ) {
+            List<Flight> flightList = flRepository.findFlightsByCaptain_Id(pid);
+            List<FlightDto> flightDtoList = new ArrayList<>();
+
+            for ( Flight fl : flightList ) {
+                FlightDto dto = new FlightDto().flightToFlightDto( fl );
+
+                flightDtoList.add(dto);
+            }
+            return flightDtoList;
+//        } else {
+//            throw new RecordNotFoundException();
+//        }
+    }
+
+    /*
+    public FlightDto getFlightById( Long flid ) {
+        if ( flRepository.findById( flid ).isPresent() ) {
+            Flight flight = flRepository.findById( flid ).get();
+            return new FlightDto().flightToFlightDto( flight );
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
+
+
+        @Override
+    public List<FlightDto> getAllFlights() {
+        List<Flight> flightList = this.flRepository.findAll();
+        List<FlightDto> flightDtoList = new ArrayList<>();
+
+        for ( Flight fl : flightList ) {
+            FlightDto dto = new FlightDto().flightToFlightDto( fl );
+
+            flightDtoList.add(dto);
+        }
+        return flightDtoList;
+    }
+     */
+
 //    public void assignAlltoflight( Long flid, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid ) {
 //        var optionalFlight = flRepository.findById( flid );
 //        var optionalPlane = plRepository.findById( plid );
 //        var optionalStartingMethode = smRepository.findById( smid );
-//        var optionalPerson = personRepository.findById( cpid );
+//        var optionalPerson = psRepository.findById( cpid );
 //        var optionalAirport = apRepository.findById( cpid );
 //
 //        if ( optionalFlight.isPresent() && optionalAirport.isPresent() && optionalPerson.isPresent() && optionalPlane.isPresent() && optionalStartingMethode.isPresent() ) {
