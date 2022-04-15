@@ -10,12 +10,9 @@ import java.time.LocalDateTime;
 public class FlightDto {
 
     private Long id;
-
-    //    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="Europe/Amsterdam")
     private LocalDateTime timeStart;
-
-    //    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss", timezone="Europe/Amsterdam")
     private LocalDateTime timeEnd;
+    private long timeFlown;
     private boolean instructionFlight;
     private String remarks;
     // MayToOne
@@ -31,10 +28,11 @@ public class FlightDto {
     public FlightDto() {
     }
 
-    public FlightDto( Long id, LocalDateTime timeStart, LocalDateTime timeEnd, boolean instructionFlight, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode, Person passenger, Person captain ) {
+    public FlightDto( Long id, LocalDateTime timeStart, LocalDateTime timeEnd, long timeFlown, boolean instructionFlight, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode, Person passenger, Person captain ) {
         this.id = id;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.timeFlown = timeFlown;
         this.instructionFlight = instructionFlight;
         this.remarks = remarks;
         //        Relationships
@@ -55,6 +53,7 @@ public class FlightDto {
         fl.setId( dto.getId() );
         fl.setTimeStart( dto.getTimeStart() );
         fl.setTimeEnd( dto.getTimeEnd() );
+        fl.setTimeFlown( dto.getTimeFlown() );
         fl.setInstructionFlight( dto.getInstructionFlight() );
         fl.setRemarks( dto.getRemarks() );
 //        Relationships
@@ -75,6 +74,7 @@ public class FlightDto {
         dto.setId( fl.getId() );
         dto.setTimeStart( fl.getTimeStart() );
         dto.setTimeEnd( fl.getTimeEnd() );
+        dto.setTimeFlown( fl.getTimeFlown() );
         dto.setInstructionFlight( fl.getInstructionFlight() );
         dto.setRemarks( fl.getRemarks() );
 //        relationships
@@ -113,6 +113,13 @@ public class FlightDto {
         this.timeEnd = timeEnd;
     }
 
+    public long getTimeFlown() {
+        return timeFlown;
+    }
+
+    public void setTimeFlown( long timeFlown ) {
+        this.timeFlown = timeFlown;
+    }
     public boolean getInstructionFlight() {
         return instructionFlight;
     }

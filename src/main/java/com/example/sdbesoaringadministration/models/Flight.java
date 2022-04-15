@@ -1,7 +1,6 @@
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,14 +17,14 @@ public class Flight {
     private Long id;
 
 //    @CreationTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
+//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
     private LocalDateTime timeStart = LocalDateTime.now();
 
-
 //    @CreationTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime timeEnd = LocalDateTime.now();
+//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
+    private LocalDateTime timeEnd;
 
+    private long timeFlown;
     private boolean instructionFlight;
     private String remarks;
 
@@ -89,6 +88,14 @@ public class Flight {
 
     public void setTimeEnd( LocalDateTime timeEnd ) {
         this.timeEnd = timeEnd;
+    }
+
+    public long getTimeFlown() {
+        return timeFlown;
+    }
+
+    public void setTimeFlown( long timeFlown ) {
+        this.timeFlown = timeFlown;
     }
 
     public boolean getInstructionFlight() {

@@ -8,6 +8,7 @@ import com.example.sdbesoaringadministration.repositories.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class FlightServiceImpl implements FlightService {
             fl.setId( fl.getId() );
             fl.setTimeStart( dto.getTimeStart() );
             fl.setTimeEnd( dto.getTimeEnd() );
+            fl.setTimeFlown( dto.getTimeFlown() );
             fl.setInstructionFlight( dto.getInstructionFlight() );
             fl.setRemarks( dto.getRemarks() );
             fl.setPlane( dto.getPlane() );
@@ -198,6 +200,7 @@ public class FlightServiceImpl implements FlightService {
         var optionalFlight = flRepository.findById( flid );
         var flight = optionalFlight.get();
         flight.setTimeEnd( ( LocalDateTime.now() ) );
+        flight.setTimeFlown( ChronoUnit.MINUTES.between( flight.getTimeStart(), flight.getTimeEnd() ) );
         flRepository.save( flight );
     }
 
@@ -205,15 +208,15 @@ public class FlightServiceImpl implements FlightService {
     public List<FlightDto> getFlightByCaptain( Long pid ) {
 //        Person captain = new Person();
 //        if ( !flRepository.findFlightsByCaptainEquals(pid).isEmpty() ) {
-            List<Flight> flightList = flRepository.findFlightsByCaptain_Id(pid);
-            List<FlightDto> flightDtoList = new ArrayList<>();
+        List<Flight> flightList = flRepository.findFlightsByCaptain_Id( pid );
+        List<FlightDto> flightDtoList = new ArrayList<>();
 
-            for ( Flight fl : flightList ) {
-                FlightDto dto = new FlightDto().flightToFlightDto( fl );
+        for ( Flight fl : flightList ) {
+            FlightDto dto = new FlightDto().flightToFlightDto( fl );
 
-                flightDtoList.add(dto);
-            }
-            return flightDtoList;
+            flightDtoList.add( dto );
+        }
+        return flightDtoList;
 //        } else {
 //            throw new RecordNotFoundException();
 //        }

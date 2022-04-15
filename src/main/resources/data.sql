@@ -47,10 +47,13 @@ VALUES (1015, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false);
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane)
 VALUES (1016, 'ka8', 'Alexander Schleicher', 'Ka-8b', 'PH-345', false, true);
 
-INSERT INTO flights (id, instruction_flight, remarks)
-VALUES (1017, true, 'prachtige vlucht');
-INSERT INTO flights (id, instruction_flight, remarks)
-VALUES (1018, true, 'harde landing');
--- INSERT INTO flights (id, time_start, time_end, instruction_flight, remarks, plane, airport_start, airport_end,
---                      starting_methode, passenger, captain)
--- VALUES (1019, '2022-04-14 13:00:37.185743', '2022-04-14 15:03:07.185743', true, '', 1013, 1001, 1002, 1006, 2003, 2003);
+-- INSERT INTO flights (id, instruction_flight, remarks)
+-- VALUES (1017, true, 'prachtige vlucht');
+-- INSERT INTO flights (id, instruction_flight, remarks)
+-- VALUES (1018, true, 'harde landing');
+INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id, airport_end_id,
+                     starting_methode_id, passenger_id, captain_id)
+VALUES (1017, true,'', '2022-04-14 13:00:37.185743', '0', '2022-04-14 15:03:07.185743', null, null, null, null, null,null );
+INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id, airport_end_id,
+                     starting_methode_id, passenger_id, captain_id)
+VALUES (1018, false, '', '2022-04-14 13:00:37.185743', '0', '2022-04-14 15:03:07.185743', null, null, null, null, null,null );
