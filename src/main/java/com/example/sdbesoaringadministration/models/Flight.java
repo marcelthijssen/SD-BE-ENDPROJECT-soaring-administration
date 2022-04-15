@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "flights")
 public class Flight {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -149,8 +149,6 @@ public class Flight {
     public void setCaptain( Person captain ) {
         this.captain = captain;
     }
-// OneToMany Airport
-
 
     public Airport getAirportStart() {
         return airportStart;

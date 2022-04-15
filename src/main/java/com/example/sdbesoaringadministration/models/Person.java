@@ -17,7 +17,7 @@ import java.util.Set;
 public class Person {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     private String gender;
@@ -63,7 +63,12 @@ public class Person {
     @JsonIgnore
     private List<Plane> technician;
 
-
+    @OneToMany
+            (mappedBy = "billed_person",
+                    fetch= FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Invoice> billed_person;
 
     public Long getId() {
         return id;

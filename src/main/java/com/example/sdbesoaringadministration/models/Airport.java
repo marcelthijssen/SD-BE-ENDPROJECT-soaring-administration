@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "airports")
 public class Airport {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

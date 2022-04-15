@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class TypeOfMembership {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     private String title;

@@ -13,7 +13,7 @@ import java.util.List;
 public class Plane {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     private String callSign;
