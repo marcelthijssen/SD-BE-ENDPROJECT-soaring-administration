@@ -1,15 +1,12 @@
 package com.example.sdbesoaringadministration.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 //import com.example.sdbesoaringadministration.utils.LocalDateAttributeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -17,14 +14,13 @@ import java.util.Set;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
     private String gender;
     private String firstName;
     private String lastName;
-//    @Convert(converter = LocalDateAttributeConverter.class)
-    private LocalDate birthday;
+    private LocalDate dateOfBirth;
     private String streetName;
     private String houseNumber;
     private String postalcode;
@@ -47,6 +43,13 @@ public class Person {
     @JsonIgnore
     private List<Flight> passenger;
 
+    @OneToMany
+            (mappedBy = "billedPerson",
+                    fetch= FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Flight> billedPerson;
+
 
     @OneToMany
             (mappedBy = "owner",
@@ -63,12 +66,6 @@ public class Person {
     @JsonIgnore
     private List<Plane> technician;
 
-    @OneToMany
-            (mappedBy = "billed_person",
-                    fetch= FetchType.LAZY,
-                    cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Invoice> billed_person;
 
     public Long getId() {
         return id;
@@ -102,12 +99,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setBirthday( LocalDate birthday ) {
-        this.birthday = birthday;
+    public void setDateOfBirth( LocalDate dateOfBirth ) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getStreetName() {

@@ -1,10 +1,12 @@
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -12,58 +14,68 @@ import java.time.LocalDateTime;
 @Table(name = "flights")
 public class Flight {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private Long id;
 
-//    @CreationTimestamp
-//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime timeStart = LocalDateTime.now();
-
-//    @CreationTimestamp
-//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
+    private LocalDateTime timeStart;
     private LocalDateTime timeEnd;
-
     private long timeFlown;
     private boolean instructionFlight;
     private String remarks;
 
-//    a plane can have multiple flights
     @ManyToOne
-    @JsonBackReference
+//    @JsonBackReference
+    @JoinColumn(name = "billed_person_id",
+            referencedColumnName = "id")
+    private Person billedPerson;
+    //    a plane can have multiple flights
+    @ManyToOne
+//    @JsonBackReference
     @JoinColumn(
             name = "plane_id",
             referencedColumnName = "id")
     private Plane plane;
 
     @ManyToOne
-    @JsonBackReference
+//    @JsonBackReference
     @JoinColumn(
             name = "starting_methode_id",
             referencedColumnName = "id")
     private StartingMethode startingMethode;
 
-//    a person can have different relations with the flight
+    //    a person can have different relations with the flight
     @ManyToOne
-    @JoinColumn(name = "passenger_id")
-    @JsonBackReference("passenger")
+//    @JsonBackReference
+    @JoinColumn(name = "passenger_id",
+            referencedColumnName = "id")
+
     private Person passenger;
 
     @ManyToOne
-    @JoinColumn(name = "captain_id")
-    @JsonBackReference("captain")
+//    @JsonBackReference
+    @JoinColumn(name = "captain_id",
+            referencedColumnName = "id")
     private Person captain;
 
-//    /    a person can have different relations with the flight
+    //    /    a person can have different relations with the flight
     @ManyToOne
-    @JoinColumn(name = "airport_end_id")
-    @JsonBackReference("airportEnd")
+//    @JsonBackReference
+    @JoinColumn(name = "airport_end_id",
+            referencedColumnName = "id")
     private Airport airportEnd;
 
     @ManyToOne
-    @JoinColumn(name = "airport_start_id")
-    @JsonBackReference("airportStart")
+    @JoinColumn(name = "airport_start_id",
+            referencedColumnName = "id")
     private Airport airportStart;
+
+    @OneToMany
+            (mappedBy = "flights_info",
+                    fetch = FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Invoice> flights_info;
 
 
     public Long getId() {
@@ -114,8 +126,6 @@ public class Flight {
         this.remarks = remarks;
     }
 
-//   OneTwoMany  plane
-
     public void setPlane( Plane plane ) {
         this.plane = plane;
     }
@@ -124,8 +134,6 @@ public class Flight {
         return plane;
     }
 
-
-//
     public StartingMethode getStartingMethode() {
         return startingMethode;
     }
@@ -166,6 +174,11 @@ public class Flight {
         this.airportStart = airportStart;
     }
 
+    public Person getBilledPerson() {
+        return billedPerson;
+    }
 
-
+    public void setBilledPerson( Person billedPerson ) {
+        this.billedPerson = billedPerson;
+    }
 }

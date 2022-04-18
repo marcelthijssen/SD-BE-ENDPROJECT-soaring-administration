@@ -69,7 +69,7 @@ public class PersonServiceImpl implements PersonService {
             p.setGender( dto.getGender() );
             p.setFirstName( dto.getFirstName() );
             p.setLastName( dto.getLastName() );
-            p.setBirthday( dto.getBirthday() );
+            p.setDateOfBirth( dto.getDateOfBirth() );
             p.setStreetName( dto.getStreetName() );
             p.setHouseNumber( dto.getHouseNumber() );
             p.setPostalcode( dto.getPostalcode() );

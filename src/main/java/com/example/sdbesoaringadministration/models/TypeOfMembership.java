@@ -1,10 +1,12 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
@@ -12,11 +14,19 @@ import java.math.BigDecimal;
 public class TypeOfMembership {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
     private String title;
     private BigDecimal costsPerMonth;
+
+    @OneToMany
+            (mappedBy = "type_of_membership",
+                    fetch= FetchType.LAZY,
+                    cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Invoice> type_of_membership;
+
 
 //    GETTERS en SETTERS
 

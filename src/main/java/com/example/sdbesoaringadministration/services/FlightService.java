@@ -15,8 +15,17 @@ public interface FlightService {
 
     FlightDto getFlightById( Long flid );
 
-    Flight addFlight( FlightDto flightDto );
+//    Flight addFlight( FlightDto flightDto );
 
+    FlightDto addFlight();
+
+    /*
+        @Override
+        public Flight addFlight( FlightDto flightDto ) {
+            Flight flight = flightDtoToFlight( flightDto );
+            return this.flRepository.save( flight );
+        }
+        */
     void deleteFlightById( Long flid );
 
     FlightDto updateFlight( Long flid, FlightDto flightDto );
@@ -37,10 +46,8 @@ public interface FlightService {
 
     void assignTimeEnd( Long flid );
 
+    FlightDto updateRemarksToFLight(Long flid, FlightDto dto );
     List<FlightDto> getFlightByCaptain( Long pid );
 
-//    void assignAlltoflight ( Long flid, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid );
-//    startTimer
 
-//    stopTimer
 }

@@ -46,6 +46,15 @@ public class FlightController {
     }
 
     @PostMapping("/flights")
+    public FlightDto addFlight() {
+        FlightDto dto = flightService.addFlight();
+        return dto;
+    }
+
+
+//    }
+    /*
+      @PostMapping("/flights")
     public ResponseEntity<Object> addFlight( @Valid @RequestBody FlightDto flightDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
@@ -59,6 +68,7 @@ public class FlightController {
             return new ResponseEntity<>( "Flight has been added", HttpStatus.CREATED );
         }
     }
+     */
 
     @DeleteMapping("/flights/{flid}")
     public ResponseEntity<Object> deleteFlightById( @PathVariable("flid") Long flid ) {
@@ -124,5 +134,12 @@ public class FlightController {
     public ResponseEntity<Object> assignTimeEnd( @PathVariable("flid") Long flid ) {
         flightService.assignTimeEnd( flid );
         return new ResponseEntity<>( "Flight has ended", HttpStatus.OK );
+    }
+
+
+    @PutMapping("/flights/{flid}/remarks")
+    public FlightDto updateRemarksToFLight( @PathVariable("flid") Long flid, @RequestBody FlightDto flight ) {
+        FlightDto dto = flightService.updateRemarksToFLight( flid, flight );
+        return dto;
     }
 }

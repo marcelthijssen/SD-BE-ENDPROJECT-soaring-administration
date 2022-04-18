@@ -1,15 +1,12 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Person;
-import com.example.sdbesoaringadministration.models.Plane;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.*;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Validated
@@ -25,7 +22,7 @@ public class PersonDto {
 
     @Column
 //    @Convert(converter = LocalDateAttributeConverter.class)
-    private LocalDate birthday;
+    private LocalDate dateOfBirth;
     private String streetName;
     private String houseNumber;
     private String postalcode;
@@ -40,12 +37,12 @@ public class PersonDto {
     public PersonDto() {
     }
 
-    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate birthday, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone ) {
+    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone ) {
         this.id = id;
         this.gender = gender;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthday;
+        this.dateOfBirth = dateOfBirth;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.postalcode = postalcode;
@@ -65,13 +62,11 @@ public class PersonDto {
     public static PersonDto personToPersonDto( Person p ) {
         PersonDto dto = new PersonDto();
 
-//        PersonDto.convertToDateViaSqlDate( dto.getBirthday() );
-
         dto.setId( p.getId() );
         dto.setGender( p.getGender() );
         dto.setFirstName( p.getFirstName() );
         dto.setLastName( p.getLastName() );
-        dto.setBirthday( p.getBirthday() );
+        dto.setDateOfBirth( p.getDateOfBirth() );
         dto.setStreetName( p.getStreetName() );
         dto.setHouseNumber( p.getHouseNumber() );
         dto.setPostalcode( p.getPostalcode() );
@@ -93,7 +88,7 @@ public class PersonDto {
         p.setGender( personDto.getGender() );
         p.setFirstName( personDto.getFirstName() );
         p.setLastName( personDto.getLastName() );
-        p.setBirthday( personDto.getBirthday() );
+        p.setDateOfBirth( personDto.getDateOfBirth() );
         p.setStreetName( personDto.getStreetName() );
         p.setHouseNumber( personDto.getHouseNumber() );
         p.setPostalcode( personDto.getPostalcode() );
@@ -134,9 +129,7 @@ public class PersonDto {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
-    }
+
 
     public String getCountry() {
         return country;
@@ -145,9 +138,11 @@ public class PersonDto {
     public void setCountry( String country ) {
         this.country = country;
     }
-
-    public void setBirthday( LocalDate birthday ) {
-        this.birthday = birthday;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+    public void setDateOfBirth( LocalDate dateOfBirth ) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getStreetName() {

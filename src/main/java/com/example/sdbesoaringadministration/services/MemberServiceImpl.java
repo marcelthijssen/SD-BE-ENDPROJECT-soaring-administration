@@ -78,7 +78,7 @@ public class MemberServiceImpl implements MemberService {
             m.setGender( m.getGender() );
             m.setFirstName( m.getFirstName() );
             m.setLastName( m.getLastName() );
-            m.setBirthday( m.getBirthday() );
+            m.setDateOfBirth( m.getDateOfBirth() );
             m.setStreetName( m.getStreetName() );
             m.setHouseNumber( m.getHouseNumber() );
             m.setCity( m.getCity() );

@@ -1,45 +1,31 @@
-package com.example.sdbesoaringadministration.models;
+package com.example.sdbesoaringadministration.dtos;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.sdbesoaringadministration.models.*;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
-@Table(name = "invoices")
-public class Invoice {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+public class InvoiceDto {
+
     private Long id;
-
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int invoiceNumber;
-
-    private BigDecimal ammount;
 
     private Date creationDate;
 
-    @ManyToOne
-//    @JsonBackReference
-    @JoinColumn(name = "person_id",
-            referencedColumnName = "id")
     private Person billedPerson;
 
-    //    Flight information -captain, time-flown
-    @ManyToOne
-//    @JsonBackReference("flights")
-    @JoinColumn(name = "flights_info_id",
-            referencedColumnName = "id")
-    private Flight flights_info;
+    private Flight flight_info;
 
-    //    T-O-M information -person, tom
-    @ManyToOne
-//    @JsonBackReference
-    @JoinColumn(name = "type_of_membership_info_id",
-            referencedColumnName = "id")
     private TypeOfMembership type_of_membership;
+    private BigDecimal ammount;
 
+
+    public void setId( Long id, Date creationDate, BigDecimal ammount, Flight flight_info, TypeOfMembership type_of_membership ) {
+        this.id = id;
+        this.creationDate = creationDate;
+        this.ammount = ammount;
+        this.flight_info = flight_info;
+    }
 
     public Long getId() {
         return id;
@@ -48,7 +34,6 @@ public class Invoice {
     public void setId( Long id ) {
         this.id = id;
     }
-
     public int getInvoiceNumber() {
         return invoiceNumber;
     }
@@ -82,14 +67,6 @@ public class Invoice {
         this.ammount = ammount;
     }
 
-    public Flight getFlights_info() {
-        return flights_info;
-    }
-
-    public void setFlights_info( Flight flights_info ) {
-        this.flights_info = flights_info;
-    }
-
     public TypeOfMembership getType_of_membership() {
         return type_of_membership;
     }
@@ -97,4 +74,26 @@ public class Invoice {
     public void setType_of_membership( TypeOfMembership type_of_membership ) {
         this.type_of_membership = type_of_membership;
     }
+
+    public Flight getFlight_info() {
+        return flight_info;
+    }
+
+    public void setFlight_info( Flight flight_info ) {
+        this.flight_info = flight_info;
+    }
+
+    public static InvoiceDto invoiceToInvoiceDto( Invoice i ) {
+        InvoiceDto dto = new InvoiceDto();
+
+        dto.setId( i.getId() );
+        dto.setInvoiceNumber( i.getInvoiceNumber() );
+        dto.setCreationDate( i.getCreationDate() );
+        dto.setBilledPerson( i.getBilledPerson() );
+        dto.setAmmount( i.getAmmount() );
+
+
+        return dto;
+    }
 }
+

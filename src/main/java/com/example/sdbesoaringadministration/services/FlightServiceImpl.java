@@ -3,7 +3,6 @@ package com.example.sdbesoaringadministration.services;
 import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
-import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.*;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +10,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.sdbesoaringadministration.dtos.FlightDto.flightDtoToFlight;
 
 @Service
 public class FlightServiceImpl implements FlightService {
@@ -55,11 +52,21 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public FlightDto addFlight(  ) {
+        Flight flight = new Flight();
+        this.flRepository.save( flight );
+
+        FlightDto dto = new FlightDto().flightToFlightDto( flight );
+        dto.setId( flight.getId() );
+        return dto;
+    }
+/*
+    @Override
     public Flight addFlight( FlightDto flightDto ) {
         Flight flight = flightDtoToFlight( flightDto );
         return this.flRepository.save( flight );
     }
-
+    */
     @Override
     public void deleteFlightById( Long flid ) {
         if ( flRepository.findById( flid ).isPresent() ) {
@@ -85,6 +92,7 @@ public class FlightServiceImpl implements FlightService {
             fl.setStartingMethode( dto.getStartingMethode() );
             fl.setPassenger( dto.getPassenger() );
             fl.setCaptain( dto.getCaptain() );
+            fl.setBilledPerson(dto.getBilledPerson());
 
 // plane
             fl.setPlane( dto.getPlane() );
@@ -138,6 +146,7 @@ public class FlightServiceImpl implements FlightService {
 
             flight.setAirportEnd( airportEnd );
             flRepository.save( flight );
+
         } else {
             throw new RecordNotFoundException( "Airport or flight doesn't exist" );
         }
@@ -201,9 +210,37 @@ public class FlightServiceImpl implements FlightService {
         var flight = optionalFlight.get();
         flight.setTimeEnd( ( LocalDateTime.now() ) );
         flight.setTimeFlown( ChronoUnit.MINUTES.between( flight.getTimeStart(), flight.getTimeEnd() ) );
+
+        if ( !flight.getInstructionFlight() ) {
+            flight.setBilledPerson( flight.getCaptain() );
+        } else {
+            flight.setBilledPerson( flight.getPassenger() );
+        }
         flRepository.save( flight );
     }
 
+//    public void addRemarksToFlight( Long flid ) {
+//        var optionalFlight = flRepository.findById( flid );
+//        var flight = optionalFlight.get();
+//        flight.setRemarks( flid );
+//
+//        flRepository.save( flight );
+//    }
+///*
+      @Override
+    public FlightDto updateRemarksToFLight( Long flid, FlightDto dto ) {
+        if ( flRepository.findById( flid ).isPresent() ) {
+            Flight fl = flRepository.findById( flid ).get();
+            fl.setRemarks( dto.getRemarks() );
+
+            fl.setPlane( dto.getPlane() );
+            flRepository.save( fl );
+            return dto;
+        } else {
+            throw new RecordNotFoundException( "Flight not found" );
+        }
+    }
+// */
     @Override
     public List<FlightDto> getFlightByCaptain( Long pid ) {
 //        Person captain = new Person();

@@ -11,12 +11,13 @@ import java.util.List;
 @Table(name = "airports")
 public class Airport {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String Icao;
-    private String location;
+    private String city;
+    private String country;
 
     // A flight can only have on airport
     @OneToMany
@@ -43,14 +44,6 @@ public class Airport {
         this.id = id;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation( String location ) {
-        this.location = location;
-    }
-
     public String getIcao() {
         return Icao;
     }
@@ -58,18 +51,19 @@ public class Airport {
     public void setIcao( String Icao ) {
         this.Icao = Icao;
     }
+    public String getCity() {
+        return city;
+    }
 
-    // Flight
-//    public void setFlight(List<Flight> flights) {
-//        this.flights = flights;
-//    }
-//    public List<Flight> getFlights() {
-//        return flights;
-//    }
-//
-//    void addFlight( Flight flight) {
-//        this.flights.add(flight);
-//    }
+    public void setCity( String city ) {
+        this.city = city;
+    }
 
+    public String getCountry() {
+        return country;
+    }
 
+    public void setCountry( String country ) {
+        this.country = country;
+    }
 }

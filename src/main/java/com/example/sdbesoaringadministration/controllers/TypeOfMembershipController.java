@@ -23,13 +23,13 @@ public class TypeOfMembershipController {
     }
 
 
-    @GetMapping("/toms")
+    @GetMapping("/typeofmemberships")
     public ResponseEntity<Object> getAllTypeOfMemberships() {
         List<TypeOfMembershipDto> listTypeOfMembershipDto = tomService.getAllTypeOfMemberships();
         return new ResponseEntity<>( listTypeOfMembershipDto, HttpStatus.OK );
     }
 
-    @GetMapping("/toms/{id}")
+    @GetMapping("/typeofmemberships/{id}")
     public ResponseEntity<Object> getTypeOfMembershipById( @PathVariable(name = "id") Long id ) {
         TypeOfMembershipDto typeOfMembershipDto = tomService.getTypeOfMembershipById(id );
         try {
@@ -40,7 +40,7 @@ public class TypeOfMembershipController {
     }
 
 
-    @PostMapping("/toms")
+    @PostMapping("/typeofmemberships")
     public ResponseEntity<Object> addTypeOfMembership(@Valid @RequestBody TypeOfMembershipDto typeOfMembershipDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
@@ -55,7 +55,7 @@ public class TypeOfMembershipController {
         }
     }
 
-    @DeleteMapping("/toms/{id}")
+    @DeleteMapping("/typeofmemberships/{id}")
     public ResponseEntity<Object> deleteTypeOfMembershipById(@PathVariable("id") Long id) {
 
         tomService.deleteTypeOfMembershipById(id);
@@ -64,7 +64,7 @@ public class TypeOfMembershipController {
     }
 
 
-    @PutMapping("/toms/{id}")
+    @PutMapping("/typeofmemberships/{id}")
 
     public TypeOfMembershipDto updateTypeOfMembership(@PathVariable("id") Long id, @RequestBody TypeOfMembershipDto dto) {
 
