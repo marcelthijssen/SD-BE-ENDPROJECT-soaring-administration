@@ -4,6 +4,7 @@ import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
+import com.example.sdbesoaringadministration.repositories.MembershipRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
+//    private MembershipRepository tomRepository;
 
     public PersonServiceImpl( PersonRepository personRepository ) {
         this.personRepository = personRepository;
+//        this.tomRepository = tomRepository;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person addPerson( PersonDto personDto ) {
-        Person p = PersonDto.personDtoToPerson(personDto);
+        Person p = PersonDto.personDtoToPerson( personDto );
 
         return this.personRepository.save( p );
     }
@@ -77,6 +80,11 @@ public class PersonServiceImpl implements PersonService {
             p.setCountry( dto.getCountry() );
             p.setEmail( dto.getEmail() );
             p.setPhone( dto.getPhone() );
+            p.setUserName( dto.getUserName() );
+            p.setPassword( dto.getPassword() );
+            p.setRole( dto.getRole() );
+            p.setMembership( dto.getMembership() );
+            p.setPilotLicense( dto.getPilotLicense() );
             personRepository.save( p );
         } else {
 
@@ -84,4 +92,21 @@ public class PersonServiceImpl implements PersonService {
         }
         return null;
     }
+
+//    @Override
+//    public PersonDto addTypeOfMembershipToPerson( Long pid, Long tomid ) {
+//
+//            var optionalTypeOfMembership = tomRepository.findById( tomid );
+//            var optionalPerson = personRepository.findById( pid );
+//
+//            if ( optionalTypeOfMembership.isPresent() && optionalPerson.isPresent() ) {
+//                var tom = optionalTypeOfMembership.get();
+//                var person = optionalPerson.get();
+//
+//                person.getEmail().add( tom );
+//                personRepository.save( person );
+//            } else {
+//                throw new RecordNotFoundException( "tv of wb bestaat niet" );
+//            }
+//        }
 }

@@ -22,7 +22,7 @@ public class PersonController {
     }
 
     @GetMapping("/persons")
-    public ResponseEntity<Object> getAllPersons(){
+    public ResponseEntity<Object> getAllPersons() {
         List<PersonDto> personDtoList = personService.getAllPersons();
 
         return new ResponseEntity<>( personDtoList, HttpStatus.OK );
@@ -56,19 +56,20 @@ public class PersonController {
 
     @DeleteMapping("/persons/{pid}")
     public ResponseEntity<Object> deletePersonById( @PathVariable("pid") Long pid ) {
-
         personService.deletePersonById( pid );
         return new ResponseEntity<>( "Person deleted from systeem", HttpStatus.ACCEPTED );
-
     }
 
     @PutMapping("/persons/{pid}")
     public PersonDto updatePerson( @PathVariable("pid") Long pid, @RequestBody PersonDto person ) {
-
         PersonDto dto = personService.updatePerson( pid, person );
-
         return dto;
-
     }
+//
+//    @PutMapping("/persons/{pid}/membership/{tomid}")
+//    public PersonDto addMembershipToPerson( @PathVariable("pid") Long pid, @PathVariable("tomid") Long tomid ) {
+//        personService.addMembershipToPerson( pid, tomid );
+//        return dto;
+//    }
 
 }

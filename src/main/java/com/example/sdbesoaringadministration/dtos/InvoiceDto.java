@@ -16,11 +16,11 @@ public class InvoiceDto {
 
     private Flight flight_info;
 
-    private TypeOfMembership type_of_membership;
+    private Membership type_of_membership;
     private BigDecimal ammount;
 
 
-    public void setId( Long id, Date creationDate, BigDecimal ammount, Flight flight_info, TypeOfMembership type_of_membership ) {
+    public void setId( Long id, Date creationDate, BigDecimal ammount, Flight flight_info, Membership type_of_membership ) {
         this.id = id;
         this.creationDate = creationDate;
         this.ammount = ammount;
@@ -67,11 +67,11 @@ public class InvoiceDto {
         this.ammount = ammount;
     }
 
-    public TypeOfMembership getType_of_membership() {
+    public Membership getType_of_membership() {
         return type_of_membership;
     }
 
-    public void setType_of_membership( TypeOfMembership type_of_membership ) {
+    public void setType_of_membership( Membership type_of_membership ) {
         this.type_of_membership = type_of_membership;
     }
 

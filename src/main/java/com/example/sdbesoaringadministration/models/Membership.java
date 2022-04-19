@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 @Data
-@Table(name = "type_of_memberships")
-public class TypeOfMembership {
+@Table(name = "memberships")
+public class Membership {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -21,11 +20,11 @@ public class TypeOfMembership {
     private BigDecimal costsPerMonth;
 
     @OneToMany
-            (mappedBy = "type_of_membership",
+            (mappedBy = "membership",
                     fetch= FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Invoice> type_of_membership;
+    private List<Invoice> membership;
 
 
 //    GETTERS en SETTERS

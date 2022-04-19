@@ -17,4 +17,6 @@ public interface PersonService {
 
     PersonDto updatePerson( Long pid, PersonDto dto );
 
+//    PersonDto addTypeOfMembershipToPerson(Long  pid, Long tomid);
+
 }

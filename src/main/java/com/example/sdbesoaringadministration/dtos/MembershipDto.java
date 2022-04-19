@@ -1,6 +1,6 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import com.example.sdbesoaringadministration.models.TypeOfMembership;
+import com.example.sdbesoaringadministration.models.Membership;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Column;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @Validated
-public class TypeOfMembershipDto {
+public class MembershipDto {
 
     private Long id;
 
@@ -21,10 +21,10 @@ public class TypeOfMembershipDto {
     private BigDecimal costsPerMonth;
 
     //    Constructors
-    public TypeOfMembershipDto() {
+    public MembershipDto() {
     }
 
-    public TypeOfMembershipDto( Long id, String title, BigDecimal costsPerMonth, BigDecimal max ) {
+    public MembershipDto( Long id, String title, BigDecimal costsPerMonth, BigDecimal max ) {
         this.id = id;
         this.title = title;
         this.costsPerMonth = costsPerMonth;
@@ -56,8 +56,8 @@ public class TypeOfMembershipDto {
     }
 
 
-    public static TypeOfMembership typeOfMembershipDtoToTypeOfMembership( TypeOfMembershipDto dto ) {
-        TypeOfMembership tom = new TypeOfMembership();
+    public static Membership membershipDtoToMembership( MembershipDto dto ) {
+        Membership tom = new Membership();
 
         tom.setId( dto.getId() );
         tom.setTitle( dto.getTitle() );
@@ -66,8 +66,8 @@ public class TypeOfMembershipDto {
         return tom;
     }
 
-    public static TypeOfMembershipDto typeOfMembershipToTypeOfMembershipDto( TypeOfMembership tom ) {
-        TypeOfMembershipDto dto = new TypeOfMembershipDto();
+    public static MembershipDto membershipToMembershipDto( Membership tom ) {
+        MembershipDto dto = new MembershipDto();
 
         dto.setId( tom.getId() );
         dto.setTitle( tom.getTitle() );

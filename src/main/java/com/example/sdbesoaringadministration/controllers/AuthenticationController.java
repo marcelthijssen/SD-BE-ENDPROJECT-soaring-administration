@@ -1,6 +1,6 @@
 package com.example.sdbesoaringadministration.controllers;
 
-import com.example.sdbesoaringadministration.dtos.MemberDto;
+import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,8 +25,8 @@ public class AuthenticationController {
 
 
     @PostMapping("/auth")
-    public ResponseEntity<Object> signIn( @RequestBody MemberDto memberDto ) {
-        UsernamePasswordAuthenticationToken up = new UsernamePasswordAuthenticationToken( memberDto.getUserName(), memberDto.getPassword() );
+    public ResponseEntity<Object> signIn( @RequestBody PersonDto dto ) {
+        UsernamePasswordAuthenticationToken up = new UsernamePasswordAuthenticationToken( dto.getUserName(), dto.getPassword() );
         Authentication auth = authManager.authenticate( up );
 
         UserDetails ud = ( UserDetails ) auth.getPrincipal();

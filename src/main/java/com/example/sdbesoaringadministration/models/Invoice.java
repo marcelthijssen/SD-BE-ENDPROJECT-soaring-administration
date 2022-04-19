@@ -1,7 +1,5 @@
 package com.example.sdbesoaringadministration.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -36,9 +34,9 @@ public class Invoice {
     //    T-O-M information -person, tom
     @ManyToOne
 //    @JsonBackReference
-    @JoinColumn(name = "type_of_membership_info_id",
+    @JoinColumn(name = "membership_info_id",
             referencedColumnName = "id")
-    private TypeOfMembership type_of_membership;
+    private Membership type_of_membership;
 
 
     public Long getId() {
@@ -65,7 +63,6 @@ public class Invoice {
         this.billedPerson = billedPerson;
     }
 
-
     public Date getCreationDate() {
         return creationDate;
     }
@@ -90,11 +87,13 @@ public class Invoice {
         this.flights_info = flights_info;
     }
 
-    public TypeOfMembership getType_of_membership() {
+    public Membership getType_of_membership() {
         return type_of_membership;
     }
 
-    public void setType_of_membership( TypeOfMembership type_of_membership ) {
+    public void setType_of_membership( Membership type_of_membership ) {
         this.type_of_membership = type_of_membership;
     }
+//    calculating ionvoice
+
 }
