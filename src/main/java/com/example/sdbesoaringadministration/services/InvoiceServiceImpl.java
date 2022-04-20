@@ -5,13 +5,13 @@ import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Invoice;
+import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.FlightRepository;
 import com.example.sdbesoaringadministration.repositories.InvoiceRepository;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -19,10 +19,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     private final FlightRepository flRepository;
     private final PersonRepository pRepository;
 
-    public InvoiceServiceImpl( InvoiceRepository invRepository, FlightRepository flRepository,  PersonRepository pRepository ) {
+    public InvoiceServiceImpl( InvoiceRepository invRepository, FlightRepository flRepository, PersonRepository pRepository ) {
         this.invRepository = invRepository;
         this.flRepository = flRepository;
-        this.pRepository= pRepository;
+        this.pRepository = pRepository;
     }
 
     @Override
@@ -37,8 +37,6 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
         return invoiceDtoList;
     }
-
-//     get one invoice from one person
 
     public List<InvoiceDto> findInvoicesByBilledPerson( Long plid ) {
         if ( !invRepository.findInvoicesByBilledPerson( plid ).isEmpty() ) {
@@ -57,15 +55,12 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
     }
 
-    @Override
-    public List<Flight> createAnInvoice( Long pid ) {
-        Invoice inv = new Invoice();
-        List<Flight> flights = flRepository.findFlightsByBilledPersonEquals( pid );
-//        1 -  get all flights ids from this person
-//        2 - get
-//        inv.setBilledPerson( pid );
-
-        return flights;
-    }
-
+//    @Override
+//    public List<Flight> createAnInvoice( Long pid ) {
+//        Invoice inv = new Invoice();
+//        List<Flight> flights = flRepository.findFlightsByBilledPersonEquals( pid );
+//
+//
+//        return flights;
+//    }
 }

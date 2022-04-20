@@ -49,16 +49,16 @@ INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, st
 VALUES (3003, 'm', 'Tonnie', 'de Vries', '0634506109', '1964-08-19', 'Naamstraat', '55a', '4811VC', 'Rotjeknor',
         'Nederland', 'begin@mailig.nl', null, null, null, null, 4003);
 
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane)
-VALUES (5001, 'G1', 'Alexander Schleicher', 'Ask-13', 'PH-1045', true, false);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane)
-VALUES (5002, 'G7', 'Alexander Schleicher', 'Ask-21', 'PH-1337', true, false);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane)
-VALUES (5003, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane)
-VALUES (5004, 'ka8', 'Alexander Schleicher', 'Ka-8b', 'PH-345', false, true);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane)
-VALUES (5005, 'EC', 'Rolladen Schleicher', 'LS-6b', 'PH-1203', false, true);
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status)
+VALUES (5001, 'G1', 'Alexander Schleicher', 'Ask-13', 'PH-1045', true, false, 3001, 3001, null);
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status)
+VALUES (5002, 'G7', 'Alexander Schleicher', 'Ask-21', 'PH-1337', true, false, 3002, 3002, null);
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status)
+VALUES (5003, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false, 3002, 3003, null );
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,flight_status)
+VALUES (5004, 'ka8', 'Alexander Schleicher', 'Ka-8b', 'PH-345', false, true, 3003, 3002, null);
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,flight_status)
+VALUES (5005, 'EC', 'Rolladen Schleicher', 'LS-6b', 'PH-1203', false, true, 3003, 3001, null);
 
 INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)

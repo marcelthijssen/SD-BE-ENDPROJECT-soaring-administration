@@ -22,16 +22,14 @@ public class Invoice {
             referencedColumnName = "id")
     private Person billedPerson;
     @ManyToOne
-//    @JsonBackReference("flights")
     @JoinColumn(name = "flights_info_id",
             referencedColumnName = "id")
     private Flight flights_info;
 
     @ManyToOne
-//    @JsonBackReference
-    @JoinColumn(name = "membership_info_id",
+    @JoinColumn(name = "membership_id",
             referencedColumnName = "id")
-    private Membership type_of_membership;
+    private Membership membership;
 
     public Long getId() {
         return id;
@@ -81,13 +79,13 @@ public class Invoice {
         this.flights_info = flights_info;
     }
 
-    public Membership getType_of_membership() {
-        return type_of_membership;
+    public Membership getMembership() {
+        return membership;
     }
 
-    public void setType_of_membership( Membership type_of_membership ) {
-        this.type_of_membership = type_of_membership;
+    public void setMembership( Membership membership ) {
+        this.membership = membership;
     }
-//    calculating ionvoice
+//    calculating invoice
 
 }

@@ -241,7 +241,7 @@ public class FlightServiceImpl implements FlightService {
     public List<FlightDto> getFlightsByCaptain_id( Long cpid ) {
 //        Person captain = new Person();
 //        if ( !flRepository.findFlightsByCaptainEquals(pid).isEmpty() ) {
-        List<Flight> flightList = flRepository.findFlightsByCaptain_Id( pcpd );
+        List<Flight> flightList = flRepository.findFlightsByCaptain_Id(cpid );
         List<FlightDto> flightDtoList = new ArrayList<>();
 
         for ( Flight fl : flightList ) {

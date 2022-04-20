@@ -34,11 +34,13 @@ public class Plane {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     @JsonBackReference("owner")
+    @JsonIgnore
     private Person owner;
 
     @ManyToOne
     @JoinColumn(name = "technician_id")
     @JsonBackReference("technician")
+    @JsonIgnore
     private Person technician;
 
     public Long getId() {

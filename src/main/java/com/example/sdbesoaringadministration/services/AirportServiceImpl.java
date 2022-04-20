@@ -39,8 +39,8 @@ public class AirportServiceImpl implements AirportService {
     public AirportDto getAirportsById( Long id ) {
         if ( airportRepository.findById( id ).isPresent() ) {
 
-            Airport airport = airportRepository.findById( id ).get();
-            AirportDto dto = new AirportDto().airportToAirportDto(airport);
+            Airport ap = airportRepository.findById( id ).get();
+            AirportDto dto = new AirportDto().airportToAirportDto(ap);
 
             return dto;
         } else {
@@ -51,15 +51,15 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public Airport addAirport( AirportDto airportDto ) {
-        Airport airport = airportDtoToAirport( airportDto );
+        Airport ap = airportDtoToAirport( airportDto );
 
-        return this.airportRepository.save( airport );
+        return this.airportRepository.save( ap );
     }
 
     @Override
-    public ResponseEntity<Object> deleteAirportById( Long id ) {
-        if ( airportRepository.findById( id ).isPresent() ) {
-            airportRepository.deleteById( id );
+    public ResponseEntity<Object> deleteAirportById( Long apid ) {
+        if ( airportRepository.findById( apid ).isPresent() ) {
+            airportRepository.deleteById( apid );
             return new ResponseEntity<>("Airport is deleted", HttpStatus.OK);
         } else {
             throw new RecordNotFoundException( "Airport not found" );
@@ -68,15 +68,15 @@ public class AirportServiceImpl implements AirportService {
 
 
   @Override
-    public AirportDto updateAirport( Long id, AirportDto dto ) {
-        if ( airportRepository.findById( id ).isPresent() ) {
-            Airport airport = airportRepository.findById( id ).get();
-            dto.setId( airport.getId() );
-            dto.setIcao( airport.getIcao() );
-            dto.setCity( airport.getCity() );
-            dto.setCountry(airport.getCountry());
+    public AirportDto updateAirport( Long apid, AirportDto dto ) {
+        if ( airportRepository.findById( apid ).isPresent() ) {
+            Airport ap = airportRepository.findById( apid ).get();
+            dto.setId( ap.getId() );
+            dto.setIcao( ap.getIcao() );
+            dto.setCity( ap.getCity() );
+            dto.setCountry(ap.getCountry());
 
-            airportRepository.save(airport);
+            airportRepository.save(ap);
             return dto;
         } else {
             throw new RecordNotFoundException( "Airport not found" );
