@@ -14,12 +14,10 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String Icao;
     private String city;
     private String country;
 
-    // A flight can only have on airport
     @OneToMany
             (mappedBy = "airportStart",
                     fetch = FetchType.LAZY,
@@ -34,8 +32,6 @@ public class Airport {
     @JsonIgnore
     private List<Flight> airportEnd;
 
-
-//    GETTERS AND SETTERS
     public Long getId() {
         return id;
     }
@@ -51,6 +47,7 @@ public class Airport {
     public void setIcao( String Icao ) {
         this.Icao = Icao;
     }
+
     public String getCity() {
         return city;
     }

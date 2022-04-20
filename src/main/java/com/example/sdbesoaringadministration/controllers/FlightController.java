@@ -38,9 +38,9 @@ public class FlightController {
         }
     }
 
-    @GetMapping("/flights/captain/{pid}")
-    public ResponseEntity<List<FlightDto>> getFlightByCaptain( @PathVariable(name = "pid") Long pid ) {
-        List<FlightDto> flights = flightService.getFlightByCaptain( pid );
+    @GetMapping("/flights/captain/{cpid}")
+    public ResponseEntity<List<FlightDto>> getFlightsByCaptain_id( @PathVariable(name = "cpid") Long cpid ) {
+        List<FlightDto> flights = flightService.getFlightsByCaptain_id( cpid );
 
         return new ResponseEntity<>( flights, HttpStatus.OK );
     }
@@ -119,9 +119,16 @@ public class FlightController {
 
     //         assign starting method to flight
     @PutMapping("/flights/{flid}/captain/{cpid}")
-    public ResponseEntity<Object> assigncaptainToFlight( @PathVariable("flid") Long flid, @PathVariable("cpid") Long cpid ) {
+    public ResponseEntity<Object> assignCaptainToFlight( @PathVariable("flid") Long flid, @PathVariable("cpid") Long cpid ) {
         flightService.assignCaptainToFlight( flid, cpid );
         return new ResponseEntity<>( "Captain added to flight", HttpStatus.ACCEPTED );
+    }
+
+
+    @PutMapping("/flights/{flid}/instructionflight")
+    public FlightDto assignInstructionFlightToFlight( @PathVariable("flid") Long flid, @RequestBody FlightDto flight ) {
+        FlightDto dto = flightService.assignInstructionFlightToFlight( flid, flight );
+        return dto;
     }
 
     @PutMapping("/flights/{flid}/start")

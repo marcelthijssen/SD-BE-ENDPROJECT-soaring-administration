@@ -1,43 +1,37 @@
 package com.example.sdbesoaringadministration.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "invoices")
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int invoiceNumber;
-
     private BigDecimal ammount;
-
     private Date creationDate;
-
     @ManyToOne
-//    @JsonBackReference
     @JoinColumn(name = "person_id",
             referencedColumnName = "id")
     private Person billedPerson;
-
-    //    Flight information -captain, time-flown
     @ManyToOne
 //    @JsonBackReference("flights")
     @JoinColumn(name = "flights_info_id",
             referencedColumnName = "id")
     private Flight flights_info;
 
-    //    T-O-M information -person, tom
     @ManyToOne
 //    @JsonBackReference
     @JoinColumn(name = "membership_info_id",
             referencedColumnName = "id")
     private Membership type_of_membership;
-
 
     public Long getId() {
         return id;

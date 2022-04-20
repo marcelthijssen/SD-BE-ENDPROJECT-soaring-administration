@@ -10,27 +10,21 @@ import java.math.BigDecimal;
 
 @Validated
 public class MembershipDto {
-
     private Long id;
-
     @NotBlank(message = "Must have a title")
     private String title;
-
     @Column(precision = 10, scale = 2)
     @Digits(integer = 4, fraction = 2)
     private BigDecimal costsPerMonth;
 
-    //    Constructors
     public MembershipDto() {
     }
-
     public MembershipDto( Long id, String title, BigDecimal costsPerMonth, BigDecimal max ) {
         this.id = id;
         this.title = title;
         this.costsPerMonth = costsPerMonth;
     }
 
-    //    GETTERS and SETTERS
     public Long getId() {
         return id;
     }

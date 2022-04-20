@@ -38,21 +38,16 @@ public class FlightDto {
         this.timeFlown = timeFlown;
         this.instructionFlight = instructionFlight;
         this.remarks = remarks;
-        //        Relationships
         this.plane = plane;
         this.airportStart = airportStart;
         this.airportEnd = airportEnd;
         this.startingMethode = startingMethode;
         this.passenger = passenger;
         this.captain = captain;
-        this.billedPerson=billedPerson;
+        this.billedPerson = billedPerson;
 
     }
 
-
-    //    Dto to Model
-
-    // after update we are ready so using inline
 
     public Long getId() {
         return id;
@@ -155,7 +150,7 @@ public class FlightDto {
         return billedPerson;
     }
 
-    public void setBilledPerson( Person billed_Person ) {
+    public void setBilledPerson( Person billedPerson ) {
         this.billedPerson = billedPerson;
     }
 
@@ -168,7 +163,6 @@ public class FlightDto {
         fl.setTimeFlown( dto.getTimeFlown() );
         fl.setInstructionFlight( dto.getInstructionFlight() );
         fl.setRemarks( dto.getRemarks() );
-//        Relationships
         fl.setPlane( dto.getPlane() );
         fl.setAirportStart( dto.getAirportStart() );
         fl.setAirportEnd( dto.getAirportEnd() );
@@ -190,7 +184,6 @@ public class FlightDto {
         dto.setTimeFlown( fl.getTimeFlown() );
         dto.setInstructionFlight( fl.getInstructionFlight() );
         dto.setRemarks( fl.getRemarks() );
-//        relationships
         dto.setPlane( fl.getPlane() );
         dto.setAirportStart( fl.getAirportStart() );
         dto.setAirportEnd( fl.getAirportEnd() );

@@ -24,7 +24,6 @@ public class Plane {
     private boolean privatePlane;
     @Lob
     public byte[] flightStatus;
-
     @OneToMany
             (mappedBy = "plane",
                     fetch = FetchType.LAZY,

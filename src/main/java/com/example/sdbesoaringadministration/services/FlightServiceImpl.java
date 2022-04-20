@@ -60,13 +60,7 @@ public class FlightServiceImpl implements FlightService {
         dto.setId( flight.getId() );
         return dto;
     }
-/*
-    @Override
-    public Flight addFlight( FlightDto flightDto ) {
-        Flight flight = flightDtoToFlight( flightDto );
-        return this.flRepository.save( flight );
-    }
-    */
+
     @Override
     public void deleteFlightById( Long flid ) {
         if ( flRepository.findById( flid ).isPresent() ) {
@@ -198,6 +192,17 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
+    public FlightDto assignInstructionFlightToFlight( Long flid, FlightDto dto ) {
+        if ( flRepository.findById( flid ).isPresent() ) {
+            Flight fl = flRepository.findById( flid ).get();
+            fl.setInstructionFlight( dto.getInstructionFlight() );
+
+            flRepository.save( fl );
+            return dto;
+        } else {
+            throw new RecordNotFoundException( "Flight not found" );
+        }
+    }
     public void assignTimeStart( Long flid ) {
         var optionalFlight = flRepository.findById( flid );
         var flight = optionalFlight.get();
@@ -219,33 +224,24 @@ public class FlightServiceImpl implements FlightService {
         flRepository.save( flight );
     }
 
-//    public void addRemarksToFlight( Long flid ) {
-//        var optionalFlight = flRepository.findById( flid );
-//        var flight = optionalFlight.get();
-//        flight.setRemarks( flid );
-//
-//        flRepository.save( flight );
-//    }
-///*
       @Override
     public FlightDto updateRemarksToFLight( Long flid, FlightDto dto ) {
         if ( flRepository.findById( flid ).isPresent() ) {
             Flight fl = flRepository.findById( flid ).get();
             fl.setRemarks( dto.getRemarks() );
 
-            fl.setPlane( dto.getPlane() );
             flRepository.save( fl );
             return dto;
         } else {
             throw new RecordNotFoundException( "Flight not found" );
         }
     }
-// */
+
     @Override
-    public List<FlightDto> getFlightByCaptain( Long pid ) {
+    public List<FlightDto> getFlightsByCaptain_id( Long cpid ) {
 //        Person captain = new Person();
 //        if ( !flRepository.findFlightsByCaptainEquals(pid).isEmpty() ) {
-        List<Flight> flightList = flRepository.findFlightsByCaptain_Id( pid );
+        List<Flight> flightList = flRepository.findFlightsByCaptain_Id( pcpd );
         List<FlightDto> flightDtoList = new ArrayList<>();
 
         for ( Flight fl : flightList ) {
@@ -259,47 +255,5 @@ public class FlightServiceImpl implements FlightService {
 //        }
     }
 
-    /*
-    public FlightDto getFlightById( Long flid ) {
-        if ( flRepository.findById( flid ).isPresent() ) {
-            Flight flight = flRepository.findById( flid ).get();
-            return new FlightDto().flightToFlightDto( flight );
-        } else {
-            throw new RecordNotFoundException();
-        }
-    }
 
-
-        @Override
-    public List<FlightDto> getAllFlights() {
-        List<Flight> flightList = this.flRepository.findAll();
-        List<FlightDto> flightDtoList = new ArrayList<>();
-
-        for ( Flight fl : flightList ) {
-            FlightDto dto = new FlightDto().flightToFlightDto( fl );
-
-            flightDtoList.add(dto);
-        }
-        return flightDtoList;
-    }
-     */
-
-//    public void assignAlltoflight( Long flid, Long plid, Long smid, Long cpid, Long psid, Long asid, Long aeid ) {
-//        var optionalFlight = flRepository.findById( flid );
-//        var optionalPlane = plRepository.findById( plid );
-//        var optionalStartingMethode = smRepository.findById( smid );
-//        var optionalPerson = psRepository.findById( cpid );
-//        var optionalAirport = apRepository.findById( cpid );
-//
-//        if ( optionalFlight.isPresent() && optionalAirport.isPresent() && optionalPerson.isPresent() && optionalPlane.isPresent() && optionalStartingMethode.isPresent() ) {
-//                assignPlaneToFlight( flid, plid );
-//            assignStartingMethodeToFlight( flid, smid );
-//            assignCaptainToFlight( flid, cpid );
-//            assignPassengerToFlight( flid, psid );
-//            assignAirportStartToFlight( flid, asid );
-//            assignAirportEndToFlight( flid, aeid );
-//        } else {
-//            new ResponseEntity<>( "Something went wrong", HttpStatus.BAD_REQUEST );
-//        }
-//    }
 }

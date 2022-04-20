@@ -7,6 +7,8 @@ import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +17,11 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-//    private MembershipRepository tomRepository;
+    private MembershipRepository tomRepository;
 
-    public PersonServiceImpl( PersonRepository personRepository ) {
+    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository ) {
         this.personRepository = personRepository;
-//        this.tomRepository = tomRepository;
+        this.tomRepository = tomRepository;
     }
 
     @Override
@@ -93,20 +95,20 @@ public class PersonServiceImpl implements PersonService {
         return null;
     }
 
-//    @Override
-//    public PersonDto addTypeOfMembershipToPerson( Long pid, Long tomid ) {
-//
-//            var optionalTypeOfMembership = tomRepository.findById( tomid );
-//            var optionalPerson = personRepository.findById( pid );
-//
-//            if ( optionalTypeOfMembership.isPresent() && optionalPerson.isPresent() ) {
-//                var tom = optionalTypeOfMembership.get();
-//                var person = optionalPerson.get();
-//
-//                person.getEmail().add( tom );
-//                personRepository.save( person );
-//            } else {
-//                throw new RecordNotFoundException( "tv of wb bestaat niet" );
-//            }
-//        }
+    @Override
+    public void addMembershipToPerson( Long pid, Long mbid ) {
+
+            var optionalMembership = tomRepository.findById( mbid );
+            var optionalPerson = personRepository.findById( pid );
+
+            if ( optionalMembership.isPresent() && optionalPerson.isPresent() ) {
+                var m = optionalMembership.get();
+                var p = optionalPerson.get();
+
+                p.setMembership( m );
+                personRepository.save( p );
+            } else {
+                throw new RecordNotFoundException( "Person or membership bestaat niet" );
+            }
+        }
 }

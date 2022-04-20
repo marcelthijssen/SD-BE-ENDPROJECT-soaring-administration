@@ -6,6 +6,7 @@ import com.example.sdbesoaringadministration.models.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -15,17 +16,7 @@ public interface FlightService {
 
     FlightDto getFlightById( Long flid );
 
-//    Flight addFlight( FlightDto flightDto );
-
     FlightDto addFlight();
-
-    /*
-        @Override
-        public Flight addFlight( FlightDto flightDto ) {
-            Flight flight = flightDtoToFlight( flightDto );
-            return this.flRepository.save( flight );
-        }
-        */
     void deleteFlightById( Long flid );
 
     FlightDto updateFlight( Long flid, FlightDto flightDto );
@@ -42,12 +33,15 @@ public interface FlightService {
 
     void assignCaptainToFlight( Long flid, Long cpid );
 
-    void assignTimeStart( Long flid);
+    FlightDto assignInstructionFlightToFlight(Long flid, FlightDto dto );
+
+        void assignTimeStart( Long flid );
 
     void assignTimeEnd( Long flid );
 
-    FlightDto updateRemarksToFLight(Long flid, FlightDto dto );
-    List<FlightDto> getFlightByCaptain( Long pid );
+    FlightDto updateRemarksToFLight( Long flid, FlightDto dto );
+
+    List<FlightDto> getFlightsByCaptain_id( Long cpid );
 
 
 }

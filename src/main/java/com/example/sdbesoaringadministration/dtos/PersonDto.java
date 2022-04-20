@@ -1,5 +1,6 @@
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.models.Membership;
 import com.example.sdbesoaringadministration.models.Person;
 import org.springframework.validation.annotation.Validated;
 
@@ -33,17 +34,16 @@ public class PersonDto {
 
     private String password;
 
-    private String membership;
-
     private String role;
 
     private String pilotLicense;
 
+    private Membership membership;
     public PersonDto() {
     }
 
     public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone,
-                      String userName, String password, String membership, String role, String pilotLicense ) {
+                      String userName, String password, String role, String pilotLicense, Membership membership ) {
         this.id = id;
         this.gender = gender;
         this.firstName = firstName;
@@ -86,10 +86,9 @@ public class PersonDto {
         dto.setPhone( p.getPhone() );
         dto.setUserName( p.getUserName() );
         dto.setPhone( p.getPassword() );
-        dto.setMembership( p.getMembership() );
         dto.setRole( p.getRole() );
         dto.setPilotLicense( p.getPilotLicense() );
-
+        dto.setMembership( p.getMembership() );
         return dto;
     }
 
@@ -111,9 +110,9 @@ public class PersonDto {
         p.setPhone( dto.getPhone() );
         p.setUserName( dto.getUserName() );
         p.setPhone( dto.getPassword() );
-        p.setMembership( dto.getMembership() );
         p.setRole( dto.getRole() );
         p.setPilotLicense( dto.getPilotLicense() );
+        p.setMembership( dto.getMembership() );
         return p;
     }
 
@@ -227,14 +226,6 @@ public class PersonDto {
         this.password = password;
     }
 
-    public String getMembership() {
-        return membership;
-    }
-
-    public void setMembership( String membership ) {
-        this.membership = membership;
-    }
-
     public String getRole() {
         return role;
     }
@@ -250,7 +241,15 @@ public class PersonDto {
     public void setPilotLicense( String pilotLicense ) {
         this.pilotLicense = pilotLicense;
     }
-//    public Set<Plane> getplanes() {
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership( Membership membership ) {
+        this.membership = membership;
+    }
+    //    public Set<Plane> getplanes() {
 //        return planes;
 //    }
 

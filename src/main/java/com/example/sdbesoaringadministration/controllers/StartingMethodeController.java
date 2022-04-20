@@ -28,13 +28,13 @@ public class StartingMethodeController {
         return new ResponseEntity<>( listStartingMethodeDto, HttpStatus.OK );
     }
 
-    @GetMapping("/startingmethodes/{id}")
-    public ResponseEntity<Object> getStartingMethodeById( @PathVariable(name = "id") Long id ) {
-        StartingMethodeDto startingMethodeDto = smService.getStartingMethodeById(  id );
+    @GetMapping("/startingmethodes/{smid}")
+    public ResponseEntity<Object> getStartingMethodeById( @PathVariable(name = "smid") Long smid ) {
+        StartingMethodeDto startingMethodeDto = smService.getStartingMethodeById( smid );
         try {
             return ResponseEntity.ok( startingMethodeDto );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "artingmethode not found" );
+            throw new RecordNotFoundException( "Startingmethode not found" );
         }
     }
 
@@ -54,17 +54,17 @@ public class StartingMethodeController {
         }
     }
 
-    @DeleteMapping("/startingmethodes/{id}")
-    public ResponseEntity<Object> deleteAirportById(@PathVariable("id") Long id) {
+    @DeleteMapping("/startingmethodes/{smid}")
+    public ResponseEntity<Object> deleteAirportById( @PathVariable("smid") Long smid ) {
 
-        smService.deleteStartingMethodeById( id);
-return new ResponseEntity<>( "StartingMethode has been deleted", HttpStatus.ACCEPTED );
+        smService.deleteStartingMethodeById( smid );
+        return new ResponseEntity<>( "StartingMethode has been deleted", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/startingmethodes/{id}")
-    public StartingMethodeDto updateStartingMethode(@PathVariable("id") Long id, @RequestBody StartingMethodeDto dto) {
+    @PutMapping("/startingmethodes/{smid}")
+    public StartingMethodeDto updateStartingMethode( @PathVariable("smid") Long smid, @RequestBody StartingMethodeDto dto ) {
 
-        smService.updateStartingMethode(id, dto);
+        smService.updateStartingMethode( smid, dto );
         return dto;
     }
 

@@ -65,11 +65,12 @@ public class PersonController {
         PersonDto dto = personService.updatePerson( pid, person );
         return dto;
     }
-//
-//    @PutMapping("/persons/{pid}/membership/{tomid}")
-//    public PersonDto addMembershipToPerson( @PathVariable("pid") Long pid, @PathVariable("tomid") Long tomid ) {
-//        personService.addMembershipToPerson( pid, tomid );
-//        return dto;
-//    }
+
+    @PutMapping("/persons/{pid}/membership/{mbid}")
+    public ResponseEntity<Object> addMembershipToPerson( @PathVariable("pid") Long pid, @PathVariable("mbid") Long mbid ) {
+        personService.addMembershipToPerson( pid, mbid );
+
+        return new ResponseEntity<>( "Membership added to a person", HttpStatus.OK );
+    }
 
 }

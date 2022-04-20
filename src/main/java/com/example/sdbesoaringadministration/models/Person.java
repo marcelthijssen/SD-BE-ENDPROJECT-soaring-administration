@@ -1,8 +1,8 @@
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-//import com.example.sdbesoaringadministration.utils.LocalDateAttributeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 @Table(name = "persons")
 public class Person {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
@@ -28,35 +27,35 @@ public class Person {
     private String country;
     private String email;
     private String phone;
-
     private String userName;
-
     private String password;
-
-    private String membership;
-
     private String role;
-
     private String pilotLicense;
-
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(
+            name = "membership_id",
+            referencedColumnName = "id")
+    @JsonManagedReference
+    private Membership membership;
 
     @OneToMany
             (mappedBy = "captain",
-                    fetch= FetchType.LAZY,
+                    fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Flight> captain;
 
     @OneToMany
             (mappedBy = "passenger",
-                    fetch= FetchType.LAZY,
+                    fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Flight> passenger;
 
     @OneToMany
             (mappedBy = "billedPerson",
-                    fetch= FetchType.LAZY,
+                    fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Flight> billedPerson;
@@ -64,7 +63,7 @@ public class Person {
 
     @OneToMany
             (mappedBy = "owner",
-                    fetch= FetchType.LAZY,
+                    fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Plane> owner;
@@ -72,7 +71,7 @@ public class Person {
 
     @OneToMany
             (mappedBy = "technician",
-                    fetch= FetchType.LAZY,
+                    fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Plane> technician;
@@ -190,13 +189,6 @@ public class Person {
         this.password = password;
     }
 
-    public String getMembership() {
-        return membership;
-    }
-
-    public void setMembership( String membership ) {
-        this.membership = membership;
-    }
 
     public String getRole() {
         return role;
@@ -212,5 +204,13 @@ public class Person {
 
     public void setPilotLicense( String pilotLicense ) {
         this.pilotLicense = pilotLicense;
+    }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership( Membership membership ) {
+        this.membership = membership;
     }
 }

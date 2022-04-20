@@ -8,11 +8,11 @@ public interface MembershipService {
 
     List<MembershipDto> getAllMemberships();
 
-    MembershipDto getMembershipById( Long id );
+    MembershipDto getMembershipById( Long mbid );
 
     void addMembership( MembershipDto membershipDto );
 
-    void deleteMembershipById( Long id );
+    void deleteMembershipById( Long mbid );
 
-    MembershipDto updateMembership( Long id, MembershipDto dto );
+    MembershipDto updateMembership( Long mbid, MembershipDto dto );
 }
