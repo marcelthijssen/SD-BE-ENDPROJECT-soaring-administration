@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Membership;
 import com.example.sdbesoaringadministration.models.Person;
+import com.example.sdbesoaringadministration.models.Role;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
@@ -30,20 +31,21 @@ public class PersonDto {
     private String email;
     private String phone;
 
-    private String userName;
-
-    private String password;
-
-    private String role;
-
     private String pilotLicense;
 
     private Membership membership;
+    private String username;
+
+    private String password;
+
+    private Role role;
+
+    private boolean enabled;
     public PersonDto() {
     }
 
-    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone,
-                      String userName, String password, String role, String pilotLicense, Membership membership ) {
+    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String pilotLicense, Membership membership,
+                      String username, String password, Role role, boolean enabled ) {
         this.id = id;
         this.gender = gender;
         this.firstName = firstName;
@@ -56,7 +58,7 @@ public class PersonDto {
         this.country = country;
         this.email = email;
         this.phone = phone;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.membership = membership;
         this.role = role;
@@ -84,7 +86,7 @@ public class PersonDto {
         dto.setCountry( p.getCountry() );
         dto.setEmail( p.getEmail() );
         dto.setPhone( p.getPhone() );
-        dto.setUserName( p.getUserName() );
+        dto.setUsername( p.getUsername() );
         dto.setPhone( p.getPassword() );
         dto.setRole( p.getRole() );
         dto.setPilotLicense( p.getPilotLicense() );
@@ -108,7 +110,7 @@ public class PersonDto {
         p.setCountry( dto.getCountry() );
         p.setEmail( dto.getEmail() );
         p.setPhone( dto.getPhone() );
-        p.setUserName( dto.getUserName() );
+        p.setUsername( dto.getUsername() );
         p.setPhone( dto.getPassword() );
         p.setRole( dto.getRole() );
         p.setPilotLicense( dto.getPilotLicense() );
@@ -209,31 +211,6 @@ public class PersonDto {
         this.phone = phone;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName( String userName ) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword( String password ) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole( String role ) {
-        this.role = role;
-    }
-
     public String getPilotLicense() {
         return pilotLicense;
     }
@@ -248,6 +225,39 @@ public class PersonDto {
 
     public void setMembership( Membership membership ) {
         this.membership = membership;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername( String username ) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword( String password ) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole( Role role ) {
+        this.role = role;
+    }
+
+
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled( boolean enabled ) {
+        this.enabled = enabled;
     }
     //    public Set<Plane> getplanes() {
 //        return planes;

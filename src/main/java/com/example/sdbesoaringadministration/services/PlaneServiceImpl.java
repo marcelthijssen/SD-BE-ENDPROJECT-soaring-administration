@@ -16,8 +16,6 @@ import static com.example.sdbesoaringadministration.dtos.PlaneDto.planeDtoToPlan
 
 @Service
 public class PlaneServiceImpl implements PlaneService {
-
-
     private final PlaneRepository plRepository;
     private final PersonRepository personRepository;
 

@@ -5,6 +5,7 @@ import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
+import com.example.sdbesoaringadministration.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,10 +19,11 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private MembershipRepository tomRepository;
-
-    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository ) {
+private RoleRepository roleRepository;
+    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository, RoleRepository roleRepository ) {
         this.personRepository = personRepository;
         this.tomRepository = tomRepository;
+        this.roleRepository=roleRepository;
     }
 
     @Override
@@ -82,7 +84,7 @@ public class PersonServiceImpl implements PersonService {
             p.setCountry( dto.getCountry() );
             p.setEmail( dto.getEmail() );
             p.setPhone( dto.getPhone() );
-            p.setUserName( dto.getUserName() );
+            p.setUsername( dto.getUsername() );
             p.setPassword( dto.getPassword() );
             p.setRole( dto.getRole() );
             p.setMembership( dto.getMembership() );
@@ -111,4 +113,22 @@ public class PersonServiceImpl implements PersonService {
                 throw new RecordNotFoundException( "Person or membership bestaat niet" );
             }
         }
+
+
+    @Override
+    public void addRoleToPerson( Long pid, Long rid ) {
+
+        var optionalRole = roleRepository.findById( rid );
+        var optionalPerson = personRepository.findById( pid );
+
+        if ( optionalRole.isPresent() && optionalPerson.isPresent() ) {
+            var r = optionalRole.get();
+            var p = optionalPerson.get();
+
+            p.setRole( r );
+            personRepository.save( p );
+        } else {
+            throw new RecordNotFoundException( "Person or membership bestaat niet" );
+        }
+    }
 }

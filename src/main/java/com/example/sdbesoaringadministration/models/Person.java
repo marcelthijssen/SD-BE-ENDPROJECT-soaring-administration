@@ -27,10 +27,11 @@ public class Person {
     private String country;
     private String email;
     private String phone;
-    private String userName;
-    private String password;
-    private String role;
     private String pilotLicense;
+    private String username;
+    private String password;
+//    private String role;
+    private boolean enabled;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(
@@ -38,6 +39,15 @@ public class Person {
             referencedColumnName = "id")
     @JsonManagedReference
     private Membership membership;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(
+            name = "role_id",
+            referencedColumnName = "id")
+    @JsonManagedReference
+    private Role role;
+
 
     @OneToMany
             (mappedBy = "captain",
@@ -172,32 +182,6 @@ public class Person {
     public void setPhone( String phone ) {
         this.phone = phone;
     }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName( String userName ) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword( String password ) {
-        this.password = password;
-    }
-
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole( String role ) {
-        this.role = role;
-    }
-
     public String getPilotLicense() {
         return pilotLicense;
     }
@@ -212,5 +196,29 @@ public class Person {
 
     public void setMembership( Membership membership ) {
         this.membership = membership;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername( String username ) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword( String password ) {
+        this.password = password;
+    }
+
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled( boolean enabled ) {
+        this.enabled = enabled;
     }
 }
