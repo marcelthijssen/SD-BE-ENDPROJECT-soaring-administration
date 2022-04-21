@@ -3,21 +3,24 @@ package com.example.sdbesoaringadministration.dtos;
 import com.example.sdbesoaringadministration.models.Membership;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.models.Role;
+import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.*;
+import java.util.HashSet;
+import java.util.Set;
 
-
+@Data
 @Validated
 public class PersonDto {
 
     private Long id;
     private String gender;
-        @NotBlank(message = "Firstname can not be empty")
+    @NotBlank(message = "Firstname can not be empty")
     private String firstName;
-        @NotBlank(message = "Lastname can not be empty")
+    @NotBlank(message = "Lastname can not be empty")
     private String lastName;
 
     private LocalDate dateOfBirth;
@@ -38,14 +41,28 @@ public class PersonDto {
 
     private String password;
 
-    private Role role;
+    private Set<Role> roles = new HashSet<>();
 
     private boolean enabled;
+
     public PersonDto() {
     }
 
-    public PersonDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String streetName, String houseNumber, String postalcode, String city, String country, String email, String phone, String pilotLicense, Membership membership,
-                      String username, String password, Role role, boolean enabled ) {
+    public PersonDto( Long id, String gender,
+                      String firstName, String lastName,
+                      LocalDate dateOfBirth,
+                      String streetName,
+                      String houseNumber,
+                      String postalcode,
+                      String city, String country,
+                      String email,
+                      String phone,
+                      String pilotLicense,
+                      Membership membership,
+                      String username,
+                      String password,
+                      Set<Role> roles,
+                      boolean enabled ) {
         this.id = id;
         this.gender = gender;
         this.firstName = firstName;
@@ -58,64 +75,17 @@ public class PersonDto {
         this.country = country;
         this.email = email;
         this.phone = phone;
+        this.pilotLicense = pilotLicense;
+        this.membership = membership;
         this.username = username;
         this.password = password;
-        this.membership = membership;
-        this.role = role;
-        this.pilotLicense = pilotLicense;
+        this.roles = roles;
+        this.enabled = enabled;
     }
 
     public Long getId() {
 
         return id;
-    }
-
-
-    public static PersonDto personToPersonDto( Person p ) {
-        PersonDto dto = new PersonDto();
-
-        dto.setId( p.getId() );
-        dto.setGender( p.getGender() );
-        dto.setFirstName( p.getFirstName() );
-        dto.setLastName( p.getLastName() );
-        dto.setDateOfBirth( p.getDateOfBirth() );
-        dto.setStreetName( p.getStreetName() );
-        dto.setHouseNumber( p.getHouseNumber() );
-        dto.setPostalcode( p.getPostalcode() );
-        dto.setCity( p.getCity() );
-        dto.setCountry( p.getCountry() );
-        dto.setEmail( p.getEmail() );
-        dto.setPhone( p.getPhone() );
-        dto.setUsername( p.getUsername() );
-        dto.setPhone( p.getPassword() );
-        dto.setRole( p.getRole() );
-        dto.setPilotLicense( p.getPilotLicense() );
-        dto.setMembership( p.getMembership() );
-        return dto;
-    }
-
-
-    public static Person personDtoToPerson( PersonDto dto ) {
-
-        Person p = new Person();
-        p.setId( dto.getId() );
-        p.setGender( dto.getGender() );
-        p.setFirstName( dto.getFirstName() );
-        p.setLastName( dto.getLastName() );
-        p.setDateOfBirth( dto.getDateOfBirth() );
-        p.setStreetName( dto.getStreetName() );
-        p.setHouseNumber( dto.getHouseNumber() );
-        p.setPostalcode( dto.getPostalcode() );
-        p.setCity( dto.getCity() );
-        p.setCountry( dto.getCountry() );
-        p.setEmail( dto.getEmail() );
-        p.setPhone( dto.getPhone() );
-        p.setUsername( dto.getUsername() );
-        p.setPhone( dto.getPassword() );
-        p.setRole( dto.getRole() );
-        p.setPilotLicense( dto.getPilotLicense() );
-        p.setMembership( dto.getMembership() );
-        return p;
     }
 
 
@@ -226,6 +196,7 @@ public class PersonDto {
     public void setMembership( Membership membership ) {
         this.membership = membership;
     }
+
     public String getUsername() {
         return username;
     }
@@ -242,15 +213,14 @@ public class PersonDto {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole( Role role ) {
-        this.role = role;
+    public void setRoles( Set<Role> roles ) {
+        this.roles = roles;
     }
-
-
 
     public boolean getEnabled() {
         return enabled;
@@ -259,14 +229,7 @@ public class PersonDto {
     public void setEnabled( boolean enabled ) {
         this.enabled = enabled;
     }
-    //    public Set<Plane> getplanes() {
-//        return planes;
-//    }
 
-//    public static java.util.Date convertToDateViaSqlDate( LocalDate dateToConvert ) {
-//        return java.sql.Date.valueOf(dateToConvert);
-//    }
-//    public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
-//        return java.sql.Date.valueOf( String.valueOf( dateToConvert ) );
-//    }
+
+
 }

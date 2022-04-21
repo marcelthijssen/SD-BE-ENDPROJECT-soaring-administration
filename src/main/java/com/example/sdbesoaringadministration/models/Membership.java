@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Data
+//@Data
 @Table(name = "memberships")
 public class Membership {
 

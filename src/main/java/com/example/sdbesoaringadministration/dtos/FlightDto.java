@@ -2,10 +2,12 @@ package com.example.sdbesoaringadministration.dtos;
 
 
 import com.example.sdbesoaringadministration.models.*;
+import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 
+@Data
 @Validated
 public class FlightDto {
 
@@ -80,6 +82,7 @@ public class FlightDto {
     public void setTimeFlown( long timeFlown ) {
         this.timeFlown = timeFlown;
     }
+
     public boolean getInstructionFlight() {
         return instructionFlight;
     }
@@ -146,6 +149,7 @@ public class FlightDto {
     public void setCaptain( Person captain ) {
         this.captain = captain;
     }
+
     public Person getBilledPerson() {
         return billedPerson;
     }

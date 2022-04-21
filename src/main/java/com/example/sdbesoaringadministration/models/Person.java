@@ -6,10 +6,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
 @Table(name = "persons")
 public class Person {
     @Id
@@ -30,7 +31,7 @@ public class Person {
     private String pilotLicense;
     private String username;
     private String password;
-//    private String role;
+    //    private String role;
     private boolean enabled;
     @ManyToOne
     @JsonIgnore
@@ -40,13 +41,13 @@ public class Person {
     @JsonManagedReference
     private Membership membership;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(
-            name = "role_id",
-            referencedColumnName = "id")
-    @JsonManagedReference
-    private Role role;
+
+    @ManyToMany
+    @JoinTable(
+            name = "persons_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
+    private Set<Role> roles = new HashSet<>();
 
 
     @OneToMany
@@ -182,6 +183,7 @@ public class Person {
     public void setPhone( String phone ) {
         this.phone = phone;
     }
+
     public String getPilotLicense() {
         return pilotLicense;
     }
@@ -197,6 +199,7 @@ public class Person {
     public void setMembership( Membership membership ) {
         this.membership = membership;
     }
+
     public String getUsername() {
         return username;
     }
@@ -221,4 +224,14 @@ public class Person {
     public void setEnabled( boolean enabled ) {
         this.enabled = enabled;
     }
+
+    public Set<Role> getRoles(){
+        return roles;
+    }
+
+    public void setRoles( Set<Role> roles ) {
+    }
+//    public void setRoles(Set<Role> roles) {
+//        this.roles=roles;
+//    }
 }

@@ -1,17 +1,19 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.StartingMethode;
+import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import java.math.BigDecimal;
 
+@Data
 @Validated
 public class StartingMethodeDto {
 
     private Long id;
     private String title;
     private String unit;
-//    BigDecimal bd1 = new BigDecimal.valueOf(...) OF BigDecimal("...")
+    //    BigDecimal bd1 = new BigDecimal.valueOf(...) OF BigDecimal("...")
     private BigDecimal price;
 
     // constructors
@@ -19,6 +21,7 @@ public class StartingMethodeDto {
     }
 
     public StartingMethodeDto( Long id, String title, String unit, BigDecimal price ) {
+        this.id = id;
         this.title = title;
         this.unit = unit;
         this.price = price;
@@ -26,19 +29,19 @@ public class StartingMethodeDto {
 
 
     //    Dto to Model
-    public static StartingMethode startingMethodeDtoToStartingMethode( StartingMethodeDto dto) {
+    public static StartingMethode startingMethodeDtoToStartingMethode( StartingMethodeDto dto ) {
         StartingMethode startingMethode = new StartingMethode();
 
         startingMethode.setId( dto.getId() );
-        startingMethode.setTitle( dto.getTitle());
+        startingMethode.setTitle( dto.getTitle() );
         startingMethode.setUnit( dto.getUnit() );
         startingMethode.setPrice( dto.getPrice() );
 
         return startingMethode;
     }
 
-//model to dto
-    public StartingMethodeDto startingMethodeToStartingMethodeDto ( StartingMethode startingMethode ) {
+    //model to dto
+    public StartingMethodeDto startingMethodeToStartingMethodeDto( StartingMethode startingMethode ) {
         var dto = new StartingMethodeDto();
 
         dto.setId( startingMethode.getId() );
@@ -47,6 +50,7 @@ public class StartingMethodeDto {
         dto.setPrice( startingMethode.getPrice() );
         return dto;
     }
+
     //getters an setters
     public Long getId() {
         return id;

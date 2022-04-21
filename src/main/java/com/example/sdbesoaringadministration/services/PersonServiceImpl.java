@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -28,22 +29,20 @@ private RoleRepository roleRepository;
 
     @Override
     public List<PersonDto> getAllPersons() {
-        List<Person> personsList = this.personRepository.findAll();
-        List<PersonDto> personsDtoList = new ArrayList<>();
+        List<Person> personsList = personRepository.findAll();
+        List<PersonDto> dtoList = new ArrayList<>();
 
         for ( Person p : personsList ) {
-            PersonDto dto = PersonDto.personToPersonDto( p );
-            personsDtoList.add( dto );
+            dtoList.add(personToPersonDto( p ));
         }
-        return personsDtoList;
+        return dtoList;
     }
 
     @Override
     public PersonDto getPersonById( Long pid ) {
-
-        if ( personRepository.findById( pid ).isPresent() ) {
-            Person p = personRepository.findById( pid ).get();
-            PersonDto dto = PersonDto.personToPersonDto( p );
+        Optional<Person> person = personRepository.findById( pid );
+        if ( person.isPresent() ) {
+            PersonDto dto = personToPersonDto( person.get() );
             return dto;
 
         } else {
@@ -52,10 +51,9 @@ private RoleRepository roleRepository;
     }
 
     @Override
-    public Person addPerson( PersonDto personDto ) {
-        Person p = PersonDto.personDtoToPerson( personDto );
-
-        return this.personRepository.save( p );
+    public PersonDto addPerson( PersonDto personDto ) {
+        personRepository.save( personDtoToPerson( personDto ) );
+    return personDto;
     }
 
     @Override
@@ -86,7 +84,7 @@ private RoleRepository roleRepository;
             p.setPhone( dto.getPhone() );
             p.setUsername( dto.getUsername() );
             p.setPassword( dto.getPassword() );
-            p.setRole( dto.getRole() );
+            p.setRoles( dto.getRoles() );
             p.setMembership( dto.getMembership() );
             p.setPilotLicense( dto.getPilotLicense() );
             personRepository.save( p );
@@ -116,19 +114,70 @@ private RoleRepository roleRepository;
 
 
     @Override
-    public void addRoleToPerson( Long pid, Long rid ) {
+    public void assignRoleToPerson( Long pid, Long rid ) {
 
         var optionalRole = roleRepository.findById( rid );
         var optionalPerson = personRepository.findById( pid );
 
         if ( optionalRole.isPresent() && optionalPerson.isPresent() ) {
-            var r = optionalRole.get();
-            var p = optionalPerson.get();
+            var role = optionalRole.get();
+            var person = optionalPerson.get();
 
-            p.setRole( r );
-            personRepository.save( p );
+            person.getRoles().add( role );
+            personRepository.save( person );
         } else {
-            throw new RecordNotFoundException( "Person or membership bestaat niet" );
+            throw new RecordNotFoundException( "Person or role bestaat niet" );
         }
     }
+
+
+
+    public static PersonDto personToPersonDto( Person p ) {
+        PersonDto dto = new PersonDto();
+
+        dto.setId( p.getId() );
+        dto.setGender( p.getGender() );
+        dto.setFirstName( p.getFirstName() );
+        dto.setLastName( p.getLastName() );
+        dto.setDateOfBirth( p.getDateOfBirth() );
+        dto.setStreetName( p.getStreetName() );
+        dto.setHouseNumber( p.getHouseNumber() );
+        dto.setPostalcode( p.getPostalcode() );
+        dto.setCity( p.getCity() );
+        dto.setCountry( p.getCountry() );
+        dto.setEmail( p.getEmail() );
+        dto.setPhone( p.getPhone() );
+
+        dto.setPilotLicense( p.getPilotLicense() );
+        dto.setMembership( p.getMembership() );
+//        dto.setUsername( p.getUsername() );
+//        dto.setPhone( p.getPassword() );
+        dto.setRoles( p.getRoles() );
+        return dto;
+    }
+
+
+    public static Person personDtoToPerson( PersonDto dto ) {
+
+        Person p = new Person();
+        p.setId( dto.getId() );
+        p.setGender( dto.getGender() );
+        p.setFirstName( dto.getFirstName() );
+        p.setLastName( dto.getLastName() );
+        p.setDateOfBirth( dto.getDateOfBirth() );
+        p.setStreetName( dto.getStreetName() );
+        p.setHouseNumber( dto.getHouseNumber() );
+        p.setPostalcode( dto.getPostalcode() );
+        p.setCity( dto.getCity() );
+        p.setCountry( dto.getCountry() );
+        p.setEmail( dto.getEmail() );
+        p.setPhone( dto.getPhone() );
+        p.setUsername( dto.getUsername() );
+        p.setPhone( dto.getPassword() );
+        p.setRoles( dto.getRoles() );
+        p.setPilotLicense( dto.getPilotLicense() );
+        p.setMembership( dto.getMembership() );
+        return p;
+    }
+
 }

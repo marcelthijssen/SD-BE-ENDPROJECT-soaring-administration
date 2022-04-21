@@ -74,12 +74,10 @@ public class PersonController {
     }
 
 
-    @PutMapping("/persons/{pid}/role/{rid}")
-    public ResponseEntity<Object> addRoleToPerson( @PathVariable("pid") Long pid, @PathVariable("rid") Long rid ) {
-        personService.addMembershipToPerson( pid, rid );
-
-        return new ResponseEntity<>( "Role added to a person", HttpStatus.OK );
+    @PutMapping("/persons/{pid}/roles/{rid}")
+    public ResponseEntity<Object> assignRoleToPerson( @PathVariable("pid") Long pid, @PathVariable("rid") Long rid ) {
+        personService.assignRoleToPerson( pid, rid );
+        return new ResponseEntity<>( "Role assigned to Person", HttpStatus.ACCEPTED );
     }
-
 
 }

@@ -27,7 +27,6 @@ public class StartingMethode {
     @NotBlank
     private String unit;
 
-
     @DecimalMin(value = "0.0", message="value = 0.0")
     @Digits(integer=1, fraction=2)
     private BigDecimal price;

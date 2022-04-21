@@ -1,19 +1,28 @@
 package com.example.sdbesoaringadministration.dtos;
 
 
+import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.models.Role;
+import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
 public class RoleDto {
 
     private Long id;
     private String name;
 
-    public RoleDto() {
+    private Set<Person> persons = new HashSet<>();
 
+    public RoleDto() {
     }
-    public RoleDto( Long id, String name ) {
+
+    public RoleDto( Long id, String name, Set<Person> persons ) {
         this.id = id;
         this.name = name;
+        this.persons = persons;
     }
 
     public Long getId() {
@@ -32,19 +41,12 @@ public class RoleDto {
         this.name = name;
     }
 
-    public static Role roleDtoToRole( RoleDto dto ) {
-        Role role = new Role();
-
-        role.setId( dto.getId() );
-        role.setName( dto.getName() );
-        return role;
+    public Set<Person> getPersons() {
+        return persons;
     }
 
-    public static RoleDto roleToRoleDto( Role role ) {
-        RoleDto dto = new RoleDto();
-
-        dto.setId( role.getId() );
-        dto.setName( role.getName() );
-        return dto;
+    public void setPersons( Set<Person> persons ) {
+        this.persons = persons;
     }
+
 }

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Data
+//@Data
 @Table(name = "invoices")
 public class Invoice {
     @Id

@@ -36,23 +36,30 @@ VALUES (4003, 'GPL ≤18', 12.50);
 INSERT INTO memberships (id, title, costs_per_month)
 VALUES (4004, 'Honourable member', 0.00);
 
+--
+-- INSERT INTO persons_roles (role_id, person_id) VALUES (7001,3001);
+-- INSERT INTO persons_roles (role_id, person_id) VALUES (7002,3002);
+-- INSERT INTO persons_roles (role_id, person_id) VALUES (7003,3003);
+--
+
 
 INSERT INTO roles (id, name) VALUES (7001, 'PERSON');
 INSERT INTO roles (id, name) VALUES (7002, 'MEMBER');
 INSERT INTO roles (id, name) VALUES (7003, 'ADMIN');
 
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, password, pilot_license, role_id, username, membership_id, enabled)
+                     postalcode, city, country, email, password, pilot_license, username, membership_id, enabled)
 VALUES (3001, 'm', 'Jeffrey', 'Johnson', '0612306345', '1994-08-19', 'straat', '3', '4817SX', 'Amsterdam',
-        'Nederland', 'sdbe@novi.nl', null, null, 7001, null, 4001,true);
+        'Nederland', 'sdbe@novi.nl', null, null, null, 4001,true);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, password, pilot_license, role_id, username, membership_id, enabled)
+                     postalcode, city, country, email, password, pilot_license,  username, membership_id, enabled)
 VALUES (3002, 'v', 'Jan', 'van Westen', '0691256345', '1984-08-19', 'Straatnaam', '993', '4811VC', 'Drenthe',
-        'Nederland', 'begin@mailadres.nl', null, null, 7002, null, 4002,true);
+        'Nederland', 'begin@mailadres.nl', null, null, null, 4002,true);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, password, pilot_license, role_id, username, membership_id, enabled)
+                     postalcode, city, country, email, password, pilot_license,  username, membership_id, enabled)
 VALUES (3003, 'm', 'Tonnie', 'de Vries', '0634506109', '1964-08-19', 'Naamstraat', '55a', '4811VC', 'Rotjeknor',
-        'Nederland', 'begin@mailig.nl', null, null, 7003, null, 4003, true);
+        'Nederland', 'begin@mailig.nl', null, null,  null, 4003, true);
+
 
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status)
 VALUES (5001, 'G1', 'Alexander Schleicher', 'Ask-13', 'PH-1045', true, false, 3001, 3001, null);

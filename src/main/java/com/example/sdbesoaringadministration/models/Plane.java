@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+//@Data
 @Table(name = "planes")
 public class Plane {
 

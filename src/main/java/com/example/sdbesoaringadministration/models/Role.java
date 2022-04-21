@@ -4,19 +4,26 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@Table(name="roles")
+@Table(name = "roles")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(unique = true, nullable = false)
     private Long id;
 
     private String name;
+
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
+    private Set<Person> persons = new HashSet<>();
+
 
     public Long getId() {
         return id;
@@ -34,10 +41,12 @@ public class Role {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "role",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Person> persons;
+    public Set<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons( Set<Person> persons ) {
+        this.persons = persons;
+    }
 
 }

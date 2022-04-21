@@ -11,7 +11,7 @@ public interface PersonService {
 
     PersonDto getPersonById( Long pid );
 
-    Person addPerson( PersonDto personDto );
+    PersonDto addPerson( PersonDto personDto );
 
     void deletePersonById( Long pid );
 
@@ -19,6 +19,6 @@ public interface PersonService {
 
     void addMembershipToPerson(Long  pid, Long mbid);
 
-    void addRoleToPerson(Long  pid, Long rid);
+    void assignRoleToPerson(Long  pid, Long rid);
 
 }

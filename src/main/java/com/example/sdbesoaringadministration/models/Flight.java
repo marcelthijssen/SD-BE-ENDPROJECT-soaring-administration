@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
+//@Data
 @Table(name = "flights")
 public class Flight {
     @Id
