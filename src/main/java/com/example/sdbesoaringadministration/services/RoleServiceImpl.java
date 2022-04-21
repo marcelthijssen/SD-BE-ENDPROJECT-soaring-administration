@@ -23,9 +23,15 @@ public class RoleServiceImpl implements RoleService {
         List<RoleDto> dtoList = new ArrayList<>();
 
         for ( Role role : roleList ) {
-            dtoList.add( roleToRoleDto(role) );
+            dtoList.add( roleToRoleDto( role ) );
         }
         return dtoList;
+    }
+
+    @Override
+    public RoleDto addNewRole( RoleDto roleDto ) {
+        roleRepository.save( roleDtoToRole( roleDto ) );
+        return roleDto;
     }
 
 

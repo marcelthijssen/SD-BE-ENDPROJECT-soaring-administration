@@ -19,10 +19,9 @@ public class RoleDto {
     public RoleDto() {
     }
 
-    public RoleDto( Long id, String name, Set<Person> persons ) {
+    public RoleDto( Long id, String name ) {
         this.id = id;
         this.name = name;
-        this.persons = persons;
     }
 
     public Long getId() {
