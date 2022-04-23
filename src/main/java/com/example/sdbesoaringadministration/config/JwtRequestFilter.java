@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.config;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,19 +18,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.example.sdbesoaringadministration.services.JwtUserDetailsServiceImpl;
+
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    @Autowired
+    //    @Autowired
     private JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl;
 
-    @Autowired
+    //    @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    public JwtRequestFilter( JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl, JwtTokenUtil jwtTokenUtil ) {
-        this.jwtUserDetailsServiceImpl = jwtUserDetailsServiceImpl;
+    @Autowired
+    @Qualifier("jwtUserDetailsServiceImpl")
+    public void setJwtUserDetailsServiceImpl( JwtUserDetailsServiceImpl jwtUserDetailsService ) {
+        this.jwtUserDetailsServiceImpl = jwtUserDetailsService;
+    }
+    @Autowired
+//    @Qualifier("jwtTokenUntil")
+    public void setJwtTokenUtil( JwtTokenUtil jwtTokenUtil ) {
         this.jwtTokenUtil = jwtTokenUtil;
     }
+//    public setJwtRequestFilter( JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl, JwtTokenUtil jwtTokenUtil ) {
+//        this.jwtUserDetailsServiceImpl = jwtUserDetailsServiceImpl;
+//        this.jwtTokenUtil = jwtTokenUtil;
+//    }
 
     @Override
     protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain )

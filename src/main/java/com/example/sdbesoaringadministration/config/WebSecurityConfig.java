@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.config;
 
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,20 +22,37 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+//    @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-
     @Autowired
+    @Qualifier("jwtAuthenticationEntryPoint")
+    public void setJwtAuthenticationEntryPoint(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint){
+        this.jwtAuthenticationEntryPoint=jwtAuthenticationEntryPoint;
+    }
+//    @Autowired
     private UserDetailsService userDetailsService;
-
     @Autowired
+//    @Qualifier("jwtUserDetailsService")
+    public void setUserDetailsService(UserDetailsService userDetailsService){
+        this.userDetailsService=userDetailsService;
+    }
+//    @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    public WebSecurityConfig( JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, UserDetailsService userDetailsService, JwtRequestFilter jwtRequestFilter ) {
-        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-        this.userDetailsService = userDetailsService;
-        this.jwtRequestFilter = jwtRequestFilter;
+    @Autowired
+    @Qualifier("jwtRequestFilter")
+    public void setJwtRequestFilter(JwtRequestFilter jwtRequestFilter){
+        this.jwtRequestFilter=jwtRequestFilter;
     }
+//@Autowired
+//    public WebSecurityConfig( JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+//                              UserDetailsService userDetailsService
+////        , JwtRequestFilter jwtRequestFilter
+//        ) {
+//        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+//        this.userDetailsService = userDetailsService;
+////        this.jwtRequestFilter = jwtRequestFilter;
+//    }
 
     @Autowired
     public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
