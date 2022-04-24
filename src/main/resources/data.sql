@@ -26,7 +26,6 @@ VALUES (2002, 'Tow', 'minute', 0.2);
 INSERT INTO starting_methodes (id, title, unit, price)
 VALUES (2003, 'Selfstarter', 0, 0);
 
-
 INSERT INTO memberships (id, title, costs_per_month)
 VALUES (4001, 'pupil ≤18', 56.00);
 INSERT INTO memberships (id, title, costs_per_month)
@@ -73,7 +72,6 @@ INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, st
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3003, 'm', 'Tonnie', 'de Vries', '0634506109', '1964-08-19', 'Naamstraat', '55a', '4811VC', 'Rotjeknor',
         'Nederland', 'begin@mailig.nl', null, 4003);
-
 
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status)
