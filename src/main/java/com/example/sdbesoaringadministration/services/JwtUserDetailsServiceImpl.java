@@ -16,17 +16,17 @@ import java.util.ArrayList;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
-//  @Autowired
+  @Autowired
   private UserRepository userRepo;
-//    @Autowired
+    @Autowired
     private PasswordEncoder bcryptEncoder;
 
-    @Autowired
-//    @Qualifier("bcryptEncoder")
-    public void setJwtUserDetailsServiceImpl(UserRepository userRepo,PasswordEncoder bcryptEncoder ){
-        this.userRepo=userRepo;
-        this.bcryptEncoder=bcryptEncoder;
-    }
+//    @Autowired
+////    @Qualifier("bcryptEncoder")
+//    public void setJwtUserDetailsServiceImpl(UserRepository userRepo,PasswordEncoder bcryptEncoder ){
+//        this.userRepo=userRepo;
+//        this.bcryptEncoder=bcryptEncoder;
+//    }
 //    public JwtUserDetailsServiceImpl( UserRepository userRepo, PasswordEncoder bcryptEncoder ) {
 //        this.userRepo = userRepo;
 //        this.bcryptEncoder = bcryptEncoder;

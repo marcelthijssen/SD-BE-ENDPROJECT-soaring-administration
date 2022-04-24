@@ -22,37 +22,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
+    @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    @Autowired
-    @Qualifier("jwtAuthenticationEntryPoint")
-    public void setJwtAuthenticationEntryPoint(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint){
-        this.jwtAuthenticationEntryPoint=jwtAuthenticationEntryPoint;
-    }
-//    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-//    @Qualifier("jwtUserDetailsService")
-    public void setUserDetailsService(UserDetailsService userDetailsService){
-        this.userDetailsService=userDetailsService;
-    }
-//    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+
 
     @Autowired
-    @Qualifier("jwtRequestFilter")
-    public void setJwtRequestFilter(JwtRequestFilter jwtRequestFilter){
-        this.jwtRequestFilter=jwtRequestFilter;
-    }
-//@Autowired
-//    public WebSecurityConfig( JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-//                              UserDetailsService userDetailsService
-////        , JwtRequestFilter jwtRequestFilter
-//        ) {
-//        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-//        this.userDetailsService = userDetailsService;
-////        this.jwtRequestFilter = jwtRequestFilter;
-//    }
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
+
 
     @Autowired
     public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
@@ -72,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure( HttpSecurity http) throws Exception {
+    protected void configure( HttpSecurity http ) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests().antMatchers( "/authenticate", "/register" ).permitAll().
                 anyRequest().authenticated().and().
