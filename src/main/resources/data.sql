@@ -37,9 +37,9 @@ INSERT INTO memberships (id, title, costs_per_month)
 VALUES (4004, 'Honourable member', 0.00);
 
 --
--- INSERT INTO persons_roles (role_id, person_id) VALUES (7001,3001);
--- INSERT INTO persons_roles (role_id, person_id) VALUES (7002,3002);
--- INSERT INTO persons_roles (role_id, person_id) VALUES (7003,3003);
+-- INSERT INTO persons_roles (roles_id, Ausers_id) VALUES (7001,3001);
+-- INSERT INTO persons_roles (roles_id, Ausers_id) VALUES (7002,3002);
+-- INSERT INTO persons_roles (roles_id, Ausers_id) VALUES (7003,3003);
 --
 
 
@@ -80,7 +80,3 @@ INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
 VALUES (6002, false, '', '2022-04-14 13:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, null, 2001, 3001,
         3003, 3003);
-
-
--- INSERT INTO invoices (id, ammount, creation_date, invoice_number, billed_person_id, flights_info_id, type_of_membership_info_id)
--- VALUES (24, 25.00, null, 1, null, 17, 10);

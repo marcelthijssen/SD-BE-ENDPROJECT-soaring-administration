@@ -2,8 +2,6 @@ package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.config.JwtTokenUtil;
 import com.example.sdbesoaringadministration.dtos.AUserDto;
-//import com.example.sdbesoaringadministration.dtos.UserDto;
-import com.example.sdbesoaringadministration.dtos.AUserDto;
 import com.example.sdbesoaringadministration.security.JwtRequest;
 import com.example.sdbesoaringadministration.security.JwtResponse;
 import com.example.sdbesoaringadministration.services.JwtUserDetailsServiceImpl;

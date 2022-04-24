@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
+
 @Data
 @Validated
 public class AirportDto {
@@ -49,11 +50,10 @@ public class AirportDto {
         dto.setId( airport.getId() );
         dto.setIcao( airport.getIcao() );
         dto.setCity( airport.getCity() );
-        dto.setCountry(airport.getCountry());
+        dto.setCountry( airport.getCountry() );
         return dto;
     }
 
-    //    GETTERS AND SETTERS
     public String getIcao() {
         return Icao;
     }
@@ -73,6 +73,7 @@ public class AirportDto {
     public String getCity() {
         return city;
     }
+
     public void setCity( String city ) {
         this.city = city;
     }
