@@ -74,11 +74,11 @@ VALUES (5005, 'EC', 'Rolladen Schleicher', 'LS-6b', 'PH-1203', false, true, 3003
 
 INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6001, true, '', '2022-04-14 13:00:37.185743', '120', '2022-04-14 15:03:07.185743', 5001, 1001, 1001, 2001, 3001,
+VALUES (6001, true, '', '2022-04-14 13:00:37.185743', '120', '2022-04-14 15:03:07.185743', 5001, 1001, null, 2001, 3001,
         3002, 3001);
 INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6002, false, '', '2022-04-14 13:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
+VALUES (6002, false, '', '2022-04-14 13:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, null, 2001, 3001,
         3003, 3003);
 
 

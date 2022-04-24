@@ -1,11 +1,9 @@
 package com.example.sdbesoaringadministration.services;
 
-import com.example.sdbesoaringadministration.dtos.UserDto;
-import com.example.sdbesoaringadministration.models.User;
-import com.example.sdbesoaringadministration.repositories.UserRepository;
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
+import com.example.sdbesoaringadministration.dtos.AUserDto;
+import com.example.sdbesoaringadministration.models.AUser;
+import com.example.sdbesoaringadministration.repositories.AUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,25 +14,16 @@ import java.util.ArrayList;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
-  @Autowired
-  private UserRepository userRepo;
+
+    @Autowired
+    private AUserRepository aUserRepository;
+
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
-//    @Autowired
-////    @Qualifier("bcryptEncoder")
-//    public void setJwtUserDetailsServiceImpl(UserRepository userRepo,PasswordEncoder bcryptEncoder ){
-//        this.userRepo=userRepo;
-//        this.bcryptEncoder=bcryptEncoder;
-//    }
-//    public JwtUserDetailsServiceImpl( UserRepository userRepo, PasswordEncoder bcryptEncoder ) {
-//        this.userRepo = userRepo;
-//        this.bcryptEncoder = bcryptEncoder;
-//    }
-
     @Override
     public UserDetails loadUserByUsername( String username ) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername( username );
+        AUser user = aUserRepository.findByUsername( username );
         if ( user == null ) {
             throw new UsernameNotFoundException( "User not found with username: " + username );
         }
@@ -42,10 +31,10 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
                 new ArrayList<>() );
     }
 
-    public User save( UserDto dto ) {
-        User user = new User();
-        user.setUsername( dto.getUsername() );
-        user.setPassword( bcryptEncoder.encode( dto.getPassword() ) );
-        return userRepo.save( user );
+    public AUser save( AUserDto dto ) {
+        AUser auser = new AUser();
+        auser.setUsername( dto.getUsername() );
+        auser.setPassword( bcryptEncoder.encode( dto.getPassword() ) );
+        return aUserRepository.save( auser );
     }
 }
