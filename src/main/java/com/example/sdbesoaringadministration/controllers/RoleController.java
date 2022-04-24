@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -45,5 +42,12 @@ public class RoleController {
             return new ResponseEntity<>( "New Role added to systeem, unfortunately you can not do anything with this new role", HttpStatus.CREATED );
         }
     }
+
+    @PutMapping("/roles/{rid}/user/{uid}")
+    public ResponseEntity<Object> assignRoleToAUser( @PathVariable("rid") Long rid, @PathVariable("uid") Long uid ) {
+        roleService.assignRoleToAUser( rid, uid );
+        return new ResponseEntity<>( "Role assigned to Person", HttpStatus.ACCEPTED );
+    }
+
 
 }

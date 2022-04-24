@@ -1,6 +1,7 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.AUserDto;
+import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.AUser;
 import com.example.sdbesoaringadministration.repositories.AUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +38,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
         auser.setPassword( bcryptEncoder.encode( dto.getPassword() ) );
         return aUserRepository.save( auser );
     }
+
+
+
 }

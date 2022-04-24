@@ -82,9 +82,6 @@ private RoleRepository roleRepository;
             p.setCountry( dto.getCountry() );
             p.setEmail( dto.getEmail() );
             p.setPhone( dto.getPhone() );
-            p.setUsername( dto.getUsername() );
-            p.setPassword( dto.getPassword() );
-            p.setRoles( dto.getRoles() );
             p.setMembership( dto.getMembership() );
             p.setPilotLicense( dto.getPilotLicense() );
             personRepository.save( p );
@@ -113,24 +110,6 @@ private RoleRepository roleRepository;
         }
 
 
-    @Override
-    public void assignRoleToPerson( Long pid, Long rid ) {
-
-        var optionalRole = roleRepository.findById( rid );
-        var optionalPerson = personRepository.findById( pid );
-
-        if ( optionalRole.isPresent() && optionalPerson.isPresent() ) {
-            var role = optionalRole.get();
-            var person = optionalPerson.get();
-
-            person.getRoles().add( role );
-            personRepository.save( person );
-        } else {
-            throw new RecordNotFoundException( "Person or role bestaat niet" );
-        }
-    }
-
-
 
     public static PersonDto personToPersonDto( Person p ) {
         PersonDto dto = new PersonDto();
@@ -147,12 +126,8 @@ private RoleRepository roleRepository;
         dto.setCountry( p.getCountry() );
         dto.setEmail( p.getEmail() );
         dto.setPhone( p.getPhone() );
-
         dto.setPilotLicense( p.getPilotLicense() );
         dto.setMembership( p.getMembership() );
-//        dto.setUsername( p.getUsername() );
-//        dto.setPhone( p.getPassword() );
-        dto.setRoles( p.getRoles() );
         return dto;
     }
 
@@ -172,9 +147,6 @@ private RoleRepository roleRepository;
         p.setCountry( dto.getCountry() );
         p.setEmail( dto.getEmail() );
         p.setPhone( dto.getPhone() );
-        p.setUsername( dto.getUsername() );
-        p.setPhone( dto.getPassword() );
-        p.setRoles( dto.getRoles() );
         p.setPilotLicense( dto.getPilotLicense() );
         p.setMembership( dto.getMembership() );
         return p;

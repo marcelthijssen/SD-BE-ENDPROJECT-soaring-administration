@@ -29,10 +29,7 @@ public class Person {
     private String email;
     private String phone;
     private String pilotLicense;
-    private String username;
-    private String password;
-    //    private String role;
-    private boolean enabled;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(
@@ -40,15 +37,6 @@ public class Person {
             referencedColumnName = "id")
     @JsonManagedReference
     private Membership membership;
-
-
-    @ManyToMany
-    @JoinTable(
-            name = "persons_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "person_id"))
-    private Set<Role> roles = new HashSet<>();
-
 
     @OneToMany
             (mappedBy = "captain",
@@ -200,38 +188,4 @@ public class Person {
         this.membership = membership;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername( String username ) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword( String password ) {
-        this.password = password;
-    }
-
-
-    public boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled( boolean enabled ) {
-        this.enabled = enabled;
-    }
-
-    public Set<Role> getRoles(){
-        return roles;
-    }
-
-    public void setRoles( Set<Role> roles ) {
-    }
-//    public void setRoles(Set<Role> roles) {
-//        this.roles=roles;
-//    }
 }

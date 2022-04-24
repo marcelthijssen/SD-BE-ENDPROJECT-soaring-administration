@@ -1,6 +1,7 @@
 package com.example.sdbesoaringadministration.dtos;
 
 
+import com.example.sdbesoaringadministration.models.AUser;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.models.Role;
 import lombok.Data;
@@ -14,7 +15,7 @@ public class RoleDto {
     private Long id;
     private String name;
 
-    private Set<Person> persons = new HashSet<>();
+    private Set<AUser> ausers = new HashSet<>();
 
     public RoleDto() {
     }
@@ -40,12 +41,12 @@ public class RoleDto {
         this.name = name;
     }
 
-    public Set<Person> getPersons() {
-        return persons;
+    public Set<AUser> getAUsers() {
+        return ausers;
     }
 
-    public void setPersons( Set<Person> persons ) {
-        this.persons = persons;
+    public void setAUsers( Set<AUser> ausers ) {
+        this.ausers = ausers;
     }
 
 }

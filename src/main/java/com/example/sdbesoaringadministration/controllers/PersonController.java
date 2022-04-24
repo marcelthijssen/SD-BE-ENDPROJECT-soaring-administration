@@ -73,11 +73,4 @@ public class PersonController {
         return new ResponseEntity<>( "Membership added to a person", HttpStatus.OK );
     }
 
-
-    @PutMapping("/persons/{pid}/roles/{rid}")
-    public ResponseEntity<Object> assignRoleToPerson( @PathVariable("pid") Long pid, @PathVariable("rid") Long rid ) {
-        personService.assignRoleToPerson( pid, rid );
-        return new ResponseEntity<>( "Role assigned to Person", HttpStatus.ACCEPTED );
-    }
-
 }

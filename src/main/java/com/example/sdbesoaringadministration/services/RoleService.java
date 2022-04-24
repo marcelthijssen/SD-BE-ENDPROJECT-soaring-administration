@@ -10,4 +10,7 @@ public interface RoleService {
     List<RoleDto> getAllRoles();
 
     RoleDto addNewRole( RoleDto roleDto );
+
+    void assignRoleToAUser(Long rid, Long uid);
+
 }

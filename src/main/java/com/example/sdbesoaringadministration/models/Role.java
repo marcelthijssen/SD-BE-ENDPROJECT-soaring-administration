@@ -22,7 +22,7 @@ public class Role {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
-    private Set<Person> persons = new HashSet<>();
+    private Set<AUser> ausers = new HashSet<>();
 
 
     public Long getId() {
@@ -41,12 +41,12 @@ public class Role {
         this.name = name;
     }
 
-    public Set<Person> getPersons() {
-        return persons;
+    public Set<AUser> getAUsers() {
+        return ausers;
     }
 
-    public void setPersons( Set<Person> persons ) {
-        this.persons = persons;
+    public void setAUsers( Set<AUser> ausers ) {
+        this.ausers = ausers;
     }
 
 }

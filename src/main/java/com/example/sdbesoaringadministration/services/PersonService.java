@@ -19,6 +19,5 @@ public interface PersonService {
 
     void addMembershipToPerson(Long  pid, Long mbid);
 
-    void assignRoleToPerson(Long  pid, Long rid);
 
 }
