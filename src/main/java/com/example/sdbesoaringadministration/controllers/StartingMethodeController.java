@@ -49,7 +49,7 @@ public class StartingMethodeController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            smService.addStartingMethode( startingMethodeDto );
+            smService.createStartingMethode( startingMethodeDto );
             return new ResponseEntity( "Startingmethode added to list of startingmethodes", HttpStatus.CREATED );
         }
     }

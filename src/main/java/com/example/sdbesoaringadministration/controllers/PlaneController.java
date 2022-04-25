@@ -52,7 +52,7 @@ public class PlaneController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            planeService.addPlane( planeDto );
+            planeService.createPlane( planeDto );
             return new ResponseEntity<>( "plane added to systeem", HttpStatus.CREATED );
         }
     }

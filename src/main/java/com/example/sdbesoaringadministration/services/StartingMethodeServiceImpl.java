@@ -48,7 +48,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     }
 
     @Override
-    public void addStartingMethode( StartingMethodeDto dto ) {
+    public void createStartingMethode( StartingMethodeDto dto ) {
         StartingMethode sm = startingMethodeDtoToStartingMethode( dto );
         smRepository.save( sm );
     }

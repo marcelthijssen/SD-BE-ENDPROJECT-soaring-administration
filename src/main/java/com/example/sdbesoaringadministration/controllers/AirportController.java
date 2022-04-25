@@ -49,7 +49,7 @@ public class AirportController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            airportService.addAirport( airportDto );
+            airportService.createAirport( airportDto );
             return new ResponseEntity<>( "Airport added to list of airports", HttpStatus.CREATED );
         }
     }

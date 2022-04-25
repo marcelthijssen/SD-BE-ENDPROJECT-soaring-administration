@@ -46,7 +46,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto addPerson( PersonDto personDto ) {
+    public PersonDto createPerson( PersonDto personDto ) {
         personRepository.save( personDtoToPerson( personDto ) );
     return personDto;
     }

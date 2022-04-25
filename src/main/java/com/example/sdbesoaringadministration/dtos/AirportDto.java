@@ -10,30 +10,21 @@ import javax.validation.constraints.NotBlank;
 //@Data
 @Validated
 public class AirportDto {
-
     private Long id;
-
     @Length(min = 4, max = 4, message = "ICAO notation must have exactly 4 characters")
     private String Icao;
-
     @NotBlank(message = "City can not be empty")
     private String city;
-
     @NotBlank(message = "Country must be added")
     private String country;
-
-    // CONSTRUCTORS
     public AirportDto() {
     }
-
     public AirportDto( Long id, String ICAO, String city, String country ) {
         this.id = id;
         this.Icao = ICAO;
         this.city = city;
         this.country = country;
     }
-
-    //    Dto to Model
     public static Airport airportDtoToAirport( AirportDto dto ) {
         Airport airport = new Airport();
 

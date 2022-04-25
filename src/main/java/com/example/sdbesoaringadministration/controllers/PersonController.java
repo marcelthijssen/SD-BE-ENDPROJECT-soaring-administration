@@ -48,7 +48,7 @@ public class PersonController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            personService.addPerson( personDto );
+            personService.createPerson( personDto );
             return new ResponseEntity<>( "Person added to systeem", HttpStatus.CREATED );
         }
     }

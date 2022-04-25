@@ -10,7 +10,7 @@ public interface MembershipService {
 
     MembershipDto getMembershipById( Long mbid );
 
-    void addMembership( MembershipDto membershipDto );
+    void createMembership( MembershipDto membershipDto );
 
     void deleteMembershipById( Long mbid );
 
