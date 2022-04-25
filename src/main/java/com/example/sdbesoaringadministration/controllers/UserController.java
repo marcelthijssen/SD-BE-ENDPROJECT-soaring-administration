@@ -22,9 +22,9 @@ public class UserController {
     @GetMapping(value = "")
     public ResponseEntity<List<UserDto>> getUsers() {
 
-        List<UserDto> userDtos = userService.getUsers();
+        List<UserDto> userDtoList = userService.getUsers();
 
-        return ResponseEntity.ok().body( userDtos );
+        return ResponseEntity.ok().body( userDtoList );
     }
 
     @GetMapping(value = "/{username}")
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<UserDto> createUser( @RequestBody UserDto dto ) {
+    public ResponseEntity<UserDto> createUser( @RequestBody final UserDto dto ) {
 
         String newUsername = userService.createUser( dto );
 

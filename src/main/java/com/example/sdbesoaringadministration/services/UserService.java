@@ -8,6 +8,9 @@ import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.repositories.UserRepository;
 import com.example.sdbesoaringadministration.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,14 +24,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
 //    @Autowired
 //    private AuthorityRepository authorityRepository;
 
     public List<UserDto> getUsers() {
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
-        for ( User user : list ) {
-            collection.add( userToUserDto( user ) );
+        for ( User u : list ) {
+            collection.add( userToUserDto( u ) );
         }
         return collection;
     }
@@ -48,10 +52,9 @@ public class UserService {
         return userRepository.existsById( username );
     }
 
-    public String createUser( UserDto userDto ) {
+    public String createUser( final UserDto dto ) {
         String randomString = RandomStringGenerator.generateAlphaNumeric( 20 );
-        userDto.setApikey( randomString );
-        User newUser = userRepository.save( userDtoToUser( userDto ) );
+        User newUser = userRepository.save( userDtoToUser( dto ) );
         return newUser.getUsername();
     }
 
@@ -91,7 +94,7 @@ public class UserService {
 
     public static UserDto userToUserDto( User user ) {
 
-        var dto = new UserDto();
+        UserDto dto = new UserDto();
 
         dto.username = user.getUsername();
         dto.password = user.getPassword();
@@ -103,17 +106,17 @@ public class UserService {
         return dto;
     }
 
-    public User userDtoToUser( UserDto userDto ) {
+    public User userDtoToUser( UserDto dto ) {
 
-        var user = new User();
+        User u = new User();
 
-        user.setUsername( userDto.getUsername() );
-        user.setPassword( userDto.getPassword() );
-        user.setEnabled( userDto.getEnabled() );
-        user.setApikey( userDto.getApikey() );
-        user.setEmail( userDto.getEmail() );
+        u.setUsername( dto.getUsername() );
+        u.setPassword( dto.getPassword() );
+        u.setEnabled( dto.getEnabled() );
+        u.setApikey( dto.getApikey() );
+        u.setEmail( dto.getEmail() );
 
-        return user;
+        return u;
     }
 
 }
