@@ -1,13 +1,13 @@
 package com.example.sdbesoaringadministration.models;
 
-import lombok.Data;
+////import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-//@Data
+////@Data
 @Table(name = "invoices")
 public class Invoice {
     @Id

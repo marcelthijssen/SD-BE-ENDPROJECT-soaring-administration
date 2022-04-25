@@ -35,30 +35,22 @@ VALUES (4003, 'GPL ≤18', 12.50);
 INSERT INTO memberships (id, title, costs_per_month)
 VALUES (4004, 'Honourable member', 0.00);
 
-INSERT INTO roles (id, name)
-VALUES (8001, 'ADMIN');
-INSERT INTO roles (id, name)
-VALUES (8002, 'MEMBER');
-INSERT INTO roles (id, name)
-VALUES (8003, 'TECHNICIAN');
-INSERT INTO roles (id, name)
-VALUES (8004, 'PERSON');
+INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE);
+INSERT INTO users (username, password, email, enabled) VALUES ('admin', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE);
 
-INSERT INTO ausers (id, username, password, enabled)
-VALUES (7001, 'admin', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
-INSERT INTO ausers (id, username, password, enabled)
-VALUES (7002, 'member', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
-INSERT INTO ausers (id, username, password, enabled)
-VALUES (7003, 'tech', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
-INSERT INTO ausers (id, username, password, enabled)
-VALUES (7004, 'person', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
+INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');
 
--- INSERT INTO ausers_roles (ausers_id, roles_id) VALUES (7001,8001);
--- INSERT INTO ausers_roles (ausers_id, roles_id) VALUES (7002,8002);
--- INSERT INTO ausers_roles (ausers_id, roles_id) VALUES (7003,8003);
--- INSERT INTO ausers_roles (ausers_id, roles_id) VALUES (7003,8003);
--- INSERT INTO ausers_roles (ausers_id, roles_id) VALUES (7003,8001);
--- INSERT INTO ausers_roles (ausers_id, roles_id) VALUES (7004,8004);
+-- INSERT INTO users (id, username, password, enabled)
+-- VALUES (7001, 'admin', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
+-- INSERT INTO users (id, username, password, enabled)
+-- VALUES (7002, 'member', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
+-- INSERT INTO users (id, username, password, enabled)
+-- VALUES (7003, 'tech', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
+-- INSERT INTO users (id, username, password, enabled)
+-- VALUES (7004, 'person', '$2a$10$1d9lWJPCxeafT26iPODuIO0pyIY2o.ozspZ3rfPUMSzr5AW9UruLW', true);
+
 
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
                      postalcode, city, country, email, pilot_license, membership_id)

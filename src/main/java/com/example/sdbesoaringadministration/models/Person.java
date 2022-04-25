@@ -2,7 +2,7 @@ package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+//import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;

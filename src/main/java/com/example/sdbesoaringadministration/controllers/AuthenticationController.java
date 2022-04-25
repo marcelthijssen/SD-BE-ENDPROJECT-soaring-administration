@@ -1,57 +1,60 @@
 package com.example.sdbesoaringadministration.controllers;
 
-import com.example.sdbesoaringadministration.config.JwtTokenUtil;
-import com.example.sdbesoaringadministration.dtos.AUserDto;
-import com.example.sdbesoaringadministration.security.JwtRequest;
-import com.example.sdbesoaringadministration.security.JwtResponse;
-import com.example.sdbesoaringadministration.services.JwtUserDetailsServiceImpl;
+import com.example.sdbesoaringadministration.payload.AuthenticationRequest;
+import com.example.sdbesoaringadministration.payload.AuthenticationResponse;
+import com.example.sdbesoaringadministration.services.CustomUserDetailsService;
+import com.example.sdbesoaringadministration.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
+//@CrossOrigin
 @RestController
-@CrossOrigin
 public class AuthenticationController {
 
-    @Autowired
+    @Autowired()
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private
+    CustomUserDetailsService userDetailsService;
 
     @Autowired
-    private JwtUserDetailsServiceImpl userDetailsService;
+    JwtUtil jwtUtl;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    @GetMapping(value = "/authenticated")
+    public ResponseEntity<Object> authenticated( Authentication authentication, Principal principal) {
+        return ResponseEntity.ok().body(principal);
+    }
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+    @PostMapping(value = "/authenticate")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+
+        String username = authenticationRequest.getUsername();
+        String password = authenticationRequest.getPassword();
+
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, password)
+            );
+        }
+        catch (BadCredentialsException ex) {
+            throw new Exception("Incorrect username or password", ex);
+        }
 
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+                .loadUserByUsername(username);
 
-        final String token = jwtTokenUtil.generateToken(userDetails);
+        final String jwt = jwtUtl.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody AUserDto dto) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(dto));
-    }
-
-    private void authenticate(String username, String password) throws Exception {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
-        }
-    }
 }

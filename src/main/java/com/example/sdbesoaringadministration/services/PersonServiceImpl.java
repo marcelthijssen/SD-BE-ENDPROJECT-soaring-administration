@@ -5,11 +5,8 @@ import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
-import com.example.sdbesoaringadministration.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +16,10 @@ import java.util.Optional;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-    private MembershipRepository tomRepository;
-private RoleRepository roleRepository;
-    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository, RoleRepository roleRepository ) {
+    private final MembershipRepository tomRepository;
+    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository ) {
         this.personRepository = personRepository;
         this.tomRepository = tomRepository;
-        this.roleRepository=roleRepository;
     }
 
     @Override
@@ -70,7 +65,7 @@ private RoleRepository roleRepository;
         if ( personRepository.findById( pid ).isPresent() ) {
             Person p = personRepository.findById( pid ).get();
 
-//            p.getId( dto.getId() );
+            p.setId( p.getId() );
             p.setGender( dto.getGender() );
             p.setFirstName( dto.getFirstName() );
             p.setLastName( dto.getLastName() );
