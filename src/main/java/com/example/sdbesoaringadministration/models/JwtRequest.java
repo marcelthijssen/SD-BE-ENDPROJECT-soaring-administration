@@ -1,4 +1,4 @@
-package com.example.sdbesoaringadministration.security;
+package com.example.sdbesoaringadministration.models;
 
 import java.io.Serializable;
 

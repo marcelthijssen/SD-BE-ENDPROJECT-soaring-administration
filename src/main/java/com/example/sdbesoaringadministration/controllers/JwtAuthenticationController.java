@@ -2,8 +2,8 @@ package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.config.JwtTokenUtil;
 import com.example.sdbesoaringadministration.dtos.AUserDto;
-import com.example.sdbesoaringadministration.security.JwtRequest;
-import com.example.sdbesoaringadministration.security.JwtResponse;
+import com.example.sdbesoaringadministration.models.JwtRequest;
+import com.example.sdbesoaringadministration.models.JwtResponse;
 import com.example.sdbesoaringadministration.services.JwtUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-public class AuthenticationController {
+public class JwtAuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
