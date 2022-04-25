@@ -1,4 +1,4 @@
-package com.invisiblegardening.Exceptions;
+package com.example.sdbesoaringadministration.exceptions;
 
 public class UsernameAlreadyExistException extends RuntimeException {
     private static final long serialVersionUID = 1L;
@@ -9,7 +9,7 @@ public class UsernameAlreadyExistException extends RuntimeException {
 
     }
 
-    public UsernameAlreadyExistException(String message) {
+    public UsernameAlreadyExistException( String message) {
 
         super(message);
 

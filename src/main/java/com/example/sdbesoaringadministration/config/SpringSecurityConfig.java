@@ -28,8 +28,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
-        auth.userDetailsService( customUserDetailsService );
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure( HttpSecurity http ) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
 
         //JWT token authentication
         http
@@ -58,8 +58,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy( SessionCreationPolicy.STATELESS );
-        http.addFilterBefore( jwtRequestFilter, UsernamePasswordAuthenticationFilter.class );
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 

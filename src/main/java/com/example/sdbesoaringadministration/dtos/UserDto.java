@@ -12,7 +12,6 @@ public class UserDto {
     public String username;
     public String password;
     public Boolean enabled;
-    public String apikey;
     public String email;
     @JsonSerialize
     public Set<Authority> authorities;
@@ -27,10 +26,6 @@ public class UserDto {
 
     public Boolean getEnabled() {
         return enabled;
-    }
-
-    public String getApikey() {
-        return apikey;
     }
 
     public String getEmail() {
@@ -51,10 +46,6 @@ public class UserDto {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
     }
 
     public void setEmail(String email) {

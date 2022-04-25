@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.UserDto;
 import com.example.sdbesoaringadministration.exceptions.BadRequestException;
+import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/")
     public ResponseEntity<List<UserDto>> getUsers() {
 
         List<UserDto> userDtoList = userService.getUsers();
@@ -38,9 +39,9 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<UserDto> createUser( @RequestBody final UserDto dto ) {
+    public ResponseEntity<UserDto> createUser( @RequestBody User user ) {
 
-        String newUsername = userService.createUser( dto );
+        String newUsername = userService.createUser( user );
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path( "/{username}" )
                 .buildAndExpand( newUsername ).toUri();
