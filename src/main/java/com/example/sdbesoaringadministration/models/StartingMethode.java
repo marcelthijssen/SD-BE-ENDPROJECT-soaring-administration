@@ -31,7 +31,6 @@ public class StartingMethode {
     @Digits(integer=1, fraction=2)
     private BigDecimal price;
 
-    // A flight can only have one  startingmethode
     @OneToMany
             (mappedBy = "startingMethode",
                     fetch = FetchType.LAZY,
@@ -40,8 +39,6 @@ public class StartingMethode {
     private List<Flight> flights;
 
 
-
-    //getters an setters
     public String getTitle() {
         return title;
     }
@@ -74,7 +71,7 @@ public class StartingMethode {
         this.id = id;
     }
 
-    // Flight
+
     public void setFlight(List<Flight> flights) {
         this.flights = flights;
     }
