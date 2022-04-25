@@ -3,7 +3,7 @@ package com.example.sdbesoaringadministration.dtos;
 import com.example.sdbesoaringadministration.models.Membership;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.models.Role;
-import lombok.Data;
+//import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
@@ -12,7 +12,7 @@ import java.time.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+//@Data
 @Validated
 public class PersonDto {
 

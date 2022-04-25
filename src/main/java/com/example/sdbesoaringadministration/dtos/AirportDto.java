@@ -1,13 +1,13 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Airport;
-import lombok.Data;
+//import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 
-@Data
+//@Data
 @Validated
 public class AirportDto {
 

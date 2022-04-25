@@ -1,14 +1,14 @@
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+//import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+//@Data
 @Table(name = "roles")
 public class Role {
 

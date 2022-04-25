@@ -4,12 +4,12 @@ package com.example.sdbesoaringadministration.dtos;
 import com.example.sdbesoaringadministration.models.AUser;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.models.Role;
-import lombok.Data;
+//import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+//@Data
 public class RoleDto {
 
     private Long id;
