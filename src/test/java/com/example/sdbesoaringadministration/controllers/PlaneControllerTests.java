@@ -10,15 +10,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class RoleControllerTests {
+public class PlaneControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void shouldReturn200() throws Exception {
-        mockMvc.perform(get("/roles"))
-                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/planes"))
+                .andExpect(status().isOk());
     }
 
 }
