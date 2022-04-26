@@ -39,9 +39,9 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<UserDto> createUser( @RequestBody User user ) {
+    public ResponseEntity<UserDto> createUser( @RequestBody UserDto dto ) {
 
-        String newUsername = userService.createUser( user );
+        String newUsername = userService.createUser( dto );
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path( "/{username}" )
                 .buildAndExpand( newUsername ).toUri();

@@ -20,7 +20,7 @@ public interface UserService {
     public UserDto getUser( String username );
 
     public boolean userExists( String username );
-    public String createUser( User user );
+    public String createUser( UserDto dto );
     public void deleteUser( String username );
     public void updateUser( String username, UserDto newUser );
     public Set<Authority> getAuthorities( String username );

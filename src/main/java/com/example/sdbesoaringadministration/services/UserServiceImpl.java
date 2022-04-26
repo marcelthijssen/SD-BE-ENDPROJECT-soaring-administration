@@ -55,24 +55,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsById( username );
     }
 
-    public String createUser( User user ) {
+    public String createUser( UserDto dto ) {
 
-        if ( userExists( user.getUsername() ) ) {
-            throw new UsernameAlreadyExistException( "Username is al in gebruik" );
+        if ( userExists( dto.getUsername() ) ) {
+            throw new UsernameAlreadyExistException( "Username is not available" );
         }
-//        User user = new User();
-        String randomString = RandomStringGenerator.generateAlphaNumeric( 20 );
+        User user = new User();
 
-        user.setEmail( user.getEmail() );
-
-        user.setPassword( passwordEncoder.encode( user.getPassword() ) );
-
+        user.setEmail( dto.getEmail() );
+        user.setPassword( passwordEncoder.encode( dto.getPassword() ) );
         user.getAuthorities().clear();
-
-        user.addAuthority( new Authority( user.getUsername(), "ROLE_USER" ) );
-//
-//        user.setId((getUsers().size())+1);
-
+        user.addAuthority( new Authority( dto.getUsername(), "ROLE_USER" ) );
         User newUser = userRepository.save( user );
 
         return newUser.getUsername();
