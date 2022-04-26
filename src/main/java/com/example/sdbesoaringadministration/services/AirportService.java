@@ -10,7 +10,7 @@ public interface AirportService{
 
     List<AirportDto> getAllAirports();
 
-    AirportDto getAirportsById ( Long id);
+    AirportDto getAirportById ( Long id);
 
     Airport createAirport( AirportDto airportDto);
 

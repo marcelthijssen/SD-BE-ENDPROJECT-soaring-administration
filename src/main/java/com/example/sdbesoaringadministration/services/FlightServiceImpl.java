@@ -52,7 +52,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightDto createFlight(  ) {
+    public FlightDto createFlight() {
         Flight flight = new Flight();
         this.flRepository.save( flight );
 
@@ -86,7 +86,7 @@ public class FlightServiceImpl implements FlightService {
             fl.setStartingMethode( dto.getStartingMethode() );
             fl.setPassenger( dto.getPassenger() );
             fl.setCaptain( dto.getCaptain() );
-            fl.setBilledPerson(dto.getBilledPerson());
+            fl.setBilledPerson( dto.getBilledPerson() );
 
 // plane
             fl.setPlane( dto.getPlane() );
@@ -203,6 +203,7 @@ public class FlightServiceImpl implements FlightService {
             throw new RecordNotFoundException( "Flight not found" );
         }
     }
+
     public void assignTimeStart( Long flid ) {
         var optionalFlight = flRepository.findById( flid );
         var flight = optionalFlight.get();
@@ -214,7 +215,7 @@ public class FlightServiceImpl implements FlightService {
         var optionalFlight = flRepository.findById( flid );
         var flight = optionalFlight.get();
         flight.setTimeEnd( ( LocalDateTime.now() ) );
-        flight.setTimeFlown( ChronoUnit.MINUTES.between( flight.getTimeStart(), flight.getTimeEnd() ) );
+        flight.setTimeFlown( calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) );
 
         if ( !flight.getInstructionFlight() ) {
             flight.setBilledPerson( flight.getCaptain() );
@@ -224,7 +225,7 @@ public class FlightServiceImpl implements FlightService {
         flRepository.save( flight );
     }
 
-      @Override
+    @Override
     public FlightDto updateRemarksToFLight( Long flid, FlightDto dto ) {
         if ( flRepository.findById( flid ).isPresent() ) {
             Flight fl = flRepository.findById( flid ).get();
@@ -241,7 +242,7 @@ public class FlightServiceImpl implements FlightService {
     public List<FlightDto> getFlightsByCaptain_id( Long cpid ) {
 //        Person captain = new Person();
 //        if ( !flRepository.findFlightsByCaptainEquals(pid).isEmpty() ) {
-        List<Flight> flightList = flRepository.findFlightsByCaptain_Id(cpid );
+        List<Flight> flightList = flRepository.findFlightsByCaptain_Id( cpid );
         List<FlightDto> flightDtoList = new ArrayList<>();
 
         for ( Flight fl : flightList ) {
@@ -255,5 +256,9 @@ public class FlightServiceImpl implements FlightService {
 //        }
     }
 
+    public long calculateTimeFlown( LocalDateTime timeStart, LocalDateTime timeEnd ) {
+
+        return( ChronoUnit.MINUTES.between( timeStart, timeEnd));
+    }
 
 }

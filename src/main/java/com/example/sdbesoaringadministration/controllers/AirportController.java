@@ -30,7 +30,7 @@ public class AirportController {
 
     @GetMapping("/airports/{id}")
     public ResponseEntity<Object> getAirportById( @PathVariable(name = "id") Long id ) {
-        AirportDto airportDto = airportService.getAirportsById( id );
+        AirportDto airportDto = airportService.getAirportById( id );
         try {
             return ResponseEntity.ok( airportDto );
         } catch ( Exception ex ) {
