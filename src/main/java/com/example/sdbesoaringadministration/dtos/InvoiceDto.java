@@ -1,12 +1,12 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.*;
-//import lombok.Data;
+;
 import org.springframework.validation.annotation.Validated;
 
 import java.math.BigDecimal;
 import java.util.Date;
-//@Data
+
 @Validated
 public class InvoiceDto {
 

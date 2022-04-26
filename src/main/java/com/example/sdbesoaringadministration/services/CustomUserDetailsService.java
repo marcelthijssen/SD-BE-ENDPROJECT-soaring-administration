@@ -1,6 +1,5 @@
 package com.example.sdbesoaringadministration.services;
 
-
 import com.example.sdbesoaringadministration.dtos.UserDto;
 import com.example.sdbesoaringadministration.exceptions.UsernameNotFoundException;
 import com.example.sdbesoaringadministration.models.Authority;
@@ -16,16 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
-
-//    @Autowired
-//    private AuthorityService authorityService;
 
     @Override
     public UserDetails loadUserByUsername( String username ) {

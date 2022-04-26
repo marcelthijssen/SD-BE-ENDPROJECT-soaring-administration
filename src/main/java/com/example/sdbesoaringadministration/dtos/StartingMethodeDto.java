@@ -1,12 +1,12 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.StartingMethode;
-//import lombok.Data;
+;
 import org.springframework.validation.annotation.Validated;
 
 import java.math.BigDecimal;
 
-//@Data
+
 @Validated
 public class StartingMethodeDto {
 

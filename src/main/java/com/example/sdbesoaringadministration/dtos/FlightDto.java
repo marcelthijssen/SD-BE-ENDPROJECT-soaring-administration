@@ -2,12 +2,12 @@ package com.example.sdbesoaringadministration.dtos;
 
 
 import com.example.sdbesoaringadministration.models.*;
-//import lombok.Data;
+;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 
-//@Data
+
 @Validated
 public class FlightDto {
 

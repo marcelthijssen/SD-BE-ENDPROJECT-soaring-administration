@@ -1,7 +1,7 @@
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-//import lombok.Data;
+;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-//@Data
+
 @Table(name = "starting_methodes")
 public class StartingMethode {
 

@@ -1,14 +1,10 @@
 package com.example.sdbesoaringadministration.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-//import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-////@Data
 @Table(name = "flights")
 public class Flight {
     @Id
