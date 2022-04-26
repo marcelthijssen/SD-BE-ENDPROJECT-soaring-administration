@@ -8,10 +8,7 @@ import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +38,7 @@ public class AirportTests {
     AirportRepository airportRepository;
 
     @Mock
-    AirportServiceImpl airportService;
+    AirportServiceImpl service;
 
     @Captor
     ArgumentCaptor<Airport> airportCaptor;
@@ -51,22 +48,23 @@ public class AirportTests {
 
 
     @Test
-    public void getAirportTest() {
+    public void returns_AirportWhen_getAirportByIdTest() {
         Airport airport = new Airport();
         airport.setIcao( "EHGR" );
         airport.setId( 1L );
-        when( airportRepository.findById( 1L ) ).thenReturn( Optional.of( airport ) );
+        Mockito.when( airportRepository.findById( 1L ) ).thenReturn( Optional.of( airport ) );
 
-        airportService.getAirportById( 1L );
+        assertThat(airportRepository.findById(1L)).isEqualTo(Optional.of( airport ));
+
     }
 
-    @Test
-    public void getAirportExceptionTest() {
-        Airport airport = new Airport();
-        airport.setIcao( "EHGR" );
-        airport.setId( 1L );
-        assertThrows( RecordNotFoundException.class, () -> airportService.getAirportById( 2L ) );
-    }
+//    @Test
+//    public void gives_RecordNotFoundException_when_getAirportById_fails_Test() {
+//        Airport airport = new Airport();
+//        airport.setIcao( "EHGR" );
+//        airport.setId( 1L );
+//        return assertThrown( RecordNotFoundException.class, () -> service.getAirportById( 2L ) );
+//    }
 
 //    @Autowired
 //    private TestRestTemplate restTemplate;
@@ -99,9 +97,9 @@ public class AirportTests {
         testAirport.add( airport3 );
 
 
-        airportService.getAllAirports();
+        service.getAllAirports();
 
-        verify( airportService, times( 1 ) ).getAllAirports();
+        verify( service, times( 1 ) ).getAllAirports();
 
         assertThat( testAirport.size() ).isEqualTo( 3 );
         assertThat( testAirport.get( 0 ) ).isEqualTo( airport1 );
@@ -132,7 +130,7 @@ public class AirportTests {
         when( airportRepository.findById( 1L ) ).thenReturn( Optional.of( airportDto1 ) );
 
         airportDto1.setIcao( "ABCD" );
-        airportService.updateAirport( 1L, airportDto1 );
+        service.updateAirport( 1L, airportDto1 );
 
         verify( airportRepository ).save( airportDto1 );
 
@@ -142,7 +140,7 @@ public class AirportTests {
 */
     @Test
     public void updateAirportExceptionTest() {
-        assertThrows( RecordNotFoundException.class, () -> airportService.getAirportById( null ) );
+        assertThrows( RecordNotFoundException.class, () -> service.getAirportById( null ) );
     }
 
     @Test
