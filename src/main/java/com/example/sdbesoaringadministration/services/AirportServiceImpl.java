@@ -36,7 +36,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public AirportDto getAirportsById( Long id ) {
+    public AirportDto getAirportById( Long id ) {
         if ( airportRepository.findById( id ).isPresent() ) {
 
             Airport ap = airportRepository.findById( id ).get();
@@ -50,8 +50,8 @@ public class AirportServiceImpl implements AirportService {
 
 
     @Override
-    public Airport createAirport( AirportDto airportDto ) {
-        Airport ap = airportDtoToAirport( airportDto );
+    public Airport createAirport( AirportDto dto ) {
+        Airport ap = airportDtoToAirport( dto );
 
         return this.airportRepository.save( ap );
     }
