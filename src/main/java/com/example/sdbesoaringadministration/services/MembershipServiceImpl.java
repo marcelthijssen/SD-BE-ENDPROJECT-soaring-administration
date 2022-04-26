@@ -45,7 +45,7 @@ public class MembershipServiceImpl implements MembershipService {
     }
 
     @Override
-    public void addMembership( MembershipDto dto ) {
+    public void createMembership( MembershipDto dto ) {
         Membership tom = membershipDtoToMembership(dto);
         this.tomRepository.save( tom );
     }

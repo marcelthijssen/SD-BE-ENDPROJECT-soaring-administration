@@ -30,24 +30,24 @@ public class StartingMethodeDto {
 
     //    Dto to Model
     public static StartingMethode startingMethodeDtoToStartingMethode( StartingMethodeDto dto ) {
-        StartingMethode startingMethode = new StartingMethode();
+        StartingMethode sm = new StartingMethode();
 
-        startingMethode.setId( dto.getId() );
-        startingMethode.setTitle( dto.getTitle() );
-        startingMethode.setUnit( dto.getUnit() );
-        startingMethode.setPrice( dto.getPrice() );
+        sm.setId( dto.getId() );
+        sm.setTitle( dto.getTitle() );
+        sm.setUnit( dto.getUnit() );
+        sm.setPrice( dto.getPrice() );
 
-        return startingMethode;
+        return sm;
     }
 
     //model to dto
-    public StartingMethodeDto startingMethodeToStartingMethodeDto( StartingMethode startingMethode ) {
+    public StartingMethodeDto startingMethodeToStartingMethodeDto( StartingMethode sm ) {
         var dto = new StartingMethodeDto();
 
-        dto.setId( startingMethode.getId() );
-        dto.setTitle( startingMethode.getTitle() );
-        dto.setUnit( startingMethode.getUnit() );
-        dto.setPrice( startingMethode.getPrice() );
+        dto.setId( sm.getId() );
+        dto.setTitle( sm.getTitle() );
+        dto.setUnit( sm.getUnit() );
+        dto.setPrice( sm.getPrice() );
         return dto;
     }
 

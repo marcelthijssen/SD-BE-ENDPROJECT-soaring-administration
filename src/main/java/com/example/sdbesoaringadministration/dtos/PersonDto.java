@@ -1,16 +1,12 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Membership;
-import com.example.sdbesoaringadministration.models.Person;
-import com.example.sdbesoaringadministration.models.Role;
 //import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.time.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 
 //@Data
 @Validated

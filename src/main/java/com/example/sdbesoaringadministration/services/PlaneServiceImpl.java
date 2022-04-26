@@ -49,7 +49,7 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public Plane addPlane( PlaneDto dto ) {
+    public Plane createPlane( PlaneDto dto ) {
         Plane plane = planeDtoToPlane( dto );
 
         return this.plRepository.save( plane );

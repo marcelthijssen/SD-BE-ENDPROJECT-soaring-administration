@@ -52,7 +52,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightDto addFlight(  ) {
+    public FlightDto createFlight(  ) {
         Flight flight = new Flight();
         this.flRepository.save( flight );
 

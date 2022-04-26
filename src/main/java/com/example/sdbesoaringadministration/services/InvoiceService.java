@@ -13,7 +13,7 @@ public interface InvoiceService {
 
     List<InvoiceDto> getAllInvoices();
 
-    public List<InvoiceDto> findInvoicesByBilledPerson( Long plid );
+    List<InvoiceDto> findInvoicesByBilledPerson( Long plid );
 
 //    public List<Flight> createAnInvoice( Long pid );
 

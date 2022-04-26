@@ -12,7 +12,7 @@ public interface AirportService{
 
     AirportDto getAirportsById ( Long id);
 
-    Airport addAirport(AirportDto airportDto);
+    Airport createAirport( AirportDto airportDto);
 
     ResponseEntity<Object> deleteAirportById( Long id);
 

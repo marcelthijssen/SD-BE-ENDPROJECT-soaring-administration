@@ -13,7 +13,7 @@ public interface PlaneService {
 
     PlaneDto getPlaneById( Long id );
 
-    Plane addPlane( PlaneDto planeDto );
+    Plane createPlane( PlaneDto planeDto );
 
     void deletePlaneById( Long id );
 

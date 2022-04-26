@@ -50,7 +50,7 @@ public class AirportServiceImpl implements AirportService {
 
 
     @Override
-    public Airport addAirport( AirportDto airportDto ) {
+    public Airport createAirport( AirportDto airportDto ) {
         Airport ap = airportDtoToAirport( airportDto );
 
         return this.airportRepository.save( ap );

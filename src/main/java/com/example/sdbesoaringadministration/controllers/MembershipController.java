@@ -50,7 +50,7 @@ public class MembershipController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            membershipService.addMembership( MembershipDto );
+            membershipService.createMembership( MembershipDto );
             return new ResponseEntity<>( "new type of Membership has been added to the system", HttpStatus.CREATED );
         }
     }

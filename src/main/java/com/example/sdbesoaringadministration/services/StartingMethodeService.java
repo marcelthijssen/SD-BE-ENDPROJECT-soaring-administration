@@ -1,7 +1,6 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.StartingMethodeDto;
-import com.example.sdbesoaringadministration.models.StartingMethode;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public interface StartingMethodeService {
 
     StartingMethodeDto getStartingMethodeById( Long smid );
 
-    void addStartingMethode( StartingMethodeDto startingMethodeDto );
+    void createStartingMethode( StartingMethodeDto startingMethodeDto );
 
     void deleteStartingMethodeById( Long smid );
 
