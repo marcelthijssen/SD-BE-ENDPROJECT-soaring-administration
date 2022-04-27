@@ -5,6 +5,7 @@ import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Plane;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.PlaneRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,7 +45,7 @@ public class PlaneServiceImpl implements PlaneService {
             Plane pl = plRepository.findById( plid ).get();
             return new PlaneDto().planeToPlaneDto( pl );
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException( "Invalid plane id: " + plid, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -59,7 +60,7 @@ public class PlaneServiceImpl implements PlaneService {
         if ( plRepository.findById( plid ).isPresent() ) {
             plRepository.deleteById( plid );
         } else {
-            throw new RecordNotFoundException( "Plane not found" );
+            throw new RecordNotFoundException( "Invalid plane id: " + plid, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -93,7 +94,7 @@ public class PlaneServiceImpl implements PlaneService {
             plane.setOwner( person );
             plRepository.save( plane );
         } else {
-            throw new RecordNotFoundException( "person or plane does not exist" );
+            throw new RecordNotFoundException( "Invalid plane-id: " + plid + ", or invalid person-id: " + pid , HttpStatus.NOT_FOUND );
         }
     }
 
@@ -110,7 +111,7 @@ public class PlaneServiceImpl implements PlaneService {
             plane.setTechnician( person );
             plRepository.save( plane );
         } else {
-            throw new RecordNotFoundException( "person or plane does not exist" );
+            throw new RecordNotFoundException( "person or plane does not exist", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -123,7 +124,7 @@ public class PlaneServiceImpl implements PlaneService {
 
             plRepository.save( pl );
         } else {
-            throw new RecordNotFoundException( "Plane not here" );
+            throw new RecordNotFoundException( "Plane not here", HttpStatus.NOT_FOUND );
         }
         return null;
     }
@@ -138,7 +139,7 @@ public class PlaneServiceImpl implements PlaneService {
             dto.setFlightStatus( pl.getFlightStatus() );
             return dto;
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException( "Plane with id: " + plid + " not available", HttpStatus.NOT_FOUND );
         }
     }
 }

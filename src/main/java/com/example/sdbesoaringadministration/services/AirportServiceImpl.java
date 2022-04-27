@@ -37,15 +37,15 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public AirportDto getAirportById( Long id ) {
-        if ( airportRepository.findById( id ).isPresent() ) {
+//        if ( airportRepository.findById( id ).isPresent() ) {
 
             Airport ap = airportRepository.findById( id ).get();
             AirportDto dto = new AirportDto().airportToAirportDto(ap);
 
             return dto;
-        } else {
-            throw new RecordNotFoundException();
-        }
+//        } else {
+//            throw new RecordNotFoundException("Airport not available", HttpStatus.NOT_FOUND );
+//        }
     }
 
 
@@ -62,7 +62,7 @@ public class AirportServiceImpl implements AirportService {
             airportRepository.deleteById( apid );
             return new ResponseEntity<>("Airport is deleted", HttpStatus.OK);
         } else {
-            throw new RecordNotFoundException( "Airport not found" );
+            throw new RecordNotFoundException( "Airport not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -79,7 +79,7 @@ public class AirportServiceImpl implements AirportService {
             airportRepository.save(ap);
             return dto;
         } else {
-            throw new RecordNotFoundException( "Airport not found" );
+            throw new RecordNotFoundException( "Airport not found", HttpStatus.NOT_FOUND );
         }
     }
 }

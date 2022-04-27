@@ -31,7 +31,7 @@ public class FlightController {
         try {
             return ResponseEntity.ok( flight );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Not found" );
+            throw new RecordNotFoundException( "Not found", HttpStatus.NOT_FOUND );
         }
     }
 

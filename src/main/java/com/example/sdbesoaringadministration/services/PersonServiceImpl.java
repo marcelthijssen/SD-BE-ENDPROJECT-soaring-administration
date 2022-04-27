@@ -5,6 +5,7 @@ import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class PersonServiceImpl implements PersonService {
             return dto;
 
         } else {
-            throw new RecordNotFoundException( "Person not found" );
+            throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -56,7 +57,7 @@ public class PersonServiceImpl implements PersonService {
         if ( personRepository.findById( pid ).isPresent() ) {
             personRepository.deleteById( pid );
         } else {
-            throw new RecordNotFoundException( "Person not found" );
+            throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -82,7 +83,7 @@ public class PersonServiceImpl implements PersonService {
             personRepository.save( p );
         } else {
 
-            throw new RecordNotFoundException( "Person not found" );
+            throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
         }
         return null;
     }
@@ -100,7 +101,7 @@ public class PersonServiceImpl implements PersonService {
                 p.setMembership( m );
                 personRepository.save( p );
             } else {
-                throw new RecordNotFoundException( "Person or membership bestaat niet" );
+                throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
             }
         }
 

@@ -36,7 +36,7 @@ public class MembershipController {
         try {
             return ResponseEntity.ok( MembershipDto );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Type of Membership not found" );
+            throw new RecordNotFoundException( "Type of Membership not found", HttpStatus.NOT_FOUND );
         }
     }
 

@@ -35,7 +35,7 @@ public class StartingMethodeController {
         try {
             return ResponseEntity.ok( startingMethodeDto );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Startingmethode not found" );
+            throw new RecordNotFoundException( "Startingmethode not found", HttpStatus.NOT_FOUND );
         }
     }
 

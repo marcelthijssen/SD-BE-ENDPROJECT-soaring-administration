@@ -4,6 +4,7 @@ import com.example.sdbesoaringadministration.dtos.StartingMethodeDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.StartingMethode;
 import com.example.sdbesoaringadministration.repositories.StartingMethodeRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
 
             return dto;
         } else {
-            throw new RecordNotFoundException( "Starting methode not found" );
+            throw new RecordNotFoundException( "Starting methode not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -59,7 +60,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
         if ( smRepository.findById( smid ).isPresent() ) {
             smRepository.deleteById( smid );
         } else {
-            throw new RecordNotFoundException( "Starting methode not found" );
+            throw new RecordNotFoundException( "Starting methode not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -73,7 +74,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
             sm.setPrice( dto.getPrice() );
             smRepository.save( sm );
         } else {
-            throw new RecordNotFoundException( "StartingMethode does not exist" );
+            throw new RecordNotFoundException( "StartingMethode does not exist", HttpStatus.NOT_FOUND );
         }
     }
 

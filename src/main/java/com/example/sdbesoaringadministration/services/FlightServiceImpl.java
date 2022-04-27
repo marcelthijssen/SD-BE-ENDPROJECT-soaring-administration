@@ -54,7 +54,7 @@ public class FlightServiceImpl implements FlightService {
             Flight flight = flRepository.findById( flid ).get();
             return new FlightDto().flightToFlightDto( flight );
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException("Flight not available", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -73,7 +73,7 @@ public class FlightServiceImpl implements FlightService {
         if ( flRepository.findById( flid ).isPresent() ) {
             flRepository.deleteById( flid );
         } else {
-            throw new RecordNotFoundException( "No flight found" );
+            throw new RecordNotFoundException( "No flight found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -100,7 +100,7 @@ public class FlightServiceImpl implements FlightService {
             flRepository.save( fl );
             return dto;
         } else {
-            throw new RecordNotFoundException( "Flight not found" );
+            throw new RecordNotFoundException( "Flight not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -116,7 +116,7 @@ public class FlightServiceImpl implements FlightService {
             flight.setPlane( plane );
             flRepository.save( flight );
         } else {
-            throw new RecordNotFoundException( "Plane or flight doesn't exist" );
+            throw new RecordNotFoundException( "Plane or flight doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -132,7 +132,7 @@ public class FlightServiceImpl implements FlightService {
             flight.setAirportStart( airportStart );
             flRepository.save( flight );
         } else {
-            throw new RecordNotFoundException( "Airport or flight doesn't exist" );
+            throw new RecordNotFoundException( "Airport or flight doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -149,7 +149,7 @@ public class FlightServiceImpl implements FlightService {
             flRepository.save( flight );
 
         } else {
-            throw new RecordNotFoundException( "Airport or flight doesn't exist" );
+            throw new RecordNotFoundException( "Airport or flight doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -165,7 +165,7 @@ public class FlightServiceImpl implements FlightService {
             flight.setStartingMethode( startingMethode );
             flRepository.save( flight );
         } else {
-            throw new RecordNotFoundException( "Flight or startingmethode doesn't exist" );
+            throw new RecordNotFoundException( "Flight or startingmethode doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -180,7 +180,7 @@ public class FlightServiceImpl implements FlightService {
             flight.setPassenger( person );
             flRepository.save( flight );
         } else {
-            throw new RecordNotFoundException( "Flight or person doesn't exist" );
+            throw new RecordNotFoundException( "Flight or person doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -195,7 +195,7 @@ public class FlightServiceImpl implements FlightService {
             flight.setCaptain( person );
             flRepository.save( flight );
         } else {
-            throw new RecordNotFoundException( "Flight or this person doesn't exist" );
+            throw new RecordNotFoundException( "Flight or this person doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -207,7 +207,7 @@ public class FlightServiceImpl implements FlightService {
             flRepository.save( fl );
             return dto;
         } else {
-            throw new RecordNotFoundException( "Flight not found" );
+            throw new RecordNotFoundException( "Flight not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -241,7 +241,7 @@ public class FlightServiceImpl implements FlightService {
             flRepository.save( fl );
             return dto;
         } else {
-            throw new RecordNotFoundException( "Flight not found" );
+            throw new RecordNotFoundException( "Flight not found", HttpStatus.NOT_FOUND );
         }
     }
 

@@ -1,14 +1,10 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.InvoiceDto;
-import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
-import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Invoice;
-import com.example.sdbesoaringadministration.models.Person;
-import com.example.sdbesoaringadministration.repositories.FlightRepository;
 import com.example.sdbesoaringadministration.repositories.InvoiceRepository;
-import com.example.sdbesoaringadministration.repositories.PersonRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -44,7 +40,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             return invoiceDtoList;
 
         } else {
-            throw new RecordNotFoundException( "Invoice doesn't exist" );
+            throw new RecordNotFoundException( "Invoice doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
 

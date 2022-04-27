@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.UserDto;
 import com.example.sdbesoaringadministration.exceptions.BadRequestException;
+import com.example.sdbesoaringadministration.exceptions.UsernameNotFoundException;
 import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,13 @@ public class UserController {
 
     @GetMapping(value = "/{username}")
     public ResponseEntity<UserDto> getUser( @PathVariable("username") String username ) {
+        try {
+            UserDto optionalUser = userService.getUser( username );
 
-        UserDto optionalUser = userService.getUser( username );
-
-
-        return ResponseEntity.ok().body( optionalUser );
-
+            return ResponseEntity.ok().body( optionalUser );
+        } catch (UsernameNotFoundException ex) {
+            throw new UsernameNotFoundException(HttpStatus.NOT_FOUND, username );
+        }
     }
 
     @PostMapping(value = "")
@@ -47,7 +49,7 @@ public class UserController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path( "/{username}" )
                 .buildAndExpand( newUsername ).toUri();
 
-        return new ResponseEntity("New user added " + user.getUsername(), HttpStatus.CREATED);
+        return new ResponseEntity( "New user added " + user.getUsername(), HttpStatus.CREATED );
     }
 
     @PutMapping(value = "/{username}")

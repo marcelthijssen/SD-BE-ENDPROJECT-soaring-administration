@@ -39,7 +39,7 @@ public class PlaneController {
         try {
             return ResponseEntity.ok( plane );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Plane Not found" );
+            throw new RecordNotFoundException( "Plane Not found", HttpStatus.NOT_FOUND );
         }
     }
 

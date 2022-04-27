@@ -9,6 +9,7 @@ import com.example.sdbesoaringadministration.models.Authority;
 import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
         if ( user.isPresent() ) {
             dto = userToUserDto( user.get() );
         } else {
-            throw new UsernameNotFoundException( username );
+            throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         }
         return dto;
     }
@@ -74,14 +75,14 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updateUser( String username, UserDto newUser ) {
-        if ( !userRepository.existsById( username ) ) throw new RecordNotFoundException();
+        if ( !userRepository.existsById( username ) ) throw new RecordNotFoundException("Not found", HttpStatus.NOT_FOUND );
         User user = userRepository.findById( username ).get();
         user.setPassword( newUser.getPassword() );
         userRepository.save( user );
     }
 
     public Set<Authority> getAuthorities( String username ) {
-        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( username );
+        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         User user = userRepository.findById( username ).get();
         UserDto userDto = userToUserDto( user );
         return userDto.getAuthorities();
@@ -89,14 +90,14 @@ public class UserServiceImpl implements UserService {
 
     public void addAuthority( String username, String authority ) {
 
-        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( username );
+        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         User user = userRepository.findById( username ).get();
         user.addAuthority( new Authority( username, authority ) );
         userRepository.save( user );
     }
 
     public void removeAuthority( String username, String authority ) {
-        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( username );
+        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         User user = userRepository.findById( username ).get();
         Authority authorityToRemove = user.getAuthorities().stream().filter( ( a ) -> a.getAuthority().equalsIgnoreCase( authority ) ).findAny().get();
         user.removeAuthority( authorityToRemove );

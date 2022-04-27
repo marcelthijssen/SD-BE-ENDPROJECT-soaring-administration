@@ -1,6 +1,7 @@
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.AirportDto;
+import com.example.sdbesoaringadministration.exceptions.ExceptionHandler;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.services.AirportService;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,11 @@ import java.util.List;
 @RequestMapping("/airports")
 public class AirportController {
 
-    private final AirportService airportService;
+    private AirportService airportService;
 
     public AirportController( AirportService service ) {
         this.airportService = service;
     }
-
 
     @GetMapping("")
     public ResponseEntity<Object> getAllAirports() {
@@ -31,12 +31,12 @@ public class AirportController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getAirportById( @PathVariable(name = "id") Long id ) {
-        AirportDto airportDto = airportService.getAirportById( id );
-        try {
+//        try {
+            AirportDto airportDto = airportService.getAirportById( id );
             return ResponseEntity.ok( airportDto );
-        } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Airport not found" );
-        }
+//        } catch ( RecordNotFoundException e ) {
+//            throw new RecordNotFoundException( "Invalid airport-id: " + id, HttpStatus.NOT_FOUND );
+//        }
     }
 
 
@@ -57,15 +57,17 @@ public class AirportController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAirportById( @PathVariable("id") Long id ) {
-
-        airportService.deleteAirportById( id );
-        return new ResponseEntity<>( "Airport has been deleted from the system.", HttpStatus.ACCEPTED );
+        try {
+            airportService.deleteAirportById( id );
+            return new ResponseEntity<>( "Airport has been deleted from the system.", HttpStatus.ACCEPTED );
+        } catch ( Exception e ) {
+            throw new RecordNotFoundException( "Invalid airport-id: " + id, HttpStatus.BAD_REQUEST );
+        }
     }
 
     @PutMapping("/{id}")
     public AirportDto updateAirport( @PathVariable("id") Long id, @RequestBody AirportDto dto ) {
 
-        // after update we are ready so using inline variable
         return airportService.updateAirport( id, dto );
     }
 

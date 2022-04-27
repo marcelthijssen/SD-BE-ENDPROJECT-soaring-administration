@@ -4,6 +4,7 @@ import com.example.sdbesoaringadministration.dtos.UserDto;
 import com.example.sdbesoaringadministration.exceptions.UsernameNotFoundException;
 import com.example.sdbesoaringadministration.models.Authority;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername( String username ) {
         Optional<UserDto> user = Optional.ofNullable( userService.getUser( username ) );
         if ( !user.isPresent() ) {
-            throw new UsernameNotFoundException( username );
+            throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         }
 
         String password = user.get().getPassword();

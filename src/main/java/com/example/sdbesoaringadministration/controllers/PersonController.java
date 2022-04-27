@@ -35,7 +35,7 @@ public class PersonController {
         try {
             return ResponseEntity.ok( person );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Not found" );
+            throw new RecordNotFoundException( "Not found", HttpStatus.NOT_FOUND );
         }
     }
 

@@ -4,6 +4,7 @@ import com.example.sdbesoaringadministration.dtos.MembershipDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Membership;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class MembershipServiceImpl implements MembershipService {
 
             return new MembershipDto().membershipToMembershipDto( tom );
         } else {
-            throw new RecordNotFoundException( "Type of Membership not found" );
+            throw new RecordNotFoundException( "Type of Membership not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -55,7 +56,7 @@ public class MembershipServiceImpl implements MembershipService {
         if ( tomRepository.findById( mbid ).isPresent() ) {
             tomRepository.deleteById( mbid );
         } else {
-            throw new RecordNotFoundException( "Type of Membership not found" );
+            throw new RecordNotFoundException( "Type of Membership not found", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -70,7 +71,7 @@ public class MembershipServiceImpl implements MembershipService {
             tom.setCostsPerMonth( dto.getCostsPerMonth() );
             tomRepository.save( tom );
         } else {
-            throw new RecordNotFoundException( "Type of membership not found" );
+            throw new RecordNotFoundException( "Type of membership not found", HttpStatus.NOT_FOUND );
         }
         return null;
     }
