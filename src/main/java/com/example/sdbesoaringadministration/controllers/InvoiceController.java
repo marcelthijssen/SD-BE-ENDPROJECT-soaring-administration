@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/invoices")
 public class InvoiceController {
 
     private final InvoiceService invService;
@@ -19,14 +20,14 @@ public class InvoiceController {
         this.invService = invService;
     }
 
-    @GetMapping("/invoices")
+    @GetMapping("")
     public ResponseEntity<Object> getAllInvoices() {
         List<InvoiceDto> invoiceDtoList = invService.getAllInvoices();
 
         return new ResponseEntity<>( invoiceDtoList, HttpStatus.OK );
     }
 
-    @GetMapping("/invoices/billedperson/{pid}")
+    @GetMapping("/billedperson/{pid}")
     public ResponseEntity<Object> getInvoiceByBilledPerson( @PathVariable(name = "pid") Long pid ) {
         List<InvoiceDto> invoices = invService.findInvoicesByBilledPerson( pid );
         return new ResponseEntity<>( invoices, HttpStatus.OK );

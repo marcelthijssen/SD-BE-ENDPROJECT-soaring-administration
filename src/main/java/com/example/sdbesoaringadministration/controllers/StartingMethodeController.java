@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/startingmethodes")
 public class StartingMethodeController {
 
     private final StartingMethodeService smService;
@@ -22,13 +23,13 @@ public class StartingMethodeController {
     }
 
 
-    @GetMapping("/startingmethodes")
+    @GetMapping("")
     public ResponseEntity<Object> getAllStartingMethode() {
         List<StartingMethodeDto> listStartingMethodeDto = smService.getAllStartingMethodes();
         return new ResponseEntity<>( listStartingMethodeDto, HttpStatus.OK );
     }
 
-    @GetMapping("/startingmethodes/{smid}")
+    @GetMapping("/{smid}")
     public ResponseEntity<Object> getStartingMethodeById( @PathVariable(name = "smid") Long smid ) {
         StartingMethodeDto startingMethodeDto = smService.getStartingMethodeById( smid );
         try {
@@ -39,7 +40,7 @@ public class StartingMethodeController {
     }
 
 
-    @PostMapping("/startingmethodes")
+    @PostMapping("")
     public ResponseEntity<Object> addAStartingMethode( @Valid @RequestBody StartingMethodeDto startingMethodeDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
@@ -54,14 +55,14 @@ public class StartingMethodeController {
         }
     }
 
-    @DeleteMapping("/startingmethodes/{smid}")
+    @DeleteMapping("/{smid}")
     public ResponseEntity<Object> deleteAirportById( @PathVariable("smid") Long smid ) {
 
         smService.deleteStartingMethodeById( smid );
         return new ResponseEntity<>( "StartingMethode has been deleted", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/startingmethodes/{smid}")
+    @PutMapping("/{smid}")
     public StartingMethodeDto updateStartingMethode( @PathVariable("smid") Long smid, @RequestBody StartingMethodeDto dto ) {
 
         smService.updateStartingMethode( smid, dto );

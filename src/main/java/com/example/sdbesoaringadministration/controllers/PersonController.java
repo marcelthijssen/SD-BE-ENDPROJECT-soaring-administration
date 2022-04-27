@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/persons")
 public class PersonController {
 
     private final PersonService personService;
@@ -21,14 +22,14 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/persons")
+    @GetMapping("")
     public ResponseEntity<Object> getAllPersons() {
         List<PersonDto> personDtoList = personService.getAllPersons();
 
         return new ResponseEntity<>( personDtoList, HttpStatus.OK );
     }
 
-    @GetMapping("/persons/{pid}")
+    @GetMapping("/{pid}")
     public ResponseEntity<Object> getPersonById( @PathVariable(name = "pid") Long pid ) {
         PersonDto person = personService.getPersonById( pid );
         try {
@@ -38,7 +39,7 @@ public class PersonController {
         }
     }
 
-    @PostMapping("/persons")
+    @PostMapping("")
     public ResponseEntity<Object> addPerson( @Valid @RequestBody PersonDto personDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
@@ -54,19 +55,19 @@ public class PersonController {
     }
 
 
-    @DeleteMapping("/persons/{pid}")
+    @DeleteMapping("/{pid}")
     public ResponseEntity<Object> deletePersonById( @PathVariable("pid") Long pid ) {
         personService.deletePersonById( pid );
         return new ResponseEntity<>( "Person deleted from systeem", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/persons/{pid}")
+    @PutMapping("/{pid}")
     public PersonDto updatePerson( @PathVariable("pid") Long pid, @RequestBody PersonDto person ) {
         PersonDto dto = personService.updatePerson( pid, person );
         return dto;
     }
 
-    @PutMapping("/persons/{pid}/membership/{mbid}")
+    @PutMapping("/{pid}/membership/{mbid}")
     public ResponseEntity<Object> addMembershipToPerson( @PathVariable("pid") Long pid, @PathVariable("mbid") Long mbid ) {
         personService.addMembershipToPerson( pid, mbid );
 

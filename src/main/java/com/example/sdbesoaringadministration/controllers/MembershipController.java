@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/memberships")
 public class MembershipController {
 
 
@@ -23,13 +24,13 @@ public class MembershipController {
     }
 
 
-    @GetMapping("/memberships")
+    @GetMapping("")
     public ResponseEntity<Object> getAllMemberships() {
         List<MembershipDto> listMembershipDto = membershipService.getAllMemberships();
         return new ResponseEntity<>( listMembershipDto, HttpStatus.OK );
     }
 
-    @GetMapping("/memberships/{mbid}")
+    @GetMapping("/{mbid}")
     public ResponseEntity<Object> getMembershipById( @PathVariable(name = "mbid") Long mbid ) {
         MembershipDto MembershipDto = membershipService.getMembershipById( mbid );
         try {
@@ -40,7 +41,7 @@ public class MembershipController {
     }
 
 
-    @PostMapping("/memberships")
+    @PostMapping("")
     public ResponseEntity<Object> addMembership( @Valid @RequestBody MembershipDto MembershipDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
@@ -55,7 +56,7 @@ public class MembershipController {
         }
     }
 
-    @DeleteMapping("/memberships/{mbid}")
+    @DeleteMapping("/{mbid}")
     public ResponseEntity<Object> deleteMembershipById( @PathVariable("mbid") Long mbid ) {
 
         membershipService.deleteMembershipById( mbid );
@@ -64,7 +65,7 @@ public class MembershipController {
     }
 
 
-    @PutMapping("/memberships/{mbid}")
+    @PutMapping("/{mbid}")
 
     public MembershipDto updateMembership( @PathVariable("id") Long mbid, @RequestBody MembershipDto dto ) {
 

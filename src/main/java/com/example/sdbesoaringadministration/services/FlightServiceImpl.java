@@ -266,7 +266,6 @@ public class FlightServiceImpl implements FlightService {
     public ResponseEntity<Object> createInvoicefromFLight( Long flid ) {
         Invoice invoice = new Invoice();
         Flight flight = flRepository.getById( flid );
-        if ( invRepository.findInvoiceByFlight_Id( flid ).isEmpty() ) {
 
             invoice.setCreationDate( ( LocalDate.now() ) );
             invoice.setBilledPerson( flight.getBilledPerson() );
@@ -275,9 +274,7 @@ public class FlightServiceImpl implements FlightService {
             invoice.setFlight( flight );
             invRepository.save( invoice );
             return new ResponseEntity<>( "Invoice", HttpStatus.CREATED );
-        } else {
-            return new ResponseEntity<>( "Invoice allready created for this flight, please use the update-function", HttpStatus.BAD_REQUEST );
-        }
+
     }
 
     public long calculateTimeFlown( LocalDateTime timeStart, LocalDateTime timeEnd ) {

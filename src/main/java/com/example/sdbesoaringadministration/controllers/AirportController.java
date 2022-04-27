@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/airports")
 public class AirportController {
 
     private final AirportService airportService;
@@ -22,13 +23,13 @@ public class AirportController {
     }
 
 
-    @GetMapping("/airports")
+    @GetMapping("")
     public ResponseEntity<Object> getAllAirports() {
         List<AirportDto> listAirportsDto = airportService.getAllAirports();
         return new ResponseEntity<>( listAirportsDto, HttpStatus.OK );
     }
 
-    @GetMapping("/airports/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Object> getAirportById( @PathVariable(name = "id") Long id ) {
         AirportDto airportDto = airportService.getAirportById( id );
         try {
@@ -39,7 +40,7 @@ public class AirportController {
     }
 
 
-    @PostMapping("/airports")
+    @PostMapping("")
     public ResponseEntity<Object> addAirport( @Valid @RequestBody AirportDto airportDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
@@ -54,14 +55,14 @@ public class AirportController {
         }
     }
 
-    @DeleteMapping("/airports/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAirportById( @PathVariable("id") Long id ) {
 
         airportService.deleteAirportById( id );
         return new ResponseEntity<>( "Airport has been deleted from the system.", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/airports/{id}")
+    @PutMapping("/{id}")
     public AirportDto updateAirport( @PathVariable("id") Long id, @RequestBody AirportDto dto ) {
 
         // after update we are ready so using inline variable
