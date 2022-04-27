@@ -4,6 +4,7 @@ package com.example.sdbesoaringadministration.dtos;
 import com.example.sdbesoaringadministration.models.Authority;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import javax.persistence.Column;
 import java.util.HashSet;
 import java.util.Set;
 

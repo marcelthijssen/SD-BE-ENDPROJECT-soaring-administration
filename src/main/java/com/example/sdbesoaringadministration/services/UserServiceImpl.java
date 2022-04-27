@@ -8,7 +8,6 @@ import com.example.sdbesoaringadministration.exceptions.UsernameAlreadyExistExce
 import com.example.sdbesoaringadministration.models.Authority;
 import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.repositories.UserRepository;
-import com.example.sdbesoaringadministration.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,21 +54,19 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsById( username );
     }
 
-    public String createUser( UserDto dto ) {
+    public String createUser( User user ) {
 
-        if ( userExists( dto.getUsername() ) ) {
-            throw new UsernameAlreadyExistException( "Username is not available" );
+        if ( userExists( user.getUsername() ) ) {
+            throw new UsernameAlreadyExistException( "Username allready in use, please chose another" );
+        } else {
+            user.setEmail( user.getEmail() );
+            user.setPassword( passwordEncoder.encode( user.getPassword() ) );
+            user.getAuthorities().clear();
+            user.addAuthority( new Authority( user.getUsername(), "ROLE_USER" ) );
+            User newUser = userRepository.save( user );
+
+            return "New user added";
         }
-        User user = new User();
-
-        user.setEmail( dto.getEmail() );
-        user.setPassword( passwordEncoder.encode( dto.getPassword() ) );
-        user.getAuthorities().clear();
-        user.addAuthority( new Authority( dto.getUsername(), "ROLE_USER" ) );
-        User newUser = userRepository.save( user );
-
-        return newUser.getUsername();
-
     }
 
     public void deleteUser( String username ) {
@@ -112,7 +109,7 @@ public class UserServiceImpl implements UserService {
 
         dto.username = user.getUsername();
         dto.password = user.getPassword();
-        dto.enabled = user.isEnabled();
+        dto.enabled = user.getEnabled();
         dto.email = user.getEmail();
         dto.authorities = user.getAuthorities();
 

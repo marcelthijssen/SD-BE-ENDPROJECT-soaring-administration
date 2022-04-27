@@ -27,4 +27,5 @@ public interface PlaneService {
 
     PlaneDto getPlaneFlightStatusById( Long plid );
 
+    PlaneDto addMinutePrice( Long plid, PlaneDto dto );
 }

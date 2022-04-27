@@ -145,4 +145,12 @@ public class FlightController {
         FlightDto dto = flightService.updateRemarksToFLight( flid, flight );
         return dto;
     }
+
+    @PutMapping("/flights/{flid}/invoice")
+    public ResponseEntity<Object> createInvoicefromFLight( @PathVariable("flid") Long flid ) {
+        flightService.createInvoicefromFLight( flid );
+        return new ResponseEntity<>( "invoice created", HttpStatus.CREATED );
+    }
+
+
 }

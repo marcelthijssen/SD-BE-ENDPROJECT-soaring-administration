@@ -51,7 +51,6 @@ public class PlaneServiceImpl implements PlaneService {
     @Override
     public Plane createPlane( PlaneDto dto ) {
         Plane plane = planeDtoToPlane( dto );
-
         return this.plRepository.save( plane );
     }
 
@@ -73,6 +72,14 @@ public class PlaneServiceImpl implements PlaneService {
         return null;
     }
 
+    public PlaneDto addMinutePrice( Long plid, PlaneDto dto ) {
+        if ( plRepository.findById( plid ).isPresent()){
+            Plane pl = plRepository.findById( plid ).get();
+//            pl.setMinutePrice( plane.getMinutePrice() );
+            plRepository.save(pl);
+        }
+        return dto;
+    }
 
     @Override
     public void assignOwnerToPlane( Long plid, Long pid ) {
@@ -116,7 +123,7 @@ public class PlaneServiceImpl implements PlaneService {
 
             plRepository.save( pl );
         } else {
-            throw new RecordNotFoundException("Plane not here");
+            throw new RecordNotFoundException( "Plane not here" );
         }
         return null;
     }

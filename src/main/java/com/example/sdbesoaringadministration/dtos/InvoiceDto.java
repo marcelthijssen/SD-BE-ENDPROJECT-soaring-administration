@@ -5,29 +5,25 @@ import com.example.sdbesoaringadministration.models.*;
 import org.springframework.validation.annotation.Validated;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Validated
 public class InvoiceDto {
 
     private Long id;
-    private int invoiceNumber;
-
-    private Date creationDate;
-
+    private LocalDate creationDate;
     private Person billedPerson;
-
-    private Flight flight_info;
-
-    private Membership type_of_membership;
     private BigDecimal ammount;
+private Flight flight;
+    public InvoiceDto() {
+    }
 
-
-    public void setId( Long id, Date creationDate, BigDecimal ammount, Flight flight_info, Membership type_of_membership ) {
+    public void setInvoiceDto( Long id, LocalDate creationDate, Person billedPerson, BigDecimal ammount, Flight flight ) {
         this.id = id;
         this.creationDate = creationDate;
+        this.billedPerson=billedPerson;
         this.ammount = ammount;
-        this.flight_info = flight_info;
+        this.flight = flight;
     }
 
     public Long getId() {
@@ -37,13 +33,7 @@ public class InvoiceDto {
     public void setId( Long id ) {
         this.id = id;
     }
-    public int getInvoiceNumber() {
-        return invoiceNumber;
-    }
 
-    public void setInvoiceNumber( int invoiceNumber ) {
-        this.invoiceNumber = invoiceNumber;
-    }
 
     public Person getBilledPerson() {
         return billedPerson;
@@ -53,12 +43,11 @@ public class InvoiceDto {
         this.billedPerson = billedPerson;
     }
 
-
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate( Date creationDate ) {
+    public void setCreationDate( LocalDate creationDate ) {
         this.creationDate = creationDate;
     }
 
@@ -70,33 +59,11 @@ public class InvoiceDto {
         this.ammount = ammount;
     }
 
-    public Membership getType_of_membership() {
-        return type_of_membership;
-    }
+    public Flight getFlight() {
+        return flight;}
 
-    public void setType_of_membership( Membership type_of_membership ) {
-        this.type_of_membership = type_of_membership;
-    }
-
-    public Flight getFlight_info() {
-        return flight_info;
-    }
-
-    public void setFlight_info( Flight flight_info ) {
-        this.flight_info = flight_info;
-    }
-
-    public static InvoiceDto invoiceToInvoiceDto( Invoice i ) {
-        InvoiceDto dto = new InvoiceDto();
-
-        dto.setId( i.getId() );
-        dto.setInvoiceNumber( i.getInvoiceNumber() );
-        dto.setCreationDate( i.getCreationDate() );
-        dto.setBilledPerson( i.getBilledPerson() );
-        dto.setAmmount( i.getAmmount() );
-
-
-        return dto;
+    public void setFlight( Flight flight ) {
+        this.flight = flight;
     }
 }
 

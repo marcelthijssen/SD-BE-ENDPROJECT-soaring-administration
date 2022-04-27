@@ -1,8 +1,11 @@
 package com.example.sdbesoaringadministration.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "flights")
@@ -17,6 +20,10 @@ public class Flight {
     private boolean instructionFlight;
     private String remarks;
 
+
+    @JsonIgnore
+    @OneToOne(mappedBy="flight")
+    private Invoice invoice;
     @ManyToOne
     @JoinColumn(name = "billed_person_id",
             referencedColumnName = "id")
@@ -53,7 +60,6 @@ public class Flight {
     @JoinColumn(name = "airport_start_id",
             referencedColumnName = "id")
     private Airport airportStart;
-
 
 
     public Long getId() {
@@ -159,4 +165,6 @@ public class Flight {
     public void setBilledPerson( Person billedPerson ) {
         this.billedPerson = billedPerson;
     }
+
+
 }

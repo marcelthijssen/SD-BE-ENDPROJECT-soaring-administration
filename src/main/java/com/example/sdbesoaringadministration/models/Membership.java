@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-
 @Table(name = "memberships")
 public class Membership {
 
@@ -49,11 +48,4 @@ public class Membership {
         this.costsPerMonth = costsPerMonth;
     }
 
-//    public List<Person> getMemberships() {
-//        return memberships;
-//    }
-//
-//    public void setMemberships( List<Person> memberships ) {
-//        this.memberships = memberships;
-//    }
 }

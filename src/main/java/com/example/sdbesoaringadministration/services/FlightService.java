@@ -1,6 +1,8 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.FlightDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -37,5 +39,6 @@ public interface FlightService {
 
     List<FlightDto> getFlightsByCaptain_id( Long cpid );
 
+    public ResponseEntity<Object> createInvoicefromFLight( Long flid);
 
 }

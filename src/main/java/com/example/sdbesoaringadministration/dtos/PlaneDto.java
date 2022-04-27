@@ -6,6 +6,7 @@ import com.example.sdbesoaringadministration.models.Plane;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 @Validated
 public class PlaneDto {
@@ -18,6 +19,7 @@ public class PlaneDto {
     @NotBlank(message = "Registration can not be empty")
     private String registration;
     private boolean twoSeater;
+    private BigDecimal minutePrice;
     private boolean privatePlane;
     private Person owner;
     private Person technician;
@@ -26,13 +28,14 @@ public class PlaneDto {
     public PlaneDto() {
     }
 
-    public PlaneDto( Long id, String callSign, String brand, String type, String registration, boolean twoSeater, boolean privatePlane, Person owner, Person technician, byte[] flightStatus ) {
+    public PlaneDto( Long id, String callSign, String brand, String type, String registration, boolean twoSeater, BigDecimal minutePrice, boolean privatePlane, Person owner, Person technician, byte[] flightStatus ) {
         this.id = id;
         this.callSign = callSign;
         this.brand = brand;
         this.type = type;
         this.registration = registration;
         this.twoSeater = twoSeater;
+        this.minutePrice=minutePrice;
         this.privatePlane = privatePlane;
         this.owner = owner;
         this.technician = technician;
@@ -77,6 +80,14 @@ public class PlaneDto {
 
     public void setRegistration( String registration ) {
         this.registration = registration;
+    }
+
+    public BigDecimal getMinutePrice() {
+        return minutePrice;
+    }
+
+    public void setMinutePrice( BigDecimal minutePrice ) {
+        this.minutePrice = minutePrice;
     }
 
     public boolean getTwoSeater() {

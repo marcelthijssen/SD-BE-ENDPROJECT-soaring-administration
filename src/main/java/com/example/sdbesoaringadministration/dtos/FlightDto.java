@@ -24,10 +24,8 @@ public class FlightDto {
     private StartingMethode startingMethode;
     private Person passenger;
     private Person captain;
-
     private Person billedPerson;
 
-    //TODO: Add StartingMethode and Plane
 
     public FlightDto() {
     }
@@ -47,7 +45,6 @@ public class FlightDto {
         this.passenger = passenger;
         this.captain = captain;
         this.billedPerson = billedPerson;
-
     }
 
 
@@ -157,6 +154,7 @@ public class FlightDto {
     public void setBilledPerson( Person billedPerson ) {
         this.billedPerson = billedPerson;
     }
+
 
     public static Flight flightDtoToFlight( FlightDto dto ) {
         Flight fl = new Flight();

@@ -16,13 +16,10 @@ import java.util.*;
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
     private final InvoiceRepository invRepository;
-    private final FlightRepository flRepository;
-    private final PersonRepository pRepository;
 
-    public InvoiceServiceImpl( InvoiceRepository invRepository, FlightRepository flRepository, PersonRepository pRepository ) {
+    public InvoiceServiceImpl( InvoiceRepository invRepository ) {
         this.invRepository = invRepository;
-        this.flRepository = flRepository;
-        this.pRepository = pRepository;
+
     }
 
     @Override
@@ -31,9 +28,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         List<InvoiceDto> invoiceDtoList = new ArrayList<>();
 
         for ( Invoice i : invoiceList ) {
-            InvoiceDto dto = new InvoiceDto().invoiceToInvoiceDto( i );
-
-            invoiceDtoList.add( dto );
+            invoiceDtoList.add(invoiceToInvoiceDto( i ));
         }
         return invoiceDtoList;
     }
@@ -44,9 +39,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             List<InvoiceDto> invoiceDtoList = new ArrayList<>();
 
             for ( Invoice i : invoiceList ) {
-                InvoiceDto dto = new InvoiceDto().invoiceToInvoiceDto( i );
-
-                invoiceDtoList.add( dto );
+                invoiceDtoList.add(invoiceToInvoiceDto( i ));
             }
             return invoiceDtoList;
 
@@ -55,12 +48,16 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
     }
 
-//    @Override
-//    public List<Flight> createAnInvoice( Long pid ) {
-//        Invoice inv = new Invoice();
-//        List<Flight> flights = flRepository.findFlightsByBilledPersonEquals( pid );
-//
-//
-//        return flights;
-//    }
+
+    public static InvoiceDto invoiceToInvoiceDto( Invoice i ) {
+        InvoiceDto dto = new InvoiceDto();
+
+        dto.setId( i.getId() );
+        dto.setCreationDate( i.getCreationDate() );
+        dto.setFlight( i.getFlight() );
+        dto.setBilledPerson( i.getBilledPerson() );
+        dto.setAmmount( i.getAmmount() );
+
+        return dto;
+    }
 }

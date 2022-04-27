@@ -5,6 +5,7 @@ import com.example.sdbesoaringadministration.exceptions.BadRequestException;
 import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -39,14 +40,14 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<UserDto> createUser( @RequestBody UserDto dto ) {
+    public ResponseEntity<String> createUser( @RequestBody User user ) {
 
-        String newUsername = userService.createUser( dto );
+        String newUsername = userService.createUser( user );
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path( "/{username}" )
                 .buildAndExpand( newUsername ).toUri();
 
-        return ResponseEntity.created( location ).build();
+        return new ResponseEntity("New user added " + user.getUsername(), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{username}")

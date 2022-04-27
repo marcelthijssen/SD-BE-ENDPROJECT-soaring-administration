@@ -25,7 +25,7 @@ public class PlaneController {
     }
 
     @GetMapping("/planes")
-    public ResponseEntity<Object> getAllPlanes(){
+    public ResponseEntity<Object> getAllPlanes() {
         List<PlaneDto> planeDtoList = planeService.getAllPlanes();
 
         return new ResponseEntity<>( planeDtoList, HttpStatus.OK );
@@ -61,13 +61,22 @@ public class PlaneController {
     public ResponseEntity<String> deletePlaneById( @PathVariable("plid") Long plid ) {
 
         planeService.deletePlaneById( plid );
-        return new ResponseEntity<>("Plane deleted from system", HttpStatus.ACCEPTED  );
+        return new ResponseEntity<>( "Plane deleted from system", HttpStatus.ACCEPTED );
     }
 
     @PutMapping("/planes/{plid}")
     public PlaneDto updatePlane( @PathVariable("plid") Long plid, @RequestBody PlaneDto plane ) {
 
         PlaneDto dto = planeService.updatePlane( plid, plane );
+
+        return dto;
+    }
+
+    //         assign owner to plane
+    @PutMapping("/planes/{plid}/price")
+    public PlaneDto addMinutePrice( @PathVariable("plid") Long plid, @RequestBody PlaneDto plane ) {
+
+        PlaneDto dto = planeService.addMinutePrice( plid, plane );
 
         return dto;
     }
@@ -89,7 +98,7 @@ public class PlaneController {
 
     // need to upload file for plane
     @PutMapping("/planes/{plid}/flightstatus")
-    public String AddPlaneFlightStatusPdf(@Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
+    public String AddPlaneFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
         planeService.AddPlaneFlightStatusPdf( plid, pdf );
         return "File uploaded";
     }

@@ -2,13 +2,14 @@ package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.beans.factory.annotation.Value;
 ;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-
 @Table(name = "planes")
 public class Plane {
 
@@ -22,6 +23,8 @@ public class Plane {
     private String registration;
     private boolean twoSeater;
     private boolean privatePlane;
+//@Column(columnDefinition="default '0.000000000'")
+    private BigDecimal minutePrice;
     @Lob
     public byte[] flightStatus;
     @OneToMany
@@ -81,6 +84,14 @@ public class Plane {
 
     public void setRegistration( String registration ) {
         this.registration = registration;
+    }
+
+    public BigDecimal getMinutePrice() {
+        return minutePrice;
+    }
+
+    public void setMinutePrice( BigDecimal minutePrice ) {
+        this.minutePrice = minutePrice;
     }
 
     public boolean getTwoSeater() {

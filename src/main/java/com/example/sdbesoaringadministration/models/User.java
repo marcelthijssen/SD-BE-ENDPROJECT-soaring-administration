@@ -19,8 +19,6 @@ public class User {
 
     @Column(nullable = false)
     private boolean enabled = true;
-
-
     @Column
     private String email;
 
@@ -48,7 +46,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 

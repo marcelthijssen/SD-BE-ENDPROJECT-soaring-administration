@@ -3,9 +3,14 @@ package com.example.sdbesoaringadministration.services;
 import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
+import com.example.sdbesoaringadministration.models.Invoice;
 import com.example.sdbesoaringadministration.repositories.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -19,13 +24,15 @@ public class FlightServiceImpl implements FlightService {
     private final AirportRepository apRepository;
     private final StartingMethodeRepository smRepository;
     private final PersonRepository psRepository;
+    private final InvoiceRepository invRepository;
 
-    public FlightServiceImpl( FlightRepository flRepository, PlaneRepository plRepository, AirportRepository apRepository, StartingMethodeRepository smRepository, PersonRepository psRepository ) {
+    public FlightServiceImpl( FlightRepository flRepository, PlaneRepository plRepository, AirportRepository apRepository, StartingMethodeRepository smRepository, PersonRepository psRepository, InvoiceRepository invRepository ) {
         this.flRepository = flRepository;
         this.plRepository = plRepository;
         this.apRepository = apRepository;
         this.smRepository = smRepository;
         this.psRepository = psRepository;
+        this.invRepository = invRepository;
     }
 
     @Override
@@ -256,9 +263,41 @@ public class FlightServiceImpl implements FlightService {
 //        }
     }
 
-    public long calculateTimeFlown( LocalDateTime timeStart, LocalDateTime timeEnd ) {
+    public ResponseEntity<Object> createInvoicefromFLight( Long flid ) {
+        Invoice invoice = new Invoice();
+        Flight flight = flRepository.getById( flid );
+        if ( invRepository.findInvoiceByFlight_Id( flid ).isEmpty() ) {
 
-        return( ChronoUnit.MINUTES.between( timeStart, timeEnd));
+            invoice.setCreationDate( ( LocalDate.now() ) );
+            invoice.setBilledPerson( flight.getBilledPerson() );
+            invoice.setAmmount( calculateCostsOfFlight( flight ) );
+            invoice.setId( flight.getId() );
+            invoice.setFlight( flight );
+            invRepository.save( invoice );
+            return new ResponseEntity<>( "Invoice", HttpStatus.CREATED );
+        } else {
+            return new ResponseEntity<>( "Invoice allready created for this flight, please use the update-function", HttpStatus.BAD_REQUEST );
+        }
     }
 
+    public long calculateTimeFlown( LocalDateTime timeStart, LocalDateTime timeEnd ) {
+        return ( ChronoUnit.MINUTES.between( timeStart, timeEnd ) );
+    }
+
+    public BigDecimal calculateCostsOfFlight( Flight flight ) {
+
+        BigDecimal sm = flight.getStartingMethode().getPrice();
+
+        BigDecimal time;
+        BigDecimal timePrice = BigDecimal.valueOf( 0 );
+        if ( flight.getPlane().getPrivatePlane() ) {
+            System.out.println( flight.getPlane().getPrivatePlane() );
+        } else {
+            time = BigDecimal.valueOf( ( int ) flight.getTimeFlown() );
+            timePrice = ( time.multiply( flight.getPlane().getMinutePrice() ) );
+        }
+        BigDecimal amount = sm.add( timePrice );
+
+        return amount;
+    }
 }

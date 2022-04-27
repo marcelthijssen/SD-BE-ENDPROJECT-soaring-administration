@@ -2,34 +2,35 @@ package com.example.sdbesoaringadministration.models;
 
 //;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-
 @Table(name = "invoices")
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="invoice_number")
     private Long id;
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int invoiceNumber;
+
     private BigDecimal ammount;
-    private Date creationDate;
+    private LocalDate creationDate;
+
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(
+            name = "flight_id",
+            referencedColumnName = "id")
+    private Flight flight;
     @ManyToOne
-    @JoinColumn(name = "person_id",
+    @JoinColumn(name = "billed_person_id",
             referencedColumnName = "id")
     private Person billedPerson;
-    @ManyToOne
-    @JoinColumn(name = "flights_info_id",
-            referencedColumnName = "id")
-    private Flight flights_info;
-
-    @ManyToOne
-    @JoinColumn(name = "membership_id",
-            referencedColumnName = "id")
-    private Membership membership;
 
     public Long getId() {
         return id;
@@ -37,14 +38,6 @@ public class Invoice {
 
     public void setId( Long id ) {
         this.id = id;
-    }
-
-    public int getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber( int invoiceNumber ) {
-        this.invoiceNumber = invoiceNumber;
     }
 
     public Person getBilledPerson() {
@@ -55,11 +48,11 @@ public class Invoice {
         this.billedPerson = billedPerson;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate( Date creationDate ) {
+    public void setCreationDate( LocalDate creationDate ) {
         this.creationDate = creationDate;
     }
 
@@ -71,21 +64,9 @@ public class Invoice {
         this.ammount = ammount;
     }
 
-    public Flight getFlights_info() {
-        return flights_info;
-    }
+    public void setFlight(Flight flight){this.flight=flight;}
 
-    public void setFlights_info( Flight flights_info ) {
-        this.flights_info = flights_info;
+    public Flight getFlight() {
+        return flight;
     }
-
-    public Membership getMembership() {
-        return membership;
-    }
-
-    public void setMembership( Membership membership ) {
-        this.membership = membership;
-    }
-//    calculating invoice
-
 }
