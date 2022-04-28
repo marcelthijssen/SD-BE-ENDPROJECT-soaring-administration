@@ -49,24 +49,4 @@ public class MembershipDto {
         this.costsPerMonth = costsPerMonth;
     }
 
-
-    public static Membership membershipDtoToMembership( MembershipDto dto ) {
-        Membership tom = new Membership();
-
-        tom.setId( dto.getId() );
-        tom.setTitle( dto.getTitle() );
-        tom.setCostsPerMonth( dto.getCostsPerMonth() );
-
-        return tom;
-    }
-
-    public static MembershipDto membershipToMembershipDto( Membership tom ) {
-        MembershipDto dto = new MembershipDto();
-
-        dto.setId( tom.getId() );
-        dto.setTitle( tom.getTitle() );
-        dto.setCostsPerMonth( tom.getCostsPerMonth() );
-
-        return dto;
-    }
 }

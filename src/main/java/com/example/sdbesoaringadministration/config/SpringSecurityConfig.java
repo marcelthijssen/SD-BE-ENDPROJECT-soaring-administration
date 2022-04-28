@@ -52,11 +52,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 //                /users
                 .mvcMatchers( HttpMethod.GET, "/users" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.GET, "/users/**" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.POST, "/users" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.PUT, "/users" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.DELETE, "/**" ).hasRole( "ADMIN" )
+                .antMatchers( HttpMethod.POST, "/users/**/authorities" ).hasAnyRole( "ADMIN" )
+                .antMatchers( HttpMethod.POST, "/users//**/authorities/**" ).hasAnyRole( "ADMIN" )
+
+
 //                /Memberships
                 .mvcMatchers( HttpMethod.GET, "/memberships" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.GET, "/memberships/**" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.POST, "/memberships" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.PUT, "/memberships/**" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.DELETE, "/memberships/**" ).hasRole( "ADMIN" )
@@ -71,14 +77,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers( HttpMethod.GET, "/airports" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.GET, "/airports/**" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.POST, "/airports" ).hasAnyRole( "ADMIN", "USER" )
-                .mvcMatchers( HttpMethod.PUT, "/airports" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.PUT, "/airports/**" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
 //                /planes
                 .mvcMatchers( HttpMethod.GET, "/planes" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.GET, "/planes/**" ).hasAnyRole( "ADMIN", "USER", "TECHNICIAN" )
                 .mvcMatchers( HttpMethod.POST, "/planes" ).hasAnyRole( "ADMIN", "USER" )
-                .mvcMatchers( HttpMethod.PUT, "/planes" ).hasAnyRole( "ADMIN", "USER" )
-                .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.PUT, "/planes/flightstatus/**" ).hasRole( "TECHNICIAN" )
+                .mvcMatchers( HttpMethod.PUT, "/planes/**" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
 //                /Startingmethodes
                 .mvcMatchers( HttpMethod.GET, "/startingmethodes" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.POST, "/startingmethodes" ).hasRole( "ADMIN" )

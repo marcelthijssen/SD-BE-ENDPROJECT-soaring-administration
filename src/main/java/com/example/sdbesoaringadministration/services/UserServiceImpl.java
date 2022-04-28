@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
         UserDto dto = new UserDto();
 
         dto.username = user.getUsername();
-        dto.password = user.getPassword();
+//Password removed for security-reasons
         dto.enabled = user.getEnabled();
         dto.email = user.getEmail();
         dto.authorities = user.getAuthorities();
@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
         return dto;
     }
 
-    public User dtoToUser( UserDto dto ) {
+    public User userDtoToUser( UserDto dto ) {
 
         User u = new User();
 

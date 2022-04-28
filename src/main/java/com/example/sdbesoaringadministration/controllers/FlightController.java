@@ -44,8 +44,7 @@ public class FlightController {
 
     @PostMapping("")
     public FlightDto addFlight() {
-        FlightDto dto = flightService.createFlight();
-        return dto;
+        return flightService.createFlight();
     }
 
 
@@ -75,8 +74,7 @@ public class FlightController {
 
     @PutMapping("flights/{flid}")
     public FlightDto updateFlight( @PathVariable("flid") Long flid, @RequestBody FlightDto flight ) {
-        FlightDto dto = flightService.updateFlight( flid, flight );
-        return dto;
+        return flightService.updateFlight( flid, flight );
     }
 
     // Assign plane to flight
@@ -124,8 +122,7 @@ public class FlightController {
 
     @PutMapping("/{flid}/instructionflight")
     public FlightDto assignInstructionFlightToFlight( @PathVariable("flid") Long flid, @RequestBody FlightDto flight ) {
-        FlightDto dto = flightService.assignInstructionFlightToFlight( flid, flight );
-        return dto;
+        return flightService.assignInstructionFlightToFlight( flid, flight );
     }
 
     @PutMapping("/{flid}/start")
@@ -143,11 +140,10 @@ public class FlightController {
 
     @PutMapping("/{flid}/remarks")
     public FlightDto updateRemarksToFLight( @PathVariable("flid") Long flid, @RequestBody FlightDto flight ) {
-        FlightDto dto = flightService.updateRemarksToFLight( flid, flight );
-        return dto;
+        return flightService.updateRemarksToFLight( flid, flight );
     }
 
-    @PutMapping("/{flid}/invoice")
+    @PutMapping("/invoice/{flid}")
     public ResponseEntity<Object> createInvoicefromFLight( @PathVariable("flid") Long flid ) {
         flightService.createInvoicefromFLight( flid );
         return new ResponseEntity<>( "invoice created", HttpStatus.CREATED );

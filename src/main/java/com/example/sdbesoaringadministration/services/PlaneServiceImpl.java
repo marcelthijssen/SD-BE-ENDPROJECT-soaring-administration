@@ -145,7 +145,6 @@ public class PlaneServiceImpl implements PlaneService {
 
     public static PlaneDto planeToPlaneDto( Plane pl ) {
         PlaneDto dto = new PlaneDto();
-        if ( pl.getFlightStatus() == null ) {
 
             dto.setId( pl.getId() );
             dto.setCallSign( pl.getCallSign() );
@@ -158,19 +157,7 @@ public class PlaneServiceImpl implements PlaneService {
             dto.setTechnician( pl.getTechnician() );
             dto.setFlightStatus( pl.getFlightStatus() );
             return dto;
-        } else {
-            dto.setId( pl.getId() );
-            dto.setCallSign( pl.getCallSign() );
-            dto.setBrand( pl.getBrand() );
-            dto.setType( pl.getType() );
-            dto.setRegistration( pl.getRegistration() );
-            dto.setTwoSeater( pl.getTwoSeater() );
-            dto.setPrivatePlane( pl.getPrivatePlane() );
-            dto.setOwner( pl.getOwner() );
-            dto.setTechnician( pl.getTechnician() );
-            dto.setFlightStatus( pl.getFlightStatus() );
-            return dto;
-        }
+
     }
 
     public static Plane planeDtoToPlane( PlaneDto dto ) {

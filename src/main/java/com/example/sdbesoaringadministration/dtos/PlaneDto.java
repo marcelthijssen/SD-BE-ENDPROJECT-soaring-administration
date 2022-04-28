@@ -129,5 +129,36 @@ public class PlaneDto {
         this.technician = technician;
     }
 
+    public static PlaneDto planeToPlaneDto( Plane pl ) {
+        PlaneDto dto = new PlaneDto();
+
+        dto.setId( pl.getId() );
+        dto.setCallSign( pl.getCallSign() );
+        dto.setBrand( pl.getBrand() );
+        dto.setType( pl.getType() );
+        dto.setRegistration( pl.getRegistration() );
+        dto.setTwoSeater( pl.getTwoSeater() );
+        dto.setPrivatePlane( pl.getPrivatePlane() );
+        dto.setOwner( pl.getOwner() );
+        dto.setTechnician( pl.getTechnician() );
+        dto.setFlightStatus( pl.getFlightStatus() );
+        return dto;
+    }
+
+    public static Plane planeDtoToPlane( PlaneDto dto ) {
+        Plane pl = new Plane();
+
+        pl.setId( dto.getId() );
+        pl.setCallSign( dto.getCallSign() );
+        pl.setBrand( dto.getBrand() );
+        pl.setType( dto.getType() );
+        pl.setRegistration( dto.getRegistration() );
+        pl.setTwoSeater( dto.getTwoSeater() );
+        pl.setPrivatePlane( dto.getPrivatePlane() );
+        pl.setOwner( dto.getOwner() );
+        pl.setTechnician( dto.getTechnician() );
+        pl.setFlightStatus( dto.getFlightStatus() );
+        return pl;
+    }
 
 }

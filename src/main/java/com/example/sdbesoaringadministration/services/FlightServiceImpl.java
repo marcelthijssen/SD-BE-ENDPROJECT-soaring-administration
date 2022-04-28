@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,7 +43,6 @@ public class FlightServiceImpl implements FlightService {
 
         for ( Flight fl : flightList ) {
             FlightDto dto = new FlightDto().flightToFlightDto( fl );
-
             flightDtoList.add( dto );
         }
         return flightDtoList;
@@ -54,7 +54,7 @@ public class FlightServiceImpl implements FlightService {
             Flight flight = flRepository.findById( flid ).get();
             return new FlightDto().flightToFlightDto( flight );
         } else {
-            throw new RecordNotFoundException("Flight not available", HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Flight not available", HttpStatus.NOT_FOUND );
         }
     }
 
@@ -94,8 +94,6 @@ public class FlightServiceImpl implements FlightService {
             fl.setPassenger( dto.getPassenger() );
             fl.setCaptain( dto.getCaptain() );
             fl.setBilledPerson( dto.getBilledPerson() );
-
-// plane
             fl.setPlane( dto.getPlane() );
             flRepository.save( fl );
             return dto;
@@ -264,19 +262,42 @@ public class FlightServiceImpl implements FlightService {
     }
 
     public ResponseEntity<Object> createInvoicefromFLight( Long flid ) {
-        Invoice invoice = new Invoice();
-        Flight flight = flRepository.getById( flid );
+        var optionalFlight = flRepository.findById( flid );
+        var flight = optionalFlight.get();
 
-            invoice.setCreationDate( ( LocalDate.now() ) );
-            invoice.setBilledPerson( flight.getBilledPerson() );
-            invoice.setAmmount( calculateCostsOfFlight( flight ) );
-            invoice.setId( flight.getId() );
-            invoice.setFlight( flight );
-            invRepository.save( invoice );
-            return new ResponseEntity<>( "Invoice", HttpStatus.CREATED );
+        try {
+            if ( optionalFlight.isPresent()) {
 
+                Invoice invoice = new Invoice();
+
+                invoice.setCreationDate( ( LocalDate.now() ) );
+                invoice.setBilledPerson( flight.getBilledPerson() );
+                invoice.setAmmount( calculateCostsOfFlight( flight ) );
+                invoice.setId( flight.getId() );
+                invoice.setFlight( flight );
+                invRepository.save( invoice );
+                return new ResponseEntity<>( "Invoice", HttpStatus.CREATED );
+            } else {
+                return new ResponseEntity<>( HttpStatus.NOT_FOUND );
+            }
+        } catch( Exception e)    {
+        return new ResponseEntity<>( "invalid flight-id: " + flid, HttpStatus.NOT_FOUND );
     }
 
+}
+
+    /*
+            if ( flRepository.findById( flid ).isPresent() ) {
+                Flight fl = flRepository.findById( flid ).get();
+                fl.setInstructionFlight( dto.getInstructionFlight() );
+
+                flRepository.save( fl );
+                return dto;
+            } else {
+                throw new RecordNotFoundException( "Flight not found", HttpStatus.NOT_FOUND );
+            }
+        }
+     */
     public long calculateTimeFlown( LocalDateTime timeStart, LocalDateTime timeEnd ) {
         return ( ChronoUnit.MINUTES.between( timeStart, timeEnd ) );
     }
@@ -293,8 +314,6 @@ public class FlightServiceImpl implements FlightService {
             time = BigDecimal.valueOf( ( int ) flight.getTimeFlown() );
             timePrice = ( time.multiply( flight.getPlane().getMinutePrice() ) );
         }
-        BigDecimal amount = sm.add( timePrice );
-
-        return amount;
+        return sm.add( timePrice );
     }
 }

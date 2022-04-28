@@ -23,8 +23,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private
-    CustomUserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     JwtUtil jwtUtl;

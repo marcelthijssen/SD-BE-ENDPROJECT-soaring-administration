@@ -13,11 +13,11 @@ import java.util.Date;
 @Entity
 @Table(name = "invoices")
 public class Invoice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="invoice_number")
     private Long id;
-
     private BigDecimal ammount;
     private LocalDate creationDate;
 
