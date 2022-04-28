@@ -23,17 +23,17 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/")
-    public ResponseEntity<List<UserDto>> getUsers() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
 
-        List<UserDto> userDtoList = userService.getUsers();
+        List<UserDto> userDtoList = userService.getAllUsers();
 
         return ResponseEntity.ok().body( userDtoList );
     }
 
     @GetMapping(value = "/{username}")
-    public ResponseEntity<UserDto> getUser( @PathVariable("username") String username ) {
+    public ResponseEntity<UserDto> getUserById( @PathVariable("username") String username ) {
         try {
-            UserDto optionalUser = userService.getUser( username );
+            UserDto optionalUser = userService.getUserById( username );
 
             return ResponseEntity.ok().body( optionalUser );
         } catch (UsernameNotFoundException ex) {

@@ -10,6 +10,8 @@ import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +33,7 @@ public class UserServiceImpl implements UserService {
 //    @Autowired
 //    private AuthorityRepository authorityRepository;
 
-    public List<UserDto> getUsers() {
+    public List<UserDto> getAllUsers() {
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
         for ( User u : list ) {
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService {
         return collection;
     }
 
-    public UserDto getUser( String username ) {
+    public UserDto getUserById( String username ) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById( username );
         if ( user.isPresent() ) {
@@ -58,13 +60,13 @@ public class UserServiceImpl implements UserService {
     public String createUser( User user ) {
 
         if ( userExists( user.getUsername() ) ) {
-            throw new UsernameAlreadyExistException( "Username allready in use, please chose another" );
+            throw new UsernameAlreadyExistException( "Username allready in use, please choose another" );
         } else {
             user.setEmail( user.getEmail() );
             user.setPassword( passwordEncoder.encode( user.getPassword() ) );
             user.getAuthorities().clear();
             user.addAuthority( new Authority( user.getUsername(), "ROLE_USER" ) );
-            User newUser = userRepository.save( user );
+            userRepository.save( user );
 
             return "New user added";
         }
@@ -74,18 +76,21 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById( username );
     }
 
-    public void updateUser( String username, UserDto newUser ) {
-        if ( !userRepository.existsById( username ) ) throw new RecordNotFoundException("Not found", HttpStatus.NOT_FOUND );
-        User user = userRepository.findById( username ).get();
-        user.setPassword( newUser.getPassword() );
-        userRepository.save( user );
+    public ResponseEntity<Object> updateUser( String username, UserDto newUser ) {
+            if ( !userRepository.existsById( username ) )
+                throw new RecordNotFoundException( "Not found", HttpStatus.NOT_FOUND );
+            User user = userRepository.findById( username ).get();
+            user.setPassword( newUser.getPassword() );
+            userRepository.save( user );
+
+            return new ResponseEntity<>( HttpStatus.OK );
     }
 
     public Set<Authority> getAuthorities( String username ) {
         if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         User user = userRepository.findById( username ).get();
-        UserDto userDto = userToUserDto( user );
-        return userDto.getAuthorities();
+        UserDto dto = userToUserDto( user );
+        return dto.getAuthorities();
     }
 
     public void addAuthority( String username, String authority ) {
@@ -117,7 +122,7 @@ public class UserServiceImpl implements UserService {
         return dto;
     }
 
-    public User userDtoToUser( UserDto dto ) {
+    public User dtoToUser( UserDto dto ) {
 
         User u = new User();
 

@@ -35,22 +35,24 @@ public class FlightControllerTests {
 
     @Test
     public void shouldReturnOrder() throws Exception {
-Flight flight = new Flight();
-flight.setId( 1L );
+        Flight flight = new Flight();
+        flight.setId( 1L );
         flight.setTimeStart( LocalDateTime.parse( "2022-04-26T07:42:32.341225" ) );
         flight.setTimeEnd( LocalDateTime.parse( "2022-04-26T09:42:32.341225" ) );
-        Mockito.when(mockService.calculateTimeFlown(flight.getTimeStart(), flight.getTimeEnd())).thenReturn( 120L );
+        Mockito.when( mockService.calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) ).thenReturn( 120L );
 
-        mockMvc.perform(put("/flight/1/end"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("order with number 123")));
+        mockMvc.perform( put( "/flight/1/end" ) )
+                .andDo( print() )
+                .andExpect( status().isOk() )
+                .andExpect( content().string( containsString( "order with number 123" ) ) );
+    }
+
+@Test
+    void shouldReturnTimeFlown() {
+        Flight flight = new Flight();
+        flight.setTimeStart( LocalDateTime.parse( "2022-04-26T07:42:32.341225" ) );
+        flight.setTimeEnd( LocalDateTime.parse( "2022-04-26T09:42:32.341225" ) );
+        assertEquals( 120, mockService.calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) );
+
     }
 }
-//
-//    void shouldReturnTimeFlown() {
-//        flight.setTimeStart( LocalDateTime.parse( "2022-04-26T07:42:32.341225" ) );
-//        flight.setTimeEnd( LocalDateTime.parse( "2022-04-26T09:42:32.341225" ) );
-//        assertEquals( 120, flightServiceImpl.calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) );
-//
-//    }

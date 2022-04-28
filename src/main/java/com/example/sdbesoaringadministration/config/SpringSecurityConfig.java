@@ -16,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -51,11 +50,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
-//                .antMatchers("/authenticated").authenticated()
-//                .antMatchers("/authenticate").permitAll()
+                .mvcMatchers(HttpMethod.POST,"/users").permitAll()
+                .mvcMatchers(HttpMethod.PUT,"/users").permitAll()
+                .mvcMatchers("/users").hasRole("ADMIN")
+                .mvcMatchers( HttpMethod.DELETE, "/users/").hasRole("ADMIN")
+                .mvcMatchers("/authenticated").authenticated()
+                .mvcMatchers("/authenticate").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()

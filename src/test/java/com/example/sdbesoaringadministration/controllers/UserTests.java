@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -26,6 +27,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -84,14 +86,14 @@ public class UserTests {
 
         List<User> testUser = new ArrayList<>();
         User user1 = new User();
-        user1.setId( 1L );
-        user1.setIcao( "ABCD" );
+        user1.setUsername( "1L" );
+        user1.setEmail( "ABCD@mail.nl" );
         User user2 = new User();
-        user2.setId( 2L );
-        user2.setIcao( "EFGH" );
+        user1.setUsername( "22L" );
+        user1.setEmail( "ABCDe@mail.nl" );
         User user3 = new User();
-        user3.setId( 3L );
-        user3.setIcao( "IJKL" );
+        user1.setUsername( "3L" );
+        user1.setEmail( "ABCDf@mail.nl" );
 
         testUser.add( user1 );
         testUser.add( user2 );
@@ -111,16 +113,16 @@ public class UserTests {
     @Test
     public void saveUserTest() {
         User user = new User();
-        user.setId( 1L );
-        user.setIcao( "ABCD" );
+        user.setUsername( "1L" );
+        user.setEmail( "ABCD@mail.nl" );
 
         userRepository.save( user );
 
         verify( userRepository, times( 1 ) ).save( userCaptor.capture() );
         var user1 = userCaptor.getValue();
 
-        assertThat( user1.getIcao() ).isEqualTo( "ABCD" );
-        assertThat( user1.getId() ).isEqualTo( 1 );
+        assertThat( user1.getUsername() ).isEqualTo( "1L" );
+        assertThat( user1.getEmail() ).isEqualTo( "ABCD@mail.nl" );
     }
     /*
         @Test
@@ -139,16 +141,28 @@ public class UserTests {
             assertThat( userDto1.getIcao() ).isEqualTo( "test1" );
         }
     */
+//    @Test
+//    public void updateUserExceptionTest() {
+//        assertThrows( RecordNotFoundException.class, () -> service.getUserById( null ) );
+//        throw new RecordNotFoundException( "nit found" , HttpStatus.NOT_FOUND );
+//    }
     @Test
-    public void updateUserExceptionTest() {
-        assertThrows( RecordNotFoundException.class, () -> service.getUserById( null ) );
+    public void whenExceptionThrown_thenAssertionSucceeds() {
+        Exception ex = assertThrows(RecordNotFoundException.class, () -> {
+            service.getUserById( null );
+        });
+
+        String expectedMessage = "For input string";
+        String actualMessage = ex.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void deleteUserTest() {
         User user = new User();
-        user.setId( 1L );
-        user.setIcao( "ABCD" );
+        user.setUsername( "1L" );
+        user.setEmail( "ABCD@mail.nl" );
 
         userRepository.delete( user );
 

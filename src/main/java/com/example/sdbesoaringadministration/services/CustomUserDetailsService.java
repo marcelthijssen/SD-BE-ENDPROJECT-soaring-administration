@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername( String username ) {
-        Optional<UserDto> user = Optional.ofNullable( userService.getUser( username ) );
+        Optional<UserDto> user = Optional.ofNullable( userService.getUserById( username ) );
         if ( !user.isPresent() ) {
             throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         }

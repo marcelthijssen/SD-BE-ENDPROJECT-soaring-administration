@@ -55,3 +55,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
 }
+/*
+        try {
+                UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(request);
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                chain.doFilter(request, response);
+                } catch (AccessDeniedException ade){
+                handlerExceptionResolver.resolveException(request, response, null, ade);
+                }*/

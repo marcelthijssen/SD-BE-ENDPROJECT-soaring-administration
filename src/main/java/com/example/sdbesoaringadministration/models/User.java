@@ -30,6 +30,7 @@ public class User {
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
+
     public String getUsername() {
         return username;
     }
