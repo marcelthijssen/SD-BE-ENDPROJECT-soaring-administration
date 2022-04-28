@@ -50,14 +50,55 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.POST,"/users").permitAll()
-                .mvcMatchers(HttpMethod.PUT,"/users").permitAll()
-                .mvcMatchers("/users").hasRole("ADMIN")
-                .mvcMatchers( HttpMethod.DELETE, "/users/").hasRole("ADMIN")
-                .mvcMatchers( HttpMethod.PUT, "/planes/flightstatus/**").hasRole("TECHNICIAN")
-                .mvcMatchers("/authenticated").authenticated()
-                .mvcMatchers("/authenticate").permitAll()
-                .anyRequest().permitAll()
+//                /users
+                .mvcMatchers( HttpMethod.GET, "/users" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.POST, "/users" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.PUT, "/users" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.DELETE, "/**" ).hasRole( "ADMIN" )
+//                /Memberships
+                .mvcMatchers( HttpMethod.GET, "/memberships" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.POST, "/memberships" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.PUT, "/memberships/**" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.DELETE, "/memberships/**" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.PUT, "/membership/" ).hasRole( "ADMIN" )
+//                /persons
+                .mvcMatchers( HttpMethod.GET, "/persons" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.GET, "/persons/**" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.POST, "/persons" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.PUT, "/persons/**" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.DELETE, "/persons/**" ).hasAnyRole( "ADMIN" )
+//                /airports
+                .mvcMatchers( HttpMethod.GET, "/airports" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.GET, "/airports/**" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.POST, "/airports" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.PUT, "/airports" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
+//                /planes
+                .mvcMatchers( HttpMethod.GET, "/planes" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.POST, "/planes" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.PUT, "/planes" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.PUT, "/planes/flightstatus/**" ).hasRole( "TECHNICIAN" )
+//                /Startingmethodes
+                .mvcMatchers( HttpMethod.GET, "/startingmethodes" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.POST, "/startingmethodes" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.PUT, "/startingmethodes/**" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.DELETE, "/startingmethodes/**" ).hasRole( "ADMIN" )
+//                /flights
+                .mvcMatchers( HttpMethod.GET, "/flights" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.GET, "/flights/**" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.POST, "/flights" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.PUT, "/flights/**" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.DELETE, "/flights/**" ).hasRole( "ADMIN" )
+//                  /Invoices
+                .mvcMatchers( HttpMethod.GET, "/invoices/**" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.GET, "/invoices" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.POST, "/invoices/**" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.DELETE, "/invoices/**" ).hasRole( "ADMIN" )
+//                  /Authenticate
+                .mvcMatchers( "/authenticated" ).authenticated()
+                .mvcMatchers( "/authenticate" ).permitAll()
+                .anyRequest().denyAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy( SessionCreationPolicy.STATELESS );

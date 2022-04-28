@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.sdbesoaringadministration.dtos.PlaneDto.planeDtoToPlane;
-
 @Service
 public class PlaneServiceImpl implements PlaneService {
     private final PlaneRepository plRepository;
@@ -32,22 +30,23 @@ public class PlaneServiceImpl implements PlaneService {
         List<PlaneDto> planeDtoList = new ArrayList<>();
 
         for ( Plane pl : planeList ) {
-            PlaneDto dto = new PlaneDto().planeToPlaneDto( pl );
-
-            planeDtoList.add( dto );
+            planeDtoList.add( planeToPlaneDto( pl ) );
         }
         return planeDtoList;
     }
 
+
     @Override
     public PlaneDto getPlaneById( Long plid ) {
-        if ( plRepository.findById( plid ).isPresent() ) {
+        try {
             Plane pl = plRepository.findById( plid ).get();
-            return new PlaneDto().planeToPlaneDto( pl );
-        } else {
+            PlaneDto dto = ( planeToPlaneDto( pl ) );
+            return dto;
+        } catch ( Exception e ) {
             throw new RecordNotFoundException( "Invalid plane id: " + plid, HttpStatus.NOT_FOUND );
         }
     }
+
 
     @Override
     public Plane createPlane( PlaneDto dto ) {
@@ -74,10 +73,10 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     public PlaneDto addMinutePrice( Long plid, PlaneDto dto ) {
-        if ( plRepository.findById( plid ).isPresent()){
+        if ( plRepository.findById( plid ).isPresent() ) {
             Plane pl = plRepository.findById( plid ).get();
 //            pl.setMinutePrice( plane.getMinutePrice() );
-            plRepository.save(pl);
+            plRepository.save( pl );
         }
         return dto;
     }
@@ -94,7 +93,7 @@ public class PlaneServiceImpl implements PlaneService {
             plane.setOwner( person );
             plRepository.save( plane );
         } else {
-            throw new RecordNotFoundException( "Invalid plane-id: " + plid + ", or invalid person-id: " + pid , HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid plane-id: " + plid + ", or invalid person-id: " + pid, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -116,15 +115,16 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public PlaneDto AddPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
-        if ( plRepository.findById( plid ).isPresent() ) {
-            Plane pl = plRepository.findById( plid ).get();
+    public PlaneDto addPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
 
-            pl.setFlightStatus( pdf.getBytes() );
-
-            plRepository.save( pl );
-        } else {
-            throw new RecordNotFoundException( "Plane not here", HttpStatus.NOT_FOUND );
+        try {
+            if ( plRepository.findById( plid ).isPresent() ) {
+                Plane pl = plRepository.findById( plid ).get();
+                pl.setFlightStatus( pdf.getBytes() );
+                plRepository.save( pl );
+            }
+        } catch ( RecordNotFoundException e ) {
+            throw new RecordNotFoundException( "Invalid plane-id: " + plid, HttpStatus.NOT_FOUND );
         }
         return null;
     }
@@ -139,7 +139,54 @@ public class PlaneServiceImpl implements PlaneService {
             dto.setFlightStatus( pl.getFlightStatus() );
             return dto;
         } else {
-            throw new RecordNotFoundException( "Plane with id: " + plid + " not available", HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid plane-id: " + plid, HttpStatus.NOT_FOUND );
         }
+    }
+
+    public static PlaneDto planeToPlaneDto( Plane pl ) {
+        PlaneDto dto = new PlaneDto();
+        if ( pl.getFlightStatus() == null ) {
+
+            dto.setId( pl.getId() );
+            dto.setCallSign( pl.getCallSign() );
+            dto.setBrand( pl.getBrand() );
+            dto.setType( pl.getType() );
+            dto.setRegistration( pl.getRegistration() );
+            dto.setTwoSeater( pl.getTwoSeater() );
+            dto.setPrivatePlane( pl.getPrivatePlane() );
+            dto.setOwner( pl.getOwner() );
+            dto.setTechnician( pl.getTechnician() );
+            dto.setFlightStatus( pl.getFlightStatus() );
+            return dto;
+        } else {
+            dto.setId( pl.getId() );
+            dto.setCallSign( pl.getCallSign() );
+            dto.setBrand( pl.getBrand() );
+            dto.setType( pl.getType() );
+            dto.setRegistration( pl.getRegistration() );
+            dto.setTwoSeater( pl.getTwoSeater() );
+            dto.setPrivatePlane( pl.getPrivatePlane() );
+            dto.setOwner( pl.getOwner() );
+            dto.setTechnician( pl.getTechnician() );
+            dto.setFlightStatus( pl.getFlightStatus() );
+            return dto;
+        }
+    }
+
+    public static Plane planeDtoToPlane( PlaneDto dto ) {
+        Plane pl = new Plane();
+
+        pl.setId( dto.getId() );
+        pl.setCallSign( dto.getCallSign() );
+        pl.setBrand( dto.getBrand() );
+        pl.setType( dto.getType() );
+        pl.setRegistration( dto.getRegistration() );
+        pl.setTwoSeater( dto.getTwoSeater() );
+        pl.setPrivatePlane( dto.getPrivatePlane() );
+        pl.setOwner( dto.getOwner() );
+        pl.setTechnician( dto.getTechnician() );
+        pl.setFlightStatus( dto.getFlightStatus() );
+        return pl;
+
     }
 }

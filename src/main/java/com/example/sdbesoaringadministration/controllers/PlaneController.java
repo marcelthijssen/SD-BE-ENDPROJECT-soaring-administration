@@ -99,8 +99,8 @@ public class PlaneController {
 
     // need to upload file for plane
     @PutMapping("/flightstatus/{plid}")
-    public String AddPlaneFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
-        planeService.AddPlaneFlightStatusPdf( plid, pdf );
+    public String addPlaneFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
+        planeService.addPlaneFlightStatusPdf( plid, pdf );
         return "File uploaded";
     }
 

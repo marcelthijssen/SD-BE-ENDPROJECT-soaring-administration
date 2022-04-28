@@ -18,6 +18,7 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final MembershipRepository tomRepository;
+
     public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository ) {
         this.personRepository = personRepository;
         this.tomRepository = tomRepository;
@@ -29,7 +30,7 @@ public class PersonServiceImpl implements PersonService {
         List<PersonDto> dtoList = new ArrayList<>();
 
         for ( Person p : personsList ) {
-            dtoList.add(personToPersonDto( p ));
+            dtoList.add( personToPersonDto( p ) );
         }
         return dtoList;
     }
@@ -48,8 +49,13 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto createPerson( PersonDto personDto ) {
-        personRepository.save( personDtoToPerson( personDto ) );
-    return personDto;
+        try {
+            Person p = personDtoToPerson( personDto );
+            personRepository.save( p );
+            return personDto;
+        } catch ( RecordNotFoundException e ) {
+            throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
+        }
     }
 
     @Override
@@ -91,20 +97,19 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void addMembershipToPerson( Long pid, Long mbid ) {
 
-            var optionalMembership = tomRepository.findById( mbid );
-            var optionalPerson = personRepository.findById( pid );
+        var optionalMembership = tomRepository.findById( mbid );
+        var optionalPerson = personRepository.findById( pid );
 
-            if ( optionalMembership.isPresent() && optionalPerson.isPresent() ) {
-                var m = optionalMembership.get();
-                var p = optionalPerson.get();
+        if ( optionalMembership.isPresent() && optionalPerson.isPresent() ) {
+            var m = optionalMembership.get();
+            var p = optionalPerson.get();
 
-                p.setMembership( m );
-                personRepository.save( p );
-            } else {
-                throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
-            }
+            p.setMembership( m );
+            personRepository.save( p );
+        } else {
+            throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
         }
-
+    }
 
 
     public static PersonDto personToPersonDto( Person p ) {
@@ -147,5 +152,5 @@ public class PersonServiceImpl implements PersonService {
         p.setMembership( dto.getMembership() );
         return p;
     }
-
 }
+

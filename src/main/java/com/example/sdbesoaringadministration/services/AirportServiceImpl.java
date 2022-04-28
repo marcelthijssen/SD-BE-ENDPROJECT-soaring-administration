@@ -1,8 +1,10 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.AirportDto;
+import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Airport;
+import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.repositories.AirportRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.sdbesoaringadministration.dtos.AirportDto.airportDtoToAirport;
 
 @Service
 public class AirportServiceImpl implements AirportService {
@@ -28,7 +29,7 @@ public class AirportServiceImpl implements AirportService {
         List<AirportDto> airportDtoList = new ArrayList<>();
 
         for ( Airport ap : airportList ) {
-            AirportDto dto = new AirportDto().airportToAirportDto( ap );
+            AirportDto dto = airportToAirportDto( ap );
 
             airportDtoList.add( dto );
         }
@@ -36,21 +37,19 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public AirportDto getAirportById( Long id ) {
-//        if ( airportRepository.findById( id ).isPresent() ) {
-
-            Airport ap = airportRepository.findById( id ).get();
-            AirportDto dto = new AirportDto().airportToAirportDto(ap);
-
+    public AirportDto getAirportById( Long aid ) {
+        try {
+            Airport ap = airportRepository.findById( aid ).get();
+            AirportDto dto = airportToAirportDto( ap );
             return dto;
-//        } else {
-//            throw new RecordNotFoundException("Airport not available", HttpStatus.NOT_FOUND );
-//        }
+        } catch ( Exception e ) {
+            throw new RecordNotFoundException( "Invalid airport id: " + aid, HttpStatus.NOT_FOUND );
+        }
     }
-
 
     @Override
     public Airport createAirport( AirportDto dto ) {
+
         Airport ap = airportDtoToAirport( dto );
 
         return this.airportRepository.save( ap );
@@ -58,28 +57,48 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public ResponseEntity<Object> deleteAirportById( Long apid ) {
-        if ( airportRepository.findById( apid ).isPresent() ) {
+        try {
             airportRepository.deleteById( apid );
-            return new ResponseEntity<>("Airport is deleted", HttpStatus.OK);
-        } else {
+            return new ResponseEntity<>( "Airport is deleted", HttpStatus.OK );
+        } catch ( RecordNotFoundException e ) {
             throw new RecordNotFoundException( "Airport not found", HttpStatus.NOT_FOUND );
         }
     }
 
 
-  @Override
+    @Override
     public AirportDto updateAirport( Long apid, AirportDto dto ) {
-        if ( airportRepository.findById( apid ).isPresent() ) {
+        try {
             Airport ap = airportRepository.findById( apid ).get();
-            dto.setId( ap.getId() );
-            dto.setIcao( ap.getIcao() );
-            dto.setCity( ap.getCity() );
-            dto.setCountry(ap.getCountry());
+            ap.setId( dto.getId() );
+            ap.setIcao( dto.getIcao() );
+            ap.setCity( dto.getCity() );
+            ap.setCountry( dto.getCountry() );
 
-            airportRepository.save(ap);
+            airportRepository.save( ap );
             return dto;
-        } else {
+        } catch ( RecordNotFoundException e ) {
             throw new RecordNotFoundException( "Airport not found", HttpStatus.NOT_FOUND );
         }
+    }
+
+    public static Airport airportDtoToAirport( AirportDto dto ) {
+        Airport airport = new Airport();
+
+        airport.setId( dto.getId() );
+        airport.setIcao( dto.getIcao() );
+        airport.setCity( dto.getCity() );
+        airport.setCountry( dto.getCountry() );
+
+        return airport;
+    }
+
+    public AirportDto airportToAirportDto( Airport airport ) {
+        AirportDto dto = new AirportDto();
+        dto.setId( airport.getId() );
+        dto.setIcao( airport.getIcao() );
+        dto.setCity( airport.getCity() );
+        dto.setCountry( airport.getCountry() );
+        return dto;
     }
 }

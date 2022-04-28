@@ -37,7 +37,8 @@ public class PersonDto {
     public PersonDto() {
     }
 
-    public PersonDto( Long id, String gender,
+    public PersonDto( Long id,
+                      String gender,
                       String firstName, String lastName,
                       LocalDate dateOfBirth,
                       String streetName,

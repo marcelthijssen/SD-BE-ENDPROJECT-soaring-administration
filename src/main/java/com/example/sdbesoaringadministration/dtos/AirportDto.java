@@ -25,25 +25,6 @@ public class AirportDto {
         this.city = city;
         this.country = country;
     }
-    public static Airport airportDtoToAirport( AirportDto dto ) {
-        Airport airport = new Airport();
-
-        airport.setId( dto.getId() );
-        airport.setIcao( dto.getIcao() );
-        airport.setCity( dto.getCity() );
-        airport.setCountry( dto.getCountry() );
-
-        return airport;
-    }
-
-    public AirportDto airportToAirportDto( Airport airport ) {
-        AirportDto dto = new AirportDto();
-        dto.setId( airport.getId() );
-        dto.setIcao( airport.getIcao() );
-        dto.setCity( airport.getCity() );
-        dto.setCountry( airport.getCountry() );
-        return dto;
-    }
 
     public String getIcao() {
         return Icao;

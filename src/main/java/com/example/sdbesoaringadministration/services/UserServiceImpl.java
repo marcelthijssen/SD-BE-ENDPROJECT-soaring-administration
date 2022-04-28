@@ -34,12 +34,12 @@ public class UserServiceImpl implements UserService {
 //    private AuthorityRepository authorityRepository;
 
     public List<UserDto> getAllUsers() {
-        List<UserDto> collection = new ArrayList<>();
+        List<UserDto> usersList = new ArrayList<>();
         List<User> list = userRepository.findAll();
         for ( User u : list ) {
-            collection.add( userToUserDto( u ) );
+            usersList.add( userToUserDto( u ) );
         }
-        return collection;
+        return usersList;
     }
 
     public UserDto getUserById( String username ) {
