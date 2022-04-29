@@ -53,13 +53,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //                /users
                 .mvcMatchers( HttpMethod.GET, "/users" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.GET, "/users/**" ).hasRole( "ADMIN" )
-                .mvcMatchers( HttpMethod.POST, "/users" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.POST, "/users" ).permitAll()
                 .mvcMatchers( HttpMethod.PUT, "/users" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.DELETE, "/**" ).hasRole( "ADMIN" )
                 .antMatchers( HttpMethod.POST, "/users/**/authorities" ).hasAnyRole( "ADMIN" )
-                .antMatchers( HttpMethod.POST, "/users//**/authorities/**" ).hasAnyRole( "ADMIN" )
-
-
+                .antMatchers( HttpMethod.POST, "/users/**/authorities/**" ).hasAnyRole( "ADMIN" )
 //                /Memberships
                 .mvcMatchers( HttpMethod.GET, "/memberships" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.GET, "/memberships/**" ).hasAnyRole( "ADMIN", "USER" )

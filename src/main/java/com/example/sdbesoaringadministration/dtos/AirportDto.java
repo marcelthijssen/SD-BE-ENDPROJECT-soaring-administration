@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class AirportDto {
     private Long id;
     @Length(min = 4, max = 4, message = "ICAO notation must have exactly 4 characters")
-    private String Icao;
+    private String icao;
     @NotBlank(message = "City can not be empty")
     private String city;
     @NotBlank(message = "Country must be added")
@@ -21,17 +21,17 @@ public class AirportDto {
     }
     public AirportDto( Long id, String ICAO, String city, String country ) {
         this.id = id;
-        this.Icao = ICAO;
+        this.icao = ICAO;
         this.city = city;
         this.country = country;
     }
 
     public String getIcao() {
-        return Icao;
+        return icao;
     }
 
     public void setIcao( String icao ) {
-        this.Icao = icao;
+        this.icao = icao;
     }
 
     public Long getId() {

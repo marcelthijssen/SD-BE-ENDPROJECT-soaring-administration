@@ -18,24 +18,19 @@ public class StartingMethode {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @NotBlank
     private String title;
-
     @NotBlank
     private String unit;
-
     @DecimalMin(value = "0.0", message="value = 0.0")
     @Digits(integer=1, fraction=2)
     private BigDecimal price;
-
     @OneToMany
             (mappedBy = "startingMethode",
                     fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Flight> flights;
-
 
     public String getTitle() {
         return title;

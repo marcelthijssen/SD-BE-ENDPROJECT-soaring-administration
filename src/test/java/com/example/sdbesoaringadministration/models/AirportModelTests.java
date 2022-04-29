@@ -20,7 +20,7 @@ public class AirportModelTests {
     }
 
     @Test
-    void testGetIcao() {
+    void testGeticao() {
         String expectedResult = "ABCD";
         String actualResult = this.airport.getIcao();
         assertEquals( expectedResult, actualResult );

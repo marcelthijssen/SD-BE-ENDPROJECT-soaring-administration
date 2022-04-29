@@ -13,7 +13,7 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String Icao;
+    private String icao;
     private String city;
     private String country;
 
@@ -40,11 +40,11 @@ public class Airport {
     }
 
     public String getIcao() {
-        return Icao;
+        return icao;
     }
 
-    public void setIcao( String Icao ) {
-        this.Icao = Icao;
+    public void setIcao( String icao ) {
+        this.icao = icao;
     }
 
     public String getCity() {

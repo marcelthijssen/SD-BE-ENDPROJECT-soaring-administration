@@ -1,5 +1,7 @@
 package com.example.sdbesoaringadministration.models;
 
+import com.example.sdbesoaringadministration.utils.AuthorityKey;
+
 import javax.persistence.*;
 import java.io.Serializable;
 

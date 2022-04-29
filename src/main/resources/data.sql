@@ -141,7 +141,7 @@ VALUES (6004, true, '', '2022-04-14 10:00:37.185743', '6', '2022-04-14 15:03:07.
         3004, 3001);
 INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6005, true, '', '2022-04-14 10:00:37.185743', '111', '2022-04-14 15:03:07.185743', 5001, 1001, 1001, 2001, 3001,
+VALUES (6005, true, '', '2022-04-14 10:00:37.185743', '111', '2022-04-14 15:03:07.185743', 5001, 1001, 1002, 2001, 3001,
         3002, 3001);
 INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)

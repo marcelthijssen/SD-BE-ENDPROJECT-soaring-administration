@@ -77,17 +77,18 @@ public class UserServiceImpl implements UserService {
     }
 
     public ResponseEntity<Object> updateUser( String username, UserDto newUser ) {
-            if ( !userRepository.existsById( username ) )
-                throw new RecordNotFoundException( "Not found", HttpStatus.NOT_FOUND );
-            User user = userRepository.findById( username ).get();
-            user.setPassword( newUser.getPassword() );
-            userRepository.save( user );
+        if ( !userRepository.existsById( username ) )
+            throw new RecordNotFoundException( "Not found", HttpStatus.NOT_FOUND );
+        User user = userRepository.findById( username ).get();
+        user.setPassword( newUser.getPassword() );
+        userRepository.save( user );
 
-            return new ResponseEntity<>( HttpStatus.OK );
+        return new ResponseEntity<>( HttpStatus.OK );
     }
 
     public Set<Authority> getAuthorities( String username ) {
-        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
+        if ( !userRepository.existsById( username ) )
+            throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         User user = userRepository.findById( username ).get();
         UserDto dto = userToUserDto( user );
         return dto.getAuthorities();
@@ -95,14 +96,16 @@ public class UserServiceImpl implements UserService {
 
     public void addAuthority( String username, String authority ) {
 
-        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
+        if ( !userRepository.existsById( username ) )
+            throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         User user = userRepository.findById( username ).get();
         user.addAuthority( new Authority( username, authority ) );
         userRepository.save( user );
     }
 
     public void removeAuthority( String username, String authority ) {
-        if ( !userRepository.existsById( username ) ) throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
+        if ( !userRepository.existsById( username ) )
+            throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         User user = userRepository.findById( username ).get();
         Authority authorityToRemove = user.getAuthorities().stream().filter( ( a ) -> a.getAuthority().equalsIgnoreCase( authority ) ).findAny().get();
         user.removeAuthority( authorityToRemove );
@@ -113,11 +116,11 @@ public class UserServiceImpl implements UserService {
 
         UserDto dto = new UserDto();
 
-        dto.username = user.getUsername();
-//Password removed for security-reasons
-        dto.enabled = user.getEnabled();
-        dto.email = user.getEmail();
-        dto.authorities = user.getAuthorities();
+        dto.setUsername( user.getUsername() );
+        dto.setPassword( user.getPassword() );
+        dto.setEnabled( user.getEnabled() );
+        dto.setEmail( user.getEmail() );
+        dto.setAuthorities(user.getAuthorities());
 
         return dto;
     }
