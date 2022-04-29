@@ -13,16 +13,16 @@ public class InvoiceDto {
     private Long id;
     private LocalDate creationDate;
     private Person billedPerson;
-    private BigDecimal ammount;
+    private BigDecimal amount;
 private Flight flight;
     public InvoiceDto() {
     }
 
-    public void setInvoiceDto( Long id, LocalDate creationDate, Person billedPerson, BigDecimal ammount, Flight flight ) {
+    public void setInvoiceDto( Long id, LocalDate creationDate, Person billedPerson, BigDecimal amount, Flight flight ) {
         this.id = id;
         this.creationDate = creationDate;
         this.billedPerson=billedPerson;
-        this.ammount = ammount;
+        this.amount = amount;
         this.flight = flight;
     }
 
@@ -51,12 +51,12 @@ private Flight flight;
         this.creationDate = creationDate;
     }
 
-    public BigDecimal getAmmount() {
-        return ammount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setAmmount( BigDecimal ammount ) {
-        this.ammount = ammount;
+    public void setAmmount( BigDecimal amount ) {
+        this.amount = amount;
     }
 
     public Flight getFlight() {

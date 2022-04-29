@@ -18,7 +18,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="invoice_number")
     private Long id;
-    private BigDecimal ammount;
+    private BigDecimal amount;
     private LocalDate creationDate;
 
     @OneToOne
@@ -56,12 +56,12 @@ public class Invoice {
         this.creationDate = creationDate;
     }
 
-    public BigDecimal getAmmount() {
-        return ammount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setAmmount( BigDecimal ammount ) {
-        this.ammount = ammount;
+    public void setAmount( BigDecimal amount ) {
+        this.amount = amount;
     }
 
     public void setFlight(Flight flight){this.flight=flight;}

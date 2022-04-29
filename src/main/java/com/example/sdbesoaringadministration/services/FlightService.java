@@ -39,6 +39,6 @@ public interface FlightService {
 
     List<FlightDto> getFlightsByCaptain_id( Long cpid );
 
-    public ResponseEntity<Object> createInvoicefromFLight( Long flid);
+    public ResponseEntity<Object> createInvoiceFromFLight( Long flid);
 
 }

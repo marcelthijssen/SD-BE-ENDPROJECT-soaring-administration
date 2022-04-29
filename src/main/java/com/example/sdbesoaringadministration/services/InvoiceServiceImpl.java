@@ -52,7 +52,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         dto.setCreationDate( i.getCreationDate() );
         dto.setFlight( i.getFlight() );
         dto.setBilledPerson( i.getBilledPerson() );
-        dto.setAmmount( i.getAmmount() );
+        dto.setAmmount( i.getAmount() );
 
         return dto;
     }

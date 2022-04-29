@@ -261,30 +261,42 @@ public class FlightServiceImpl implements FlightService {
 //        }
     }
 
-    public ResponseEntity<Object> createInvoicefromFLight( Long flid ) {
+    public ResponseEntity<Object> createInvoiceFromFLight( Long flid ) {
         var optionalFlight = flRepository.findById( flid );
+        var optionalInvoice = invRepository.findInvoiceByFlight_Id( flid );
         var flight = optionalFlight.get();
 
-        try {
-            if ( optionalFlight.isPresent()) {
+        if (optionalInvoice.isEmpty()){
+            Invoice invoice = new Invoice();
 
-                Invoice invoice = new Invoice();
+            invoice.setId( flight.getId() );
+            invoice.setCreationDate( ( LocalDate.now() ) );
+            invoice.setBilledPerson( flight.getBilledPerson() );
+            invoice.setAmount( calculateCostsOfFlight( flight ) );
+            invoice.setId( flight.getId() );
+            invoice.setFlight( flight );
+            invRepository.save( invoice );
 
-                invoice.setCreationDate( ( LocalDate.now() ) );
-                invoice.setBilledPerson( flight.getBilledPerson() );
-                invoice.setAmmount( calculateCostsOfFlight( flight ) );
-                invoice.setId( flight.getId() );
-                invoice.setFlight( flight );
-                invRepository.save( invoice );
-                return new ResponseEntity<>( "Invoice", HttpStatus.CREATED );
-            } else {
-                return new ResponseEntity<>( HttpStatus.NOT_FOUND );
-            }
-        } catch( Exception e)    {
-        return new ResponseEntity<>( "invalid flight-id: " + flid, HttpStatus.NOT_FOUND );
+        } else {
+////            invoice.setId( flight.getId() );
+//            optionalInvoice.set(flight.getCreationDate( ( LocalDate.now() ) ));
+//            optionalInvoice.setBilledPerson( flight.getBilledPerson() );
+//            optionalInvoice.setAmount( calculateCostsOfFlight( flight ) );
+//            optionalInvoice.setId( flight.getId() );
+//            optionalInvoice.setFlight( flight );
+//            invRepository.save( optionalInvoice );
+
+            return new ResponseEntity<>( "asdfghjk", HttpStatus.ACCEPTED );
+
+//            } else {
+//                return new ResponseEntity<>( HttpStatus.NOT_FOUND );
+//            }
+//        } catch( Exception e)    {
+//        return new ResponseEntity<>( "invalid flight-id: " + flid, HttpStatus.NOT_FOUND );
+//    }
+        }
+        return null;
     }
-
-}
 
     /*
             if ( flRepository.findById( flid ).isPresent() ) {

@@ -137,15 +137,14 @@ public class FlightController {
         return new ResponseEntity<>( "Flight has ended", HttpStatus.OK );
     }
 
-
     @PutMapping("/{flid}/remarks")
     public FlightDto updateRemarksToFLight( @PathVariable("flid") Long flid, @RequestBody FlightDto flight ) {
         return flightService.updateRemarksToFLight( flid, flight );
     }
 
     @PutMapping("/invoice/{flid}")
-    public ResponseEntity<Object> createInvoicefromFLight( @PathVariable("flid") Long flid ) {
-        flightService.createInvoicefromFLight( flid );
+    public ResponseEntity<Object> createInvoiceFromFLight( @PathVariable("flid") Long flid ) {
+        flightService.createInvoiceFromFLight( flid );
         return new ResponseEntity<>( "invoice created", HttpStatus.CREATED );
     }
 
