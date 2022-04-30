@@ -17,8 +17,6 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private String SECRET_KEY;
-    @Value("${jwt.expired}")
-    private int TOKEN_EXPIRED;
 
     public String extractUsername( String token ) {
         return extractClaim( token, Claims::getSubject );
@@ -51,7 +49,7 @@ public class JwtUtil {
                 .setClaims( claims )
                 .setSubject( subject )
                 .setIssuedAt( new Date( System.currentTimeMillis() ) )
-                .setExpiration( new Date( System.currentTimeMillis() + TOKEN_EXPIRED ) )
+                .setExpiration( new Date( System.currentTimeMillis() + (1000*60*60*24) ) )
                 .signWith( SignatureAlgorithm.HS256, SECRET_KEY )
                 .compact();
     }

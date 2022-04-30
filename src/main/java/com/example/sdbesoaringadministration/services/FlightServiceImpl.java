@@ -4,13 +4,11 @@ import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Invoice;
-import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -59,15 +57,37 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    @Override
-    public FlightDto createFlight( FlightDto dto) {
-        Flight flight = flightDtoToFlight(dto);
-        this.flRepository.save( flight );
+    /*
+        @Override
+        public FlightDto createFlight( FlightDto dto ) {
+            Flight flight = ( flightDtoToFlight( dto ) );
+            System.out.println( flight );
+            this.flRepository.save( flight );
 
-        FlightDto dtoReturn = flightToFlightDto( flight );
-        dtoReturn.setId( flight.getId() );
-        return dtoReturn;
+            FlightDto dtoReturn = flightToFlightDto( flight );
+            dtoReturn.setId( flight.getId() );
+            return dtoReturn;
+        }*/
+    public Flight createFlight( FlightDto dto ) {
+        Flight fl = new Flight();
+
+        fl.setId( dto.getId() );
+        fl.setTimeStart( dto.getTimeStart() );
+        fl.setTimeEnd( dto.getTimeEnd() );
+        fl.setTimeFlown( dto.getTimeFlown() );
+        fl.setInstructionFlight( dto.getInstructionFlight() );
+        fl.setRemarks( dto.getRemarks() );
+        fl.setPlane( dto.getPlane() );
+        fl.setAirportStart( dto.getAirportStart() );
+        fl.setAirportEnd( dto.getAirportEnd() );
+        fl.setStartingMethode( dto.getStartingMethode() );
+        fl.setPassenger( dto.getPassenger() );
+        fl.setCaptain( dto.getCaptain() );
+        fl.setBilledPerson( dto.getBilledPerson() );
+        flRepository.save( fl );
+        return fl;
     }
+
 
     @Override
     public void deleteFlightById( Long flid ) {
@@ -272,31 +292,35 @@ public class FlightServiceImpl implements FlightService {
         var optionalInvoice = invRepository.findById( flid );
         var flight = optionalFlight.get();
 
-        if ( optionalInvoice.get().getId().equals( optionalFlight.get().getId() ) ) {
-            var invoice = optionalInvoice.get();
+        if ( flight.getTimeEnd().equals( null ) ) {
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+        } else {
+            if ( optionalInvoice.get().getId().equals( optionalFlight.get().getId() ) ) {
+                var invoice = optionalInvoice.get();
 
 //            invoice.setId( flight.getId() );
-            invoice.setCreationDate( ( LocalDate.now() ) );
-            invoice.setBilledPerson( flight.getBilledPerson() );
-            invoice.setAmount( calculateCostsOfFlight( flight ) );
-            invoice.setId( flight.getId() );
-            invoice.setFlight( flight );
-            invRepository.save( invoice );
+                invoice.setCreationDate( ( LocalDate.now() ) );
+                invoice.setBilledPerson( flight.getBilledPerson() );
+                invoice.setAmount( calculateCostsOfFlight( flight ) );
+                invoice.setId( flight.getId() );
+                invoice.setFlight( flight );
+                invRepository.save( invoice );
 
-        } else {
-            Invoice invoice = new Invoice();
-            invoice.setId( flight.getId() );
-            invoice.setCreationDate( ( LocalDate.now() ) );
-            invoice.setBilledPerson( flight.getBilledPerson() );
-            invoice.setAmount( calculateCostsOfFlight( flight ) );
-            invoice.setId( flight.getId() );
-            invoice.setFlight( flight );
-            invRepository.save( invoice );
+            } else {
+                Invoice invoice = new Invoice();
+                invoice.setId( flight.getId() );
+                invoice.setCreationDate( ( LocalDate.now() ) );
+                invoice.setBilledPerson( flight.getBilledPerson() );
+                invoice.setAmount( calculateCostsOfFlight( flight ) );
+                invoice.setId( flight.getId() );
+                invoice.setFlight( flight );
+                invRepository.save( invoice );
 
-            return new ResponseEntity<>( "asdfghjk", HttpStatus.ACCEPTED );
+                return new ResponseEntity<>( "asdfghjk", HttpStatus.ACCEPTED );
 
+            }
+            return null;
         }
-        return null;
     }
 
 

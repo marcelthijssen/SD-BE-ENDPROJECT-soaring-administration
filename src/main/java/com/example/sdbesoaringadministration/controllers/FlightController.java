@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
+import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.services.FlightService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class FlightController {
     }
 
     @PostMapping("")
-    public FlightDto createFlight(FlightDto dto) {
+    public Flight createFlight( FlightDto dto) {
         return flightService.createFlight(dto);
     }
 

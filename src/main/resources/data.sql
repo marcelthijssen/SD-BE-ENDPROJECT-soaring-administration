@@ -75,19 +75,19 @@ VALUES ('willie', 'ROLE_TECHNICIAN');
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number, postalcode,
                      city, country, email, pilot_license, membership_id)
 VALUES (3001, 'm', 'Jeffrey', 'Johnson', '0612306345', '1994-08-19', 'straat', '3', '4817SX', 'Amsterdam', 'Nederland',
-        'sdbe@novi.nl', null, 4001);
+        'sdbe@novi.nl', false, 4001);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number, postalcode,
                      city, country, email, pilot_license, membership_id)
 VALUES (3002, 'v', 'Jan', 'van Westen', '0691256345', '1984-08-19', 'Straatnaam', '993', '4811VC', 'Drenthe',
-        'Nederland', 'begin@mailadres.nl', null, 4002);
+        'Nederland', 'begin@mailadres.nl', false, 4002);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3003, 'v', 'Fem', 'achternaam', '0634506109', '1974-08-19', 'Naamstrasse', '12', '4621VC', 'Ergensanders',
-        'Nederland', 'fem@mailings.nl', null, 4003);
+        'Nederland', 'fem@mailings.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3004, 'm', 'Casper', 'Anders', '0634506109', '1984-08-19', 'Straatnaam', '2', '4811VC', 'Rotjeknor',
-        'Nederland', 'begin@mailig.nl', null, 4004);
+        'Nederland', 'begin@mailig.nl', true, 4004);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3005, 'v', 'Nicole', 'Adriaansen', '0634506109', '1994-01-01', 'Naafdmstraat', '65', '4811VC', 'Tilburg',
@@ -95,15 +95,15 @@ VALUES (3005, 'v', 'Nicole', 'Adriaansen', '0634506109', '1994-01-01', 'Naafdmst
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3006, 'm', 'jan', 'Pietersen', '0634506109', '2004-01-01', 'Naamstjhgfraat', '12', '4811VC', 'Volendam',
-        'Nederland', 'begin@mailig.nl', null, 4003);
+        'Nederland', 'begin@mailig.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3007, 'v', 'Johan', 'de Beek', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
-        'Nederland', 'begin@mailig.nl', null, 4003);
+        'Nederland', 'begin@mailig.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3008, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
-        'Nederland', 'willie@wortel.nl', null, 4003);
+        'Nederland', 'willie@wortel.nl', false, 4003);
 
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status, minute_price)
 VALUES (5001, 'G1', 'Alexander Schleicher', 'Ask-13', 'PH-1045', true, false, 3001, 3001, null, 0.25);

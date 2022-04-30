@@ -1,6 +1,7 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.FlightDto;
+import com.example.sdbesoaringadministration.models.Flight;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -12,7 +13,8 @@ public interface FlightService {
 
     FlightDto getFlightById( Long flid );
 
-    FlightDto createFlight(FlightDto dto);
+    Flight createFlight( FlightDto dto);
+
     void deleteFlightById( Long flid );
 
     FlightDto updateFlight( Long flid, FlightDto flightDto );
