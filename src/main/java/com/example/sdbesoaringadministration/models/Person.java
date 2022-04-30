@@ -28,7 +28,7 @@ public class Person {
     private String country;
     private String email;
     private String phone;
-    private String pilotLicense;
+    private Boolean pilotLicense;
 
     @ManyToOne
     @JsonIgnore
@@ -172,11 +172,11 @@ public class Person {
         this.phone = phone;
     }
 
-    public String getPilotLicense() {
+    public boolean getPilotLicense() {
         return pilotLicense;
     }
 
-    public void setPilotLicense( String pilotLicense ) {
+    public void setPilotLicense( boolean pilotLicense ) {
         this.pilotLicense = pilotLicense;
     }
 

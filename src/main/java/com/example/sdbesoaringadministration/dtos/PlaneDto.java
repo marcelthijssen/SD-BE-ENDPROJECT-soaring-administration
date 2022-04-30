@@ -23,7 +23,7 @@ public class PlaneDto {
     private boolean privatePlane;
     private Person owner;
     private Person technician;
-    public byte[] flightStatus;
+    private byte[] flightStatus;
 
     public PlaneDto() {
     }

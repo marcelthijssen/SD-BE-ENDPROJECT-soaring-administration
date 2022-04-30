@@ -68,18 +68,14 @@ public class PlaneController {
     @PutMapping("/{plid}")
     public PlaneDto updatePlane( @PathVariable("plid") Long plid, @RequestBody PlaneDto plane ) {
 
-        PlaneDto dto = planeService.updatePlane( plid, plane );
-
-        return dto;
+        return planeService.updatePlane( plid, plane );
     }
 
     //         assign owner to plane
     @PutMapping("/{plid}/price")
     public PlaneDto addMinutePrice( @PathVariable("plid") Long plid, @RequestBody PlaneDto plane ) {
 
-        PlaneDto dto = planeService.addMinutePrice( plid, plane );
-
-        return dto;
+        return planeService.addMinutePrice( plid, plane );
     }
 
     //         assign owner to plane
@@ -107,7 +103,7 @@ public class PlaneController {
     @GetMapping(value = "/{plid}/flightstatus", produces = MediaType.APPLICATION_PDF_VALUE)
     public @ResponseBody byte[] getPlaneflightStatusById( @PathVariable(name = "plid") Long plid ) {
         PlaneDto plane = planeService.getPlaneFlightStatusById( plid );
-        return plane.flightStatus;
+        return plane.getFlightStatus();
 
     }
 }

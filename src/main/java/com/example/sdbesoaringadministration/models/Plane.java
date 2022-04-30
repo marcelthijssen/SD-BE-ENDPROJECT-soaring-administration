@@ -23,10 +23,11 @@ public class Plane {
     private String registration;
     private boolean twoSeater;
     private boolean privatePlane;
-//@Column(columnDefinition="default '0.000000000'")
     private BigDecimal minutePrice;
     @Lob
-    public byte[] flightStatus;
+    private byte[] flightStatus;
+
+
     @OneToMany
             (mappedBy = "plane",
                     fetch = FetchType.LAZY,

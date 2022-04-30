@@ -4,6 +4,7 @@ package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +16,6 @@ import java.util.Date;
 public class Invoice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="invoice_number")
     private Long id;
     private BigDecimal amount;

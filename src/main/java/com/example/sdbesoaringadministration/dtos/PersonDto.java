@@ -1,7 +1,6 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Membership;
-;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
@@ -30,7 +29,7 @@ public class PersonDto {
     private String email;
     private String phone;
 
-    private String pilotLicense;
+    private boolean pilotLicense;
 
     private Membership membership;
 
@@ -47,7 +46,7 @@ public class PersonDto {
                       String city, String country,
                       String email,
                       String phone,
-                      String pilotLicense,
+                      boolean pilotLicense,
                       Membership membership
     ) {
         this.id = id;
@@ -164,11 +163,11 @@ public class PersonDto {
         this.phone = phone;
     }
 
-    public String getPilotLicense() {
+    public boolean getPilotLicense() {
         return pilotLicense;
     }
 
-    public void setPilotLicense( String pilotLicense ) {
+    public void setPilotLicense( boolean pilotLicense ) {
         this.pilotLicense = pilotLicense;
     }
 

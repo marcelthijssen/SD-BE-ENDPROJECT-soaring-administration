@@ -263,13 +263,13 @@ public class FlightServiceImpl implements FlightService {
 
     public ResponseEntity<Object> createInvoiceFromFLight( Long flid ) {
         var optionalFlight = flRepository.findById( flid );
-        var optionalInvoice = invRepository.findInvoiceByFlight_Id( flid );
+        var optionalInvoice = invRepository.findById( flid );
         var flight = optionalFlight.get();
 
-        if (optionalInvoice.isEmpty()){
-            Invoice invoice = new Invoice();
+        if (optionalInvoice.get().getId().equals( optionalFlight.get().getId() )){
+            var invoice = optionalInvoice.get();
 
-            invoice.setId( flight.getId() );
+//            invoice.setId( flight.getId() );
             invoice.setCreationDate( ( LocalDate.now() ) );
             invoice.setBilledPerson( flight.getBilledPerson() );
             invoice.setAmount( calculateCostsOfFlight( flight ) );
@@ -278,38 +278,22 @@ public class FlightServiceImpl implements FlightService {
             invRepository.save( invoice );
 
         } else {
-////            invoice.setId( flight.getId() );
-//            optionalInvoice.set(flight.getCreationDate( ( LocalDate.now() ) ));
-//            optionalInvoice.setBilledPerson( flight.getBilledPerson() );
-//            optionalInvoice.setAmount( calculateCostsOfFlight( flight ) );
-//            optionalInvoice.setId( flight.getId() );
-//            optionalInvoice.setFlight( flight );
-//            invRepository.save( optionalInvoice );
+        Invoice invoice=new Invoice();
+            invoice.setId( flight.getId() );
+            invoice.setCreationDate( ( LocalDate.now() ) );
+            invoice.setBilledPerson( flight.getBilledPerson() );
+            invoice.setAmount( calculateCostsOfFlight( flight ) );
+            invoice.setId( flight.getId() );
+            invoice.setFlight( flight );
+            invRepository.save( invoice );
 
             return new ResponseEntity<>( "asdfghjk", HttpStatus.ACCEPTED );
 
-//            } else {
-//                return new ResponseEntity<>( HttpStatus.NOT_FOUND );
-//            }
-//        } catch( Exception e)    {
-//        return new ResponseEntity<>( "invalid flight-id: " + flid, HttpStatus.NOT_FOUND );
-//    }
         }
         return null;
     }
 
-    /*
-            if ( flRepository.findById( flid ).isPresent() ) {
-                Flight fl = flRepository.findById( flid ).get();
-                fl.setInstructionFlight( dto.getInstructionFlight() );
 
-                flRepository.save( fl );
-                return dto;
-            } else {
-                throw new RecordNotFoundException( "Flight not found", HttpStatus.NOT_FOUND );
-            }
-        }
-     */
     public long calculateTimeFlown( LocalDateTime timeStart, LocalDateTime timeEnd ) {
         return ( ChronoUnit.MINUTES.between( timeStart, timeEnd ) );
     }
@@ -319,13 +303,13 @@ public class FlightServiceImpl implements FlightService {
         BigDecimal sm = flight.getStartingMethode().getPrice();
 
         BigDecimal time;
-        BigDecimal timePrice = BigDecimal.valueOf( 0 );
-        if ( flight.getPlane().getPrivatePlane() ) {
-            System.out.println( flight.getPlane().getPrivatePlane() );
-        } else {
+        BigDecimal costTotalFlyingTime = null;
+        if ( flight.getBilledPerson().getPilotLicense() && !flight.getPlane().getPrivatePlane() ) {
             time = BigDecimal.valueOf( ( int ) flight.getTimeFlown() );
-            timePrice = ( time.multiply( flight.getPlane().getMinutePrice() ) );
+            costTotalFlyingTime = ( time.multiply( flight.getPlane().getMinutePrice() ) );
+        } if ( !flight.getBilledPerson().getPilotLicense() ) {
+            costTotalFlyingTime = BigDecimal.valueOf( 0 );
         }
-        return sm.add( timePrice );
+        return sm.add( costTotalFlyingTime );
     }
 }
