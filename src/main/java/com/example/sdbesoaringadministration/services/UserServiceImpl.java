@@ -2,16 +2,14 @@ package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.UserDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
-import com.example.sdbesoaringadministration.exceptions.UsernameNotFoundException;
 import com.example.sdbesoaringadministration.exceptions.UsernameAlreadyExistException;
-
+import com.example.sdbesoaringadministration.exceptions.UsernameNotFoundException;
 import com.example.sdbesoaringadministration.models.Authority;
 import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +27,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-//    @Autowired
-//    private AuthorityRepository authorityRepository;
-
     public List<UserDto> getAllUsers() {
         List<UserDto> usersList = new ArrayList<>();
         List<User> list = userRepository.findAll();
@@ -45,9 +39,10 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserById( String username ) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById( username );
-        if ( user.isPresent() ) {
+        try {
             dto = userToUserDto( user.get() );
-        } else {
+
+        } catch ( Exception e ) {
             throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         }
         return dto;
@@ -120,7 +115,7 @@ public class UserServiceImpl implements UserService {
         dto.setPassword( user.getPassword() );
         dto.setEnabled( user.getEnabled() );
         dto.setEmail( user.getEmail() );
-        dto.setAuthorities(user.getAuthorities());
+        dto.setAuthorities( user.getAuthorities() );
 
         return dto;
     }

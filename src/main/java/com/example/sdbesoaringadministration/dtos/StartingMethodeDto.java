@@ -28,29 +28,6 @@ public class StartingMethodeDto {
     }
 
 
-    //    Dto to Model
-    public static StartingMethode startingMethodeDtoToStartingMethode( StartingMethodeDto dto ) {
-        StartingMethode sm = new StartingMethode();
-
-        sm.setId( dto.getId() );
-        sm.setTitle( dto.getTitle() );
-        sm.setUnit( dto.getUnit() );
-        sm.setPrice( dto.getPrice() );
-
-        return sm;
-    }
-
-    //model to dto
-    public StartingMethodeDto startingMethodeToStartingMethodeDto( StartingMethode sm ) {
-        var dto = new StartingMethodeDto();
-
-        dto.setId( sm.getId() );
-        dto.setTitle( sm.getTitle() );
-        dto.setUnit( sm.getUnit() );
-        dto.setPrice( sm.getPrice() );
-        return dto;
-    }
-
     //getters an setters
     public Long getId() {
         return id;

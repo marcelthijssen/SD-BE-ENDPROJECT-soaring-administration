@@ -65,5 +65,6 @@ private Flight flight;
     public void setFlight( Flight flight ) {
         this.flight = flight;
     }
+
 }
 

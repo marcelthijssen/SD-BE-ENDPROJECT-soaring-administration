@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.sdbesoaringadministration.dtos.StartingMethodeDto.startingMethodeDtoToStartingMethode;
-
 @Service
 public class StartingMethodeServiceImpl implements StartingMethodeService {
 
@@ -27,7 +25,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
         List<StartingMethodeDto> smDtoList = new ArrayList<>();
 
         for ( StartingMethode sm : smList ) {
-            StartingMethodeDto dto = new StartingMethodeDto().startingMethodeToStartingMethodeDto(sm);
+            StartingMethodeDto dto = startingMethodeToStartingMethodeDto(sm);
 
             smDtoList.add( dto );
         }
@@ -39,7 +37,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
 
         if ( smRepository.findById( smid ).isPresent() ) {
             StartingMethode startingMethode = smRepository.findById( smid ).get();
-            StartingMethodeDto dto = new StartingMethodeDto().startingMethodeToStartingMethodeDto(startingMethode);
+            StartingMethodeDto dto = startingMethodeToStartingMethodeDto(startingMethode);
 
 
             return dto;
@@ -78,5 +76,25 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
         }
     }
 
+    public static StartingMethode startingMethodeDtoToStartingMethode( StartingMethodeDto dto ) {
+        StartingMethode sm = new StartingMethode();
+
+        sm.setId( dto.getId() );
+        sm.setTitle( dto.getTitle() );
+        sm.setUnit( dto.getUnit() );
+        sm.setPrice( dto.getPrice() );
+
+        return sm;
+    }
+
+    public StartingMethodeDto startingMethodeToStartingMethodeDto( StartingMethode sm ) {
+        var dto = new StartingMethodeDto();
+
+        dto.setId( sm.getId() );
+        dto.setTitle( sm.getTitle() );
+        dto.setUnit( sm.getUnit() );
+        dto.setPrice( sm.getPrice() );
+        return dto;
+    }
 
 }

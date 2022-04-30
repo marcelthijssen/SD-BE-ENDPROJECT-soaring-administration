@@ -23,7 +23,6 @@ public class PlaneServiceImpl implements PlaneService {
         this.personRepository = personRepository;
     }
 
-
     @Override
     public List<PlaneDto> getAllPlanes() {
         List<Plane> planeList = this.plRepository.findAll();
@@ -35,7 +34,6 @@ public class PlaneServiceImpl implements PlaneService {
         return planeDtoList;
     }
 
-
     @Override
     public PlaneDto getPlaneById( Long plid ) {
         try {
@@ -46,7 +44,6 @@ public class PlaneServiceImpl implements PlaneService {
             throw new RecordNotFoundException( "Invalid plane id: " + plid, HttpStatus.NOT_FOUND );
         }
     }
-
 
     @Override
     public Plane createPlane( PlaneDto dto ) {
@@ -75,7 +72,6 @@ public class PlaneServiceImpl implements PlaneService {
     public PlaneDto addMinutePrice( Long plid, PlaneDto dto ) {
         if ( plRepository.findById( plid ).isPresent() ) {
             Plane pl = plRepository.findById( plid ).get();
-//            pl.setMinutePrice( plane.getMinutePrice() );
             plRepository.save( pl );
         }
         return dto;
