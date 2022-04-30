@@ -58,25 +58,18 @@ public class AirportTests {
 
     }
 
-//    @Test
-//    public void gives_RecordNotFoundException_when_getAirportById_fails_Test() {
-//        Airport airport = new Airport();
-//        airport.setIcao( "EHGR" );
-//        airport.setId( 1L );
-//        return assertThrown( RecordNotFoundException.class, () -> service.getAirportById( 2L ) );
-//    }
 
-//    @Autowired
-//    private TestRestTemplate restTemplate;
-//
-//    @Test
-//    public void flightControllerGetAllFlightsTest() throws JSONException {
-//
-//        String response = this.restTemplate.getForObject( "/airports", String.class );
-//
-//        JSONAssert.assertEquals( "[{id:1001},{id:1002},{id:1003},{id:1004},{id:1005},{id:1006},{id:1007},{id:1008},{id:1009},{id:1010},{id:1011}]",
-//                response, false );
-//    }
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void flightControllerGetAllFlightsTest() throws JSONException {
+
+        String response = this.restTemplate.getForObject( "/airports", String.class );
+
+        JSONAssert.assertEquals( "[{id:1001},{id:1002},{id:1003},{id:1004},{id:1005},{id:1006},{id:1007},{id:1008},{id:1009},{id:1010},{id:1011}]",
+                response, false );
+    }
 
     @Test
     public void getAirport2Test() {
@@ -95,7 +88,6 @@ public class AirportTests {
         testAirport.add( airport1 );
         testAirport.add( airport2 );
         testAirport.add( airport3 );
-
 
         service.getAllAirports();
 
@@ -121,23 +113,7 @@ public class AirportTests {
         assertThat( airport1.getIcao() ).isEqualTo( "ABCD" );
         assertThat( airport1.getId() ).isEqualTo( 1 );
     }
-/*
-    @Test
-    public void updateEmployeeTest() {
-        AirportDto airportDto1 = new AirportDto();
-        airportDto1.setId( 1L );
-        airportDto1.setIcao( "ABCD" );
-        when( airportRepository.findById( 1L ) ).thenReturn( Optional.of( airportDto1 ) );
 
-        airportDto1.setIcao( "ABCD" );
-        service.updateAirport( 1L, airportDto1 );
-
-        verify( airportRepository ).save( airportDto1 );
-
-        assertThat( airportDto1.getId() ).isEqualTo( 1 );
-        assertThat( airportDto1.getIcao() ).isEqualTo( "test1" );
-    }
-*/
     @Test
     public void updateAirportExceptionTest() {
         assertThrows( RecordNotFoundException.class, () -> service.getAirportById( null ) );

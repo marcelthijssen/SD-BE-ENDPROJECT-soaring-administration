@@ -120,17 +120,17 @@ public class UserServiceImpl implements UserService {
         return dto;
     }
 
-    public User userDtoToUser( UserDto dto ) {
-
-        User u = new User();
-
-        u.setUsername( dto.getUsername() );
-        u.setPassword( dto.getPassword() );
-        u.setEnabled( dto.getEnabled() );
-        u.setEmail( dto.getEmail() );
-
-        return u;
-
-    }
+//    public User userDtoToUser( UserDto dto ) {
+//
+//        User u = new User();
+//
+//        u.setUsername( dto.getUsername() );
+//        u.setPassword( dto.getPassword() );
+//        u.setEnabled( dto.getEnabled() );
+//        u.setEmail( dto.getEmail() );
+//
+//        return u;
+//
+//    }
 
 }

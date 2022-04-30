@@ -61,25 +61,6 @@ public class UserTests {
 
     }
 
-//    @Test
-//    public void gives_RecordNotFoundException_when_getUserById_fails_Test() {
-//        User user = new User();
-//        user.setIcao( "EHGR" );
-//        user.setId( 1L );
-//        return assertThrown( RecordNotFoundException.class, () -> service.getUserById( 2L ) );
-//    }
-
-//    @Autowired
-//    private TestRestTemplate restTemplate;
-//
-//    @Test
-//    public void flightControllerGetAllFlightsTest() throws JSONException {
-//
-//        String response = this.restTemplate.getForObject( "/users", String.class );
-//
-//        JSONAssert.assertEquals( "[{id:1001},{id:1002},{id:1003},{id:1004},{id:1005},{id:1006},{id:1007},{id:1008},{id:1009},{id:1010},{id:1011}]",
-//                response, false );
-//    }
 
     @Test
     public void getUser2Test() {

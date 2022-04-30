@@ -1,7 +1,7 @@
 #Eindopdracht SD-BE
 
 ###Benodigdheden
-- IntelliJ IDEA
+- IntelliJ IDEA 
 - Java SDK 17.
 - Spring Boot
 - PgAdmin voor een PostgreSQL localhost server
