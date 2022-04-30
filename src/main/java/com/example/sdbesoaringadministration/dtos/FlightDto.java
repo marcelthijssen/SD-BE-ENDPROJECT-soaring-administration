@@ -85,7 +85,7 @@ public class FlightDto {
     }
 
     public void setInstructionFlight( boolean instructionFlight ) {
-        this.instructionFlight = this.instructionFlight;
+        this.instructionFlight = instructionFlight;
     }
 
     public String getRemarks() {
@@ -104,7 +104,6 @@ public class FlightDto {
         return plane;
     }
 
-
     public Airport getAirportStart() {
         return airportStart;
     }
@@ -121,7 +120,6 @@ public class FlightDto {
         this.airportEnd = airportEnd;
     }
 
-
     public StartingMethode getStartingMethode() {
         return startingMethode;
     }
@@ -129,7 +127,6 @@ public class FlightDto {
     public void setStartingMethode( StartingMethode startingMethode ) {
         this.startingMethode = startingMethode;
     }
-
 
     public Person getPassenger() {
         return passenger;
@@ -155,45 +152,4 @@ public class FlightDto {
         this.billedPerson = billedPerson;
     }
 
-
-    public static Flight flightDtoToFlight( FlightDto dto ) {
-        Flight fl = new Flight();
-
-        fl.setId( dto.getId() );
-        fl.setTimeStart( dto.getTimeStart() );
-        fl.setTimeEnd( dto.getTimeEnd() );
-        fl.setTimeFlown( dto.getTimeFlown() );
-        fl.setInstructionFlight( dto.getInstructionFlight() );
-        fl.setRemarks( dto.getRemarks() );
-        fl.setPlane( dto.getPlane() );
-        fl.setAirportStart( dto.getAirportStart() );
-        fl.setAirportEnd( dto.getAirportEnd() );
-        fl.setStartingMethode( dto.getStartingMethode() );
-        fl.setPassenger( dto.getPassenger() );
-        fl.setCaptain( dto.getCaptain() );
-        fl.setBilledPerson( dto.getBilledPerson() );
-
-        return fl;
-    }
-
-
-    public FlightDto flightToFlightDto( Flight fl ) {
-        FlightDto dto = new FlightDto();
-
-        dto.setId( fl.getId() );
-        dto.setTimeStart( fl.getTimeStart() );
-        dto.setTimeEnd( fl.getTimeEnd() );
-        dto.setTimeFlown( fl.getTimeFlown() );
-        dto.setInstructionFlight( fl.getInstructionFlight() );
-        dto.setRemarks( fl.getRemarks() );
-        dto.setPlane( fl.getPlane() );
-        dto.setAirportStart( fl.getAirportStart() );
-        dto.setAirportEnd( fl.getAirportEnd() );
-        dto.setStartingMethode( fl.getStartingMethode() );
-        dto.setPassenger( fl.getPassenger() );
-        dto.setCaptain( fl.getCaptain() );
-        dto.setBilledPerson( fl.getBilledPerson() );
-
-        return dto;
-    }
 }

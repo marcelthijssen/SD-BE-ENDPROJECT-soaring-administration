@@ -10,3 +10,7 @@
 ## Postgres
 Create database named 'soaring'
 
+## JWT
+
+jwt.secret=flyinghigh
+jwt.expired= (1000 * 60 * 60 * 24)

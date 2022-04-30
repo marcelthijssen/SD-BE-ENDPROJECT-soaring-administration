@@ -12,7 +12,7 @@ public interface FlightService {
 
     FlightDto getFlightById( Long flid );
 
-    FlightDto createFlight();
+    FlightDto createFlight(FlightDto dto);
     void deleteFlightById( Long flid );
 
     FlightDto updateFlight( Long flid, FlightDto flightDto );
@@ -25,7 +25,7 @@ public interface FlightService {
 
     void assignStartingMethodeToFlight( Long flid, Long smid );
 
-    void assignPassengerToFlight( Long flid, Long psid );
+    ResponseEntity<String> assignPassengerToFlight( Long flid, Long psid );
 
     void assignCaptainToFlight( Long flid, Long cpid );
 

@@ -43,28 +43,10 @@ public class FlightController {
     }
 
     @PostMapping("")
-    public FlightDto addFlight() {
-        return flightService.createFlight();
+    public FlightDto createFlight(FlightDto dto) {
+        return flightService.createFlight(dto);
     }
 
-
-//    }
-    /*
-      @PostMapping("")
-    public ResponseEntity<Object> addFlight( @Valid @RequestBody FlightDto flightDto, BindingResult br ) {
-        if ( br.hasErrors() ) {
-            StringBuilder sb = new StringBuilder();
-            for ( FieldError fe : br.getFieldErrors() ) {
-                sb.append( fe.getDefaultMessage() );
-                sb.append( "\n" );
-            }
-            return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
-        } else {
-            flightService.addFlight( flightDto );
-            return new ResponseEntity<>( "Flight has been added", HttpStatus.CREATED );
-        }
-    }
-     */
 
     @DeleteMapping("/{flid}")
     public ResponseEntity<Object> deleteFlightById( @PathVariable("flid") Long flid ) {
@@ -107,7 +89,7 @@ public class FlightController {
 
     //     assign starting method to flight
     @PutMapping("/{flid}/passenger/{psid}")
-    public ResponseEntity<Object> assignPassengerToFlight( @PathVariable("flid") Long flid, @PathVariable("psid") Long psid ) {
+    public ResponseEntity<String> assignPassengerToFlight( @PathVariable("flid") Long flid, @PathVariable("psid") Long psid ) {
         flightService.assignPassengerToFlight( flid, psid );
         return new ResponseEntity<>( "Passenger added to flight", HttpStatus.ACCEPTED );
     }

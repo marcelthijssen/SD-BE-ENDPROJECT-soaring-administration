@@ -4,6 +4,7 @@ import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Invoice;
+import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class FlightServiceImpl implements FlightService {
         List<FlightDto> flightDtoList = new ArrayList<>();
 
         for ( Flight fl : flightList ) {
-            FlightDto dto = new FlightDto().flightToFlightDto( fl );
+            FlightDto dto = flightToFlightDto( fl );
             flightDtoList.add( dto );
         }
         return flightDtoList;
@@ -52,20 +53,20 @@ public class FlightServiceImpl implements FlightService {
     public FlightDto getFlightById( Long flid ) {
         if ( flRepository.findById( flid ).isPresent() ) {
             Flight flight = flRepository.findById( flid ).get();
-            return new FlightDto().flightToFlightDto( flight );
+            return flightToFlightDto( flight );
         } else {
             throw new RecordNotFoundException( "Flight not available", HttpStatus.NOT_FOUND );
         }
     }
 
     @Override
-    public FlightDto createFlight() {
-        Flight flight = new Flight();
+    public FlightDto createFlight( FlightDto dto) {
+        Flight flight = flightDtoToFlight(dto);
         this.flRepository.save( flight );
 
-        FlightDto dto = new FlightDto().flightToFlightDto( flight );
-        dto.setId( flight.getId() );
-        return dto;
+        FlightDto dtoReturn = flightToFlightDto( flight );
+        dtoReturn.setId( flight.getId() );
+        return dtoReturn;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class FlightServiceImpl implements FlightService {
     public FlightDto updateFlight( Long flid, FlightDto dto ) {
         if ( flRepository.findById( flid ).isPresent() ) {
             Flight fl = flRepository.findById( flid ).get();
-            fl.setId( fl.getId() );
+
             fl.setTimeStart( dto.getTimeStart() );
             fl.setTimeEnd( dto.getTimeEnd() );
             fl.setTimeFlown( dto.getTimeFlown() );
@@ -167,21 +168,6 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public void assignPassengerToFlight( Long flid, Long psid ) {
-        var optionalFlight = flRepository.findById( flid );
-        var optionalPerson = psRepository.findById( psid );
-
-        if ( optionalFlight.isPresent() && optionalPerson.isPresent() ) {
-            var flight = optionalFlight.get();
-            var person = optionalPerson.get();
-
-            flight.setPassenger( person );
-            flRepository.save( flight );
-        } else {
-            throw new RecordNotFoundException( "Flight or person doesn't exist", HttpStatus.NOT_FOUND );
-        }
-    }
-
     public void assignCaptainToFlight( Long flid, Long cpid ) {
         var optionalFlight = flRepository.findById( flid );
         var optionalPerson = psRepository.findById( cpid );
@@ -196,6 +182,27 @@ public class FlightServiceImpl implements FlightService {
             throw new RecordNotFoundException( "Flight or this person doesn't exist", HttpStatus.NOT_FOUND );
         }
     }
+
+    public ResponseEntity<String> assignPassengerToFlight( Long flid, Long psid ) {
+        var optionalFlight = flRepository.findById( flid );
+        var optionalPerson = psRepository.findById( psid );
+
+        if ( optionalFlight.get().getPlane().getTwoSeater() ) {
+            if ( optionalPerson.isPresent() ) {
+                var flight = optionalFlight.get();
+                var person = optionalPerson.get();
+
+                flight.setPassenger( person );
+                flRepository.save( flight );
+            } else {
+                throw new RecordNotFoundException( "Invalid person-id", HttpStatus.NOT_FOUND );
+            }
+        } else {
+            return new ResponseEntity<>( "plane is a oneseater", HttpStatus.FORBIDDEN );
+        }
+        return new ResponseEntity<>( "id is added", HttpStatus.CREATED );
+    }
+
 
     public FlightDto assignInstructionFlightToFlight( Long flid, FlightDto dto ) {
         if ( flRepository.findById( flid ).isPresent() ) {
@@ -245,20 +252,19 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<FlightDto> getFlightsByCaptain_id( Long cpid ) {
-//        Person captain = new Person();
-//        if ( !flRepository.findFlightsByCaptainEquals(pid).isEmpty() ) {
-        List<Flight> flightList = flRepository.findFlightsByCaptain_Id( cpid );
-        List<FlightDto> flightDtoList = new ArrayList<>();
+        try {
+            List<Flight> flightList = flRepository.findFlightsByCaptain_Id( cpid );
+            List<FlightDto> flightDtoList = new ArrayList<>();
 
-        for ( Flight fl : flightList ) {
-            FlightDto dto = new FlightDto().flightToFlightDto( fl );
+            for ( Flight fl : flightList ) {
+                FlightDto dto = flightToFlightDto( fl );
 
-            flightDtoList.add( dto );
+                flightDtoList.add( dto );
+            }
+            return flightDtoList;
+        } catch ( Exception e ) {
+            throw new RecordNotFoundException( "Nothing found", HttpStatus.NOT_FOUND );
         }
-        return flightDtoList;
-//        } else {
-//            throw new RecordNotFoundException();
-//        }
     }
 
     public ResponseEntity<Object> createInvoiceFromFLight( Long flid ) {
@@ -266,7 +272,7 @@ public class FlightServiceImpl implements FlightService {
         var optionalInvoice = invRepository.findById( flid );
         var flight = optionalFlight.get();
 
-        if (optionalInvoice.get().getId().equals( optionalFlight.get().getId() )){
+        if ( optionalInvoice.get().getId().equals( optionalFlight.get().getId() ) ) {
             var invoice = optionalInvoice.get();
 
 //            invoice.setId( flight.getId() );
@@ -278,7 +284,7 @@ public class FlightServiceImpl implements FlightService {
             invRepository.save( invoice );
 
         } else {
-        Invoice invoice=new Invoice();
+            Invoice invoice = new Invoice();
             invoice.setId( flight.getId() );
             invoice.setCreationDate( ( LocalDate.now() ) );
             invoice.setBilledPerson( flight.getBilledPerson() );
@@ -307,9 +313,51 @@ public class FlightServiceImpl implements FlightService {
         if ( flight.getBilledPerson().getPilotLicense() && !flight.getPlane().getPrivatePlane() ) {
             time = BigDecimal.valueOf( ( int ) flight.getTimeFlown() );
             costTotalFlyingTime = ( time.multiply( flight.getPlane().getMinutePrice() ) );
-        } if ( !flight.getBilledPerson().getPilotLicense() ) {
+        }
+        if ( !flight.getBilledPerson().getPilotLicense() ) {
             costTotalFlyingTime = BigDecimal.valueOf( 0 );
         }
         return sm.add( costTotalFlyingTime );
+    }
+
+    public static Flight flightDtoToFlight( FlightDto dto ) {
+        Flight fl = new Flight();
+
+        fl.setId( dto.getId() );
+        fl.setTimeStart( dto.getTimeStart() );
+        fl.setTimeEnd( dto.getTimeEnd() );
+        fl.setTimeFlown( dto.getTimeFlown() );
+        fl.setInstructionFlight( dto.getInstructionFlight() );
+        fl.setRemarks( dto.getRemarks() );
+        fl.setPlane( dto.getPlane() );
+        fl.setAirportStart( dto.getAirportStart() );
+        fl.setAirportEnd( dto.getAirportEnd() );
+        fl.setStartingMethode( dto.getStartingMethode() );
+        fl.setPassenger( dto.getPassenger() );
+        fl.setCaptain( dto.getCaptain() );
+        fl.setBilledPerson( dto.getBilledPerson() );
+
+        return fl;
+    }
+
+
+    public FlightDto flightToFlightDto( Flight fl ) {
+        FlightDto dto = new FlightDto();
+
+        dto.setId( fl.getId() );
+        dto.setTimeStart( fl.getTimeStart() );
+        dto.setTimeEnd( fl.getTimeEnd() );
+        dto.setTimeFlown( fl.getTimeFlown() );
+        dto.setInstructionFlight( fl.getInstructionFlight() );
+        dto.setRemarks( fl.getRemarks() );
+        dto.setPlane( fl.getPlane() );
+        dto.setAirportStart( fl.getAirportStart() );
+        dto.setAirportEnd( fl.getAirportEnd() );
+        dto.setStartingMethode( fl.getStartingMethode() );
+        dto.setPassenger( fl.getPassenger() );
+        dto.setCaptain( fl.getCaptain() );
+        dto.setBilledPerson( fl.getBilledPerson() );
+
+        return dto;
     }
 }
