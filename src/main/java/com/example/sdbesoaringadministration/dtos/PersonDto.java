@@ -18,7 +18,6 @@ public class PersonDto {
     private String firstName;
     @NotBlank(message = "Lastname can not be empty")
     private String lastName;
-
     private LocalDate dateOfBirth;
     @NotBlank(message = "Streetname must be added")
     private String streetName;
@@ -37,7 +36,6 @@ public class PersonDto {
     private String phone;
 
     private boolean pilotLicense;
-
     private Membership membership;
 
     public PersonDto() {
@@ -45,12 +43,14 @@ public class PersonDto {
 
     public PersonDto( Long id,
                       String gender,
-                      String firstName, String lastName,
+                      String firstName,
+                      String lastName,
                       LocalDate dateOfBirth,
                       String streetName,
                       String houseNumber,
                       String postalcode,
-                      String city, String country,
+                      String city,
+                      String country,
                       String email,
                       String phone,
                       boolean pilotLicense,

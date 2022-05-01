@@ -6,15 +6,15 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface AirportService{
+public interface AirportService {
 
     List<AirportDto> getAllAirports();
 
-    AirportDto getAirportById ( Long id);
+    AirportDto getAirportById( Long aid );
 
-    Airport createAirport( AirportDto airportDto);
+    Airport createAirport( AirportDto airportDto );
 
-    ResponseEntity<Object> deleteAirportById( Long id);
+    ResponseEntity<Object> deleteAirportById( Long aid );
 
-    AirportDto updateAirport(Long id, AirportDto dto);
+    AirportDto updateAirport( Long aid, AirportDto dto );
 }

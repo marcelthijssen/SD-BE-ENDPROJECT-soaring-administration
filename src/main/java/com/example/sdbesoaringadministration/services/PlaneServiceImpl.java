@@ -6,6 +6,7 @@ import com.example.sdbesoaringadministration.models.Plane;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.PlaneRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,17 +39,17 @@ public class PlaneServiceImpl implements PlaneService {
     public PlaneDto getPlaneById( Long plid ) {
         try {
             Plane pl = plRepository.findById( plid ).get();
-            PlaneDto dto = ( planeToPlaneDto( pl ) );
-            return dto;
+            return ( planeToPlaneDto( pl ) );
         } catch ( Exception e ) {
             throw new RecordNotFoundException( "Invalid plane id: " + plid, HttpStatus.NOT_FOUND );
         }
     }
 
     @Override
-    public Plane createPlane( PlaneDto dto ) {
+    public ResponseEntity<Object> createPlane( PlaneDto dto ) {
         Plane plane = planeDtoToPlane( dto );
-        return this.plRepository.save( plane );
+         this.plRepository.save( plane );
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
@@ -111,7 +112,7 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public PlaneDto createPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
+    public void uploadFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
 
         try {
             if ( plRepository.findById( plid ).isPresent() ) {
@@ -122,12 +123,11 @@ public class PlaneServiceImpl implements PlaneService {
         } catch ( RecordNotFoundException e ) {
             throw new RecordNotFoundException( "Invalid plane-id: " + plid, HttpStatus.NOT_FOUND );
         }
-        return null;
     }
 
 
     @Override
-    public PlaneDto getPlaneFlightStatusById( Long plid ) {
+    public PlaneDto getFlightStatusPdfById( Long plid ) {
         if ( plRepository.findById( plid ).isPresent() ) {
             Plane pl = plRepository.findById( plid ).get();
             PlaneDto dto = new PlaneDto();

@@ -20,9 +20,11 @@ public class PlaneDto {
     private String type;
     @NotBlank(message = "Registration can not be empty")
     private String registration;
+    @NotBlank
     private boolean twoSeater;
     private BigDecimal minutePrice;
     private boolean privatePlane;
+    @NotBlank
     private Person owner;
     private Person technician;
     private byte[] flightStatus;

@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "")
     public ResponseEntity<List<UserDto>> getAllUsers() {
 
         List<UserDto> userDtoList = userService.getAllUsers();
@@ -36,8 +36,8 @@ public class UserController {
             UserDto optionalUser = userService.getUserById( username );
 
             return ResponseEntity.ok().body( optionalUser );
-        } catch (UsernameNotFoundException ex) {
-            throw new UsernameNotFoundException(HttpStatus.NOT_FOUND, username );
+        } catch ( UsernameNotFoundException ex ) {
+            throw new UsernameNotFoundException( HttpStatus.NOT_FOUND, username );
         }
     }
 
@@ -49,7 +49,7 @@ public class UserController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path( "/{username}" )
                 .buildAndExpand( newUsername ).toUri();
 
-        return new ResponseEntity( "New user added " + user.getUsername(), HttpStatus.CREATED );
+        return new ResponseEntity<>( "New user added " + user.getUsername(), HttpStatus.CREATED );
     }
 
     @PutMapping(value = "/{username}")

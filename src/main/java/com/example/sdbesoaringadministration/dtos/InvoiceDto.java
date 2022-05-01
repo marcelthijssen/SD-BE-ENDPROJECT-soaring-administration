@@ -13,14 +13,15 @@ public class InvoiceDto {
     private LocalDate creationDate;
     private Person billedPerson;
     private BigDecimal amount;
-private Flight flight;
+    private Flight flight;
+
     public InvoiceDto() {
     }
 
     public void setInvoiceDto( Long id, LocalDate creationDate, Person billedPerson, BigDecimal amount, Flight flight ) {
         this.id = id;
         this.creationDate = creationDate;
-        this.billedPerson=billedPerson;
+        this.billedPerson = billedPerson;
         this.amount = amount;
         this.flight = flight;
     }
@@ -59,7 +60,8 @@ private Flight flight;
     }
 
     public Flight getFlight() {
-        return flight;}
+        return flight;
+    }
 
     public void setFlight( Flight flight ) {
         this.flight = flight;

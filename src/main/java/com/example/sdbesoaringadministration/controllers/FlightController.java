@@ -60,35 +60,30 @@ public class FlightController {
         return flightService.updateFlight( flid, flight );
     }
 
-    // Assign plane to flight
     @PutMapping("/{flid}/plane/{plid}")
     public ResponseEntity<Object> assignPlaneToFlight( @PathVariable("flid") Long flid, @PathVariable("plid") Long plid ) {
         flightService.assignPlaneToFlight( flid, plid );
         return new ResponseEntity<>( "Plane added to flight", HttpStatus.ACCEPTED );
     }
 
-    // assign Airport to flight
     @PutMapping("/{flid}/airportstart/{asid}")
     public ResponseEntity<Object> assignAirportStartToFlight( @PathVariable("flid") Long flid, @PathVariable("asid") Long asid ) {
         flightService.assignAirportStartToFlight( flid, asid );
         return new ResponseEntity<>( "Starting Airport added to flight", HttpStatus.ACCEPTED );
     }
 
-    // assign Airport to flight
     @PutMapping("/{flid}/airportend/{aeid}")
     public ResponseEntity<Object> assignAirportEndToFlight( @PathVariable("flid") Long flid, @PathVariable("aeid") Long aeid ) {
         flightService.assignAirportEndToFlight( flid, aeid );
         return new ResponseEntity<>( "Landing airport added to flight", HttpStatus.ACCEPTED );
     }
 
-    // assign starting method to flight
     @PutMapping("/{flid}/startingmethodes/{smid}")
     public ResponseEntity<Object> assignStartingMethodeToFlight( @PathVariable("flid") Long flid, @PathVariable("smid") Long smid ) {
         flightService.assignStartingMethodeToFlight( flid, smid );
         return new ResponseEntity<>( "Startingmethode added to flight", HttpStatus.ACCEPTED );
     }
 
-    //     assign starting method to flight
     @PutMapping("/{flid}/passenger/{psid}")
     public ResponseEntity<String> assignPassengerToFlight( @PathVariable("flid") Long flid, @PathVariable("psid") Long psid ) {
         flightService.assignPassengerToFlight( flid, psid );
@@ -126,10 +121,9 @@ public class FlightController {
     }
 
     @PutMapping("/invoice/{flid}")
-    public ResponseEntity<Object> createInvoiceFromFLight( @PathVariable("flid") Long flid ) {
+    public ResponseEntity<String> createInvoiceFromFLight( @PathVariable("flid") Long flid ) {
         flightService.createInvoiceFromFLight( flid );
         return new ResponseEntity<>( "invoice created", HttpStatus.CREATED );
     }
-
 
 }

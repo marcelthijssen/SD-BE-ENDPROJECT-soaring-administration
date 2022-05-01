@@ -2,6 +2,7 @@ package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.PlaneDto;
 import com.example.sdbesoaringadministration.models.Plane;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ public interface PlaneService {
 
     PlaneDto getPlaneById( Long id );
 
-    Plane createPlane( PlaneDto planeDto );
+    ResponseEntity<Object> createPlane( PlaneDto planeDto );
 
     void deletePlaneById( Long id );
 
@@ -23,9 +24,9 @@ public interface PlaneService {
 
     void assignTechnicianToPlane( Long plid, Long pid );
 
-    PlaneDto createPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException;
+    void uploadFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException;
 
-    PlaneDto getPlaneFlightStatusById( Long plid );
+    PlaneDto getFlightStatusPdfById( Long plid );
 
     PlaneDto addMinutePrice( Long plid, PlaneDto dto );
 }

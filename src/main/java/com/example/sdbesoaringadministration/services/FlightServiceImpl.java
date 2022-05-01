@@ -180,7 +180,7 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public ResponseEntity<String> assignPassengerToFlight( Long flid, Long psid ) {
+    public void assignPassengerToFlight( Long flid, Long psid ) {
         var optionalFlight = flRepository.findById( flid );
         var optionalPerson = psRepository.findById( psid );
 
@@ -195,9 +195,10 @@ public class FlightServiceImpl implements FlightService {
                 throw new RecordNotFoundException( "Invalid person-id", HttpStatus.NOT_FOUND );
             }
         } else {
-            return new ResponseEntity<>( "plane is a oneseater", HttpStatus.FORBIDDEN );
+            new ResponseEntity<>( "plane is a oneseater", HttpStatus.FORBIDDEN );
+            return;
         }
-        return new ResponseEntity<>( "id is added", HttpStatus.CREATED );
+        new ResponseEntity<>( "id is added", HttpStatus.CREATED );
     }
 
 
@@ -264,40 +265,35 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public ResponseEntity<Object> createInvoiceFromFLight( Long flid ) {
+    public ResponseEntity<String> createInvoiceFromFLight( Long flid ) {
         var optionalFlight = flRepository.findById( flid );
         var optionalInvoice = invRepository.findById( flid );
         var flight = optionalFlight.get();
 
-        if ( flight.getTimeEnd().equals( null ) ) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
+        if ( optionalInvoice.get().getId().equals( optionalFlight.get().getId() ) ) {
+            var invoice = optionalInvoice.get();
+
+        invoice.setId( flight.getId() );
+            invoice.setCreationDate( ( LocalDate.now() ) );
+            invoice.setBilledPerson( flight.getBilledPerson() );
+            invoice.setAmount( calculateCostsOfFlight( flight ) );
+            invoice.setId( flight.getId() );
+            invoice.setFlight( flight );
+            invRepository.save( invoice );
+
         } else {
-            if ( optionalInvoice.get().getId().equals( optionalFlight.get().getId() ) ) {
-                var invoice = optionalInvoice.get();
+            Invoice invoice = new Invoice();
+            invoice.setId( flight.getId() );
+            invoice.setCreationDate( ( LocalDate.now() ) );
+            invoice.setBilledPerson( flight.getBilledPerson() );
+            invoice.setAmount( calculateCostsOfFlight( flight ) );
+            invoice.setId( flight.getId() );
+            invoice.setFlight( flight );
+            invRepository.save( invoice );
 
-//            invoice.setId( flight.getId() );
-                invoice.setCreationDate( ( LocalDate.now() ) );
-                invoice.setBilledPerson( flight.getBilledPerson() );
-                invoice.setAmount( calculateCostsOfFlight( flight ) );
-                invoice.setId( flight.getId() );
-                invoice.setFlight( flight );
-                invRepository.save( invoice );
-
-            } else {
-                Invoice invoice = new Invoice();
-                invoice.setId( flight.getId() );
-                invoice.setCreationDate( ( LocalDate.now() ) );
-                invoice.setBilledPerson( flight.getBilledPerson() );
-                invoice.setAmount( calculateCostsOfFlight( flight ) );
-                invoice.setId( flight.getId() );
-                invoice.setFlight( flight );
-                invRepository.save( invoice );
-
-                return new ResponseEntity<>( "asdfghjk", HttpStatus.ACCEPTED );
-
-            }
-            return null;
+            return new ResponseEntity<>( "invoice created", HttpStatus.CREATED );
         }
+        return new ResponseEntity<>( HttpStatus.OK );
     }
 
 
@@ -320,27 +316,6 @@ public class FlightServiceImpl implements FlightService {
         }
         return sm.add( costTotalFlyingTime );
     }
-
-    public static Flight flightDtoToFlight( FlightDto dto ) {
-        Flight fl = new Flight();
-
-        fl.setId( dto.getId() );
-        fl.setTimeStart( dto.getTimeStart() );
-        fl.setTimeEnd( dto.getTimeEnd() );
-        fl.setTimeFlown( dto.getTimeFlown() );
-        fl.setInstructionFlight( dto.getInstructionFlight() );
-        fl.setRemarks( dto.getRemarks() );
-        fl.setPlane( dto.getPlane() );
-        fl.setAirportStart( dto.getAirportStart() );
-        fl.setAirportEnd( dto.getAirportEnd() );
-        fl.setStartingMethode( dto.getStartingMethode() );
-        fl.setPassenger( dto.getPassenger() );
-        fl.setCaptain( dto.getCaptain() );
-        fl.setBilledPerson( dto.getBilledPerson() );
-
-        return fl;
-    }
-
 
     public FlightDto flightToFlightDto( Flight fl ) {
         FlightDto dto = new FlightDto();

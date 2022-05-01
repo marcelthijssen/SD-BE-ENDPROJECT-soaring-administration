@@ -35,7 +35,7 @@ public class StartingMethodeController {
         try {
             return ResponseEntity.ok( startingMethodeDto );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Startingmethode not found", HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid Startingmethode id: "+ smid, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -51,7 +51,7 @@ public class StartingMethodeController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             smService.createStartingMethode( startingMethodeDto );
-            return new ResponseEntity( "Startingmethode added to list of startingmethodes", HttpStatus.CREATED );
+            return new ResponseEntity<>( "Startingmethode added to list of startingmethodes", HttpStatus.CREATED );
         }
     }
 

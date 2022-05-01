@@ -1,14 +1,10 @@
 package com.example.sdbesoaringadministration.dtos;
 
-
 import com.example.sdbesoaringadministration.models.*;
-;
-import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 
 public class FlightDto {
-
     private Long id;
     private LocalDateTime timeStart;
     private LocalDateTime timeEnd;

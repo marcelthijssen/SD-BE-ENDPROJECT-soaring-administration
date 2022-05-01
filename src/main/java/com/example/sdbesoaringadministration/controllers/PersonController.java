@@ -40,7 +40,7 @@ public class PersonController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Object> addPerson( @Valid @RequestBody PersonDto personDto, BindingResult br ) {
+    public ResponseEntity<Object> createPerson( @Valid @RequestBody PersonDto personDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
             for ( FieldError fe : br.getFieldErrors() ) {
@@ -54,7 +54,6 @@ public class PersonController {
         }
     }
 
-
     @DeleteMapping("/{pid}")
     public ResponseEntity<Object> deletePersonById( @PathVariable("pid") Long pid ) {
         personService.deletePersonById( pid );
@@ -63,8 +62,7 @@ public class PersonController {
 
     @PutMapping("/{pid}")
     public PersonDto updatePerson( @PathVariable("pid") Long pid, @RequestBody PersonDto person ) {
-        PersonDto dto = personService.updatePerson( pid, person );
-        return dto;
+        return personService.updatePerson( pid, person );
     }
 
     @PutMapping("/{pid}/membership/{mbid}")

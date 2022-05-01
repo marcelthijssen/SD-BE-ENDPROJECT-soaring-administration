@@ -19,7 +19,7 @@ public class MembershipDto {
 
     public MembershipDto() {
     }
-    public MembershipDto( Long id, String title, BigDecimal costsPerMonth, BigDecimal max ) {
+    public MembershipDto( Long id, String title, BigDecimal costsPerMonth ) {
         this.id = id;
         this.title = title;
         this.costsPerMonth = costsPerMonth;

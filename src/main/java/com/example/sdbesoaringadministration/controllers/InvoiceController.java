@@ -1,13 +1,11 @@
 package com.example.sdbesoaringadministration.controllers;
 
-
 import com.example.sdbesoaringadministration.dtos.InvoiceDto;
 import com.example.sdbesoaringadministration.services.InvoiceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,8 +30,5 @@ public class InvoiceController {
         List<InvoiceDto> invoices = invService.findInvoicesByBilledPerson( pid );
         return new ResponseEntity<>( invoices, HttpStatus.OK );
     }
-
-
-
 
 }

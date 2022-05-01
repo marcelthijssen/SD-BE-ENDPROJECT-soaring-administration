@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/memberships")
 public class MembershipController {
 
-
     private final MembershipService membershipService;
 
     public MembershipController( MembershipService membershipService ) {
@@ -60,19 +59,15 @@ public class MembershipController {
     public ResponseEntity<Object> deleteMembershipById( @PathVariable("mbid") Long mbid ) {
 
         membershipService.deleteMembershipById( mbid );
-        return new ResponseEntity<>( "Membership-type has been delteed", HttpStatus.ACCEPTED );
-
+        return new ResponseEntity<>( "Membership-type has been deleted", HttpStatus.ACCEPTED );
     }
 
 
     @PutMapping("/{mbid}")
 
-    public MembershipDto updateMembership( @PathVariable("id") Long mbid, @RequestBody MembershipDto dto ) {
+    public MembershipDto updateMembership( @PathVariable("mbid") Long mbid, @RequestBody MembershipDto dto ) {
 
-        MembershipDto MembershipDto = membershipService.updateMembership( mbid, dto );
-
-        return MembershipDto;
-
+        return membershipService.updateMembership( mbid, dto );
     }
 
 

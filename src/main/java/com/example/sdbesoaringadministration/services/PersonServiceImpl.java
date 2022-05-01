@@ -39,8 +39,7 @@ public class PersonServiceImpl implements PersonService {
     public PersonDto getPersonById( Long pid ) {
         Optional<Person> person = personRepository.findById( pid );
         if ( person.isPresent() ) {
-            PersonDto dto = personToPersonDto( person.get() );
-            return dto;
+            return personToPersonDto( person.get() );
 
         } else {
             throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );

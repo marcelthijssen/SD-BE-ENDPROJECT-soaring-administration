@@ -95,14 +95,14 @@ public class PlaneController {
 
     // need to upload file for plane
     @PutMapping("/flightstatus/{plid}")
-    public String createPlaneFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
-        planeService.createPlaneFlightStatusPdf( plid, pdf );
+    public String uploadFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
+        planeService.uploadFlightStatusPdf( plid, pdf );
         return "File uploaded";
     }
 
     @GetMapping(value = "/{plid}/flightstatus", produces = MediaType.APPLICATION_PDF_VALUE)
-    public @ResponseBody byte[] getPlaneflightStatusById( @PathVariable(name = "plid") Long plid ) {
-        PlaneDto plane = planeService.getPlaneFlightStatusById( plid );
+    public @ResponseBody byte[] getFlightStatusPdfById( @PathVariable(name = "plid") Long plid ) {
+        PlaneDto plane = planeService.getFlightStatusPdfById( plid );
         return plane.getFlightStatus();
 
     }

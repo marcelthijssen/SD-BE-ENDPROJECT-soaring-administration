@@ -40,8 +40,7 @@ public class AirportServiceImpl implements AirportService {
     public AirportDto getAirportById( Long aid ) {
         try {
             Airport ap = airportRepository.findById( aid ).get();
-            AirportDto dto = airportToAirportDto( ap );
-            return dto;
+            return airportToAirportDto( ap );
         } catch ( Exception e ) {
             throw new RecordNotFoundException( "Invalid airport id: " + aid, HttpStatus.NOT_FOUND );
         }

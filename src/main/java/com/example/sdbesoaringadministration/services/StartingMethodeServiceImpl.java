@@ -25,7 +25,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
         List<StartingMethodeDto> smDtoList = new ArrayList<>();
 
         for ( StartingMethode sm : smList ) {
-            StartingMethodeDto dto = startingMethodeToStartingMethodeDto(sm);
+            StartingMethodeDto dto = startingMethodeToStartingMethodeDto( sm );
 
             smDtoList.add( dto );
         }
@@ -37,8 +37,7 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
 
         if ( smRepository.findById( smid ).isPresent() ) {
             StartingMethode startingMethode = smRepository.findById( smid ).get();
-            StartingMethodeDto dto = startingMethodeToStartingMethodeDto(startingMethode);
-
+            StartingMethodeDto dto = startingMethodeToStartingMethodeDto( startingMethode );
 
             return dto;
         } else {

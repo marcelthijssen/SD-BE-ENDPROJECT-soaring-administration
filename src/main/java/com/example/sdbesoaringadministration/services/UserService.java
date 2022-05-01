@@ -12,15 +12,23 @@ import java.util.Set;
 public interface UserService {
 
 
-    public List<UserDto> getAllUsers();
-    public UserDto getUserById( String username );
-    public boolean userExists( String username );
-    public String createUser( User user );
-    public void deleteUser( String username );
-    public ResponseEntity<Object> updateUser( String username, UserDto newUser );
-    public Set<Authority> getAuthorities( String username );
-    public void addAuthority( String username, String authority );
-    public void removeAuthority( String username, String authority );
+    List<UserDto> getAllUsers();
+
+    UserDto getUserById( String username );
+
+    boolean userExists( String username );
+
+    String createUser( User user );
+
+    void deleteUser( String username );
+
+    ResponseEntity<Object> updateUser( String username, UserDto newUser );
+
+    Set<Authority> getAuthorities( String username );
+
+    void addAuthority( String username, String authority );
+
+    void removeAuthority( String username, String authority );
 
 
-    }
+}
