@@ -36,21 +36,21 @@ INSERT INTO memberships (id, title, costs_per_month)
 VALUES (4004, 'Honourable member', 0.00);
 
 INSERT INTO users (username, password, email, enabled)
-VALUES ('user', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'user@test.nl', false);
+VALUES ('user', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'user@test.nl', false);
 INSERT INTO users (username, password, email, enabled)
-VALUES ('admin', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'admin@test.nl', TRUE);
+VALUES ('admin', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'admin@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled)
-VALUES ('user2', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'test@test.nl', TRUE);
+VALUES ('user2', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'test2@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled)
-VALUES ('user3', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'test@test.nl', TRUE);
+VALUES ('user3', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'test3@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled)
-VALUES ('user4', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'test@test.nl', TRUE);
+VALUES ('user4', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'test4@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled)
-VALUES ('user5', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'test@test.nl', TRUE);
+VALUES ('user5', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'test5@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled)
-VALUES ('user6', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'test@test.nl', TRUE);
+VALUES ('user6', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'test6@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled)
-VALUES ('willie', '$2a$10$Gi81J40Smh7Di//HeQAZEOt4/JskZFZemxSJ7E7RAvCWDY0v248yK', 'willie@wortel.nl', TRUE);
+VALUES ('willie', '$2a$10$ixD3Fpf0tw9/ZSj0hpO2g.Z4J4NobFgHfuZTSmLHjXSY5Nz/sOmMy', 'willie@wortel.nl', TRUE);
 
 INSERT INTO authorities (username, authority)
 VALUES ('admin', 'ROLE_ADMIN');
@@ -61,6 +61,8 @@ VALUES ('admin', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
 VALUES ('user', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
+VALUES ('willie', 'ROLE_TECHNICIAN');
+INSERT INTO authorities (username, authority)
 VALUES ('user3', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
 VALUES ('user4', 'ROLE_USER');
@@ -68,9 +70,6 @@ INSERT INTO authorities (username, authority)
 VALUES ('user5', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
 VALUES ('user6', 'ROLE_USER');
-INSERT INTO authorities (username, authority)
-VALUES ('willie', 'ROLE_TECHNICIAN');
-
 
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number, postalcode,
                      city, country, email, pilot_license, membership_id)
@@ -105,21 +104,29 @@ INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, st
 VALUES (3008, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
         'Nederland', 'willie@wortel.nl', false, 4003);
 
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status, minute_price)
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
 VALUES (5001, 'G1', 'Alexander Schleicher', 'Ask-13', 'PH-1045', true, false, 3001, 3001, null, 0.25);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,flight_status, minute_price)
-VALUES (5002, 'G7', 'Alexander Schleicher', 'Ask-21', 'PH-1337', true, true, 3002, 3002, null, 0);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,flight_status, minute_price)
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
+VALUES (5002, 'G7', 'Alexander Schleicher', 'Ask-21', 'PH-1337', true, true, 3002, 3002, null, 0.1);
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
 VALUES (5003, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false, 3002, 3003, null, 0.25);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,flight_status, minute_price)
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
 VALUES (5004, 'ka8', 'Alexander Schleicher', 'Ka-8b', 'PH-345', false, true, 3003, 3002, null, 0);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status, minute_price)
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
 VALUES (5005, 'EC', 'Rolladen Schleicher', 'LS-6b', 'PH-1203', false, true, 3003, 3001, null, 0);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,flight_status, minute_price)
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
 VALUES (5006, 'k8', 'Alexander Schleicher', 'Rhone', 'PH-152', false, true, 3003, 3001, null, 0);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status, minute_price)
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
 VALUES (5007, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false, 3002, 3003, null, 0.25);
-INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id, flight_status, minute_price)
+INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
+                    flight_status, minute_price)
 VALUES (5008, 'G9', 'Grob', '2b', 'PH-1254', false, true, 3007, 3007, null, 0);
 
 
@@ -147,3 +154,12 @@ INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
 VALUES (6006, false, '', '2022-04-14 10:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
         3004, 3003);
+
+INSERT INTO invoices (invoice_number, amount, creation_date, billed_person_id, flight_id)
+VALUES (6001, 5, '2022-04-14', 3001, 6001);
+INSERT INTO invoices (invoice_number, amount, creation_date, billed_person_id, flight_id)
+VALUES (6002, 7, '2022-04-15', 3003, 6002);
+INSERT INTO invoices (invoice_number, amount, creation_date, billed_person_id, flight_id)
+VALUES (6003, 11, '2022-04-16', 3001, 6003);
+INSERT INTO invoices (invoice_number, amount, creation_date, billed_person_id, flight_id)
+VALUES (6004, 4, '2022-04-17', 3004, 6004);

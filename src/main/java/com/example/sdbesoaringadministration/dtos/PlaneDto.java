@@ -14,7 +14,9 @@ public class PlaneDto {
 
     private Long id;
     private String callSign;
+    @NotBlank(message = "Brand can not be empty")
     private String brand;
+    @NotBlank(message = "Type can not be empty")
     private String type;
     @NotBlank(message = "Registration can not be empty")
     private String registration;

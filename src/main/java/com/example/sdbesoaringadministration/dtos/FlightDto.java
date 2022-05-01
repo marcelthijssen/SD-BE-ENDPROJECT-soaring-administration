@@ -7,8 +7,6 @@ import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 
-
-@Validated
 public class FlightDto {
 
     private Long id;
@@ -17,7 +15,6 @@ public class FlightDto {
     private long timeFlown;
     private boolean instructionFlight;
     private String remarks;
-    // MayToOne
     private Plane plane;
     private Airport airportStart;
     private Airport airportEnd;

@@ -44,7 +44,7 @@ public class PlaneController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Object> addPlane( @Valid @RequestBody PlaneDto planeDto, BindingResult br ) {
+    public ResponseEntity<Object> createPlane( @Valid @RequestBody PlaneDto planeDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
             for ( FieldError fe : br.getFieldErrors() ) {
@@ -95,8 +95,8 @@ public class PlaneController {
 
     // need to upload file for plane
     @PutMapping("/flightstatus/{plid}")
-    public String addPlaneFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
-        planeService.addPlaneFlightStatusPdf( plid, pdf );
+    public String createPlaneFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
+        planeService.createPlaneFlightStatusPdf( plid, pdf );
         return "File uploaded";
     }
 

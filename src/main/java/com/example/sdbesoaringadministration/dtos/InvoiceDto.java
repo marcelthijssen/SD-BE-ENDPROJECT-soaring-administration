@@ -7,7 +7,6 @@ import org.springframework.validation.annotation.Validated;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Validated
 public class InvoiceDto {
 
     private Long id;

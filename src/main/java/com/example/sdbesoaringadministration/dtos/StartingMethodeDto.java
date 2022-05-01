@@ -1,9 +1,10 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import com.example.sdbesoaringadministration.models.StartingMethode;
-;
 import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 
@@ -11,12 +12,14 @@ import java.math.BigDecimal;
 public class StartingMethodeDto {
 
     private Long id;
+    @NotBlank(message = "Title can not be empty")
     private String title;
+    @NotBlank(message = "Unit can not be empty")
     private String unit;
-    //    BigDecimal bd1 = new BigDecimal.valueOf(...) OF BigDecimal("...")
+    @Column(precision = 10, scale = 2)
+    @Digits(integer = 4, fraction = 2)
     private BigDecimal price;
 
-    // constructors
     public StartingMethodeDto() {
     }
 
@@ -44,7 +47,6 @@ public class StartingMethodeDto {
     public void setUnit( String unit ) {
         this.unit = unit;
     }
-
 
     public String getTitle() {
         return title;

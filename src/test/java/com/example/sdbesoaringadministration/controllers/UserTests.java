@@ -105,39 +105,7 @@ public class UserTests {
         assertThat( user1.getUsername() ).isEqualTo( "1L" );
         assertThat( user1.getEmail() ).isEqualTo( "ABCD@mail.nl" );
     }
-    /*
-        @Test
-        public void updateEmployeeTest() {
-            UserDto userDto1 = new UserDto();
-            userDto1.setId( 1L );
-            userDto1.setIcao( "ABCD" );
-            when( userRepository.findById( 1L ) ).thenReturn( Optional.of( userDto1 ) );
-    
-            userDto1.setIcao( "ABCD" );
-            service.updateUser( 1L, userDto1 );
-    
-            verify( userRepository ).save( userDto1 );
-    
-            assertThat( userDto1.getId() ).isEqualTo( 1 );
-            assertThat( userDto1.getIcao() ).isEqualTo( "test1" );
-        }
-    */
-//    @Test
-//    public void updateUserExceptionTest() {
-//        assertThrows( RecordNotFoundException.class, () -> service.getUserById( null ) );
-//        throw new RecordNotFoundException( "nit found" , HttpStatus.NOT_FOUND );
-//    }
-    @Test
-    public void whenExceptionThrown_thenAssertionSucceeds() {
-        Exception ex = assertThrows(RecordNotFoundException.class, () -> {
-            service.getUserById( null );
-        });
 
-        String expectedMessage = "For input string";
-        String actualMessage = ex.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
 
     @Test
     public void deleteUserTest() {

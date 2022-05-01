@@ -111,7 +111,7 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public PlaneDto addPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
+    public PlaneDto createPlaneFlightStatusPdf( Long plid, MultipartFile pdf ) throws IOException {
 
         try {
             if ( plRepository.findById( plid ).isPresent() ) {

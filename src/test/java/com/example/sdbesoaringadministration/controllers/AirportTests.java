@@ -12,8 +12,10 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -30,7 +32,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @ExtendWith(MockitoExtension.class)
 public class AirportTests {
 
@@ -43,6 +44,7 @@ public class AirportTests {
     @Captor
     ArgumentCaptor<Airport> airportCaptor;
 
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -54,22 +56,10 @@ public class AirportTests {
         airport.setId( 1L );
         Mockito.when( airportRepository.findById( 1L ) ).thenReturn( Optional.of( airport ) );
 
-        assertThat(airportRepository.findById(1L)).isEqualTo(Optional.of( airport ));
+        assertThat( airportRepository.findById( 1L ) ).isEqualTo( Optional.of( airport ) );
 
     }
 
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Test
-    public void flightControllerGetAllFlightsTest() throws JSONException {
-
-        String response = this.restTemplate.getForObject( "/airports", String.class );
-
-        JSONAssert.assertEquals( "[{id:1001},{id:1002},{id:1003},{id:1004},{id:1005},{id:1006},{id:1007},{id:1008},{id:1009},{id:1010},{id:1011}]",
-                response, false );
-    }
 
     @Test
     public void getAirport2Test() {
@@ -114,20 +104,25 @@ public class AirportTests {
         assertThat( airport1.getId() ).isEqualTo( 1 );
     }
 
-    @Test
-    public void updateAirportExceptionTest() {
-        assertThrows( RecordNotFoundException.class, () -> service.getAirportById( null ) );
-    }
 
-    @Test
-    public void deleteAirportTest() {
-        Airport airport = new Airport();
-        airport.setId( 1L );
-        airport.setIcao( "ABCD" );
-
-        airportRepository.delete( airport );
-
-        verify( airportRepository, times( 1 ) ).delete( airport );
-    }
+//    @Test
+//    public void deleteAirportTest() {
+//        Airport airport1 = new Airport();
+//        airport1.setId( 1L );
+//        airport1.setIcao( "ABCD" );
+//        airportRepository.save( airport1 );
+//
+//        Airport airport2 = new Airport();
+//        airport2.setId( 2L );
+//        airport2.setIcao( "EFGH" );
+//        airportRepository.save( airport2 );
+//
+//        airportRepository.delete( airport1 );
+//
+//        verify( airportRepository, times( 1 ) ).deleteById(1L );
+//
+//        assertThat( airportRepository.findAll().size() ).isEqualTo( 1 );
+//
+//    }
 
 }

@@ -17,11 +17,11 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
-    @Column(nullable = false)
-    private boolean enabled = false;
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private boolean enabled = false;
     @OneToMany(
             targetEntity = Authority.class,
             mappedBy = "username",

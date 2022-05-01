@@ -57,37 +57,14 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    /*
-        @Override
-        public FlightDto createFlight( FlightDto dto ) {
-            Flight flight = ( flightDtoToFlight( dto ) );
-            System.out.println( flight );
-            this.flRepository.save( flight );
-
-            FlightDto dtoReturn = flightToFlightDto( flight );
-            dtoReturn.setId( flight.getId() );
-            return dtoReturn;
-        }*/
-    public Flight createFlight( FlightDto dto ) {
+   public Flight createFlight( FlightDto dto ) {
         Flight fl = new Flight();
 
         fl.setId( dto.getId() );
-        fl.setTimeStart( dto.getTimeStart() );
-        fl.setTimeEnd( dto.getTimeEnd() );
-        fl.setTimeFlown( dto.getTimeFlown() );
-        fl.setInstructionFlight( dto.getInstructionFlight() );
-        fl.setRemarks( dto.getRemarks() );
-        fl.setPlane( dto.getPlane() );
-        fl.setAirportStart( dto.getAirportStart() );
-        fl.setAirportEnd( dto.getAirportEnd() );
-        fl.setStartingMethode( dto.getStartingMethode() );
-        fl.setPassenger( dto.getPassenger() );
-        fl.setCaptain( dto.getCaptain() );
-        fl.setBilledPerson( dto.getBilledPerson() );
+
         flRepository.save( fl );
         return fl;
     }
-
 
     @Override
     public void deleteFlightById( Long flid ) {

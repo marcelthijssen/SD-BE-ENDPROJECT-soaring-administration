@@ -70,7 +70,7 @@ public class AirportServiceImpl implements AirportService {
     public AirportDto updateAirport( Long apid, AirportDto dto ) {
         try {
             Airport ap = airportRepository.findById( apid ).get();
-            ap.setId( dto.getId() );
+            ap.setId( ap.getId() );
             ap.setIcao( dto.getIcao() );
             ap.setCity( dto.getCity() );
             ap.setCountry( dto.getCountry() );
@@ -85,7 +85,6 @@ public class AirportServiceImpl implements AirportService {
     public static Airport airportDtoToAirport( AirportDto dto ) {
         Airport airport = new Airport();
 
-        airport.setId( dto.getId() );
         airport.setIcao( dto.getIcao() );
         airport.setCity( dto.getCity() );
         airport.setCountry( dto.getCountry() );
