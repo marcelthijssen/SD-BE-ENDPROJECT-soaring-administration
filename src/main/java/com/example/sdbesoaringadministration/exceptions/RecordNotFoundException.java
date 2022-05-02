@@ -1,3 +1,13 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Handles RecordNotFoundExceptions
+ */
+
 package com.example.sdbesoaringadministration.exceptions;
 
 import org.springframework.http.HttpStatus;

@@ -1,3 +1,14 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Creates an object of Startingmethode
+ *
+ */
+
 package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,8 +33,8 @@ public class StartingMethode {
     private String title;
     @NotBlank
     private String unit;
-    @DecimalMin(value = "0.0", message="value = 0.0")
-    @Digits(integer=1, fraction=2)
+    @DecimalMin(value = "0.0", message = "value = 0.0")
+    @Digits(integer = 1, fraction = 2)
     private BigDecimal price;
     @OneToMany
             (mappedBy = "startingMethode",
@@ -48,7 +59,7 @@ public class StartingMethode {
         this.unit = unit;
     }
 
-    public BigDecimal getPrice( ) {
+    public BigDecimal getPrice() {
         return this.price;
     }
 
@@ -65,7 +76,7 @@ public class StartingMethode {
     }
 
 
-    public void setFlight(List<Flight> flights) {
+    public void setFlight( List<Flight> flights ) {
         this.flights = flights;
     }
 
@@ -73,8 +84,8 @@ public class StartingMethode {
         return flights;
     }
 
-    void addFlight( Flight flight) {
-        this.flights.add(flight);
+    void addFlight( Flight flight ) {
+        this.flights.add( flight );
     }
 
 

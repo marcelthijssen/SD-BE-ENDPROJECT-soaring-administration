@@ -1,3 +1,14 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Extends JpaRepository and communicates with database column 'persons'
+ *
+ */
+
 package com.example.sdbesoaringadministration.repositories;
 
 import com.example.sdbesoaringadministration.models.Person;

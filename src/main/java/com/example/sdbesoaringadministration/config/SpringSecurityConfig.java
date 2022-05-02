@@ -1,3 +1,12 @@
+/*
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Purpos of this class
+ *
+ */
+
 package com.example.sdbesoaringadministration.config;
 
 import com.example.sdbesoaringadministration.filter.JwtRequestFilter;

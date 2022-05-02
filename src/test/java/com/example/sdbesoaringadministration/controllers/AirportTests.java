@@ -1,3 +1,13 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Purpos of this class
+ */
+
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.models.Airport;

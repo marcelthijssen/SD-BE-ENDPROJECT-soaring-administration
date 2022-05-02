@@ -1,3 +1,13 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Handles AutheticationRequests
+ */
+
 package com.example.sdbesoaringadministration.payload;
 
 public class AuthenticationRequest {

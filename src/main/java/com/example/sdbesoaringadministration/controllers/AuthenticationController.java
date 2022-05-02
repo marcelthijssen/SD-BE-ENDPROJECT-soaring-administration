@@ -1,3 +1,14 @@
+/*
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Management of endpoints of AuthenticationController
+ * Get /Authenticated
+ * POST /authenticate -> Login
+ *
+ */
+
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.payload.AuthenticationRequest;

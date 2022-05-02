@@ -1,3 +1,12 @@
+/*
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * JwtRequestFilter
+ */
+
 package com.example.sdbesoaringadministration.filter;
 
 import com.example.sdbesoaringadministration.services.CustomUserDetailsService;

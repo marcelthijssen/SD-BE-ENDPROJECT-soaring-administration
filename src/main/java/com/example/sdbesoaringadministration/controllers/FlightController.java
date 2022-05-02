@@ -1,3 +1,16 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Controller of the endpoints for '/flights
+ * GET / POST / PUT / DELETE
+ * Creates flights and assigns: captain, passenger, airportStart, airportEnd, timeStart, timeEnd, startingMethode, instructionFlight, addRemarks and createInvoiceFromFlight
+ *
+ */
+
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.FlightDto;
@@ -90,7 +103,6 @@ public class FlightController {
         return new ResponseEntity<>( "Passenger added to flight", HttpStatus.ACCEPTED );
     }
 
-    //         assign starting method to flight
     @PutMapping("/{flid}/captain/{cpid}")
     public ResponseEntity<Object> assignCaptainToFlight( @PathVariable("flid") Long flid, @PathVariable("cpid") Long cpid ) {
         flightService.assignCaptainToFlight( flid, cpid );

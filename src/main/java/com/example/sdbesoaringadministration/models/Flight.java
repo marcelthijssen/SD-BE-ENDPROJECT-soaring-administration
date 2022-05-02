@@ -1,3 +1,14 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Creates an object of Flight
+ * 
+ */
+
 package com.example.sdbesoaringadministration.models;
 
 

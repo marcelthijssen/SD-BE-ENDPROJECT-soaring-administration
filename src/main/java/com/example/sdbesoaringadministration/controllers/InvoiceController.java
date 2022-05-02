@@ -1,3 +1,17 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Controller of the endpoints for '/flights
+ * GET
+ * '/getAllInvoices'
+ * '/billedperson/{pid}' returns aal invoices of a specific person
+ *
+ */
+
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.InvoiceDto;

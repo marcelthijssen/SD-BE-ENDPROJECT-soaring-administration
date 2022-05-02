@@ -1,3 +1,15 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Controller of endpoints from '/memeberships'
+ * GET / POST / PUT / DELETE
+ *
+ */
+
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.MembershipDto;

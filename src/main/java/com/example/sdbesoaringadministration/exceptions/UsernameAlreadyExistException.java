@@ -1,3 +1,14 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Handles UsernameAlreadyExistException
+ *
+ */
+
 package com.example.sdbesoaringadministration.exceptions;
 
 public class UsernameAlreadyExistException extends RuntimeException {

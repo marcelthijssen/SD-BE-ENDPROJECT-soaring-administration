@@ -1,3 +1,17 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Controller of endpoint from '/planes'
+ *
+ * GET / POST / PUT / DELETE
+ * and assings a owner and a technician to a specific plane
+ *
+ */
+
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.PlaneDto;
@@ -31,7 +45,6 @@ public class PlaneController {
 
         return new ResponseEntity<>( planeDtoList, HttpStatus.OK );
     }
-
 
     @GetMapping("/{plid}")
     public ResponseEntity<Object> getPlaneById( @PathVariable(name = "plid") Long plid ) {

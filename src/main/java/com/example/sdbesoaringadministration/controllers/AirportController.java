@@ -1,3 +1,15 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Managing the endpoint from /airports
+ * GET / POST / PUT / DELETE
+ *
+ */
+
 package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.AirportDto;
@@ -30,7 +42,7 @@ public class AirportController {
     }
 
     @GetMapping("/{aid}")
-    public ResponseEntity<Object> getAirportById( @PathVariable(name = "id") Long aid ) {
+    public ResponseEntity<Object> getAirportById( @PathVariable(name = "aid") Long aid ) {
         try {
             AirportDto airportDto = airportService.getAirportById( aid );
             return ResponseEntity.ok( airportDto );
@@ -41,7 +53,7 @@ public class AirportController {
 
 
     @PostMapping("")
-    public ResponseEntity<Object> addAirport( @Valid @RequestBody AirportDto airportDto, BindingResult br ) {
+    public ResponseEntity<Object> createAirport( @Valid @RequestBody AirportDto airportDto, BindingResult br ) {
         if ( br.hasErrors() ) {
             StringBuilder sb = new StringBuilder();
             for ( FieldError fe : br.getFieldErrors() ) {

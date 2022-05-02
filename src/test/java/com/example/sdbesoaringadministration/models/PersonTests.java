@@ -1,3 +1,13 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Test for Person.classe
+ */
+
 package com.example.sdbesoaringadministration.models;
 
 import org.junit.jupiter.api.BeforeEach;

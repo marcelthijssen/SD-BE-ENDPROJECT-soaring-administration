@@ -1,3 +1,14 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Creates an object of Authority
+ * 
+ */
+
 package com.example.sdbesoaringadministration.models;
 
 import com.example.sdbesoaringadministration.utils.AuthorityKey;

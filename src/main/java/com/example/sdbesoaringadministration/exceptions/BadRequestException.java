@@ -1,3 +1,14 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Handels BadRequestException
+ *
+ */
+
 package com.example.sdbesoaringadministration.exceptions;
 
 public class BadRequestException extends RuntimeException {

@@ -1,3 +1,14 @@
+/*
+ * Author: Marcel Thijssen
+ *
+ * Version: v0.1
+ *
+ * Copyright
+ *
+ * Implements methodes for PersonController
+ *
+ */
+
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.PersonDto;
