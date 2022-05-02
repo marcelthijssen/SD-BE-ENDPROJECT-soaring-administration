@@ -236,7 +236,7 @@ public class FlightServiceImpl implements FlightService {
         var optionalFlight = flRepository.findById( flid );
         var flight = optionalFlight.get();
         flight.setTimeEnd( ( LocalDateTime.now() ) );
-        flight.setTimeFlown( calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) );
+        flight.setTimeFlown( calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) ); // calculating adding timeFlown
 
         if ( !flight.getInstructionFlight() ) {
             flight.setBilledPerson( flight.getCaptain() );
