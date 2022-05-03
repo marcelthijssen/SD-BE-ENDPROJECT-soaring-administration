@@ -32,21 +32,21 @@ public class AirportModelTests {
     @Test
     void testGeticao() {
         String expectedResult = "ABCD";
-        String actualResult = this.airport.getIcao();
+        String actualResult = airport.getIcao();
         assertEquals( expectedResult, actualResult );
     }
 
     @Test
     void testGetCity() {
         String expectedResult = "ACity";
-        String actualResult = this.airport.getCity();
+        String actualResult = airport.getCity();
         assertEquals( expectedResult, actualResult );
     }
 
     @Test
     void testGetCountry() {
         String expectedResult = "ACountry";
-        String actualResult = this.airport.getCountry();
+        String actualResult = airport.getCountry();
         assertEquals( expectedResult, actualResult );
     }
 
