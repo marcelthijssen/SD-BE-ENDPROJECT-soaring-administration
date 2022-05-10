@@ -25,6 +25,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.annotation.PostConstruct;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -46,16 +48,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    private PasswordEncoder bCryptPasswordEncoder;
+
+    public void setPasswordEncoder( PasswordEncoder bCryptPasswordEncoder ) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
     // DON'T REMOVE 'static' PasswordEncoder. This prevents forming a cycle.
     @Bean
-    public static PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
     @Override
     protected void configure( HttpSecurity http ) throws Exception {
 
-        //JWT token authentication
         http
                 .csrf().disable()
                 .authorizeRequests()

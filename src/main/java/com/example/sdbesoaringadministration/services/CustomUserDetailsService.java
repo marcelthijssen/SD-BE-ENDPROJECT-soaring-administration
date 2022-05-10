@@ -32,6 +32,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+
     @Override
     public UserDetails loadUserByUsername( String username ) {
         Optional<UserDto> user = Optional.ofNullable( userService.getUserById( username ) );

@@ -8,7 +8,7 @@
  * Purpos of this class
  */
 
-package com.example.sdbesoaringadministration.controllers;
+package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.models.Airport;
 import com.example.sdbesoaringadministration.repositories.AirportRepository;
