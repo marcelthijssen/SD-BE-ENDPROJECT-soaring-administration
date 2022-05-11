@@ -35,14 +35,6 @@ public class AirportDto {
         this.country = country;
     }
 
-    public String getIcao() {
-        return icao;
-    }
-
-    public void setIcao( String icao ) {
-        this.icao = icao;
-    }
-
     public Long getId() {
         return id;
     }
@@ -51,6 +43,13 @@ public class AirportDto {
         this.id = id;
     }
 
+    public String getIcao() {
+        return icao;
+    }
+
+    public void setIcao( String icao ) {
+        this.icao = icao;
+    }
     public String getCity() {
         return city;
     }

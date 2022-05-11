@@ -29,11 +29,10 @@ import java.util.Set;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private static UserService userService;
 
-    public void setUserService( UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userService;
+
 
     @Override
     public UserDetails loadUserByUsername( String username ) {

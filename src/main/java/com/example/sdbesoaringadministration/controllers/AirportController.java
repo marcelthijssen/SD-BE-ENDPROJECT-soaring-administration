@@ -78,7 +78,7 @@ public class AirportController {
     }
 
     @PutMapping("/{aid}")
-    public AirportDto updateAirport( @PathVariable("id") Long aid, @RequestBody AirportDto dto ) {
+    public AirportDto updateAirport( @PathVariable("aid") Long aid, @RequestBody AirportDto dto ) {
 
         return airportService.updateAirport( aid, dto );
     }

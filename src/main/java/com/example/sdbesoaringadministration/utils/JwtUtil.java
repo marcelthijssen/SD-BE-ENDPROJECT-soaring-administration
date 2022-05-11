@@ -1,13 +1,3 @@
-/*
- * Author: Marcel Thijssen
- *
- * Version: v0.1
- *
- * Copyright
- *
- * Purpos of this class
- */
-
 package com.example.sdbesoaringadministration.utils;
 
 import io.jsonwebtoken.Claims;

@@ -1,12 +1,3 @@
-/*
- * Version: v0.1
- *
- * Copyright
- *
- * Purpos of this class
- *
- */
-
 package com.example.sdbesoaringadministration.config;
 
 import com.example.sdbesoaringadministration.filter.JwtRequestFilter;
@@ -14,7 +5,6 @@ import com.example.sdbesoaringadministration.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,8 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import javax.annotation.PostConstruct;
 
 @Configuration
 @EnableWebSecurity
@@ -49,16 +37,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    private PasswordEncoder bCryptPasswordEncoder;
-
+    // DON'T REMOVE 'static' PasswordEncoder. This prevents forming a cycle.
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure( HttpSecurity http ) throws Exception {
 
+        //JWT token authentication
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -67,7 +55,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers( HttpMethod.GET, "/users/**" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.POST, "/users" ).permitAll()
                 .mvcMatchers( HttpMethod.PUT, "/users" ).hasAnyRole( "ADMIN", "USER" )
-                .mvcMatchers( HttpMethod.DELETE, "/**" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.DELETE, "/users/**" ).hasRole( "ADMIN" )
                 .antMatchers( HttpMethod.POST, "/users/**/authorities" ).hasAnyRole( "ADMIN" )
                 .antMatchers( HttpMethod.POST, "/users/**/authorities/**" ).hasAnyRole( "ADMIN" )
 //                /Memberships
@@ -88,12 +76,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers( HttpMethod.GET, "/airports/**" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.POST, "/airports" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.PUT, "/airports/**" ).hasAnyRole( "ADMIN", "USER" )
-                .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
+                .mvcMatchers( HttpMethod.DELETE, "/airports" ).hasRole( "ADMIN" )
 //                /planes
                 .mvcMatchers( HttpMethod.GET, "/planes" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.GET, "/planes/**" ).hasAnyRole( "ADMIN", "USER", "TECHNICIAN" )
                 .mvcMatchers( HttpMethod.POST, "/planes" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.PUT, "/planes/flightstatus/**" ).hasRole( "TECHNICIAN" )
+                .mvcMatchers( HttpMethod.GET, "/planes/flightstatus/**" ).hasAnyRole( "ADMIN", "USER", "TECHNICIAN" )
                 .mvcMatchers( HttpMethod.PUT, "/planes/**" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
 //                /Startingmethodes

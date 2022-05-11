@@ -38,10 +38,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void setPasswordEncoder( PasswordEncoder bCryptPasswordEncoder ) {
-        this.passwordEncoder = bCryptPasswordEncoder;
-    }
-
     public List<UserDto> getAllUsers() {
         List<UserDto> usersList = new ArrayList<>();
         List<User> list = userRepository.findAll();

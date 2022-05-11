@@ -80,7 +80,7 @@ public class AirportServiceImpl implements AirportService {
     public AirportDto updateAirport( Long apid, AirportDto dto ) {
         try {
             Airport ap = airportRepository.findById( apid ).get();
-            ap.setId( ap.getId() );
+            ap.setId( dto.getId() );
             ap.setIcao( dto.getIcao() );
             ap.setCity( dto.getCity() );
             ap.setCountry( dto.getCountry() );
