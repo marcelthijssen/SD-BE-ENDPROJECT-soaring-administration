@@ -5,7 +5,7 @@
  *
  * Copyright
  *
- * Purpos of this class
+ * Purpose of this class
  */
 
 package com.example.sdbesoaringadministration;

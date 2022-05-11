@@ -14,6 +14,7 @@ import com.example.sdbesoaringadministration.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -50,16 +51,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private PasswordEncoder bCryptPasswordEncoder;
 
-    public void setPasswordEncoder( PasswordEncoder bCryptPasswordEncoder ) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
-    // DON'T REMOVE 'static' PasswordEncoder. This prevents forming a cycle.
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @Override
     protected void configure( HttpSecurity http ) throws Exception {
