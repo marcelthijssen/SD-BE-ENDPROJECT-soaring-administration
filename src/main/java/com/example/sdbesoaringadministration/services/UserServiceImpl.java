@@ -17,6 +17,7 @@ import com.example.sdbesoaringadministration.exceptions.UsernameNotFoundExceptio
 import com.example.sdbesoaringadministration.models.Authority;
 import com.example.sdbesoaringadministration.models.User;
 import com.example.sdbesoaringadministration.repositories.UserRepository;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public void setPasswordEncoder( PasswordEncoder bCryptPasswordEncoder ) {
+        this.passwordEncoder = bCryptPasswordEncoder;
+    }
 
     public List<UserDto> getAllUsers() {
         List<UserDto> usersList = new ArrayList<>();
@@ -130,17 +135,5 @@ public class UserServiceImpl implements UserService {
         return dto;
     }
 
-//    public User userDtoToUser( UserDto dto ) {
-//
-//        User u = new User();
-//
-//        u.setUsername( dto.getUsername() );
-//        u.setPassword( dto.getPassword() );
-//        u.setEnabled( dto.getEnabled() );
-//        u.setEmail( dto.getEmail() );
-//
-//        return u;
-//
-//    }
 
 }

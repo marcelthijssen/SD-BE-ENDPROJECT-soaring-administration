@@ -37,4 +37,5 @@ private User user;
         boolean actualResult = user.getEnabled();
         assertEquals( expectedResult, actualResult );
     }
+
 }
