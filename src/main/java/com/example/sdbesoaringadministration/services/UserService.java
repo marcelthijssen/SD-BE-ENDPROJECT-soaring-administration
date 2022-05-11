@@ -26,7 +26,7 @@ public interface UserService {
 
     UserDto getUserById( String username );
 
-    boolean userExists( String username );
+    Boolean userExists( String username );
 
     String createUser( User user );
 

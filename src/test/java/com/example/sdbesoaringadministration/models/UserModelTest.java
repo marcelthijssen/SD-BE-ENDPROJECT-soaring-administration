@@ -33,8 +33,8 @@ private User user;
 
     @Test
     void shouldReturnEnabled() {
-        boolean expectedResult = ( true );
-        boolean actualResult = user.getEnabled();
+        Boolean expectedResult = ( true );
+        Boolean actualResult = user.getEnabled();
         assertEquals( expectedResult, actualResult );
     }
 

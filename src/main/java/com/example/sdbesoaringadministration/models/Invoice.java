@@ -29,7 +29,11 @@ public class Invoice {
     @Id
     @Column(name="invoice_number")
     private Long id;
+
+    @Column
     private BigDecimal amount;
+
+    @Column
     private LocalDate creationDate;
 
     @OneToOne

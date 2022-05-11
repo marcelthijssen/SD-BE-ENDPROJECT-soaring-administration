@@ -86,7 +86,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers( HttpMethod.PUT, "/planes/**" ).hasAnyRole( "ADMIN", "USER" )
                 .mvcMatchers( HttpMethod.DELETE, "/planes" ).hasRole( "ADMIN" )
 //                /Startingmethodes
-                .mvcMatchers( HttpMethod.GET, "/startingmethodes" ).hasAnyRole( "ADMIN", "USER" )
+                .mvcMatchers( HttpMethod.GET, "/startingmethodes" ).hasRole( "USER" )
+                .mvcMatchers( HttpMethod.GET, "/startingmethodes" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.POST, "/startingmethodes" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.PUT, "/startingmethodes/**" ).hasRole( "ADMIN" )
                 .mvcMatchers( HttpMethod.DELETE, "/startingmethodes/**" ).hasRole( "ADMIN" )

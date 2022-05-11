@@ -27,17 +27,41 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column
     private String gender;
+
+    @Column
     private String firstName;
+
+    @Column
     private String lastName;
+
+    @Column
     private LocalDate dateOfBirth;
+
+    @Column
     private String streetName;
+
+    @Column
     private String houseNumber;
+
+    @Column
     private String postalcode;
+
+    @Column
     private String city;
+
+    @Column
     private String country;
+
+    @Column
     private String email;
+
+    @Column
     private String phone;
+
+    @Column
     private Boolean pilotLicense;
 
     @ManyToOne
@@ -182,11 +206,11 @@ public class Person {
         this.phone = phone;
     }
 
-    public boolean getPilotLicense() {
+    public Boolean getPilotLicense() {
         return pilotLicense;
     }
 
-    public void setPilotLicense( boolean pilotLicense ) {
+    public void setPilotLicense( Boolean pilotLicense ) {
         this.pilotLicense = pilotLicense;
     }
 

@@ -6,7 +6,7 @@
  * Copyright
  *
  * Creates an object of Airport
- * 
+ *
  */
 
 package com.example.sdbesoaringadministration.models;
@@ -23,8 +23,14 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column
     private String icao;
+
+    @Column
     private String city;
+
+    @Column
     private String country;
 
     @OneToMany
@@ -36,7 +42,7 @@ public class Airport {
 
     @OneToMany
             (mappedBy = "airportEnd",
-                    fetch= FetchType.LAZY,
+                    fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Flight> airportEnd;

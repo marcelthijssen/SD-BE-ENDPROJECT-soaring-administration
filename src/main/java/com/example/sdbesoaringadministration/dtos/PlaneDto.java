@@ -32,9 +32,9 @@ public class PlaneDto {
     @NotBlank(message = "Registration can not be empty")
     private String registration;
     @NotBlank
-    private boolean twoSeater;
+    private Boolean twoSeater;
     private BigDecimal minutePrice;
-    private boolean privatePlane;
+    private Boolean privatePlane;
     @NotBlank
     private Person owner;
     private Person technician;
@@ -43,7 +43,7 @@ public class PlaneDto {
     public PlaneDto() {
     }
 
-    public PlaneDto( Long id, String callSign, String brand, String type, String registration, boolean twoSeater, BigDecimal minutePrice, boolean privatePlane, Person owner, Person technician, byte[] flightStatus ) {
+    public PlaneDto( Long id, String callSign, String brand, String type, String registration, Boolean twoSeater, BigDecimal minutePrice, Boolean privatePlane, Person owner, Person technician, byte[] flightStatus ) {
         this.id = id;
         this.callSign = callSign;
         this.brand = brand;
@@ -105,19 +105,19 @@ public class PlaneDto {
         this.minutePrice = minutePrice;
     }
 
-    public boolean getTwoSeater() {
+    public Boolean getTwoSeater() {
         return this.twoSeater;
     }
 
-    public void setTwoSeater( boolean twoSeater ) {
+    public void setTwoSeater( Boolean twoSeater ) {
         this.twoSeater = twoSeater;
     }
 
-    public boolean getPrivatePlane() {
+    public Boolean getPrivatePlane() {
         return privatePlane;
     }
 
-    public void setPrivatePlane( boolean privatePlane ) {
+    public void setPrivatePlane( Boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
     public byte[] getFlightStatus() {

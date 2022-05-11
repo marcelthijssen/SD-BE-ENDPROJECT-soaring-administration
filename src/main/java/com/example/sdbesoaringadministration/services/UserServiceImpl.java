@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         return dto;
     }
 
-    public boolean userExists( String username ) {
+    public Boolean userExists( String username ) {
         return userRepository.existsById( username );
     }
 

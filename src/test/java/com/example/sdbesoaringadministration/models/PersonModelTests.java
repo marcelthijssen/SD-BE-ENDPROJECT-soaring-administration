@@ -127,8 +127,8 @@ public class PersonModelTests {
 
     @Test
     void shouldReturnPilotLicense() {
-        boolean expected = true;
-        boolean actual = this.person.getPilotLicense();
+        Boolean expected = true;
+        Boolean actual = this.person.getPilotLicense();
         assertEquals( expected, actual );
     }
 

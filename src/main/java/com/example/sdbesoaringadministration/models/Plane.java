@@ -27,14 +27,30 @@ public class Plane {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column
     private String callSign;
+
+    @Column
     private String brand;
+
+    @Column
     private String type;
+
+    @Column
     private String registration;
-    private boolean twoSeater;
-    private boolean privatePlane;
+
+    @Column
+    private Boolean twoSeater;
+
+    @Column
+    private Boolean privatePlane;
+
+    @Column
     private BigDecimal minutePrice;
     @Lob
+
+    @Column
     private byte[] flightStatus;
 
 
@@ -105,19 +121,19 @@ public class Plane {
         this.minutePrice = minutePrice;
     }
 
-    public boolean getTwoSeater() {
+    public Boolean getTwoSeater() {
         return twoSeater;
     }
 
-    public void setTwoSeater( boolean twoSeater ) {
+    public void setTwoSeater( Boolean twoSeater ) {
         this.twoSeater = twoSeater;
     }
 
-    public boolean getPrivatePlane() {
+    public Boolean getPrivatePlane() {
         return privatePlane;
     }
 
-    public void setPrivatePlane( boolean privatePlane ) {
+    public void setPrivatePlane( Boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
 

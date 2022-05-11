@@ -11,9 +11,13 @@
 
 package com.example.sdbesoaringadministration.services;
 
+import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.dtos.PersonDto;
+import com.example.sdbesoaringadministration.exceptions.BadRequestException;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
+import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Person;
+import com.example.sdbesoaringadministration.repositories.FlightRepository;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
 import org.springframework.http.HttpStatus;
@@ -29,10 +33,12 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final MembershipRepository tomRepository;
+    private final FlightRepository flightRepository;
 
-    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository ) {
+    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository, FlightRepository flightRepository ) {
         this.personRepository = personRepository;
         this.tomRepository = tomRepository;
+        this.flightRepository = flightRepository;
     }
 
     @Override
@@ -70,10 +76,13 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void deletePersonById( Long pid ) {
+
         if ( personRepository.findById( pid ).isPresent() ) {
             personRepository.deleteById( pid );
         } else {
             throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
+//        } else {
+//            thrown new BadRequestException( "unable to delete, item is used in other table" )
         }
     }
 

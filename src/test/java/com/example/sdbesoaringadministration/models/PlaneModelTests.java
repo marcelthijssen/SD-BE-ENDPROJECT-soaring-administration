@@ -61,15 +61,15 @@ public class PlaneModelTests {
 
     @Test
     void shouldReturnTwoSeater() {
-        boolean expectedResult = ( false );
-        boolean actualResult = plane.getPrivatePlane();
+        Boolean expectedResult = ( false );
+        Boolean actualResult = plane.getPrivatePlane();
         assertEquals( expectedResult, actualResult );
     }
 
     @Test
     void shouldReturnPrivatePlane() {
-        boolean expectedResult = ( false );
-        boolean actualResult = plane.getPrivatePlane();
+        Boolean expectedResult = ( false );
+        Boolean actualResult = plane.getPrivatePlane();
         assertEquals( expectedResult, actualResult );
     }
 

@@ -29,10 +29,16 @@ public class StartingMethode {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column
     @NotBlank
     private String title;
+
+    @Column
     @NotBlank
     private String unit;
+
+    @Column
     @DecimalMin(value = "0.0", message = "value = 0.0")
     @Digits(integer = 1, fraction = 2)
     private BigDecimal price;

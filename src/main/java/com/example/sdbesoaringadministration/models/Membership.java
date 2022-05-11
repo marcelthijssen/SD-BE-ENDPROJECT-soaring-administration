@@ -26,7 +26,11 @@ public class Membership {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column
     private String title;
+
+    @Column
     private BigDecimal costsPerMonth;
 
     @OneToMany(mappedBy = "membership",

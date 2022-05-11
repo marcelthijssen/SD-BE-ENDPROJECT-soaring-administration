@@ -20,7 +20,7 @@ public class FlightDto {
     private LocalDateTime timeStart;
     private LocalDateTime timeEnd;
     private long timeFlown;
-    private boolean instructionFlight;
+    private Boolean instructionFlight;
     private String remarks;
     private Plane plane;
     private Airport airportStart;
@@ -34,7 +34,7 @@ public class FlightDto {
     public FlightDto() {
     }
 
-    public FlightDto( Long id, LocalDateTime timeStart, LocalDateTime timeEnd, long timeFlown, boolean instructionFlight, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode,
+    public FlightDto( Long id, LocalDateTime timeStart, LocalDateTime timeEnd, long timeFlown, Boolean instructionFlight, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode,
                       Person passenger, Person captain, Person billedPerson ) {
         this.id = id;
         this.timeStart = timeStart;
@@ -84,11 +84,11 @@ public class FlightDto {
         this.timeFlown = timeFlown;
     }
 
-    public boolean getInstructionFlight() {
+    public Boolean getInstructionFlight() {
         return instructionFlight;
     }
 
-    public void setInstructionFlight( boolean instructionFlight ) {
+    public void setInstructionFlight( Boolean instructionFlight ) {
         this.instructionFlight = instructionFlight;
     }
 

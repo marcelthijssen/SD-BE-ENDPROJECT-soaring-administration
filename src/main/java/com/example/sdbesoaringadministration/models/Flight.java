@@ -25,10 +25,20 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
+
+    @Column
     private LocalDateTime timeStart;
+
+    @Column
     private LocalDateTime timeEnd;
+
+    @Column
     private long timeFlown;
-    private boolean instructionFlight;
+
+    @Column
+    private Boolean instructionFlight;
+
+    @Column
     private String remarks;
 
 
@@ -105,11 +115,11 @@ public class Flight {
         this.timeFlown = timeFlown;
     }
 
-    public boolean getInstructionFlight() {
+    public Boolean getInstructionFlight() {
         return instructionFlight;
     }
 
-    public void setInstructionFlight( boolean instructionFlight ) {
+    public void setInstructionFlight( Boolean instructionFlight ) {
         this.instructionFlight = instructionFlight;
     }
 

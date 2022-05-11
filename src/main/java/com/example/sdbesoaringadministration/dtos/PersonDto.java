@@ -46,7 +46,7 @@ public class PersonDto {
     @NotBlank(message = "Phone must be added")
     private String phone;
 
-    private boolean pilotLicense;
+    private Boolean pilotLicense;
     private Membership membership;
 
     public PersonDto() {
@@ -64,7 +64,7 @@ public class PersonDto {
                       String country,
                       String email,
                       String phone,
-                      boolean pilotLicense,
+                      Boolean pilotLicense,
                       Membership membership
     ) {
         this.id = id;
@@ -181,11 +181,11 @@ public class PersonDto {
         this.phone = phone;
     }
 
-    public boolean getPilotLicense() {
+    public Boolean getPilotLicense() {
         return pilotLicense;
     }
 
-    public void setPilotLicense( boolean pilotLicense ) {
+    public void setPilotLicense( Boolean pilotLicense ) {
         this.pilotLicense = pilotLicense;
     }
 
