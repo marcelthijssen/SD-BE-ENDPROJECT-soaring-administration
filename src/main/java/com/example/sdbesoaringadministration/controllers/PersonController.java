@@ -42,9 +42,9 @@ public class PersonController {
         return new ResponseEntity<>( personDtoList, HttpStatus.OK );
     }
 
-    @GetMapping("/{pid}")
-    public ResponseEntity<Object> getPersonById( @PathVariable(name = "pid") Long pid ) {
-        PersonDto person = personService.getPersonById( pid );
+    @GetMapping("/{personId}")
+    public ResponseEntity<Object> getPersonById( @PathVariable(name = "personId") Long personId ) {
+        PersonDto person = personService.getPersonById( personId );
         try {
             return ResponseEntity.ok( person );
         } catch ( Exception ex ) {
@@ -67,20 +67,20 @@ public class PersonController {
         }
     }
 
-    @DeleteMapping("/{pid}")
-    public ResponseEntity<Object> deletePersonById( @PathVariable("pid") Long pid ) {
-        personService.deletePersonById( pid );
+    @DeleteMapping("/{personId}")
+    public ResponseEntity<Object> deletePersonById( @PathVariable("personId") Long personId ) {
+        personService.deletePersonById( personId );
         return new ResponseEntity<>( "Person deleted from systeem", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/{pid}")
-    public PersonDto updatePerson( @PathVariable("pid") Long pid, @RequestBody PersonDto person ) {
-        return personService.updatePerson( pid, person );
+    @PutMapping("/{personId}")
+    public PersonDto updatePerson( @PathVariable("personId") Long personId, @RequestBody PersonDto person ) {
+        return personService.updatePerson( personId, person );
     }
 
-    @PutMapping("/{pid}/membership/{mbid}")
-    public ResponseEntity<Object> addMembershipToPerson( @PathVariable("pid") Long pid, @PathVariable("mbid") Long mbid ) {
-        personService.addMembershipToPerson( pid, mbid );
+    @PutMapping("/{personId}/membership/{membershipId}")
+    public ResponseEntity<Object> addMembershipToPerson( @PathVariable("personId") Long personId, @PathVariable("membershipId") Long membershipId ) {
+        personService.addMembershipToPerson( personId, membershipId );
 
         return new ResponseEntity<>( "Membership added to a person", HttpStatus.OK );
     }

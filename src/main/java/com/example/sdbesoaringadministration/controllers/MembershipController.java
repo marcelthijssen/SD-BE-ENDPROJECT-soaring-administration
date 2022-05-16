@@ -41,9 +41,9 @@ public class MembershipController {
         return new ResponseEntity<>( listMembershipDto, HttpStatus.OK );
     }
 
-    @GetMapping("/{mbid}")
-    public ResponseEntity<Object> getMembershipById( @PathVariable(name = "mbid") Long mbid ) {
-        MembershipDto MembershipDto = membershipService.getMembershipById( mbid );
+    @GetMapping("/{membershipId}")
+    public ResponseEntity<Object> getMembershipById( @PathVariable(name = "membershipId") Long membershipId ) {
+        MembershipDto MembershipDto = membershipService.getMembershipById( membershipId );
         try {
             return ResponseEntity.ok( MembershipDto );
         } catch ( Exception ex ) {
@@ -67,19 +67,19 @@ public class MembershipController {
         }
     }
 
-    @DeleteMapping("/{mbid}")
-    public ResponseEntity<Object> deleteMembershipById( @PathVariable("mbid") Long mbid ) {
+    @DeleteMapping("/{membershipId}")
+    public ResponseEntity<Object> deleteMembershipById( @PathVariable("membershipId") Long membershipId ) {
 
-        membershipService.deleteMembershipById( mbid );
+        membershipService.deleteMembershipById( membershipId );
         return new ResponseEntity<>( "Membership-type has been deleted", HttpStatus.ACCEPTED );
     }
 
 
-    @PutMapping("/{mbid}")
+    @PutMapping("/{membershipId}")
 
-    public MembershipDto updateMembership( @PathVariable("mbid") Long mbid, @RequestBody MembershipDto dto ) {
+    public MembershipDto updateMembership( @PathVariable("membershipId") Long membershipId, @RequestBody MembershipDto dto ) {
 
-        return membershipService.updateMembership( mbid, dto );
+        return membershipService.updateMembership( membershipId, dto );
     }
 
 

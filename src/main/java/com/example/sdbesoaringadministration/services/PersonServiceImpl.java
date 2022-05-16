@@ -32,12 +32,12 @@ import java.util.Optional;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-    private final MembershipRepository tomRepository;
+    private final MembershipRepository membershipRepository;
     private final FlightRepository flightRepository;
 
-    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository tomRepository, FlightRepository flightRepository ) {
+    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository membershipRepository, FlightRepository flightRepository ) {
         this.personRepository = personRepository;
-        this.tomRepository = tomRepository;
+        this.membershipRepository = membershipRepository;
         this.flightRepository = flightRepository;
     }
 
@@ -53,8 +53,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto getPersonById( Long pid ) {
-        Optional<Person> person = personRepository.findById( pid );
+    public PersonDto getPersonById( Long personId ) {
+        Optional<Person> person = personRepository.findById( personId );
         if ( person.isPresent() ) {
             return personToPersonDto( person.get() );
 
@@ -75,10 +75,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePersonById( Long pid ) {
+    public void deletePersonById( Long personId ) {
 
-        if ( personRepository.findById( pid ).isPresent() ) {
-            personRepository.deleteById( pid );
+        if ( personRepository.findById( personId ).isPresent() ) {
+            personRepository.deleteById( personId );
         } else {
             throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
 //        } else {
@@ -87,9 +87,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto updatePerson( Long pid, PersonDto dto ) {
-        if ( personRepository.findById( pid ).isPresent() ) {
-            Person p = personRepository.findById( pid ).get();
+    public PersonDto updatePerson( Long personId, PersonDto dto ) {
+        if ( personRepository.findById( personId ).isPresent() ) {
+            Person p = personRepository.findById( personId ).get();
 
             p.setId( p.getId() );
             p.setGender( dto.getGender() );
@@ -114,10 +114,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void addMembershipToPerson( Long pid, Long mbid ) {
+    public void addMembershipToPerson( Long personId, Long membershipId ) {
 
-        var optionalMembership = tomRepository.findById( mbid );
-        var optionalPerson = personRepository.findById( pid );
+        var optionalMembership = membershipRepository.findById( membershipId );
+        var optionalPerson = personRepository.findById( personId );
 
         if ( optionalMembership.isPresent() && optionalPerson.isPresent() ) {
             var m = optionalMembership.get();

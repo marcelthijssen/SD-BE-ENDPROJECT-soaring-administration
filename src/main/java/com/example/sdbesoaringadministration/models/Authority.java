@@ -16,9 +16,9 @@ import com.example.sdbesoaringadministration.utils.AuthorityKey;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+@Entity(name="Authority")
 @IdClass(AuthorityKey.class)
-@Table(name = "authorities")
+@Table(name = "AUTHORITIES")
 public class Authority implements Serializable {
 
     @Id

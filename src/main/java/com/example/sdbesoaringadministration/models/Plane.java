@@ -19,8 +19,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
-@Table(name = "planes")
+@Entity(name = "Plane")
+@Table(name = "PLANES")
 public class Plane {
 
     @Id

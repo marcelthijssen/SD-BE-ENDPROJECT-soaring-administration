@@ -17,8 +17,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "users")
+@Entity(name="User")
+@Table(name = "USERS")
 public class User {
 
     @Id

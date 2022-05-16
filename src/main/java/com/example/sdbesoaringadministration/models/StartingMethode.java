@@ -21,8 +21,8 @@ import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
-@Table(name = "starting_methodes")
+@Entity(name = "StartingMethode")
+@Table(name = "STARTING_METHODES")
 public class StartingMethode {
 
     @Id

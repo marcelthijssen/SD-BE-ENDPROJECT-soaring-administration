@@ -25,15 +25,15 @@ import java.util.List;
 public class MembershipServiceImpl implements MembershipService {
 
 
-    private final MembershipRepository msRepository;
+    private final MembershipRepository membershipRepository;
 
-    public MembershipServiceImpl( MembershipRepository msRepository ) {
-        this.msRepository = msRepository;
+    public MembershipServiceImpl( MembershipRepository membershipRepository ) {
+        this.membershipRepository = membershipRepository;
     }
 
     @Override
     public List<MembershipDto> getAllMemberships() {
-        List<Membership> msList = this.msRepository.findAll();
+        List<Membership> msList = this.membershipRepository.findAll();
         List<MembershipDto> tomDtoList = new ArrayList<>();
 
         for ( Membership tom : msList ) {
@@ -46,7 +46,7 @@ public class MembershipServiceImpl implements MembershipService {
     @Override
     public MembershipDto getMembershipById( Long msid ) {
        try {
-            Membership ms = msRepository.findById( msid ).get();
+            Membership ms = membershipRepository.findById( msid ).get();
            return membershipToMembershipDto( ms );
         } catch ( RecordNotFoundException e ) {
             throw new RecordNotFoundException( "Invalid membership id: " + msid, HttpStatus.NOT_FOUND );
@@ -56,13 +56,13 @@ public class MembershipServiceImpl implements MembershipService {
     @Override
     public void createMembership( MembershipDto dto ) {
         Membership tom = membershipDtoToMembership(dto);
-        this.msRepository.save( tom );
+        this.membershipRepository.save( tom );
     }
 
     @Override
-    public void deleteMembershipById( Long mbid ) {
-        if ( msRepository.findById( mbid ).isPresent() ) {
-            msRepository.deleteById( mbid );
+    public void deleteMembershipById( Long membershipId ) {
+        if ( membershipRepository.findById( membershipId ).isPresent() ) {
+            membershipRepository.deleteById( membershipId );
         } else {
             throw new RecordNotFoundException( "Type of Membership not found", HttpStatus.NOT_FOUND );
         }
@@ -70,14 +70,14 @@ public class MembershipServiceImpl implements MembershipService {
 
 
     @Override
-    public MembershipDto updateMembership( Long mbid, MembershipDto dto ) {
-        if ( msRepository.findById( mbid ).isPresent() ) {
-            Membership tom = msRepository.findById( mbid ).get();
+    public MembershipDto updateMembership( Long membershipId, MembershipDto dto ) {
+        if ( membershipRepository.findById( membershipId ).isPresent() ) {
+            Membership tom = membershipRepository.findById( membershipId ).get();
 
             tom.setId( tom.getId() );
             tom.setTitle( dto.getTitle() );
             tom.setCostsPerMonth( dto.getCostsPerMonth() );
-            msRepository.save( tom );
+            membershipRepository.save( tom );
         } else {
             throw new RecordNotFoundException( "Type of membership not found", HttpStatus.NOT_FOUND );
         }

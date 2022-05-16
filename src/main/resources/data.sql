@@ -114,7 +114,7 @@ INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, privat
 VALUES (5002, 'G7', 'Alexander Schleicher', 'Ask-21', 'PH-1337', true, true, 3002, 3002, null, 0.1);
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
-VALUES (5003, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false, 3002, 3003, null, 0.25);
+VALUES (5003, 'G4', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false, 3002, 3003, null, 0.25);
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
 VALUES (5004, 'ka8', 'Alexander Schleicher', 'Ka-8b', 'PH-345', false, true, 3003, 3002, null, 0);
@@ -123,7 +123,7 @@ INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, privat
 VALUES (5005, 'EC', 'Rolladen Schleicher', 'LS-6b', 'PH-1203', false, true, 3003, 3001, null, 0);
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
-VALUES (5006, 'k8', 'Alexander Schleicher', 'Rhone', 'PH-152', false, true, 3003, 3001, null, 0);
+VALUES (5006, 'k8c', 'Alexander Schleicher', 'Rhone', 'PH-152', false, true, 3003, 3001, null, 0);
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
 VALUES (5007, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false, 3002, 3003, null, 0.25);

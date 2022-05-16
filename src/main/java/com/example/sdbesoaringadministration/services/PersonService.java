@@ -18,15 +18,15 @@ public interface PersonService {
 
     List<PersonDto> getAllPersons();
 
-    PersonDto getPersonById( Long pid );
+    PersonDto getPersonById( Long personId );
 
     PersonDto createPerson( PersonDto personDto );
 
-    void deletePersonById( Long pid );
+    void deletePersonById( Long personId );
 
-    PersonDto updatePerson( Long pid, PersonDto dto );
+    PersonDto updatePerson( Long personId, PersonDto dto );
 
-    void addMembershipToPerson(Long  pid, Long mbid);
+    void addMembershipToPerson(Long  personId, Long membershipId);
 
 
 }

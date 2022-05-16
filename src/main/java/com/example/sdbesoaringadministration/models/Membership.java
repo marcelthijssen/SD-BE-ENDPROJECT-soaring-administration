@@ -18,8 +18,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
-@Table(name = "memberships")
+@Entity(name = "Membership")
+@Table(name = "MEMBERSHIPS")
 public class Membership {
 
     @Id

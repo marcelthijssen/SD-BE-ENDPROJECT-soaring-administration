@@ -27,7 +27,7 @@ public class PersonControllerTest {
 
     }
 
-    @WithMockUser(value = "ADMIN")
+    @WithMockUser(value = "ROLE_ADMIN")
     @Test
     public void givenAuthRequestDelete_shouldSucceedWith200() throws Exception {
         mvc.perform( delete( "/persons/3009" ).contentType( MediaType.APPLICATION_JSON ) )

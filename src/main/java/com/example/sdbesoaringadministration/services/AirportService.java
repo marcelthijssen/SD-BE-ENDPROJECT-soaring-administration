@@ -20,11 +20,11 @@ public interface AirportService {
 
     List<AirportDto> getAllAirports();
 
-    AirportDto getAirportById( Long aid );
+    AirportDto getAirportById( Long airportId );
 
     Airport createAirport( AirportDto airportDto );
 
-    ResponseEntity<Object> deleteAirportById( Long aid );
+    ResponseEntity<Object> deleteAirportById( Long airportId );
 
-    AirportDto updateAirport( Long aid, AirportDto dto );
+    AirportDto updateAirport( Long airportId, AirportDto dto );
 }

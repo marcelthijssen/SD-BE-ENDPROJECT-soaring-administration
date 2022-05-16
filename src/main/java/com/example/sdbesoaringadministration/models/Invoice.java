@@ -22,8 +22,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Entity
-@Table(name = "invoices")
+@Entity(name = "Invoice")
+@Table(name = "INVOICES")
 public class Invoice {
 
     @Id

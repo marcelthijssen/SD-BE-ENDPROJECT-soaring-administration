@@ -48,12 +48,12 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public AirportDto getAirportById( Long aid ) {
+    public AirportDto getAirportById( Long airportId ) {
         try {
-            Airport ap = airportRepository.findById( aid ).get();
+            Airport ap = airportRepository.findById( airportId ).get();
             return airportToAirportDto( ap );
         } catch ( Exception e ) {
-            throw new RecordNotFoundException( "Invalid airport id: " + aid, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid airport id: " + airportId, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -66,9 +66,9 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public ResponseEntity<Object> deleteAirportById( Long apid ) {
+    public ResponseEntity<Object> deleteAirportById( Long apersonId ) {
         try {
-            airportRepository.deleteById( apid );
+            airportRepository.deleteById( apersonId );
             return new ResponseEntity<>( "Airport is deleted", HttpStatus.OK );
         } catch ( RecordNotFoundException e ) {
             throw new RecordNotFoundException( "Airport not found", HttpStatus.NOT_FOUND );
@@ -77,9 +77,9 @@ public class AirportServiceImpl implements AirportService {
 
 
     @Override
-    public AirportDto updateAirport( Long apid, AirportDto dto ) {
+    public AirportDto updateAirport( Long apersonId, AirportDto dto ) {
         try {
-            Airport ap = airportRepository.findById( apid ).get();
+            Airport ap = airportRepository.findById( apersonId ).get();
             ap.setId( dto.getId() );
             ap.setIcao( dto.getIcao() );
             ap.setCity( dto.getCity() );

@@ -25,16 +25,16 @@ import java.util.*;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
-    private final InvoiceRepository invRepository;
+    private final InvoiceRepository invoiceRepository;
 
-    public InvoiceServiceImpl( InvoiceRepository invRepository ) {
-        this.invRepository = invRepository;
+    public InvoiceServiceImpl( InvoiceRepository invoiceRepository ) {
+        this.invoiceRepository = invoiceRepository;
     }
 
     @Override
     public List<InvoiceDto> getAllInvoices() {
         try {
-            List<Invoice> invoiceList = this.invRepository.findAll();
+            List<Invoice> invoiceList = this.invoiceRepository.findAll();
             List<InvoiceDto> invoiceDtoList = new ArrayList<>();
 
             for ( Invoice i : invoiceList ) {
@@ -46,10 +46,10 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
     }
 
-    public List<InvoiceDto> findInvoicesByBilledPerson( Long plid ) {
+    public List<InvoiceDto> findInvoicesByBilledPerson( Long planeId ) {
         try {
-            if ( !invRepository.findInvoicesByBilledPerson( plid ).isEmpty() ) {
-                List<Invoice> invoiceList = invRepository.findInvoicesByBilledPerson( plid );
+            if ( !invoiceRepository.findInvoicesByBilledPerson( planeId ).isEmpty() ) {
+                List<Invoice> invoiceList = invoiceRepository.findInvoicesByBilledPerson( planeId );
                 List<InvoiceDto> invoiceDtoList = new ArrayList<>();
 
                 for ( Invoice i : invoiceList ) {

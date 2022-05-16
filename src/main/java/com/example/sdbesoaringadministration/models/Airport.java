@@ -16,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "airports")
+@Entity(name = "Airports")
+@Table(name = "AIRPORTS")
 public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

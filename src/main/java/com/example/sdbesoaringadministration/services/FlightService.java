@@ -20,36 +20,36 @@ public interface FlightService {
 
     List<FlightDto> getAllFlights();
 
-    FlightDto getFlightById( Long flid );
+    FlightDto getFlightById( Long flightId );
 
     Flight createFlight( FlightDto dto);
 
-    void deleteFlightById( Long flid );
+    void deleteFlightById( Long flightId );
 
-    FlightDto updateFlight( Long flid, FlightDto flightDto );
+    FlightDto updateFlight( Long flightId, FlightDto flightDto );
 
-    void assignPlaneToFlight( Long flid, Long plid );
+    void assignPlaneToFlight( Long flightId, Long planeId );
 
-    void assignAirportStartToFlight( Long flid, Long asid );
+    void assignAirportStartToFlight( Long flightId, Long airportStartId );
 
-    void assignAirportEndToFlight( Long flid, Long aeid );
+    void assignAirportEndToFlight( Long flightId, Long airportEndId );
 
-    void assignStartingMethodeToFlight( Long flid, Long smid );
+    void assignStartingMethodeToFlight( Long flightId, Long startingMethodeId );
 
-    void assignPassengerToFlight( Long flid, Long psid );
+    void assignPassengerToFlight( Long flightId, Long psid );
 
-    void assignCaptainToFlight( Long flid, Long cpid );
+    void assignCaptainToFlight( Long flightId, Long captainId );
 
-    FlightDto assignInstructionFlightToFlight(Long flid, FlightDto dto );
+    FlightDto assignInstructionFlightToFlight(Long flightId, FlightDto dto );
 
-        void assignTimeStart( Long flid );
+        void assignTimeStart( Long flightId );
 
-    void assignTimeEnd( Long flid );
+    void assignTimeEnd( Long flightId );
 
-    FlightDto updateRemarksToFLight( Long flid, FlightDto dto );
+    FlightDto updateRemarksToFLight( Long flightId, FlightDto dto );
 
-    List<FlightDto> getFlightsByCaptain_id( Long cpid );
+    List<FlightDto> getFlightsByCaptain_id( Long captainId );
 
-    public ResponseEntity<String> createInvoiceFromFLight( Long flid);
+    public ResponseEntity<String> createInvoiceFromFLight( Long flightId);
 
 }

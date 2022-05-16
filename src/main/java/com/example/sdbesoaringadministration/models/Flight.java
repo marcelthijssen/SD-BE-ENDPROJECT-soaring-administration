@@ -6,7 +6,7 @@
  * Copyright
  *
  * Creates an object of Flight
- * 
+ *
  */
 
 package com.example.sdbesoaringadministration.models;
@@ -18,8 +18,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "flights")
+@Entity(name = "Flight")
+@Table(name = "FLIGHTS")
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -43,7 +43,7 @@ public class Flight {
 
 
     @JsonIgnore
-    @OneToOne(mappedBy="flight")
+    @OneToOne(mappedBy = "flight")
     private Invoice invoice;
     @ManyToOne
     @JoinColumn(name = "billed_person_id",

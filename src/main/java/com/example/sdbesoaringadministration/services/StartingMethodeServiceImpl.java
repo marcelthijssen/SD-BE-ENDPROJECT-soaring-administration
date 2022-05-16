@@ -24,15 +24,15 @@ import java.util.List;
 @Service
 public class StartingMethodeServiceImpl implements StartingMethodeService {
 
-    private final StartingMethodeRepository smRepository;
+    private final StartingMethodeRepository startingMethodeRepository;
 
-    public StartingMethodeServiceImpl( StartingMethodeRepository smRepository ) {
-        this.smRepository = smRepository;
+    public StartingMethodeServiceImpl( StartingMethodeRepository startingMethodeRepository ) {
+        this.startingMethodeRepository = startingMethodeRepository;
     }
 
     @Override
     public List<StartingMethodeDto> getAllStartingMethodes() {
-        List<StartingMethode> smList = this.smRepository.findAll();
+        List<StartingMethode> smList = this.startingMethodeRepository.findAll();
         List<StartingMethodeDto> smDtoList = new ArrayList<>();
 
         for ( StartingMethode sm : smList ) {
@@ -44,10 +44,10 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     }
 
     @Override
-    public StartingMethodeDto getStartingMethodeById( Long smid ) {
+    public StartingMethodeDto getStartingMethodeById( Long startingMethodeId ) {
 
-        if ( smRepository.findById( smid ).isPresent() ) {
-            StartingMethode startingMethode = smRepository.findById( smid ).get();
+        if ( startingMethodeRepository.findById( startingMethodeId ).isPresent() ) {
+            StartingMethode startingMethode = startingMethodeRepository.findById( startingMethodeId ).get();
             StartingMethodeDto dto = startingMethodeToStartingMethodeDto( startingMethode );
 
             return dto;
@@ -59,28 +59,28 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     @Override
     public void createStartingMethode( StartingMethodeDto dto ) {
         StartingMethode sm = startingMethodeDtoToStartingMethode( dto );
-        smRepository.save( sm );
+        startingMethodeRepository.save( sm );
     }
 
 
     @Override
-    public void deleteStartingMethodeById( Long smid ) {
-        if ( smRepository.findById( smid ).isPresent() ) {
-            smRepository.deleteById( smid );
+    public void deleteStartingMethodeById( Long startingMethodeId ) {
+        if ( startingMethodeRepository.findById( startingMethodeId ).isPresent() ) {
+            startingMethodeRepository.deleteById( startingMethodeId );
         } else {
             throw new RecordNotFoundException( "Starting methode not found", HttpStatus.NOT_FOUND );
         }
     }
 
     @Override
-    public void updateStartingMethode( Long smid, StartingMethodeDto dto ) {
-        if ( smRepository.findById( smid ).isPresent() ) {
-            StartingMethode sm = smRepository.findById( smid ).get();
+    public void updateStartingMethode( Long startingMethodeId, StartingMethodeDto dto ) {
+        if ( startingMethodeRepository.findById( startingMethodeId ).isPresent() ) {
+            StartingMethode sm = startingMethodeRepository.findById( startingMethodeId ).get();
             sm.setId( dto.getId() );
             sm.setTitle( dto.getTitle() );
             sm.setUnit( dto.getUnit() );
             sm.setPrice( dto.getPrice() );
-            smRepository.save( sm );
+            startingMethodeRepository.save( sm );
         } else {
             throw new RecordNotFoundException( "StartingMethode does not exist", HttpStatus.NOT_FOUND );
         }

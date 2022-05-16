@@ -46,9 +46,9 @@ public class PlaneController {
         return new ResponseEntity<>( planeDtoList, HttpStatus.OK );
     }
 
-    @GetMapping("/{plid}")
-    public ResponseEntity<Object> getPlaneById( @PathVariable(name = "plid") Long plid ) {
-        PlaneDto plane = planeService.getPlaneById( plid );
+    @GetMapping("/{planeId}")
+    public ResponseEntity<Object> getPlaneById( @PathVariable(name = "planeId") Long planeId ) {
+        PlaneDto plane = planeService.getPlaneById( planeId );
         try {
             return ResponseEntity.ok( plane );
         } catch ( Exception ex ) {
@@ -71,51 +71,51 @@ public class PlaneController {
         }
     }
 
-    @DeleteMapping("/{plid}")
-    public ResponseEntity<String> deletePlaneById( @PathVariable("plid") Long plid ) {
+    @DeleteMapping("/{planeId}")
+    public ResponseEntity<String> deletePlaneById( @PathVariable("planeId") Long planeId ) {
 
-        planeService.deletePlaneById( plid );
+        planeService.deletePlaneById( planeId );
         return new ResponseEntity<>( "Plane deleted from system", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/{plid}")
-    public PlaneDto updatePlane( @PathVariable("plid") Long plid, @RequestBody PlaneDto plane ) {
+    @PutMapping("/{planeId}")
+    public PlaneDto updatePlane( @PathVariable("planeId") Long planeId, @RequestBody PlaneDto plane ) {
 
-        return planeService.updatePlane( plid, plane );
+        return planeService.updatePlane( planeId, plane );
     }
 
     //         assign owner to plane
-    @PutMapping("/{plid}/price")
-    public PlaneDto addMinutePrice( @PathVariable("plid") Long plid, @RequestBody PlaneDto plane ) {
+    @PutMapping("/{planeId}/price")
+    public PlaneDto addMinutePrice( @PathVariable("planeId") Long planeId, @RequestBody PlaneDto plane ) {
 
-        return planeService.addMinutePrice( plid, plane );
+        return planeService.addMinutePrice( planeId, plane );
     }
 
     //         assign owner to plane
-    @PutMapping("/{plid}/owner/{pid}")
-    public ResponseEntity<Object> assignOwnerToPlane( @PathVariable("plid") Long plid, @PathVariable("pid") Long pid ) {
-        planeService.assignOwnerToPlane( plid, pid );
+    @PutMapping("/{planeId}/owner/{personId}")
+    public ResponseEntity<Object> assignOwnerToPlane( @PathVariable("planeId") Long planeId, @PathVariable("personId") Long personId ) {
+        planeService.assignOwnerToPlane( planeId, personId );
         return new ResponseEntity<>( "Owner added to plane", HttpStatus.ACCEPTED );
     }
 
 
     //         assign technician to plane
-    @PutMapping("/{plid}/technician/{pid}")
-    public ResponseEntity<Object> assignTechnicianToPlane( @PathVariable("plid") Long plid, @PathVariable("pid") Long pid ) {
-        planeService.assignTechnicianToPlane( plid, pid );
+    @PutMapping("/{planeId}/technician/{personId}")
+    public ResponseEntity<Object> assignTechnicianToPlane( @PathVariable("planeId") Long planeId, @PathVariable("personId") Long personId ) {
+        planeService.assignTechnicianToPlane( planeId, personId );
         return new ResponseEntity<>( "Technician added to plane", HttpStatus.ACCEPTED );
     }
 
     // need to upload file for plane
-    @PutMapping("/flightstatus/{plid}")
-    public String uploadFlightStatusPdf( @Valid @PathVariable("plid") Long plid, @RequestBody MultipartFile pdf ) throws IOException {
-        planeService.uploadFlightStatusPdf( plid, pdf );
+    @PutMapping("/flightstatus/{planeId}")
+    public String uploadFlightStatusPdf( @Valid @PathVariable("planeId") Long planeId, @RequestBody MultipartFile pdf ) throws IOException {
+        planeService.uploadFlightStatusPdf( planeId, pdf );
         return "File uploaded";
     }
 
-    @GetMapping(value = "/{plid}/flightstatus", produces = MediaType.APPLICATION_PDF_VALUE)
-    public @ResponseBody byte[] getFlightStatusPdfById( @PathVariable(name = "plid") Long plid ) {
-        PlaneDto plane = planeService.getFlightStatusPdfById( plid );
+    @GetMapping(value = "/{planeId}/flightstatus", produces = MediaType.APPLICATION_PDF_VALUE)
+    public @ResponseBody byte[] getFlightStatusPdfById( @PathVariable(name = "planeId") Long planeId ) {
+        PlaneDto plane = planeService.getFlightStatusPdfById( planeId );
         return plane.getFlightStatus();
 
     }

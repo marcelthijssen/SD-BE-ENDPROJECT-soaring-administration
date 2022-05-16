@@ -27,26 +27,26 @@ import java.util.List;
 @RequestMapping("/startingmethodes")
 public class StartingMethodeController {
 
-    private final StartingMethodeService smService;
+    private final StartingMethodeService startingMethodesService;
 
-    public StartingMethodeController( StartingMethodeService smService ) {
-        this.smService = smService;
+    public StartingMethodeController( StartingMethodeService startingMethodesService ) {
+        this.startingMethodesService = startingMethodesService;
     }
 
 
     @GetMapping("")
     public ResponseEntity<Object> getAllStartingMethode() {
-        List<StartingMethodeDto> listStartingMethodeDto = smService.getAllStartingMethodes();
+        List<StartingMethodeDto> listStartingMethodeDto = startingMethodesService.getAllStartingMethodes();
         return new ResponseEntity<>( listStartingMethodeDto, HttpStatus.OK );
     }
 
-    @GetMapping("/{smid}")
-    public ResponseEntity<Object> getStartingMethodeById( @PathVariable(name = "smid") Long smid ) {
-        StartingMethodeDto startingMethodeDto = smService.getStartingMethodeById( smid );
+    @GetMapping("/{startingMethodeId}")
+    public ResponseEntity<Object> getStartingMethodeById( @PathVariable(name = "startingMethodeId") Long startingMethodeId ) {
+        StartingMethodeDto startingMethodeDto = startingMethodesService.getStartingMethodeById( startingMethodeId );
         try {
             return ResponseEntity.ok( startingMethodeDto );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Invalid Startingmethode id: "+ smid, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid Startingmethode id: "+ startingMethodeId, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -61,22 +61,22 @@ public class StartingMethodeController {
             }
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
-            smService.createStartingMethode( startingMethodeDto );
+            startingMethodesService.createStartingMethode( startingMethodeDto );
             return new ResponseEntity<>( "Startingmethode added to list of startingmethodes", HttpStatus.CREATED );
         }
     }
 
-    @DeleteMapping("/{smid}")
-    public ResponseEntity<Object> deleteAirportById( @PathVariable("smid") Long smid ) {
+    @DeleteMapping("/{startingMethodeId}")
+    public ResponseEntity<Object> deleteAirportById( @PathVariable("startingMethodeId") Long startingMethodeId ) {
 
-        smService.deleteStartingMethodeById( smid );
+        startingMethodesService.deleteStartingMethodeById( startingMethodeId );
         return new ResponseEntity<>( "StartingMethode has been deleted", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/{smid}")
-    public StartingMethodeDto updateStartingMethode( @PathVariable("smid") Long smid, @RequestBody StartingMethodeDto dto ) {
+    @PutMapping("/{startingMethodeId}")
+    public StartingMethodeDto updateStartingMethode( @PathVariable("startingMethodeId") Long startingMethodeId, @RequestBody StartingMethodeDto dto ) {
 
-        smService.updateStartingMethode( smid, dto );
+        startingMethodesService.updateStartingMethode( startingMethodeId, dto );
         return dto;
     }
 
