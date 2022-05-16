@@ -41,21 +41,6 @@ public class Person {
     private LocalDate dateOfBirth;
 
     @Column
-    private String streetName;
-
-    @Column
-    private String houseNumber;
-
-    @Column
-    private String postalcode;
-
-    @Column
-    private String city;
-
-    @Column
-    private String country;
-
-    @Column
     private String email;
 
     @Column
@@ -150,46 +135,6 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName( String streetName ) {
-        this.streetName = streetName;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber( String houseNumber ) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getPostalcode() {
-        return postalcode;
-    }
-
-    public void setPostalcode( String postalcode ) {
-        this.postalcode = postalcode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity( String city ) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry( String country ) {
-        this.country = country;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -221,5 +166,6 @@ public class Person {
     public void setMembership( Membership membership ) {
         this.membership = membership;
     }
+
 
 }

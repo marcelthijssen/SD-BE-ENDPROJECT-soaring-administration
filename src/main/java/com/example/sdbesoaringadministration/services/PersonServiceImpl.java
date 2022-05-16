@@ -11,15 +11,12 @@
 
 package com.example.sdbesoaringadministration.services;
 
-import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.dtos.PersonDto;
-import com.example.sdbesoaringadministration.exceptions.BadRequestException;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
-import com.example.sdbesoaringadministration.models.Flight;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.FlightRepository;
-import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
+import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
