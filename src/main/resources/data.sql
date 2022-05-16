@@ -103,6 +103,8 @@ INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, st
                      postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3008, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
         'Nederland', 'willie@wortel.nl', false, 4003);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
+                     postalcode, city, country, email, pilot_license, membership_id)
 VALUES (3009, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
         'Nederland', 'willie@wortel.nl', false, 4003);
 
