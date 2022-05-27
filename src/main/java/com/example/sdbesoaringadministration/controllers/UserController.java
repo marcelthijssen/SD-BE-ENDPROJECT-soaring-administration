@@ -29,8 +29,11 @@ import java.util.Map;
 @RequestMapping(value = "/users")
 public class UserController {
 
-    @Autowired
     private UserService userService;
+
+    public UserController ( UserService userService) {
+        this.userService=userService;
+    }
 
     @GetMapping(value = "")
     public ResponseEntity<List<UserDto>> getAllUsers() {

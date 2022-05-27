@@ -22,7 +22,7 @@ import java.time.LocalDate;
 
 
 @Validated
-public class PersonDto extends AddressDto{
+public class PersonDto{
 
     private Long id;
     private String gender;
@@ -37,12 +37,10 @@ public class PersonDto extends AddressDto{
     @Length(min = 10, max = 12, message = "please enter a valid phone-number")
     @NotBlank(message = "Phone must be added")
     private String phone;
-
     private Boolean pilotLicense;
     private Membership membership;
-
+    private Address address;
     public PersonDto() {
-        super();
     }
 
     public PersonDto( Long id,
@@ -53,9 +51,9 @@ public class PersonDto extends AddressDto{
                       String email,
                       String phone,
                       Boolean pilotLicense,
-                      Membership membership
+                      Membership membership,
+                      Address address
     ) {
-        super();
 
         this.id = id;
         this.gender = gender;
@@ -66,6 +64,7 @@ public class PersonDto extends AddressDto{
         this.phone = phone;
         this.pilotLicense = pilotLicense;
         this.membership = membership;
+        this.address = address;
     }
 
     public Long getId() {

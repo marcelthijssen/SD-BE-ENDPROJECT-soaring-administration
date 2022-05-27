@@ -15,6 +15,7 @@ package com.example.sdbesoaringadministration.controllers;
 
 import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
+import com.example.sdbesoaringadministration.services.AddressService;
 import com.example.sdbesoaringadministration.services.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +31,10 @@ import java.util.List;
 public class PersonController {
 
     private final PersonService personService;
-
-    public PersonController( PersonService personService ) {
+    private final AddressService addressService;
+    public PersonController( PersonService personService, AddressService addressService ) {
         this.personService = personService;
+        this.addressService = addressService;
     }
 
     @GetMapping("")
@@ -63,6 +65,8 @@ public class PersonController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             personService.createPerson( personDto );
+//            Create addressRepo for this persn
+//            addressService.createAddres()
             return new ResponseEntity<>( "Person added to systeem", HttpStatus.CREATED );
         }
     }
@@ -85,4 +89,20 @@ public class PersonController {
         return new ResponseEntity<>( "Membership added to a person", HttpStatus.OK );
     }
 
+//    @PutMapping("/{personId}/address")
+//    public ResponseEntity<Object> addAddressToPerson( @PathVariable("personId") Long personId ) {
+//        personService.addAddressToPerson( personId );
+//
+//        return new ResponseEntity<>( "Address added to a person", HttpStatus.OK );
+//    }
+
+
+    //         assign owner to plane
+    @PutMapping("/{personId}/address/{addressId}")
+    public ResponseEntity<Object> addAddressToPerson( @PathVariable("personId") Long personId, @PathVariable("addressId") Long addressId ) {
+        personService.addAddressToPerson( personId, addressId );
+        return new ResponseEntity<>( "Owner added to plane", HttpStatus.ACCEPTED );
+    }
+
+    
 }

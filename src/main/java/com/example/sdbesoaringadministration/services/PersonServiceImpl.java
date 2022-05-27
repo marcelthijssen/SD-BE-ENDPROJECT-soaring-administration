@@ -14,7 +14,7 @@ package com.example.sdbesoaringadministration.services;
 import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Person;
-import com.example.sdbesoaringadministration.repositories.FlightRepository;
+import com.example.sdbesoaringadministration.repositories.AddressRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
 import com.example.sdbesoaringadministration.repositories.PersonRepository;
 import org.springframework.http.HttpStatus;
@@ -27,15 +27,14 @@ import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
-
     private final PersonRepository personRepository;
     private final MembershipRepository membershipRepository;
-    private final FlightRepository flightRepository;
+    private final AddressRepository addressRepository;
 
-    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository membershipRepository, FlightRepository flightRepository ) {
+    public PersonServiceImpl( PersonRepository personRepository, MembershipRepository membershipRepository, AddressRepository addressRepository ) {
         this.personRepository = personRepository;
         this.membershipRepository = membershipRepository;
-        this.flightRepository = flightRepository;
+        this.addressRepository = addressRepository;
     }
 
     @Override
@@ -93,11 +92,6 @@ public class PersonServiceImpl implements PersonService {
             p.setFirstName( dto.getFirstName() );
             p.setLastName( dto.getLastName() );
             p.setDateOfBirth( dto.getDateOfBirth() );
-            p.setStreetName( dto.getStreetName() );
-            p.setHouseNumber( dto.getHouseNumber() );
-            p.setPostalcode( dto.getPostalcode() );
-            p.setCity( dto.getCity() );
-            p.setCountry( dto.getCountry() );
             p.setEmail( dto.getEmail() );
             p.setPhone( dto.getPhone() );
             p.setMembership( dto.getMembership() );
@@ -128,6 +122,46 @@ public class PersonServiceImpl implements PersonService {
     }
 
 
+    @Override
+    public void addAddressToPerson( Long personId, Long addressId ) {
+
+        var optionalAddress = membershipRepository.findById( addressId );
+        var optionalPerson = personRepository.findById( personId );
+
+        if ( optionalAddress.isPresent() && optionalPerson.isPresent() ) {
+            var m = optionalAddress.get();
+            var p = optionalPerson.get();
+
+            p.setMembership( m );
+            personRepository.save( p );
+        } else {
+            throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
+        }
+    }
+
+
+//    @Override
+//    public void addAddressToPerson( Long personId ) {
+// check if personId has an address assigned. 
+//        List<Address> address = addressRepository.findAddressByPerson_id( personId );
+//
+//        if ( address.isEmpty() ) {
+//
+//            var optionalAddress = addressRepository.findAddressByPerson_id( personId );
+//            var optionalPerson = personRepository.findById( personId );
+//
+//            if ( optionalAddress.isPresent() && optionalPerson.isPresent() ) {
+//                var a = optionalAddress.get();
+//                var p = optionalPerson.get();
+//
+//                p.setAddress( a );
+//                personRepository.save( p );
+//            } else {
+//                throw new RecordNotFoundException( "Person or address does not exist", HttpStatus.NOT_FOUND );
+//            }
+//        }
+//    }
+
     public static PersonDto personToPersonDto( Person p ) {
         PersonDto dto = new PersonDto();
 
@@ -136,11 +170,7 @@ public class PersonServiceImpl implements PersonService {
         dto.setFirstName( p.getFirstName() );
         dto.setLastName( p.getLastName() );
         dto.setDateOfBirth( p.getDateOfBirth() );
-        dto.setStreetName( p.getStreetName() );
-        dto.setHouseNumber( p.getHouseNumber() );
-        dto.setPostalcode( p.getPostalcode() );
-        dto.setCity( p.getCity() );
-        dto.setCountry( p.getCountry() );
+//        dto.setAddress( p.getAddress() );
         dto.setEmail( p.getEmail() );
         dto.setPhone( p.getPhone() );
         dto.setPilotLicense( p.getPilotLicense() );
@@ -157,11 +187,7 @@ public class PersonServiceImpl implements PersonService {
         p.setFirstName( dto.getFirstName() );
         p.setLastName( dto.getLastName() );
         p.setDateOfBirth( dto.getDateOfBirth() );
-        p.setStreetName( dto.getStreetName() );
-        p.setHouseNumber( dto.getHouseNumber() );
-        p.setPostalcode( dto.getPostalcode() );
-        p.setCity( dto.getCity() );
-        p.setCountry( dto.getCountry() );
+//        p.setAddress( dto.getAddress() );
         p.setEmail( dto.getEmail() );
         p.setPhone( dto.getPhone() );
         p.setPilotLicense( dto.getPilotLicense() );

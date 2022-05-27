@@ -71,42 +71,37 @@ VALUES ('user5', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
 VALUES ('user6', 'ROLE_USER');
 
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number, postalcode,
-                     city, country, email, pilot_license, membership_id)
-VALUES (3001, 'm', 'Jeffrey', 'Johnson', '0612306345', '1994-08-19', 'straat', '3', '4817SX', 'Amsterdam', 'Nederland',
-        'sdbe@novi.nl', false, 4001);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number, postalcode,
-                     city, country, email, pilot_license, membership_id)
-VALUES (3002, 'v', 'Jan', 'van Westen', '0691256345', '1984-08-19', 'Straatnaam', '993', '4811VC', 'Drenthe',
-        'Nederland', 'begin@mailadres.nl', false, 4002);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, pilot_license, membership_id)
-VALUES (3003, 'v', 'Fem', 'achternaam', '0634506109', '1974-08-19', 'Naamstrasse', '12', '4621VC', 'Ergensanders',
-        'Nederland', 'fem@mailings.nl', true, 4003);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, pilot_license, membership_id)
-VALUES (3004, 'm', 'Casper', 'Anders', '0634506109', '1984-08-19', 'Straatnaam', '2', '4811VC', 'Rotjeknor',
-        'Nederland', 'begin@mailig.nl', true, 4004);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, pilot_license, membership_id)
-VALUES (3005, 'v', 'Nicole', 'Adriaansen', '0634506109', '1994-01-01', 'Naafdmstraat', '65', '4811VC', 'Tilburg',
-        'Nederland', 'Tonnie@mailig.nl', null, 4003);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, pilot_license, membership_id)
-VALUES (3006, 'm', 'jan', 'Pietersen', '0634506109', '2004-01-01', 'Naamstjhgfraat', '12', '4811VC', 'Volendam',
-        'Nederland', 'begin@mailig.nl', true, 4003);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, pilot_license, membership_id)
-VALUES (3007, 'v', 'Johan', 'de Beek', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
-        'Nederland', 'begin@mailig.nl', true, 4003);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, pilot_license, membership_id)
-VALUES (3008, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
-        'Nederland', 'willie@wortel.nl', false, 4003);
-INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, street_name, house_number,
-                     postalcode, city, country, email, pilot_license, membership_id)
-VALUES (3009, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'Naamsdtyhfgjfghtraat', '15', '4811VC', 'Breda',
-        'Nederland', 'willie@wortel.nl', false, 4003);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3001, 'm', 'Jeffrey', 'Johnson', '0612306345', '1994-08-19',  'sdbe@novi.nl', false, 4001);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3002, 'v', 'Jan', 'van Westen', '0691256345', '1984-08-19',  'begin@mailadres.nl', false, 4002);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3003, 'v', 'Fem', 'achternaam', '0634506109', '1974-08-19', 'fem@mailings.nl', true, 4003);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3004, 'm', 'Casper', 'Anders', '0634506109', '1984-08-19',  'begin@mailig.nl', true, 4004);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3005, 'v', 'Nicole', 'Adriaansen', '0634506109', '1994-01-01', 'Tonnie@mailig.nl', null, 4003);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3006, 'm', 'jan', 'Pietersen', '0634506109', '2004-01-01', 'begin@mailig.nl', true, 4003);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3007, 'v', 'Johan', 'de Beek', '0634506109', '2008-12-01', 'begin@mailig.nl', true, 4003);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3008, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel.nl', false, 4003);
+INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
+VALUES (3009, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel.nl', false, 4003);
+
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
+VALUES ( 8001, 'Breda', 'Nederland', 12, '4811AA', 'Hobokenstraat');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
+VALUES ( 8002, 'Tilburg', 'Nederland', 23, '4811AA', 'Straatnaam');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
+VALUES ( 8003, 'Houten', 'Nederland', 34, '4811AA', 'Anderestraat');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
+VALUES ( 8004, 'Rotterdam', 'Nederland', 45, '4811AA', 'Diestraat');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
+VALUES ( 8005, 'Goirle', 'Nederland', 56, '4811AA', 'Oude straatnaam');
+
+
 
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)

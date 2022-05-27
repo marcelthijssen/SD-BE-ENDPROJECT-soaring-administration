@@ -29,10 +29,10 @@ import java.util.List;
 @RequestMapping("/airports")
 public class AirportController {
 
-    private AirportService airportService;
+    private final AirportService airportService;
 
-    public AirportController( AirportService service ) {
-        this.airportService = service;
+    public AirportController( AirportService airportService ) {
+        this.airportService = airportService;
     }
 
     @GetMapping("")

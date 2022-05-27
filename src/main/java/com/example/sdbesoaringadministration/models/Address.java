@@ -2,32 +2,31 @@ package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-public class Address extends Person {
+@Entity(name = "Addresses")
+@Table(name = "ADDRESSES")
+public class Address {
 
-    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private Long id;
     @Column
     private String streetName;
-
     @Column
     private String houseNumber;
-
     @Column
     private String postalcode;
-
     @Column
     private String city;
-
     @Column
     private String country;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "address")
+    @OneToOne
     private Person person;
+
 
     public Address() {
     }
@@ -79,7 +78,6 @@ public class Address extends Person {
     public void setCountry( String country ) {
         this.country = country;
     }
-
 
     public Person getPerson() {
         return person;

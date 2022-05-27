@@ -49,6 +49,11 @@ public class Person {
     @Column
     private Boolean pilotLicense;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "person")
+    private Address address;
+
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(
@@ -167,5 +172,11 @@ public class Person {
         this.membership = membership;
     }
 
+    public Address getAddress() {
+        return address;
+    }
 
+    public void setAddress( Address address ) {
+        this.address = address;
+    }
 }
