@@ -25,16 +25,11 @@ public class PersonModelTests {
     void setUp() {
         this.person = new Person();
         this.person.setId( 1L );
-        this.person.setGender( "m" );
+//        this.person.setGender( "m" );
         this.person.setFirstName( "Firstname" );
         this.person.setLastName( "Lastname" );
         this.person.setDateOfBirth( LocalDate.of( 1879, 3, 14 ) );
-        this.person.setStreetName( "Streetname" );
 
-        this.person.setHouseNumber( "12" );
-        this.person.setPostalcode( "9876ZY" );
-        this.person.setCity( "City" );
-        this.person.setCountry( "Country" );
         this.person.setEmail( "this@email.nl" );
         this.person.setPhone( "0123654789" );
         this.person.setPilotLicense( true );
@@ -48,12 +43,7 @@ public class PersonModelTests {
         assertEquals( expected, actual );
     }
 
-    @Test
-    void ShouldReturnGender() {
-        String expected = ( "m" );
-        String actual = person.getGender();
-        assertEquals( expected, actual );
-    }
+
 
     @Test
     void shouldReturnFirstName() {
@@ -76,40 +66,6 @@ public class PersonModelTests {
         assertEquals( expected, actual );
     }
 
-    @Test
-    void shouldReturnStreetname() {
-        String expected = "Streetname";
-        String actual = this.person.getStreetName();
-        assertEquals( expected, actual );
-    }
-
-    @Test
-    void shouldReturnHouseNumber() {
-        String expected = "12";
-        String actual = this.person.getHouseNumber();
-        assertEquals( expected, actual );
-    }
-
-    @Test
-    void shouldReturnPostalCode() {
-        String expected = "9876ZY";
-        String actual = this.person.getPostalcode();
-        assertEquals( expected, actual );
-    }
-
-    @Test
-    void shouldReturnCity() {
-        String expected = "City";
-        String actual = this.person.getCity();
-        assertEquals( expected, actual );
-    }
-
-    @Test
-    void shouldReturnCountry() {
-        String expected = "Country";
-        String actual = this.person.getCountry();
-        assertEquals( expected, actual );
-    }
 
     @Test
     void shouldReturnEmail() {

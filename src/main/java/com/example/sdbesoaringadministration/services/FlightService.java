@@ -20,36 +20,36 @@ public interface FlightService {
 
     List<FlightDto> getAllFlights();
 
-    FlightDto getFlightById( Long flightId );
+    FlightDto getFlightById( Long flight_id );
 
     Flight createFlight( FlightDto dto);
 
-    void deleteFlightById( Long flightId );
+    void deleteFlightById( Long flight_id );
 
-    FlightDto updateFlight( Long flightId, FlightDto flightDto );
+    FlightDto updateFlight( Long flight_id, FlightDto flightDto );
 
-    void assignPlaneToFlight( Long flightId, Long planeId );
+    void assignPlaneToFlight( Long flight_id, Long plane_id );
 
-    void assignAirportStartToFlight( Long flightId, Long airportStartId );
+    void assignAirportStartToFlight( Long flight_id, Long airportStart_id );
 
-    void assignAirportEndToFlight( Long flightId, Long airportEndId );
+    void assignAirportEndToFlight( Long flight_id, Long airportEnd_id );
 
-    void assignStartingMethodeToFlight( Long flightId, Long startingMethodeId );
+    void assignStartingMethodeToFlight( Long flight_id, Long startingMethode_id );
 
-    void assignPassengerToFlight( Long flightId, Long psid );
+    void assignPassengerToFlight( Long flight_id, Long psid );
 
-    void assignCaptainToFlight( Long flightId, Long captainId );
+    void assignCaptainToFlight( Long flight_id, Long captain_id );
 
-    FlightDto assignInstructionFlightToFlight(Long flightId, FlightDto dto );
+    FlightDto assignInstructionFlightToFlight(Long flight_id, FlightDto dto );
 
-    void assignTimeStart( Long flightId );
+    void assignTimeStart( Long flight_id );
 
-    void assignTimeEnd( Long flightId );
+    void assignTimeEnd( Long flight_id );
 
-    FlightDto updateRemarksToFLight( Long flightId, FlightDto dto );
+    FlightDto updateRemarksToFLight( Long flight_id, FlightDto dto );
 
-    List<FlightDto> getFlightsByCaptain_id( Long captainId );
+    List<FlightDto> getFlightsByCaptain_id( Long captain_id );
 
-    public ResponseEntity<String> createInvoiceFromFLight( Long flightId);
+    public ResponseEntity<String> createInvoiceFromFLight( Long flight_id);
 
 }

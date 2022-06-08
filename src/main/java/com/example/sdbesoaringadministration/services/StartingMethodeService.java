@@ -18,11 +18,11 @@ public interface StartingMethodeService {
 
     List<StartingMethodeDto> getAllStartingMethodes();
 
-    StartingMethodeDto getStartingMethodeById( Long startingMethodeId );
+    StartingMethodeDto getStartingMethodeById( Long startingMethode_id );
 
     void createStartingMethode( StartingMethodeDto startingMethodeDto );
 
-    void deleteStartingMethodeById( Long startingMethodeId );
+    void deleteStartingMethodeById( Long startingMethode_id );
 
-    void updateStartingMethode( Long startingMethodeId, StartingMethodeDto dto );
+    void updateStartingMethode( Long startingMethode_id, StartingMethodeDto dto );
 }

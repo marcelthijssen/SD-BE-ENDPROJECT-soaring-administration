@@ -20,19 +20,19 @@ public interface PersonService {
 
     List<PersonDto> getAllPersons();
 
-    PersonDto getPersonById( Long personId );
+    PersonDto getPersonById( Long person_id );
 
     PersonDto createPerson( PersonDto personDto );
 
-    void deletePersonById( Long personId );
+    void deletePersonById( Long person_id );
 
-    PersonDto updatePerson( Long personId, PersonDto dto );
+    PersonDto updatePerson( Long person_id, PersonDto dto );
 
-    void addMembershipToPerson( Long personId, Long membershipId );
+    void addMembershipToPerson( Long person_id, Long membership_id );
 
-    void addAddressToPerson( Long personId, Long addressId);
+//    void addAddressToPerson( Long person_id, Long addressId);
 
-//    void addAddressToPerson( Long personId );
+//    void addAddressToPerson( Long person_id );
 
-//    void addAddressToPerson( Long personId );
+//    void addAddressToPerson( Long person_id );
 }

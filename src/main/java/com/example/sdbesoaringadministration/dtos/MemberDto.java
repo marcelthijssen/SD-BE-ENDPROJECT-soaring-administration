@@ -1,6 +1,5 @@
 //package com.example.sdbesoaringadministration.dtos;
 //
-//import com.example.sdbesoaringadministration.models.Address;
 //import com.example.sdbesoaringadministration.models.Membership;
 //
 //import java.time.LocalDate;
@@ -19,8 +18,8 @@
 //
 //    }
 //
-//    public MemberDto( Long id, String gender, String firstName, String lastName, LocalDate dateOfBirth, String email, String phone, Boolean pilotLicense, Membership membership Boolean brevet, Boolean radioLicense, LocalDate lastCheck ) {
-//        super( id, gender, firstName, lastName, dateOfBirth, email, phone, pilotLicense, membership );
+//    public MemberDto( Long id, Membership membership, Boolean brevet, Boolean radioLicense, LocalDate lastCheck ) {
+//        super(  );
 //        this.brevet = brevet;
 //        this.radioLicense = radioLicense;
 //        this.lastCheck = lastCheck;

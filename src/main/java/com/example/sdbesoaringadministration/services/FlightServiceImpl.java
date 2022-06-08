@@ -59,9 +59,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightDto getFlightById( Long flightId ) {
-        if ( flightRepository.findById( flightId ).isPresent() ) {
-            Flight flight = flightRepository.findById( flightId ).get();
+    public FlightDto getFlightById( Long flight_id ) {
+        if ( flightRepository.findById( flight_id ).isPresent() ) {
+            Flight flight = flightRepository.findById( flight_id ).get();
             return flightToFlightDto( flight );
         } else {
             throw new RecordNotFoundException( "Flight not available", HttpStatus.NOT_FOUND );
@@ -78,18 +78,18 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void deleteFlightById( Long flightId ) {
-        if ( flightRepository.findById( flightId ).isPresent() ) {
-            flightRepository.deleteById( flightId );
+    public void deleteFlightById( Long flight_id ) {
+        if ( flightRepository.findById( flight_id ).isPresent() ) {
+            flightRepository.deleteById( flight_id );
         } else {
             throw new RecordNotFoundException( "No flight found", HttpStatus.NOT_FOUND );
         }
     }
 
     @Override
-    public FlightDto updateFlight( Long flightId, FlightDto dto ) {
-        if ( flightRepository.findById( flightId ).isPresent() ) {
-            Flight fl = flightRepository.findById( flightId ).get();
+    public FlightDto updateFlight( Long flight_id, FlightDto dto ) {
+        if ( flightRepository.findById( flight_id ).isPresent() ) {
+            Flight fl = flightRepository.findById( flight_id ).get();
 
             fl.setTimeStart( dto.getTimeStart() );
             fl.setTimeEnd( dto.getTimeEnd() );
@@ -112,9 +112,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignPlaneToFlight( Long flightId, Long planeId ) {
-        var optionalFlight = flightRepository.findById( flightId );
-        var optionalPlane = planeRepository.findById( planeId );
+    public void assignPlaneToFlight( Long flight_id, Long plane_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
+        var optionalPlane = planeRepository.findById( plane_id );
 
         if ( optionalFlight.isPresent() && optionalPlane.isPresent() ) {
             var flight = optionalFlight.get();
@@ -128,9 +128,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignAirportStartToFlight( Long flightId, Long apersonId ) {
-        var optionalFlight = flightRepository.findById( flightId );
-        var optionalAirportStart = airportRepository.findById( apersonId );
+    public void assignAirportStartToFlight( Long flight_id, Long aperson_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
+        var optionalAirportStart = airportRepository.findById( aperson_id );
 
         if ( optionalFlight.isPresent() && optionalAirportStart.isPresent() ) {
             var flight = optionalFlight.get();
@@ -144,9 +144,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignAirportEndToFlight( Long flightId, Long airportEndId ) {
-        var optionalFlight = flightRepository.findById( flightId );
-        var optionalAirportEnd = airportRepository.findById( airportEndId );
+    public void assignAirportEndToFlight( Long flight_id, Long airportEnd_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
+        var optionalAirportEnd = airportRepository.findById( airportEnd_id );
 
         if ( optionalFlight.isPresent() && optionalAirportEnd.isPresent() ) {
             var flight = optionalFlight.get();
@@ -161,9 +161,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void assignStartingMethodeToFlight( Long flightId, Long startingMethodeId ) {
-        var optionalFlight = flightRepository.findById( flightId );
-        var optionalStartingMethode = startingMethodeRepository.findById( startingMethodeId );
+    public void assignStartingMethodeToFlight( Long flight_id, Long startingMethode_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
+        var optionalStartingMethode = startingMethodeRepository.findById( startingMethode_id );
 
         if ( optionalFlight.isPresent() && optionalStartingMethode.isPresent() ) {
             var flight = optionalFlight.get();
@@ -176,9 +176,9 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public void assignCaptainToFlight( Long flightId, Long captainId ) {
-        var optionalFlight = flightRepository.findById( flightId );
-        var optionalPerson = personRepository.findById( captainId );
+    public void assignCaptainToFlight( Long flight_id, Long captain_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
+        var optionalPerson = personRepository.findById( captain_id );
 
         if ( optionalFlight.isPresent() && optionalPerson.isPresent() ) {
             var flight = optionalFlight.get();
@@ -191,8 +191,8 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public void assignPassengerToFlight( Long flightId, Long psid ) {
-        var optionalFlight = flightRepository.findById( flightId );
+    public void assignPassengerToFlight( Long flight_id, Long psid ) {
+        var optionalFlight = flightRepository.findById( flight_id );
         var optionalPerson = personRepository.findById( psid );
 
         if ( optionalFlight.get().getPlane().getTwoSeater() ) {
@@ -213,9 +213,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
 
-    public FlightDto assignInstructionFlightToFlight( Long flightId, FlightDto dto ) {
-        if ( flightRepository.findById( flightId ).isPresent() ) {
-            Flight fl = flightRepository.findById( flightId ).get();
+    public FlightDto assignInstructionFlightToFlight( Long flight_id, FlightDto dto ) {
+        if ( flightRepository.findById( flight_id ).isPresent() ) {
+            Flight fl = flightRepository.findById( flight_id ).get();
             fl.setInstructionFlight( dto.getInstructionFlight() );
 
             flightRepository.save( fl );
@@ -225,15 +225,15 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public void assignTimeStart( Long flightId ) {
-        var optionalFlight = flightRepository.findById( flightId );
+    public void assignTimeStart( Long flight_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
         var flight = optionalFlight.get();
         flight.setTimeStart( ( LocalDateTime.now() ) );
         flightRepository.save( flight );
     }
 
-    public void assignTimeEnd( Long flightId ) {
-        var optionalFlight = flightRepository.findById( flightId );
+    public void assignTimeEnd( Long flight_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
         var flight = optionalFlight.get();
         flight.setTimeEnd( ( LocalDateTime.now() ) );
         flight.setTimeFlown( calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) ); // calculating adding timeFlown
@@ -247,9 +247,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightDto updateRemarksToFLight( Long flightId, FlightDto dto ) {
-        if ( flightRepository.findById( flightId ).isPresent() ) {
-            Flight fl = flightRepository.findById( flightId ).get();
+    public FlightDto updateRemarksToFLight( Long flight_id, FlightDto dto ) {
+        if ( flightRepository.findById( flight_id ).isPresent() ) {
+            Flight fl = flightRepository.findById( flight_id ).get();
             fl.setRemarks( dto.getRemarks() );
 
             flightRepository.save( fl );
@@ -260,9 +260,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<FlightDto> getFlightsByCaptain_id( Long captainId ) {
+    public List<FlightDto> getFlightsByCaptain_id( Long captain_id ) {
         try {
-            List<Flight> flightList = flightRepository.findFlightsByCaptain_Id( captainId );
+            List<Flight> flightList = flightRepository.findFlightsByCaptain_Id( captain_id );
             List<FlightDto> flightDtoList = new ArrayList<>();
 
             for ( Flight fl : flightList ) {
@@ -276,9 +276,9 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    public ResponseEntity<String> createInvoiceFromFLight( Long flightId ) {
-        var optionalFlight = flightRepository.findById( flightId );
-        var optionalInvoice = invoiceRepository.findById( flightId );
+    public ResponseEntity<String> createInvoiceFromFLight( Long flight_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
+        var optionalInvoice = invoiceRepository.findById( flight_id );
         var flight = optionalFlight.get();
 
         if ( optionalInvoice.get().getId().equals( optionalFlight.get().getId() ) ) {

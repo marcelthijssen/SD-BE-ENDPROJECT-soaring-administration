@@ -47,12 +47,12 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public PlaneDto getPlaneById( Long planeId ) {
+    public PlaneDto getPlaneById( Long plane_id ) {
         try {
-            Plane pl = planeRepository.findById( planeId ).get();
+            Plane pl = planeRepository.findById( plane_id ).get();
             return ( planeToPlaneDto( pl ) );
         } catch ( Exception e ) {
-            throw new RecordNotFoundException( "Invalid plane id: " + planeId, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid plane id: " + plane_id, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -64,35 +64,35 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public void deletePlaneById( Long planeId ) {
-        if ( planeRepository.findById( planeId ).isPresent() ) {
-            planeRepository.deleteById( planeId );
+    public void deletePlaneById( Long plane_id ) {
+        if ( planeRepository.findById( plane_id ).isPresent() ) {
+            planeRepository.deleteById( plane_id );
         } else {
-            throw new RecordNotFoundException( "Invalid plane id: " + planeId, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid plane id: " + plane_id, HttpStatus.NOT_FOUND );
         }
     }
 
     @Override
-    public PlaneDto updatePlane( Long planeId, PlaneDto dto ) {
-        if ( planeRepository.findById( planeId ).isPresent() ) {
-            Plane pl = planeRepository.findById( planeId ).get();
+    public PlaneDto updatePlane( Long plane_id, PlaneDto dto ) {
+        if ( planeRepository.findById( plane_id ).isPresent() ) {
+            Plane pl = planeRepository.findById( plane_id ).get();
             planeRepository.save( pl );
         }
         return null;
     }
 
-    public PlaneDto addMinutePrice( Long planeId, PlaneDto dto ) {
-        if ( planeRepository.findById( planeId ).isPresent() ) {
-            Plane pl = planeRepository.findById( planeId ).get();
+    public PlaneDto addMinutePrice( Long plane_id, PlaneDto dto ) {
+        if ( planeRepository.findById( plane_id ).isPresent() ) {
+            Plane pl = planeRepository.findById( plane_id ).get();
             planeRepository.save( pl );
         }
         return dto;
     }
 
     @Override
-    public void assignOwnerToPlane( Long planeId, Long personId ) {
-        var optionalPlane = planeRepository.findById( planeId );
-        var optionalPerson = personRepository.findById( personId );
+    public void assignOwnerToPlane( Long plane_id, Long person_id ) {
+        var optionalPlane = planeRepository.findById( plane_id );
+        var optionalPerson = personRepository.findById( person_id );
 
         if ( optionalPlane.isPresent() && optionalPerson.isPresent() ) {
             var plane = optionalPlane.get();
@@ -101,15 +101,15 @@ public class PlaneServiceImpl implements PlaneService {
             plane.setOwner( person );
             planeRepository.save( plane );
         } else {
-            throw new RecordNotFoundException( "Invalid plane-id: " + planeId + ", or invalid person-id: " + personId, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid plane-id: " + plane_id + ", or invalid person-id: " + person_id, HttpStatus.NOT_FOUND );
         }
     }
 
 
     @Override
-    public void assignTechnicianToPlane( Long planeId, Long personId ) {
-        var optionalPlane = planeRepository.findById( planeId );
-        var optionalPerson = personRepository.findById( personId );
+    public void assignTechnicianToPlane( Long plane_id, Long person_id ) {
+        var optionalPlane = planeRepository.findById( plane_id );
+        var optionalPerson = personRepository.findById( person_id );
 
         if ( optionalPlane.isPresent() && optionalPerson.isPresent() ) {
             var plane = optionalPlane.get();
@@ -123,30 +123,30 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
-    public void uploadFlightStatusPdf( Long planeId, MultipartFile pdf ) throws IOException {
+    public void uploadFlightStatusPdf( Long plane_id, MultipartFile pdf ) throws IOException {
 
         try {
-            if ( planeRepository.findById( planeId ).isPresent() ) {
-                Plane pl = planeRepository.findById( planeId ).get();
+            if ( planeRepository.findById( plane_id ).isPresent() ) {
+                Plane pl = planeRepository.findById( plane_id ).get();
                 pl.setFlightStatus( pdf.getBytes() );
                 planeRepository.save( pl );
             }
         } catch ( RecordNotFoundException e ) {
-            throw new RecordNotFoundException( "Invalid plane-id: " + planeId, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid plane-id: " + plane_id, HttpStatus.NOT_FOUND );
         }
     }
 
 
     @Override
-    public PlaneDto getFlightStatusPdfById( Long planeId ) {
-        if ( planeRepository.findById( planeId ).isPresent() ) {
-            Plane pl = planeRepository.findById( planeId ).get();
+    public PlaneDto getFlightStatusPdfById( Long plane_id ) {
+        if ( planeRepository.findById( plane_id ).isPresent() ) {
+            Plane pl = planeRepository.findById( plane_id ).get();
             PlaneDto dto = new PlaneDto();
 
             dto.setFlightStatus( pl.getFlightStatus() );
             return dto;
         } else {
-            throw new RecordNotFoundException( "Invalid plane-id: " + planeId, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid plane-id: " + plane_id, HttpStatus.NOT_FOUND );
         }
     }
 

@@ -18,7 +18,7 @@ public interface InvoiceService {
 
     List<InvoiceDto> getAllInvoices();
 
-    List<InvoiceDto> findInvoicesByBilledPerson( Long planeId );
+    List<InvoiceDto> findInvoicesByBilledPerson( Long plane_id );
 
 
 }

@@ -12,6 +12,7 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Address;
+import com.example.sdbesoaringadministration.models.Gender;
 import com.example.sdbesoaringadministration.models.Membership;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
@@ -25,7 +26,7 @@ import java.time.LocalDate;
 public class PersonDto{
 
     private Long id;
-    private String gender;
+    private Gender gender;
     @NotBlank(message = "Firstname can not be empty")
     private String firstName;
     @NotBlank(message = "Lastname can not be empty")
@@ -44,7 +45,7 @@ public class PersonDto{
     }
 
     public PersonDto( Long id,
-                      String gender,
+                      Gender gender,
                       String firstName,
                       String lastName,
                       LocalDate dateOfBirth,
@@ -77,11 +78,11 @@ public class PersonDto{
         this.id = id;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender( String gender ) {
+    public void setGender( Gender gender ) {
         this.gender = gender;
     }
 

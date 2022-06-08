@@ -46,10 +46,10 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
     }
 
-    public List<InvoiceDto> findInvoicesByBilledPerson( Long planeId ) {
+    public List<InvoiceDto> findInvoicesByBilledPerson( Long plane_id ) {
         try {
-            if ( !invoiceRepository.findInvoicesByBilledPerson( planeId ).isEmpty() ) {
-                List<Invoice> invoiceList = invoiceRepository.findInvoicesByBilledPerson( planeId );
+            if ( !invoiceRepository.findInvoicesByBilledPerson( plane_id ).isEmpty() ) {
+                List<Invoice> invoiceList = invoiceRepository.findInvoicesByBilledPerson( plane_id );
                 List<InvoiceDto> invoiceDtoList = new ArrayList<>();
 
                 for ( Invoice i : invoiceList ) {

@@ -30,13 +30,13 @@ public interface PlaneService {
 
     PlaneDto updatePlane( Long id, PlaneDto dto );
 
-    void assignOwnerToPlane( Long planeId, Long personId );
+    void assignOwnerToPlane( Long plane_id, Long person_id );
 
-    void assignTechnicianToPlane( Long planeId, Long personId );
+    void assignTechnicianToPlane( Long plane_id, Long person_id );
 
-    void uploadFlightStatusPdf( Long planeId, MultipartFile pdf ) throws IOException;
+    void uploadFlightStatusPdf( Long plane_id, MultipartFile pdf ) throws IOException;
 
-    PlaneDto getFlightStatusPdfById( Long planeId );
+    PlaneDto getFlightStatusPdfById( Long plane_id );
 
-    PlaneDto addMinutePrice( Long planeId, PlaneDto dto );
+    PlaneDto addMinutePrice( Long plane_id, PlaneDto dto );
 }

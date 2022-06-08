@@ -12,13 +12,11 @@ package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity(name = "Person")
 @Table(name = "PERSONS")
@@ -28,8 +26,8 @@ public class Person {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column
-    private String gender;
+    @Enumerated
+    private Gender gender;
 
     @Column
     private String firstName;
@@ -108,11 +106,11 @@ public class Person {
         this.id = id;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender( String gender ) {
+    public void setGender( Gender gender ) {
         this.gender = gender;
     }
 

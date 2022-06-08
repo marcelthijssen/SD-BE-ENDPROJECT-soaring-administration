@@ -40,13 +40,13 @@ public class StartingMethodeController {
         return new ResponseEntity<>( listStartingMethodeDto, HttpStatus.OK );
     }
 
-    @GetMapping("/{startingMethodeId}")
-    public ResponseEntity<Object> getStartingMethodeById( @PathVariable(name = "startingMethodeId") Long startingMethodeId ) {
-        StartingMethodeDto startingMethodeDto = startingMethodesService.getStartingMethodeById( startingMethodeId );
+    @GetMapping("/{startingMethode_id}")
+    public ResponseEntity<Object> getStartingMethodeById( @PathVariable(name = "startingMethode_id") Long startingMethode_id ) {
+        StartingMethodeDto startingMethodeDto = startingMethodesService.getStartingMethodeById( startingMethode_id );
         try {
             return ResponseEntity.ok( startingMethodeDto );
         } catch ( Exception ex ) {
-            throw new RecordNotFoundException( "Invalid Startingmethode id: "+ startingMethodeId, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid Startingmethode id: "+ startingMethode_id, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -66,17 +66,17 @@ public class StartingMethodeController {
         }
     }
 
-    @DeleteMapping("/{startingMethodeId}")
-    public ResponseEntity<Object> deleteAirportById( @PathVariable("startingMethodeId") Long startingMethodeId ) {
+    @DeleteMapping("/{startingMethode_id}")
+    public ResponseEntity<Object> deleteAirportById( @PathVariable("startingMethode_id") Long startingMethode_id ) {
 
-        startingMethodesService.deleteStartingMethodeById( startingMethodeId );
+        startingMethodesService.deleteStartingMethodeById( startingMethode_id );
         return new ResponseEntity<>( "StartingMethode has been deleted", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/{startingMethodeId}")
-    public StartingMethodeDto updateStartingMethode( @PathVariable("startingMethodeId") Long startingMethodeId, @RequestBody StartingMethodeDto dto ) {
+    @PutMapping("/{startingMethode_id}")
+    public StartingMethodeDto updateStartingMethode( @PathVariable("startingMethode_id") Long startingMethode_id, @RequestBody StartingMethodeDto dto ) {
 
-        startingMethodesService.updateStartingMethode( startingMethodeId, dto );
+        startingMethodesService.updateStartingMethode( startingMethode_id, dto );
         return dto;
     }
 

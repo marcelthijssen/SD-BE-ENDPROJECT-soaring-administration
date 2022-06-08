@@ -90,16 +90,16 @@ VALUES (3008, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
 VALUES (3009, 'm', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel.nl', false, 4003);
 
-INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
-VALUES ( 8001, 'Breda', 'Nederland', 12, '4811AA', 'Hobokenstraat');
-INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
-VALUES ( 8002, 'Tilburg', 'Nederland', 23, '4811AA', 'Straatnaam');
-INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
-VALUES ( 8003, 'Houten', 'Nederland', 34, '4811AA', 'Anderestraat');
-INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
-VALUES ( 8004, 'Rotterdam', 'Nederland', 45, '4811AA', 'Diestraat');
-INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name)
-VALUES ( 8005, 'Goirle', 'Nederland', 56, '4811AA', 'Oude straatnaam');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 8001, 'Breda', 'Nederland', 12, '4811AA', 'Hobokenstraat', '3001');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 8002, 'Tilburg', 'Nederland', 23, '4811AA', 'Straatnaam', '3004');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 8003, 'Houten', 'Nederland', 34, '4811AA', 'Anderestraat', '3005');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 8004, 'Rotterdam', 'Nederland', 45, '4811AA', 'Diestraat','3006');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 8005, 'Goirle', 'Nederland', 56, '4811AA', 'Oude straatnaam','3007');
 
 
 

@@ -13,6 +13,7 @@ package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
+import com.example.sdbesoaringadministration.models.Address;
 import com.example.sdbesoaringadministration.models.Person;
 import com.example.sdbesoaringadministration.repositories.AddressRepository;
 import com.example.sdbesoaringadministration.repositories.MembershipRepository;
@@ -49,8 +50,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto getPersonById( Long personId ) {
-        Optional<Person> person = personRepository.findById( personId );
+    public PersonDto getPersonById( Long person_id ) {
+        Optional<Person> person = personRepository.findById( person_id );
         if ( person.isPresent() ) {
             return personToPersonDto( person.get() );
 
@@ -61,20 +62,22 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto createPerson( PersonDto personDto ) {
-        try {
             Person p = personDtoToPerson( personDto );
             personRepository.save( p );
+
+            Address addr = new Address();
+            addr.setId( p.getId());
+            addressRepository.save(addr);
+
             return personDto;
-        } catch ( RecordNotFoundException e ) {
-            throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
-        }
+
     }
 
     @Override
-    public void deletePersonById( Long personId ) {
+    public void deletePersonById( Long person_id ) {
 
-        if ( personRepository.findById( personId ).isPresent() ) {
-            personRepository.deleteById( personId );
+        if ( personRepository.findById( person_id ).isPresent() ) {
+            personRepository.deleteById( person_id );
         } else {
             throw new RecordNotFoundException( "Person not found", HttpStatus.NOT_FOUND );
 //        } else {
@@ -83,9 +86,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto updatePerson( Long personId, PersonDto dto ) {
-        if ( personRepository.findById( personId ).isPresent() ) {
-            Person p = personRepository.findById( personId ).get();
+    public PersonDto updatePerson( Long person_id, PersonDto dto ) {
+        if ( personRepository.findById( person_id ).isPresent() ) {
+            Person p = personRepository.findById( person_id ).get();
 
             p.setId( p.getId() );
             p.setGender( dto.getGender() );
@@ -105,10 +108,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void addMembershipToPerson( Long personId, Long membershipId ) {
+    public void addMembershipToPerson( Long person_id, Long membership_id ) {
 
-        var optionalMembership = membershipRepository.findById( membershipId );
-        var optionalPerson = personRepository.findById( personId );
+        var optionalMembership = membershipRepository.findById( membership_id );
+        var optionalPerson = personRepository.findById( person_id );
 
         if ( optionalMembership.isPresent() && optionalPerson.isPresent() ) {
             var m = optionalMembership.get();
@@ -122,33 +125,33 @@ public class PersonServiceImpl implements PersonService {
     }
 
 
-    @Override
-    public void addAddressToPerson( Long personId, Long addressId ) {
-
-        var optionalAddress = membershipRepository.findById( addressId );
-        var optionalPerson = personRepository.findById( personId );
-
-        if ( optionalAddress.isPresent() && optionalPerson.isPresent() ) {
-            var m = optionalAddress.get();
-            var p = optionalPerson.get();
-
-            p.setMembership( m );
-            personRepository.save( p );
-        } else {
-            throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
-        }
-    }
+//    @Override
+//    public void addAddressToPerson( Long person_id, Long addressId ) {
+//
+//        var optionalAddress = membershipRepository.findById( addressId );
+//        var optionalPerson = personRepository.findById( person_id );
+//
+//        if ( optionalAddress.isPresent() && optionalPerson.isPresent() ) {
+//            var m = optionalAddress.get();
+//            var p = optionalPerson.get();
+//
+//            p.setMembership( m );
+//            personRepository.save( p );
+//        } else {
+//            throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
+//        }
+//    }
 
 
 //    @Override
-//    public void addAddressToPerson( Long personId ) {
-// check if personId has an address assigned. 
-//        List<Address> address = addressRepository.findAddressByPerson_id( personId );
+//    public void addAddressToPerson( Long person_id ) {
+// check if person_id has an address assigned. 
+//        List<Address> address = addressRepository.findAddressByPerson_id( person_id );
 //
 //        if ( address.isEmpty() ) {
 //
-//            var optionalAddress = addressRepository.findAddressByPerson_id( personId );
-//            var optionalPerson = personRepository.findById( personId );
+//            var optionalAddress = addressRepository.findAddressByPerson_id( person_id );
+//            var optionalPerson = personRepository.findById( person_id );
 //
 //            if ( optionalAddress.isPresent() && optionalPerson.isPresent() ) {
 //                var a = optionalAddress.get();
@@ -170,7 +173,7 @@ public class PersonServiceImpl implements PersonService {
         dto.setFirstName( p.getFirstName() );
         dto.setLastName( p.getLastName() );
         dto.setDateOfBirth( p.getDateOfBirth() );
-//        dto.setAddress( p.getAddress() );
+        dto.setAddress( p.getAddress() );
         dto.setEmail( p.getEmail() );
         dto.setPhone( p.getPhone() );
         dto.setPilotLicense( p.getPilotLicense() );
@@ -187,7 +190,7 @@ public class PersonServiceImpl implements PersonService {
         p.setFirstName( dto.getFirstName() );
         p.setLastName( dto.getLastName() );
         p.setDateOfBirth( dto.getDateOfBirth() );
-//        p.setAddress( dto.getAddress() );
+        p.setAddress( dto.getAddress() );
         p.setEmail( dto.getEmail() );
         p.setPhone( dto.getPhone() );
         p.setPilotLicense( dto.getPilotLicense() );

@@ -19,6 +19,6 @@ import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 
-    List<Flight> findFlightsByCaptain_Id( Long captainId );
+    List<Flight> findFlightsByCaptain_Id( Long captain_id );
 
 }

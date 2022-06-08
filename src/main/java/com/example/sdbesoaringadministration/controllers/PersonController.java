@@ -44,9 +44,9 @@ public class PersonController {
         return new ResponseEntity<>( personDtoList, HttpStatus.OK );
     }
 
-    @GetMapping("/{personId}")
-    public ResponseEntity<Object> getPersonById( @PathVariable(name = "personId") Long personId ) {
-        PersonDto person = personService.getPersonById( personId );
+    @GetMapping("/{person_id}")
+    public ResponseEntity<Object> getPersonById( @PathVariable(name = "person_id") Long person_id ) {
+        PersonDto person = personService.getPersonById( person_id );
         try {
             return ResponseEntity.ok( person );
         } catch ( Exception ex ) {
@@ -71,38 +71,38 @@ public class PersonController {
         }
     }
 
-    @DeleteMapping("/{personId}")
-    public ResponseEntity<Object> deletePersonById( @PathVariable("personId") Long personId ) {
-        personService.deletePersonById( personId );
+    @DeleteMapping("/{person_id}")
+    public ResponseEntity<Object> deletePersonById( @PathVariable("person_id") Long person_id ) {
+        personService.deletePersonById( person_id );
         return new ResponseEntity<>( "Person deleted from systeem", HttpStatus.ACCEPTED );
     }
 
-    @PutMapping("/{personId}")
-    public PersonDto updatePerson( @PathVariable("personId") Long personId, @RequestBody PersonDto person ) {
-        return personService.updatePerson( personId, person );
+    @PutMapping("/{person_id}")
+    public PersonDto updatePerson( @PathVariable("person_id") Long person_id, @RequestBody PersonDto person ) {
+        return personService.updatePerson( person_id, person );
     }
 
-    @PutMapping("/{personId}/membership/{membershipId}")
-    public ResponseEntity<Object> addMembershipToPerson( @PathVariable("personId") Long personId, @PathVariable("membershipId") Long membershipId ) {
-        personService.addMembershipToPerson( personId, membershipId );
+    @PutMapping("/{person_id}/membership/{membership_id}")
+    public ResponseEntity<Object> addMembershipToPerson( @PathVariable("person_id") Long person_id, @PathVariable("membership_id") Long membership_id ) {
+        personService.addMembershipToPerson( person_id, membership_id );
 
         return new ResponseEntity<>( "Membership added to a person", HttpStatus.OK );
     }
 
-//    @PutMapping("/{personId}/address")
-//    public ResponseEntity<Object> addAddressToPerson( @PathVariable("personId") Long personId ) {
-//        personService.addAddressToPerson( personId );
+//    @PutMapping("/{person_id}/address")
+//    public ResponseEntity<Object> addAddressToPerson( @PathVariable("person_id") Long person_id ) {
+//        personService.addAddressToPerson( person_id );
 //
 //        return new ResponseEntity<>( "Address added to a person", HttpStatus.OK );
 //    }
 
 
     //         assign owner to plane
-    @PutMapping("/{personId}/address/{addressId}")
-    public ResponseEntity<Object> addAddressToPerson( @PathVariable("personId") Long personId, @PathVariable("addressId") Long addressId ) {
-        personService.addAddressToPerson( personId, addressId );
-        return new ResponseEntity<>( "Owner added to plane", HttpStatus.ACCEPTED );
-    }
+//    @PutMapping("/{person_id}/address/{addressId}")
+//    public ResponseEntity<Object> addAddressToPerson( @PathVariable("person_id") Long person_id, @PathVariable("addressId") Long addressId ) {
+//        personService.addAddressToPerson( person_id, addressId );
+//        return new ResponseEntity<>( "Owner added to plane", HttpStatus.ACCEPTED );
+//    }
 
     
 }

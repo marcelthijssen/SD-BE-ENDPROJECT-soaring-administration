@@ -1,11 +1,8 @@
 package com.example.sdbesoaringadministration.services;
 
 import com.example.sdbesoaringadministration.dtos.AddressDto;
-import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Address;
 import com.example.sdbesoaringadministration.repositories.AddressRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,16 +32,18 @@ public class AddressServiceImpl implements AddressService {
     }
 
 //    @Override
-//    public AddressDto getAddressByPerson_id( Long personId ) {
+//    public AddressDto getAddressByPerson_id( Long person_id ) {
 //        try {
-//            Address address = addressRepository.getAddressByPerson_id( personId ).get();
+//            Address address = addressRepository.getAddressByPerson_id( person_id ).get();
 //            return addressToAddressDto( address );
 //        } catch ( Exception e ) {
-//                throw new RecordNotFoundException( "Invalid personId: " + personId, HttpStatus.NOT_FOUND );
+//                throw new RecordNotFoundException( "Invalid person_id: " + person_id, HttpStatus.NOT_FOUND );
 //            }
 //        }
-//
-//        @Override
+
+// TODO: Create an adres with the same id as the person setAddressId( getAddressId(getPersonId))??
+
+//       @Override
 //        public Address createAddress ( AddressDto addressDto ){
 //            Address address = new Address();
 //

@@ -41,13 +41,13 @@ public class AirportController {
         return new ResponseEntity<>( listAirportsDto, HttpStatus.OK );
     }
 
-    @GetMapping("/{airportId}")
-    public ResponseEntity<Object> getAirportById( @PathVariable(name = "airportId") Long airportId ) {
+    @GetMapping("/{airport_id}")
+    public ResponseEntity<Object> getAirportById( @PathVariable(name = "airport_id") Long airport_id ) {
         try {
-            AirportDto airportDto = airportService.getAirportById( airportId );
+            AirportDto airportDto = airportService.getAirportById( airport_id );
             return ResponseEntity.ok( airportDto );
         } catch ( RecordNotFoundException e ) {
-            throw new RecordNotFoundException( "Invalid airport-id: " + airportId, HttpStatus.NOT_FOUND );
+            throw new RecordNotFoundException( "Invalid airport-id: " + airport_id, HttpStatus.NOT_FOUND );
         }
     }
 
@@ -67,20 +67,20 @@ public class AirportController {
         }
     }
 
-    @DeleteMapping("/{airportId}")
-    public ResponseEntity<Object> deleteAirportById( @PathVariable("airportId") Long airportId ) {
+    @DeleteMapping("/{airport_id}")
+    public ResponseEntity<Object> deleteAirportById( @PathVariable("airport_id") Long airport_id ) {
         try {
-            airportService.deleteAirportById( airportId );
+            airportService.deleteAirportById( airport_id );
             return new ResponseEntity<>( "Airport has been deleted from the system.", HttpStatus.ACCEPTED );
         } catch ( Exception e ) {
-            throw new RecordNotFoundException( "Invalid airport-id: " + airportId, HttpStatus.BAD_REQUEST );
+            throw new RecordNotFoundException( "Invalid airport-id: " + airport_id, HttpStatus.BAD_REQUEST );
         }
     }
 
-    @PutMapping("/{airportId}")
-    public AirportDto updateAirport( @PathVariable("airportId") Long airportId, @RequestBody AirportDto dto ) {
+    @PutMapping("/{airport_id}")
+    public AirportDto updateAirport( @PathVariable("airport_id") Long airport_id, @RequestBody AirportDto dto ) {
 
-        return airportService.updateAirport( airportId, dto );
+        return airportService.updateAirport( airport_id, dto );
     }
 
 }

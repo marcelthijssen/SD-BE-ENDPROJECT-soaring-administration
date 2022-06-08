@@ -44,10 +44,10 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
     }
 
     @Override
-    public StartingMethodeDto getStartingMethodeById( Long startingMethodeId ) {
+    public StartingMethodeDto getStartingMethodeById( Long startingMethode_id ) {
 
-        if ( startingMethodeRepository.findById( startingMethodeId ).isPresent() ) {
-            StartingMethode startingMethode = startingMethodeRepository.findById( startingMethodeId ).get();
+        if ( startingMethodeRepository.findById( startingMethode_id ).isPresent() ) {
+            StartingMethode startingMethode = startingMethodeRepository.findById( startingMethode_id ).get();
             StartingMethodeDto dto = startingMethodeToStartingMethodeDto( startingMethode );
 
             return dto;
@@ -64,18 +64,18 @@ public class StartingMethodeServiceImpl implements StartingMethodeService {
 
 
     @Override
-    public void deleteStartingMethodeById( Long startingMethodeId ) {
-        if ( startingMethodeRepository.findById( startingMethodeId ).isPresent() ) {
-            startingMethodeRepository.deleteById( startingMethodeId );
+    public void deleteStartingMethodeById( Long startingMethode_id ) {
+        if ( startingMethodeRepository.findById( startingMethode_id ).isPresent() ) {
+            startingMethodeRepository.deleteById( startingMethode_id );
         } else {
             throw new RecordNotFoundException( "Starting methode not found", HttpStatus.NOT_FOUND );
         }
     }
 
     @Override
-    public void updateStartingMethode( Long startingMethodeId, StartingMethodeDto dto ) {
-        if ( startingMethodeRepository.findById( startingMethodeId ).isPresent() ) {
-            StartingMethode sm = startingMethodeRepository.findById( startingMethodeId ).get();
+    public void updateStartingMethode( Long startingMethode_id, StartingMethodeDto dto ) {
+        if ( startingMethodeRepository.findById( startingMethode_id ).isPresent() ) {
+            StartingMethode sm = startingMethodeRepository.findById( startingMethode_id ).get();
             sm.setId( dto.getId() );
             sm.setTitle( dto.getTitle() );
             sm.setUnit( dto.getUnit() );

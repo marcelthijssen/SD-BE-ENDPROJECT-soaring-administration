@@ -34,13 +34,13 @@ public class AddressController {
         return new ResponseEntity<>( listAddressesDto, HttpStatus.OK);
     }
 
-//    @GetMapping("/{personId}")
-//    public ResponseEntity<Object> getAddressByPerson_id( @PathVariable(name = "addressId") Long personId ) {
+//    @GetMapping("/{person_id}")
+//    public ResponseEntity<Object> getAddressByPerson_id( @PathVariable(name = "addressId") Long person_id ) {
 //        try {
-//            AddressDto addressDto = addressService.getAddressByPerson_id( personId );
+//            AddressDto addressDto = addressService.getAddressByPerson_id( person_id );
 //            return ResponseEntity.ok( addressDto );
 //        } catch ( RecordNotFoundException e ) {
-//            throw new RecordNotFoundException( "Invalid address-id: " + personId, HttpStatus.NOT_FOUND );
+//            throw new RecordNotFoundException( "Invalid address-id: " + person_id, HttpStatus.NOT_FOUND );
 //        }
 //    }
 

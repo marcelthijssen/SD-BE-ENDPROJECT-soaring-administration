@@ -8,7 +8,7 @@
  * Controller of the endpoints for '/flights
  * GET
  * '/getAllInvoices'
- * '/billedperson/{personId}' returns aal invoices of a specific person
+ * '/billedperson/{person_id}' returns aal invoices of a specific person
  *
  */
 
@@ -39,9 +39,9 @@ public class InvoiceController {
         return new ResponseEntity<>( invoiceDtoList, HttpStatus.OK );
     }
 
-    @GetMapping("/billedperson/{personId}")
-    public ResponseEntity<Object> getInvoiceByBilledPerson( @PathVariable(name = "personId") Long personId ) {
-        List<InvoiceDto> invoices = invoiceService.findInvoicesByBilledPerson( personId );
+    @GetMapping("/billedperson/{person_id}")
+    public ResponseEntity<Object> getInvoiceByBilledPerson( @PathVariable(name = "person_id") Long person_id ) {
+        List<InvoiceDto> invoices = invoiceService.findInvoicesByBilledPerson( person_id );
         return new ResponseEntity<>( invoices, HttpStatus.OK );
     }
 

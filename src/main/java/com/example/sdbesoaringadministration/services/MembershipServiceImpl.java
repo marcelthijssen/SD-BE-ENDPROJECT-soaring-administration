@@ -60,9 +60,9 @@ public class MembershipServiceImpl implements MembershipService {
     }
 
     @Override
-    public void deleteMembershipById( Long membershipId ) {
-        if ( membershipRepository.findById( membershipId ).isPresent() ) {
-            membershipRepository.deleteById( membershipId );
+    public void deleteMembershipById( Long membership_id ) {
+        if ( membershipRepository.findById( membership_id ).isPresent() ) {
+            membershipRepository.deleteById( membership_id );
         } else {
             throw new RecordNotFoundException( "Type of Membership not found", HttpStatus.NOT_FOUND );
         }
@@ -70,9 +70,9 @@ public class MembershipServiceImpl implements MembershipService {
 
 
     @Override
-    public MembershipDto updateMembership( Long membershipId, MembershipDto dto ) {
-        if ( membershipRepository.findById( membershipId ).isPresent() ) {
-            Membership tom = membershipRepository.findById( membershipId ).get();
+    public MembershipDto updateMembership( Long membership_id, MembershipDto dto ) {
+        if ( membershipRepository.findById( membership_id ).isPresent() ) {
+            Membership tom = membershipRepository.findById( membership_id ).get();
 
             tom.setId( tom.getId() );
             tom.setTitle( dto.getTitle() );
