@@ -26,7 +26,8 @@ public class Person {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
     private Gender gender;
 
     @Column
