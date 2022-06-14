@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/flights")
 public class FlightController {
     private final FlightService flightService;
@@ -110,7 +111,7 @@ public class FlightController {
     }
 
 
-    @PutMapping("/{flight_id}/instructionflight")
+    @PutMapping("/{flight_id}/flighttype/")
     public FlightDto assignInstructionFlightToFlight( @PathVariable("flight_id") Long flight_id, @RequestBody FlightDto flight ) {
         return flightService.assignInstructionFlightToFlight( flight_id, flight );
     }

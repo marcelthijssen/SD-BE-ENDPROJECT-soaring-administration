@@ -72,23 +72,23 @@ INSERT INTO authorities (username, authority)
 VALUES ('user6', 'ROLE_USER');
 
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3001, 'MAN', 'Jeffrey', 'Johnson', '0612306345', '1994-08-19',  'sdbe@novi.nl', false, 4001);
+VALUES (3001, 'MALE', 'Jeffrey', 'Johnson', '0612306345', '1994-08-19',  'sdbe@novi.nl', false, 4001);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3002, 'VROUW', 'Jan', 'van Westen', '0691256345', '1984-08-19',  'begin@mailadres.nl', false, 4002);
+VALUES (3002, 'FEMALE', 'Jan', 'van Westen', '0691256345', '1984-08-19',  'begins@mailadres.nl', false, 4002);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3003, 'VROUW', 'Fem', 'achternaam', '0634506109', '1974-08-19', 'fem@mailings.nl', true, 4003);
+VALUES (3003, 'FEMALE', 'Fem', 'achternaam', '0634506109', '1974-08-19', 'fem@mailings.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3004, 'MAN', 'Casper', 'Anders', '0634506109', '1984-08-19',  'begin@mailig.nl', true, 4004);
+VALUES (3004, 'MALE', 'Casper', 'Anders', '0634506109', '1984-08-19',  'begin@mailig.nl', true, 4004);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3005, 'VROUW', 'Nicole', 'Adriaansen', '0634506109', '1994-01-01', 'Tonnie@mailig.nl', null, 4003);
+VALUES (3005, 'FEMALE', 'Nicole', 'Adriaansen', '0634506109', '1994-01-01', 'Tonnie@mailig.nl', null, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3006, 'MAN', 'jan', 'Pietersen', '0634506109', '2004-01-01', 'begin@mailig.nl', true, 4003);
+VALUES (3006, 'MALE', 'jan', 'Pietersen', '0634506109', '2004-01-01', 'begfin@mailig.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3007, 'VROUW', 'Johan', 'de Beek', '0634506109', '2008-12-01', 'begin@mailig.nl', true, 4003);
+VALUES (3007, 'FEMALE', 'Johan', 'de Beek', '0634506109', '2008-12-01', 'begffin@mailig.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3008, 'MAN', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel.nl', false, 4003);
+VALUES (3008, 'MALE', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel.nl', false, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3009, 'MAN', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel.nl', false, 4003);
+VALUES (3009, 'MALE', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willfie@wortel.nl', false, 4003);
 
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
 VALUES ( 8001, 'Breda', 'Nederland', 12, '4811AA', 'Hobokenstraat', '3001');
@@ -100,8 +100,6 @@ INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name
 VALUES ( 8004, 'Rotterdam', 'Nederland', 45, '4811AA', 'Diestraat','3006');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
 VALUES ( 8005, 'Goirle', 'Nederland', 56, '4811AA', 'Oude straatnaam','3007');
-
-
 
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
@@ -129,29 +127,29 @@ INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, privat
 VALUES (5008, 'G9', 'Grob', '2b', 'PH-1254', false, true, 3007, 3007, null, 0);
 
 
-INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
+INSERT INTO flights (id, flight_type, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6001, true, '', '2022-04-14 10:00:37.185743', '18', '2022-04-14 15:03:07.185743', 5001, 1001, 1001, 2001, 3001,
+VALUES (6001, 'INSTRUCTION', '', '2022-04-14 10:00:37.185743', '18', '2022-04-14 15:03:07.185743', 5001, 1001, 1001, 2001, 3001,
         3006, 3001);
-INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
+INSERT INTO flights (id, flight_type, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6002, true, '', '2022-04-14 10:00:37.185743', '8', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
+VALUES (6002, 'INSTRUCTION', '', '2022-04-14 10:00:37.185743', '8', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
         3007, 3003);
-INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
+INSERT INTO flights (id, flight_type, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6003, true, '', '2022-04-14 10:00:37.185743', '12', '2022-04-14 15:03:07.185743', 5001, 1001, 1001, 2001, 3001,
+VALUES (6003, 'INSTRUCTION', '', '2022-04-14 10:00:37.185743', '12', '2022-04-14 15:03:07.185743', 5001, 1001, 1001, 2001, 3001,
         3002, 3001);
-INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
+INSERT INTO flights (id, flight_type, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6004, true, '', '2022-04-14 10:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
+VALUES (6004, 'INSTRUCTION', '', '2022-04-14 10:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
         3004, 3001);
-INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
+INSERT INTO flights (id, flight_type, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6005, true, '', '2022-04-14 10:00:37.185743', '111', '2022-04-14 15:03:07.185743', 5001, 1001, 1002, 2001, 3001,
+VALUES (6005, 'INSTRUCTION', '', '2022-04-14 10:00:37.185743', '111', '2022-04-14 15:03:07.185743', 5001, 1001, 1002, 2001, 3001,
         3002, 3001);
-INSERT INTO flights (id, instruction_flight, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
+INSERT INTO flights (id, flight_type, remarks, time_end, time_flown, time_start, plane_id, airport_start_id,
                      airport_end_id, starting_methode_id, passenger_id, captain_id, billed_person_id)
-VALUES (6006, false, '', '2022-04-14 10:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
+VALUES (6006, 'PRIVATE', 'opmerking', '2022-04-14 10:00:37.185743', '6', '2022-04-14 15:03:07.185743', 5002, 1001, 1001, 2001, 3001,
         3004, 3003);
 
 INSERT INTO invoices (invoice_number, amount, creation_date, billed_person_id, flight_id)

@@ -10,13 +10,13 @@
 
 package com.example.sdbesoaringadministration.models;
 
+import com.example.sdbesoaringadministration.enums.GenderEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-
 
 @Entity(name = "Person")
 @Table(name = "PERSONS")
@@ -28,7 +28,16 @@ public class Person {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private Gender gender;
+    private GenderEnum gender;
+
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(
+            name = "membership_id",
+            referencedColumnName = "id")
+    @JsonManagedReference
+    private Membership membership;
 
     @Column
     private String firstName;
@@ -36,10 +45,10 @@ public class Person {
     @Column
     private String lastName;
 
-    @Column
+    @Column(name="date_of_birth", columnDefinition = "DATE")
     private LocalDate dateOfBirth;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column
@@ -51,15 +60,6 @@ public class Person {
     @JsonIgnore
     @OneToOne(mappedBy = "person")
     private Address address;
-
-
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(
-            name = "membership_id",
-            referencedColumnName = "id")
-    @JsonManagedReference
-    private Membership membership;
 
     @OneToMany
             (mappedBy = "captain",
@@ -105,14 +105,6 @@ public class Person {
 
     public void setId( Long id ) {
         this.id = id;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender( Gender gender ) {
-        this.gender = gender;
     }
 
     public String getFirstName() {
@@ -163,6 +155,14 @@ public class Person {
         this.pilotLicense = pilotLicense;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress( Address address ) {
+        this.address = address;
+    }
+
     public Membership getMembership() {
         return membership;
     }
@@ -171,11 +171,11 @@ public class Person {
         this.membership = membership;
     }
 
-    public Address getAddress() {
-        return address;
+    public GenderEnum getGender() {
+        return gender;
     }
 
-    public void setAddress( Address address ) {
-        this.address = address;
+    public void setGender( GenderEnum gender ) {
+        this.gender = gender;
     }
 }

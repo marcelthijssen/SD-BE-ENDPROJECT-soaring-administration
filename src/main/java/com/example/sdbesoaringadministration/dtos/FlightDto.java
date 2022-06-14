@@ -11,6 +11,7 @@
 
 package com.example.sdbesoaringadministration.dtos;
 
+import com.example.sdbesoaringadministration.enums.FlightTypeEnum;
 import com.example.sdbesoaringadministration.models.*;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class FlightDto {
     private LocalDateTime timeStart;
     private LocalDateTime timeEnd;
     private long timeFlown;
-    private Boolean instructionFlight;
+    private FlightTypeEnum flightType;
     private String remarks;
     private Plane plane;
     private Airport airportStart;
@@ -34,13 +35,13 @@ public class FlightDto {
     public FlightDto() {
     }
 
-    public FlightDto( Long id, LocalDateTime timeStart, LocalDateTime timeEnd, long timeFlown, Boolean instructionFlight, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode,
+    public FlightDto( Long id, LocalDateTime timeStart, LocalDateTime timeEnd, long timeFlown, FlightTypeEnum flightType, String remarks, Plane plane, Airport airportStart, Airport airportEnd, StartingMethode startingMethode,
                       Person passenger, Person captain, Person billedPerson ) {
         this.id = id;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.timeFlown = timeFlown;
-        this.instructionFlight = instructionFlight;
+        this.flightType = flightType;
         this.remarks = remarks;
         this.plane = plane;
         this.airportStart = airportStart;
@@ -84,12 +85,12 @@ public class FlightDto {
         this.timeFlown = timeFlown;
     }
 
-    public Boolean getInstructionFlight() {
-        return instructionFlight;
+    public FlightTypeEnum getFlightType() {
+        return flightType;
     }
 
-    public void setInstructionFlight( Boolean instructionFlight ) {
-        this.instructionFlight = instructionFlight;
+    public void setFlightType( FlightTypeEnum flightType ) {
+        this.flightType = flightType;
     }
 
     public String getRemarks() {

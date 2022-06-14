@@ -12,8 +12,10 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Address;
-import com.example.sdbesoaringadministration.models.Gender;
+import com.example.sdbesoaringadministration.enums.GenderEnum;
 import com.example.sdbesoaringadministration.models.Membership;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,16 +25,18 @@ import java.time.LocalDate;
 
 
 @Validated
-public class PersonDto{
+public class PersonDto {
 
     private Long id;
-    private Gender gender;
+    private GenderEnum gender;
     @NotBlank(message = "Firstname can not be empty")
     private String firstName;
     @NotBlank(message = "Lastname can not be empty")
     private String lastName;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dateOfBirth;
-    @NotBlank(message = "Email must be added")
+    @NotBlank(message = "Email can not be empty")
     @Email(message = "Email is not valid", regexp = "(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-Za-z0-9-]*[A-Za-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
     private String email;
     @Length(min = 10, max = 12, message = "please enter a valid phone-number")
@@ -41,11 +45,12 @@ public class PersonDto{
     private Boolean pilotLicense;
     private Membership membership;
     private Address address;
+
     public PersonDto() {
     }
 
     public PersonDto( Long id,
-                      Gender gender,
+                      GenderEnum gender,
                       String firstName,
                       String lastName,
                       LocalDate dateOfBirth,
@@ -77,11 +82,11 @@ public class PersonDto{
         this.id = id;
     }
 
-    public Gender getGender() {
+    public GenderEnum getGender() {
         return gender;
     }
 
-    public void setGender( Gender gender ) {
+    public void setGender( GenderEnum gender ) {
         this.gender = gender;
     }
 

@@ -65,7 +65,7 @@ public class PersonController {
             return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
         } else {
             personService.createPerson( personDto );
-//            Create addressRepo for this persn
+//            Create addressRepo for this person
 //            addressService.createAddres()
             return new ResponseEntity<>( "Person added to systeem", HttpStatus.CREATED );
         }

@@ -70,7 +70,6 @@ public class PersonServiceImpl implements PersonService {
             addressRepository.save(addr);
 
             return personDto;
-
     }
 
     @Override
@@ -97,7 +96,7 @@ public class PersonServiceImpl implements PersonService {
             p.setDateOfBirth( dto.getDateOfBirth() );
             p.setEmail( dto.getEmail() );
             p.setPhone( dto.getPhone() );
-            p.setMembership( dto.getMembership() );
+//            p.setMembership( dto.getMembership() );
             p.setPilotLicense( dto.getPilotLicense() );
             personRepository.save( p );
         } else {
@@ -117,7 +116,7 @@ public class PersonServiceImpl implements PersonService {
             var m = optionalMembership.get();
             var p = optionalPerson.get();
 
-            p.setMembership( m );
+//            p.setMembership( m );
             personRepository.save( p );
         } else {
             throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
@@ -177,7 +176,7 @@ public class PersonServiceImpl implements PersonService {
         dto.setEmail( p.getEmail() );
         dto.setPhone( p.getPhone() );
         dto.setPilotLicense( p.getPilotLicense() );
-        dto.setMembership( p.getMembership() );
+//        dto.setMembership( p.getMembership() );
         return dto;
     }
 
@@ -194,7 +193,7 @@ public class PersonServiceImpl implements PersonService {
         p.setEmail( dto.getEmail() );
         p.setPhone( dto.getPhone() );
         p.setPilotLicense( dto.getPilotLicense() );
-        p.setMembership( dto.getMembership() );
+//        p.setMembership( dto.getMembership() );
         return p;
     }
 }

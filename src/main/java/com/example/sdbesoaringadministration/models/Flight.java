@@ -11,12 +11,11 @@
 
 package com.example.sdbesoaringadministration.models;
 
-
+import com.example.sdbesoaringadministration.enums.FlightTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity(name = "Flight")
 @Table(name = "FLIGHTS")
@@ -35,12 +34,18 @@ public class Flight {
     @Column
     private long timeFlown;
 
+    @Enumerated(EnumType.STRING)
     @Column
-    private Boolean instructionFlight;
+    private FlightTypeEnum flightType;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "starting_methode_id",
+            referencedColumnName = "id")
+    private StartingMethode startingMethode;
 
     @Column
     private String remarks;
-
 
     @JsonIgnore
     @OneToOne(mappedBy = "flight")
@@ -55,12 +60,6 @@ public class Flight {
             name = "plane_id",
             referencedColumnName = "id")
     private Plane plane;
-
-    @ManyToOne
-    @JoinColumn(
-            name = "starting_methode_id",
-            referencedColumnName = "id")
-    private StartingMethode startingMethode;
 
     @ManyToOne
     @JoinColumn(name = "passenger_id",
@@ -115,13 +114,6 @@ public class Flight {
         this.timeFlown = timeFlown;
     }
 
-    public Boolean getInstructionFlight() {
-        return instructionFlight;
-    }
-
-    public void setInstructionFlight( Boolean instructionFlight ) {
-        this.instructionFlight = instructionFlight;
-    }
 
     public String getRemarks() {
         return remarks;
@@ -185,6 +177,14 @@ public class Flight {
 
     public void setBilledPerson( Person billedPerson ) {
         this.billedPerson = billedPerson;
+    }
+
+    public FlightTypeEnum getFlightType() {
+        return flightType;
+    }
+
+    public void setFlightType( FlightTypeEnum flightType ) {
+        this.flightType = flightType;
     }
 
 

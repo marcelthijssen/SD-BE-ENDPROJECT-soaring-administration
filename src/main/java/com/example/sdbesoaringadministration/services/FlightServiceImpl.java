@@ -14,6 +14,7 @@ package com.example.sdbesoaringadministration.services;
 import com.example.sdbesoaringadministration.dtos.FlightDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Flight;
+import com.example.sdbesoaringadministration.enums.FlightTypeEnum;
 import com.example.sdbesoaringadministration.models.Invoice;
 import com.example.sdbesoaringadministration.repositories.*;
 import org.springframework.http.HttpStatus;
@@ -94,7 +95,7 @@ public class FlightServiceImpl implements FlightService {
             fl.setTimeStart( dto.getTimeStart() );
             fl.setTimeEnd( dto.getTimeEnd() );
             fl.setTimeFlown( dto.getTimeFlown() );
-            fl.setInstructionFlight( dto.getInstructionFlight() );
+            fl.setFlightType( dto.getFlightType() );
             fl.setRemarks( dto.getRemarks() );
             fl.setPlane( dto.getPlane() );
             fl.setAirportStart( dto.getAirportStart() );
@@ -216,7 +217,7 @@ public class FlightServiceImpl implements FlightService {
     public FlightDto assignInstructionFlightToFlight( Long flight_id, FlightDto dto ) {
         if ( flightRepository.findById( flight_id ).isPresent() ) {
             Flight fl = flightRepository.findById( flight_id ).get();
-            fl.setInstructionFlight( dto.getInstructionFlight() );
+            fl.setFlightType( dto.getFlightType() );
 
             flightRepository.save( fl );
             return dto;
@@ -238,10 +239,10 @@ public class FlightServiceImpl implements FlightService {
         flight.setTimeEnd( ( LocalDateTime.now() ) );
         flight.setTimeFlown( calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) ); // calculating adding timeFlown
 
-        if ( !flight.getInstructionFlight() ) {
-            flight.setBilledPerson( flight.getCaptain() );
-        } else {
+        if ( flight.getFlightType() == FlightTypeEnum.FLIGHT_TYPE_2 ) {
             flight.setBilledPerson( flight.getPassenger() );
+        } else {
+            flight.setBilledPerson( flight.getCaptain() );
         }
         flightRepository.save( flight );
     }
@@ -335,7 +336,7 @@ public class FlightServiceImpl implements FlightService {
         dto.setTimeStart( fl.getTimeStart() );
         dto.setTimeEnd( fl.getTimeEnd() );
         dto.setTimeFlown( fl.getTimeFlown() );
-        dto.setInstructionFlight( fl.getInstructionFlight() );
+        dto.setFlightType( fl.getFlightType() );
         dto.setRemarks( fl.getRemarks() );
         dto.setPlane( fl.getPlane() );
         dto.setAirportStart( fl.getAirportStart() );
