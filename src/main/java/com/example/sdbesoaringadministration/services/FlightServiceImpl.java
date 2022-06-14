@@ -92,6 +92,7 @@ public class FlightServiceImpl implements FlightService {
         if ( flightRepository.findById( flight_id ).isPresent() ) {
             Flight fl = flightRepository.findById( flight_id ).get();
 
+            fl.setId(dto.getId());
             fl.setTimeStart( dto.getTimeStart() );
             fl.setTimeEnd( dto.getTimeEnd() );
             fl.setTimeFlown( dto.getTimeFlown() );
@@ -239,7 +240,7 @@ public class FlightServiceImpl implements FlightService {
         flight.setTimeEnd( ( LocalDateTime.now() ) );
         flight.setTimeFlown( calculateTimeFlown( flight.getTimeStart(), flight.getTimeEnd() ) ); // calculating adding timeFlown
 
-        if ( flight.getFlightType() == FlightTypeEnum.FLIGHT_TYPE_2 ) {
+        if ( flight.getFlightType() == FlightTypeEnum.INSTRUCTION_FLIGHT ) {
             flight.setBilledPerson( flight.getPassenger() );
         } else {
             flight.setBilledPerson( flight.getCaptain() );

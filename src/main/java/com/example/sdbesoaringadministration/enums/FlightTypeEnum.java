@@ -5,22 +5,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum FlightTypeEnum {
-    FLIGHT_TYPE_1( 1, "Checkflight plane" ),
-    FLIGHT_TYPE_2( 2, "Instruction flight" ),
-    FLIGHT_TYPE_3( 3, "Private flight" ),
-    FLIGHT_TYPE_4( 4, "Checkflight pilot" );
 
-    private final int flightTypeNum;
+    CHECK_FLIGHT_PLANE( "Checkflight plane" ),
+    FLIGHT_MEMBER( "Checkflight plane" ),
+    INSTRUCTION_FLIGHT( "Instruction flight" ),
+    PRIVATE_FLIGHT   ( "Private flight" ),
+    CHECK_FLIGHT_MEMBER( "Checkflight pilot" );
+
     private final String flightTypeName;
 
-    FlightTypeEnum( int flightTypeNum, String flightTypeName ) {
-        this.flightTypeNum = flightTypeNum;
+    FlightTypeEnum( String flightTypeName ) {
         this.flightTypeName = flightTypeName;
     }
 
-    public int getFlightTypeNum() {
-        return flightTypeNum;
-    }
 
     @JsonValue
      public String getFlightTypeName() {
