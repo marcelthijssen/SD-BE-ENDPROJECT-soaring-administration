@@ -3,7 +3,6 @@
  *
  * Version: v0.1
  *
- * Copyright
  *
  * Controller of the endpoints for '/flights
  * GET / POST / PUT / DELETE

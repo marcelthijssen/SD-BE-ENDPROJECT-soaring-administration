@@ -3,7 +3,6 @@
  *
  * Version: v0.1
  *
- * Copyright
  *
  * Managing the endpoint from /airports
  * GET / POST / PUT / DELETE

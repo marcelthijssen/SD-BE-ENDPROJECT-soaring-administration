@@ -3,7 +3,6 @@
  *
  * Version: v0.1
  *
- * Copyright
  *
  * Extends JpaRepository and communicates with database column 'airports'
  *

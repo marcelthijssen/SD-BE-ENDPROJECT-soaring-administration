@@ -3,7 +3,6 @@
  *
  * Version: v0.1
  *
- * Copyright
  *
  * Create an object of Person
  *

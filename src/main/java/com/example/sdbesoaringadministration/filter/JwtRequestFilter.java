@@ -2,7 +2,6 @@
  *
  * Version: v0.1
  *
- * Copyright
  *
  * JwtRequestFilter
  */

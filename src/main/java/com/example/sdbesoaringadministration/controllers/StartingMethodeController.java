@@ -3,7 +3,6 @@
  *
  * Version: v0.1
  *
- * Copyright
  *
  * Controller of endpoints from '/startingmethodes'
  * GET / POST / PUT / DELETE

@@ -1,7 +1,6 @@
 /*
  * Version: v0.1
  *
- * Copyright
  *
  * Management of endpoints of AuthenticationController
  * Get /Authenticated

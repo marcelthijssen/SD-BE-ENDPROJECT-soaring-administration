@@ -1,7 +1,6 @@
 /*
  * Version: v0.1
  *
- * Copyright
  *
  * Controller of endpoint from '/users'
  * GET / POST / PUT / DELETE
