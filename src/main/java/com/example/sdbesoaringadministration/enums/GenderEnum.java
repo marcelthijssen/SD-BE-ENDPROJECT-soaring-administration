@@ -16,7 +16,6 @@ private final String genderDisplayName;
         this.genderDisplayName = genderDisplayName;
     }
 
-
     @JsonValue
     public String getGenderName() {
         return genderDisplayName;

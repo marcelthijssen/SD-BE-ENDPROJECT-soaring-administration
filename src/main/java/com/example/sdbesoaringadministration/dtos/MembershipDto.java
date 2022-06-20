@@ -10,10 +10,8 @@
 
 package com.example.sdbesoaringadministration.dtos;
 
-import com.example.sdbesoaringadministration.models.Membership;
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
@@ -23,7 +21,7 @@ public class MembershipDto {
     private Long id;
     @NotBlank(message = "Must have a title")
     private String title;
-    @Column(precision = 10, scale = 2)
+
     @Digits(integer = 4, fraction = 2)
     private BigDecimal costsPerMonth;
 

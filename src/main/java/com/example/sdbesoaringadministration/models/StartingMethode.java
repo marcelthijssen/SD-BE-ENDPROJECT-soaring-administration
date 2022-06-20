@@ -19,6 +19,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "StartingMethode")
 @Table(name = "STARTING_METHODES")
@@ -93,5 +94,16 @@ public class StartingMethode {
         this.flights.add( flight );
     }
 
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        StartingMethode that = ( StartingMethode ) o;
+        return Objects.equals( id, that.id ) && Objects.equals( title, that.title ) && Objects.equals( unit, that.unit ) && Objects.equals( price, that.price ) && Objects.equals( flights, that.flights );
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash( id, title, unit, price, flights );
+    }
 }

@@ -1,10 +1,8 @@
 package com.example.sdbesoaringadministration.dtos;
 
-import com.example.sdbesoaringadministration.models.Membership;
 import com.example.sdbesoaringadministration.models.Person;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 
 public class AddressDto {
     private long id;

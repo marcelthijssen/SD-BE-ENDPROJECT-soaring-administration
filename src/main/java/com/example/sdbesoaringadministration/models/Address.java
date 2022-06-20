@@ -3,6 +3,7 @@ package com.example.sdbesoaringadministration.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "Address")
 @Table(name = "ADDRESSES")
@@ -85,5 +86,18 @@ public class Address {
 
     public void setPerson( Person person ) {
         this.person = person;
+    }
+
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        Address address = ( Address ) o;
+        return Objects.equals( id, address.id ) && Objects.equals( streetName, address.streetName ) && Objects.equals( houseNumber, address.houseNumber ) && Objects.equals( postalcode, address.postalcode ) && Objects.equals( city, address.city ) && Objects.equals( country, address.country ) && Objects.equals( person, address.person );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( id, streetName, houseNumber, postalcode, city, country, person );
     }
 }

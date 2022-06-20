@@ -11,11 +11,12 @@ package com.example.sdbesoaringadministration.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "Plane")
 @Table(name = "PLANES")
@@ -174,4 +175,18 @@ public class Plane {
         this.technician = technician;
     }
 
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        Plane plane = ( Plane ) o;
+        return Objects.equals( id, plane.id ) && Objects.equals( callSign, plane.callSign ) && Objects.equals( brand, plane.brand ) && Objects.equals( type, plane.type ) && Objects.equals( registration, plane.registration ) && Objects.equals( twoSeater, plane.twoSeater ) && Objects.equals( privatePlane, plane.privatePlane ) && Objects.equals( minutePrice, plane.minutePrice ) && Arrays.equals( flightStatus, plane.flightStatus ) && Objects.equals( flights, plane.flights ) && Objects.equals( owner, plane.owner ) && Objects.equals( technician, plane.technician );
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash( id, callSign, brand, type, registration, twoSeater, privatePlane, minutePrice, flights, owner, technician );
+        result = 31 * result + Arrays.hashCode( flightStatus );
+        return result;
+    }
 }

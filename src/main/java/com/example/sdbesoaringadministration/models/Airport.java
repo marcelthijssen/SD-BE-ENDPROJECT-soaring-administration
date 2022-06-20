@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "Airport")
 @Table(name = "AIRPORTS")
@@ -76,5 +77,18 @@ public class Airport {
 
     public void setCountry( String country ) {
         this.country = country;
+    }
+
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        Airport airport = ( Airport ) o;
+        return Objects.equals( id, airport.id ) && Objects.equals( icao, airport.icao ) && Objects.equals( city, airport.city ) && Objects.equals( country, airport.country ) && Objects.equals( airportStart, airport.airportStart ) && Objects.equals( airportEnd, airport.airportEnd );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( id, icao, city, country, airportStart, airportEnd );
     }
 }

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity(name = "Flight")
 @Table(name = "FLIGHTS")
@@ -186,5 +187,16 @@ public class Flight {
         this.flightType = flightType;
     }
 
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        Flight flight = ( Flight ) o;
+        return timeFlown == flight.timeFlown && Objects.equals( id, flight.id ) && Objects.equals( timeStart, flight.timeStart ) && Objects.equals( timeEnd, flight.timeEnd ) && flightType == flight.flightType && Objects.equals( startingMethode, flight.startingMethode ) && Objects.equals( remarks, flight.remarks ) && Objects.equals( invoice, flight.invoice ) && Objects.equals( billedPerson, flight.billedPerson ) && Objects.equals( plane, flight.plane ) && Objects.equals( passenger, flight.passenger ) && Objects.equals( captain, flight.captain ) && Objects.equals( airportEnd, flight.airportEnd ) && Objects.equals( airportStart, flight.airportStart );
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash( id, timeStart, timeEnd, timeFlown, flightType, startingMethode, remarks, invoice, billedPerson, plane, passenger, captain, airportEnd, airportStart );
+    }
 }

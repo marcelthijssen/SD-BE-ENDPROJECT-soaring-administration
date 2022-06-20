@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "Person")
 @Table(name = "PERSONS")
@@ -176,5 +177,18 @@ public class Person {
 
     public void setGender( GenderEnum gender ) {
         this.gender = gender;
+    }
+
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        Person person = ( Person ) o;
+        return Objects.equals( id, person.id ) && gender == person.gender && Objects.equals( membership, person.membership ) && Objects.equals( firstName, person.firstName ) && Objects.equals( lastName, person.lastName ) && Objects.equals( dateOfBirth, person.dateOfBirth ) && Objects.equals( email, person.email ) && Objects.equals( phone, person.phone ) && Objects.equals( pilotLicense, person.pilotLicense ) && Objects.equals( address, person.address ) && Objects.equals( captain, person.captain ) && Objects.equals( passenger, person.passenger ) && Objects.equals( billedPerson, person.billedPerson ) && Objects.equals( owner, person.owner ) && Objects.equals( technician, person.technician );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( id, gender, membership, firstName, lastName, dateOfBirth, email, phone, pilotLicense, address, captain, passenger, billedPerson, owner, technician );
     }
 }
