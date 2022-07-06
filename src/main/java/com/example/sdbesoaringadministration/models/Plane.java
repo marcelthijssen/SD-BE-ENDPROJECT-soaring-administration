@@ -27,7 +27,7 @@ public class Plane {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String callSign;
 
     @Column
@@ -36,7 +36,7 @@ public class Plane {
     @Column
     private String type;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String registration;
 
     @Column
@@ -46,7 +46,7 @@ public class Plane {
     private Boolean privatePlane;
 
     @Column
-    private BigDecimal minutePrice;
+    private BigDecimal minutePrice = BigDecimal.valueOf( 0 );
     @Lob
 
     @Column

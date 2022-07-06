@@ -11,6 +11,8 @@ public interface AddressService {
 
     List<AddressDto> getAllAddresses();
 
+//    void addAddressToPerson( Long person_id, AddressDto addressDto );
+
     //     AddressDto getAddressByPerson_id( Long person_id );
 //    void updateAddress( Address address );
 //

@@ -9,6 +9,7 @@
 
 package com.example.sdbesoaringadministration.services;
 
+import com.example.sdbesoaringadministration.dtos.AddressDto;
 import com.example.sdbesoaringadministration.dtos.PersonDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ public interface PersonService {
 
     void addMembershipToPerson( Long person_id, Long membership_id );
 
-//    void addAddressToPerson( Long person_id, Long addressId);
+    void addAddressToPerson( Long person_id, AddressDto addressDto );
 
 //    void addAddressToPerson( Long person_id );
 

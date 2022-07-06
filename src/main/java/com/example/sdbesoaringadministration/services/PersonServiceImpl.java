@@ -10,6 +10,7 @@
 
 package com.example.sdbesoaringadministration.services;
 
+import com.example.sdbesoaringadministration.dtos.AddressDto;
 import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.models.Address;
@@ -61,14 +62,14 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto createPerson( PersonDto personDto ) {
-            Person p = personDtoToPerson( personDto );
-            personRepository.save( p );
+        Person p = personDtoToPerson( personDto );
+        personRepository.save( p );
 
-            Address addr = new Address();
-            addr.setId( p.getId());
-            addressRepository.save(addr);
+        Address addr = new Address();
+        addr.setId( p.getId() );
+        addressRepository.save( addr );
 
-            return personDto;
+        return personDto;
     }
 
     @Override
@@ -123,24 +124,63 @@ public class PersonServiceImpl implements PersonService {
     }
 
 
-//    @Override
-//    public void addAddressToPerson( Long person_id, Long addressId ) {
-//
-//        var optionalAddress = membershipRepository.findById( addressId );
-//        var optionalPerson = personRepository.findById( person_id );
-//
-//        if ( optionalAddress.isPresent() && optionalPerson.isPresent() ) {
-//            var m = optionalAddress.get();
-//            var p = optionalPerson.get();
-//
-//            p.setMembership( m );
-//            personRepository.save( p );
-//        } else {
-//            throw new RecordNotFoundException( "Person or membership bestaat niet", HttpStatus.NOT_FOUND );
-//        }
-//    }
+    @Override
+    public void addAddressToPerson( Long person_id, AddressDto dto ) {
 
+        var optionalAddress = addressRepository.findById( person_id );
+        var optionalPerson = personRepository.findById( person_id );
 
+        if ( optionalAddress.isPresent() && optionalPerson.isPresent() ) {
+            var a = optionalAddress.get();
+            var p = optionalPerson.get();
+
+            a.setId( p.getId() );
+            a.setStreetName( dto.getStreetName() );
+            a.setHouseNumber( dto.getHouseNumber() );
+            a.setCity( dto.getCity() );
+            a.setPostalcode( dto.getPostalcode() );
+            a.setCountry( dto.getCountry() );
+            a.setPerson( p );
+
+            p.setAddress( a );
+            personRepository.save( p );
+        } else {
+            throw new RecordNotFoundException( "Person or address not found", HttpStatus.NOT_FOUND );
+        }
+    }
+
+/*
+   public ResponseEntity<String> createInvoiceFromFLight( Long flight_id ) {
+        var optionalFlight = flightRepository.findById( flight_id );
+        var optionalInvoice = invoiceRepository.findById( flight_id );
+        var flight = optionalFlight.get();
+
+        if ( optionalInvoice.get().getId().equals( optionalFlight.get().getId() ) ) {
+            var invoice = optionalInvoice.get();
+
+        invoice.setId( flight.getId() );
+            invoice.setCreationDate( ( LocalDate.now() ) );
+            invoice.setBilledPerson( flight.getBilledPerson() );
+            invoice.setAmount( calculateCostsOfFlight( flight ) );
+            invoice.setId( flight.getId() );
+            invoice.setFlight( flight );
+            invoiceRepository.save( invoice );
+
+        } else {
+            Invoice invoice = new Invoice();
+            invoice.setId( flight.getId() );
+            invoice.setCreationDate( ( LocalDate.now() ) );
+            invoice.setBilledPerson( flight.getBilledPerson() );
+            invoice.setAmount( calculateCostsOfFlight( flight ) );
+            invoice.setId( flight.getId() );
+            invoice.setFlight( flight );
+            invoiceRepository.save( invoice );
+
+            return new ResponseEntity<>( "invoice created", HttpStatus.CREATED );
+        }
+        return new ResponseEntity<>( HttpStatus.OK );
+    }
+ */
 //    @Override
 //    public void addAddressToPerson( Long person_id ) {
 // check if person_id has an address assigned. 

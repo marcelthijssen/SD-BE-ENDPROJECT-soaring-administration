@@ -72,34 +72,42 @@ INSERT INTO authorities (username, authority)
 VALUES ('user6', 'ROLE_USER');
 
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3001, 'MALE', 'Jeffrey', 'Johnson', '0612306345', '1994-08-19',  'sdbe@novi.nl', false, 4001);
+VALUES (3001, 'MALE', 'Jeffrey', 'Johnson', '0612345678', '1994-08-19',  'sdbe@novi.nl', false, 4001);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3002, 'FEMALE', 'Jan', 'van Westen', '0691256345', '1984-08-19',  'begins@mailadres.nl', false, 4002);
+VALUES (3002, 'OTHER', 'Jan', 'van Westen', '0612345678', '1984-08-19',  'begins@mailadres.nl', false, 4002);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3003, 'FEMALE', 'Fem', 'achternaam', '0634506109', '1974-08-19', 'fem@mailings.nl', true, 4003);
+VALUES (3003, 'FEMALE', 'Fem', 'achternaam', '0612345678', '1974-08-19', 'fem@mailings.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3004, 'MALE', 'Casper', 'Anders', '0634506109', '1984-08-19',  'begin@mailig.nl', true, 4004);
+VALUES (3004, 'MALE', 'Casper', 'Anders', '0612345678', '1984-08-19',  'begin@mailig.nl', true, 4004);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3005, 'FEMALE', 'Nicole', 'Adriaansen', '0634506109', '1994-01-01', 'Tonnie@mailig.nl', null, 4003);
+VALUES (3005, 'FEMALE', 'Nicole', 'Adriaansen', '0612345678', '1994-01-01', 'Tonnie@mailig.nl', null, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3006, 'MALE', 'jan', 'Pietersen', '0634506109', '2004-01-01', 'begfin@mailig.nl', true, 4003);
+VALUES (3006, 'MALE', 'jan', 'Pietersen', '0612345678', '2004-01-01', 'begfin@mailig.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3007, 'FEMALE', 'Johan', 'de Beek', '0634506109', '2008-12-01', 'begffin@mailig.nl', true, 4003);
+VALUES (3007, 'FEMALE', 'Johan', 'de Beek', '0612345678', '2008-12-01', 'begffin@mailig.nl', true, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3008, 'MALE', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willie@wortel.nl', false, 4003);
+VALUES (3008, 'MALE', 'Wilie', 'Wortel', '0612345678', '2008-12-01', 'willie@wortel.nl', false, 4003);
 INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, email, pilot_license, membership_id)
-VALUES (3009, 'MALE', 'Wilie', 'Wortel', '0634506109', '2008-12-01', 'willfie@wortel.nl', false, 4003);
+VALUES (3009, 'MALE', 'Wilie', 'Wortel', '0612345678', '2008-12-01', 'willfie@wortel.nl', false, 4003);
 
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
-VALUES ( 8001, 'Breda', 'Nederland', 12, '4811AA', 'Hobokenstraat', '3001');
+VALUES ( 3001, 'Breda', 'Nederland', 12, '4811AA', 'Hobokenstraat', '3001');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
-VALUES ( 8002, 'Tilburg', 'Nederland', 23, '4811AA', 'Straatnaam', '3004');
+VALUES ( 3002, 'Tilburg', 'Nederland', 23, '4813AS', 'Straatnaam', '3002');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
-VALUES ( 8003, 'Houten', 'Nederland', 34, '4811AA', 'Anderestraat', '3005');
+VALUES ( 3003, 'Goirle', 'Nederland', 56, '4811LK', 'Oude straatnaam','3003');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
-VALUES ( 8004, 'Rotterdam', 'Nederland', 45, '4811AA', 'Diestraat','3006');
+VALUES ( 3004, 'Goirle', 'Nederland', 56, '4811LK', 'Oude straatnaam','3004');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
-VALUES ( 8005, 'Goirle', 'Nederland', 56, '4811AA', 'Oude straatnaam','3007');
+VALUES ( 3005, 'Houten', 'Nederland', 34, '4811BB', 'Anderestraat', '3005');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 3006, 'Rotterdam', 'Nederland', 45, '4811XW', 'Diestraat','3006');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 3007, 'Goirle', 'Nederland', 56, '4811LK', 'Oude straatnaam','3007');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 3008, 'Goirle', 'Nederland', 56, '4811LK', 'Oude straatnaam','3008');
+INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
+VALUES ( 3009, 'Goirle', 'Nederland', 56, '4811LK', 'Oude straatnaam','3009');
 
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
@@ -121,7 +129,7 @@ INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, privat
 VALUES (5006, 'k8c', 'Alexander Schleicher', 'Rhone', 'PH-152', false, true, 3003, 3001, null, 0);
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
-VALUES (5007, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-740', false, false, 3002, 3003, null, 0.25);
+VALUES (5007, 'G8', 'Rolladen Schneider', 'LS-4', 'PH-742', false, false, 3002, 3003, null, 0.25);
 INSERT INTO planes (id, call_sign, brand, type, registration, two_seater, private_plane, owner_id, technician_id,
                     flight_status, minute_price)
 VALUES (5008, 'G9', 'Grob', '2b', 'PH-1254', false, true, 3007, 3007, null, 0);

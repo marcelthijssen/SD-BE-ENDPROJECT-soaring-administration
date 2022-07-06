@@ -41,31 +41,6 @@ public class AddressServiceImpl implements AddressService {
 //            }
 //        }
 
-// TODO: Create an adres with the same id as the person setAddressId( getAddressId(getPersonId))??
-
-//       @Override
-//        public Address createAddress ( AddressDto addressDto ){
-//            Address address = new Address();
-//
-//            address.setId( addressDto.getId() );
-//
-//            addressRepository.save( address );
-//
-//            return address;
-//        }
-//
-//        @Override
-//        public void updateAddress ( Long id ){
-//            getAddressByPerson_id( address.getId() );
-//            addressRepository.save( address );
-//        }
-//
-//        @Override
-//        public void deleteAddressById ( Long addressId ){
-//            getAddressByPerson_id( addressId );
-//            addressRepository.deleteById( addressId );
-//            new ResponseEntity<>( "Address deleted", HttpStatus.OK );
-//        }
 
 
         public static Address addressDtoToAddress ( AddressDto dto ){

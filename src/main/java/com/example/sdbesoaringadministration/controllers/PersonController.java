@@ -12,6 +12,7 @@
 
 package com.example.sdbesoaringadministration.controllers;
 
+import com.example.sdbesoaringadministration.dtos.AddressDto;
 import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
 import com.example.sdbesoaringadministration.services.AddressService;
@@ -31,6 +32,7 @@ public class PersonController {
 
     private final PersonService personService;
     private final AddressService addressService;
+
     public PersonController( PersonService personService, AddressService addressService ) {
         this.personService = personService;
         this.addressService = addressService;
@@ -71,7 +73,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/{person_id}")
-    public ResponseEntity<Object> deletePersonById( @PathVariable("person_id") Long person_id ) {
+    public ResponseEntity<Object> deletePersonById( @PathVariable(name = "person_id") Long person_id ) {
         personService.deletePersonById( person_id );
         return new ResponseEntity<>( "Person deleted from systeem", HttpStatus.ACCEPTED );
     }
@@ -82,26 +84,34 @@ public class PersonController {
     }
 
     @PutMapping("/{person_id}/membership/{membership_id}")
-    public ResponseEntity<Object> addMembershipToPerson( @PathVariable("person_id") Long person_id, @PathVariable("membership_id") Long membership_id ) {
+    public ResponseEntity<Object> addMembershipToPerson( @PathVariable(name = "person_id") Long person_id, @PathVariable("membership_id") Long membership_id ) {
         personService.addMembershipToPerson( person_id, membership_id );
 
         return new ResponseEntity<>( "Membership added to a person", HttpStatus.OK );
     }
 
-//    @PutMapping("/{person_id}/address")
+//    @PutMapping("")
 //    public ResponseEntity<Object> addAddressToPerson( @PathVariable("person_id") Long person_id ) {
 //        personService.addAddressToPerson( person_id );
 //
 //        return new ResponseEntity<>( "Address added to a person", HttpStatus.OK );
 //    }
 
-
-    //         assign owner to plane
-//    @PutMapping("/{person_id}/address/{addressId}")
-//    public ResponseEntity<Object> addAddressToPerson( @PathVariable("person_id") Long person_id, @PathVariable("addressId") Long addressId ) {
-//        personService.addAddressToPerson( person_id, addressId );
-//        return new ResponseEntity<>( "Owner added to plane", HttpStatus.ACCEPTED );
-//    }
-
-    
+    @PutMapping("/{person_id}/address")
+    public ResponseEntity<Object> addAddressToPerson( @PathVariable(name = "person_id") Long person_id, @Valid @RequestBody AddressDto addressDto/*, BindingResult br*/ ) {
+//        if ( br.hasErrors() ) {
+//            StringBuilder sb = new StringBuilder();
+//            for ( FieldError fe : br.getFieldErrors() ) {
+//                sb.append( fe.getDefaultMessage() );
+//                sb.append( "\n" );
+//            }
+//            return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
+//        } else {
+        personService.addAddressToPerson( person_id, addressDto );
+//            Create addressRepo for this person
+//            addressService.createAddres()
+        return new ResponseEntity<>( "Address added to Person", HttpStatus.CREATED );
+    }
 }
+
+

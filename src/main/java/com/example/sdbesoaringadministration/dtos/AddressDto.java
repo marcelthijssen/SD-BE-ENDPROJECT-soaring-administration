@@ -6,29 +6,30 @@ import javax.validation.constraints.NotBlank;
 
 public class AddressDto {
     private long id;
-    @NotBlank(message = "Streetname must be added")
+    //    @NotBlank(message = "Streetname must be added")
     private String streetName;
-    @NotBlank(message = "HouseNumber must be added")
+    //    @NotBlank(message = "HouseNumber must be added")
     private String houseNumber;
     private String postalcode;
-    @NotBlank(message = "City must be added")
+    //    @NotBlank(message = "City must be added")
     private String city;
-    @NotBlank(message = "Country must be added")
+    //    @NotBlank(message = "Country must be added")
     private String country;
 
     private Person person;
 
-    public AddressDto(){}
+    public AddressDto() {
+    }
 
     public AddressDto( Long id,
-                      String streetName,
-                      String houseNumber,
-                      String postalcode,
-                      String city,
-                      String country,
+                       String streetName,
+                       String houseNumber,
+                       String postalcode,
+                       String city,
+                       String country,
                        Person person
     ) {
-        this.id=id;
+        this.id = id;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.postalcode = postalcode;
