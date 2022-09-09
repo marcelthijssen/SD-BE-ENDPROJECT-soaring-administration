@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Address {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column
@@ -100,4 +100,5 @@ public class Address {
     public int hashCode() {
         return Objects.hash( id, streetName, houseNumber, postalcode, city, country, person );
     }
+
 }

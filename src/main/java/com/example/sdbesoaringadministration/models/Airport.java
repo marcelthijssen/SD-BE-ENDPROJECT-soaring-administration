@@ -91,4 +91,6 @@ public class Airport {
     public int hashCode() {
         return Objects.hash( id, icao, city, country, airportStart, airportEnd );
     }
+
+
 }

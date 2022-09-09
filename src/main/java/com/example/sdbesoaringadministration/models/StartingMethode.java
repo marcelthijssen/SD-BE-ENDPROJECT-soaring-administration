@@ -81,7 +81,6 @@ public class StartingMethode {
         this.id = id;
     }
 
-
     public void setFlight( List<Flight> flights ) {
         this.flights = flights;
     }
@@ -106,4 +105,6 @@ public class StartingMethode {
     public int hashCode() {
         return Objects.hash( id, title, unit, price, flights );
     }
+
+
 }

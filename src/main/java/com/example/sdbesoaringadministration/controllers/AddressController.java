@@ -33,7 +33,7 @@ public class AddressController {
 
         return new ResponseEntity<>( listAddressesDto, HttpStatus.OK);
     }
-
+//
 //    @GetMapping("/{person_id}")
 //    public ResponseEntity<Object> getAddressByPerson_id( @PathVariable(name = "addressId") Long person_id ) {
 //        try {
@@ -57,7 +57,7 @@ public class AddressController {
 //            addressService.createAddress( addressDto );
 ////            Create addressRepo for this person
 ////            addressService.createAddres()
-//            return new ResponseEntity<>( "Person added to systeem", HttpStatus.CREATED );
+//            return new ResponseEntity<>( "Address added to systeem", HttpStatus.CREATED );
 //        }
 //    }
 //
