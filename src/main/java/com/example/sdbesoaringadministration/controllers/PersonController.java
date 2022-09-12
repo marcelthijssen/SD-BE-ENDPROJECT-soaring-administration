@@ -15,7 +15,6 @@ package com.example.sdbesoaringadministration.controllers;
 import com.example.sdbesoaringadministration.dtos.AddressDto;
 import com.example.sdbesoaringadministration.dtos.PersonDto;
 import com.example.sdbesoaringadministration.exceptions.RecordNotFoundException;
-import com.example.sdbesoaringadministration.services.AddressService;
 import com.example.sdbesoaringadministration.services.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +30,9 @@ import java.util.List;
 public class PersonController {
 
     private final PersonService personService;
-    private final AddressService addressService;
 
-    public PersonController( PersonService personService, AddressService addressService ) {
+    public PersonController( PersonService personService ) {
         this.personService = personService;
-        this.addressService = addressService;
     }
 
     @GetMapping("")
@@ -67,7 +64,7 @@ public class PersonController {
         } else {
             personService.createPerson( personDto );
 //            Create addressRepo for this person
-//            addressService.createAddres()
+//            addressService.createAddres();
             return new ResponseEntity<>( "Person added to systeem", HttpStatus.CREATED );
         }
     }
@@ -90,27 +87,21 @@ public class PersonController {
         return new ResponseEntity<>( "Membership added to a person", HttpStatus.OK );
     }
 
-//    @PutMapping("")
-//    public ResponseEntity<Object> addAddressToPerson( @PathVariable("person_id") Long person_id ) {
-//        personService.addAddressToPerson( person_id );
-//
-//        return new ResponseEntity<>( "Address added to a person", HttpStatus.OK );
-//    }
-
     @PutMapping("/{person_id}/address")
-    public ResponseEntity<Object> addAddressToPerson( @PathVariable(name = "person_id") Long person_id, @Valid @RequestBody AddressDto addressDto/*, BindingResult br*/ ) {
-//        if ( br.hasErrors() ) {
-//            StringBuilder sb = new StringBuilder();
-//            for ( FieldError fe : br.getFieldErrors() ) {
-//                sb.append( fe.getDefaultMessage() );
-//                sb.append( "\n" );
-//            }
-//            return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
-//        } else {
-        personService.addAddressToPerson( person_id, addressDto );
+    public ResponseEntity<Object> addAddressToPerson( @PathVariable(name = "person_id") Long person_id, @Valid @RequestBody AddressDto addressDto, BindingResult br ) {
+        if ( br.hasErrors() ) {
+            StringBuilder sb = new StringBuilder();
+            for ( FieldError fe : br.getFieldErrors() ) {
+                sb.append( fe.getDefaultMessage() );
+                sb.append( "\n" );
+            }
+            return new ResponseEntity<>( sb.toString(), HttpStatus.BAD_REQUEST );
+        } else {
+            personService.addAddressToPerson( person_id, addressDto );
 //            Create addressRepo for this person
 //            addressService.createAddres()
-        return new ResponseEntity<>( "Address added to Person", HttpStatus.CREATED );
+            return new ResponseEntity<>( "Address added to Person", HttpStatus.CREATED );
+        }
     }
 }
 

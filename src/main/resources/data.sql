@@ -91,9 +91,9 @@ INSERT INTO persons (id, gender, first_name, last_name, phone, date_of_birth, em
 VALUES (3009, 'MALE', 'Wilie', 'Wortel', '0612345678', '2008-12-01', 'willfie@wortel.nl', false, 4003);
 
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
-VALUES ( 3001, 'Breda', 'Nederland', 12, '4811AA', 'Hobokenstraat', '3001');
+VALUES ( 3001, 'Breda', 'Nederland', 3001, '4811AA', 'Hobokenstraat', '3001');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
-VALUES ( 3002, 'Tilburg', 'Nederland', 23, '4813AS', 'Straatnaam', '3002');
+VALUES ( 3002, 'Tilburg', 'Nederland', 3002, '4813AS', 'Straatnaam', '3002');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
 VALUES ( 3003, 'Goirle', 'Nederland', 56, '4811LK', 'Oude straatnaam','3003');
 INSERT INTO ADDRESSES ( id, city, country, house_number, postalcode, street_name, person_id)
