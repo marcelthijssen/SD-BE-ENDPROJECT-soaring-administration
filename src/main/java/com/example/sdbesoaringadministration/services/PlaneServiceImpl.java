@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +59,8 @@ public class PlaneServiceImpl implements PlaneService {
     @Override
     public ResponseEntity<Object> createPlane( PlaneDto dto ) {
         Plane plane = planeDtoToPlane( dto );
-         this.planeRepository.save( plane );
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        this.planeRepository.save( plane );
+        return new ResponseEntity<>( HttpStatus.CREATED );
     }
 
     @Override
@@ -152,17 +153,18 @@ public class PlaneServiceImpl implements PlaneService {
     public static PlaneDto planeToPlaneDto( Plane pl ) {
         PlaneDto dto = new PlaneDto();
 
-            dto.setId( pl.getId() );
-            dto.setCallSign( pl.getCallSign() );
-            dto.setBrand( pl.getBrand() );
-            dto.setType( pl.getType() );
-            dto.setRegistration( pl.getRegistration() );
-            dto.setTwoSeater( pl.getTwoSeater() );
-            dto.setPrivatePlane( pl.getPrivatePlane() );
-            dto.setOwner( pl.getOwner() );
-            dto.setTechnician( pl.getTechnician() );
-            dto.setFlightStatus( pl.getFlightStatus() );
-            return dto;
+        dto.setId( pl.getId() );
+        dto.setCallSign( pl.getCallSign() );
+        dto.setBrand( pl.getBrand() );
+        dto.setType( pl.getType() );
+        dto.setRegistration( pl.getRegistration() );
+        dto.setTwoSeater( pl.getTwoSeater() );
+        dto.setMinutePrice( pl.getMinutePrice().setScale( 2, RoundingMode.FLOOR ) );
+        dto.setPrivatePlane( pl.getPrivatePlane() );
+        dto.setOwner( pl.getOwner() );
+        dto.setTechnician( pl.getTechnician() );
+        dto.setFlightStatus( pl.getFlightStatus() );
+        return dto;
 
     }
 
@@ -175,6 +177,7 @@ public class PlaneServiceImpl implements PlaneService {
         pl.setType( dto.getType() );
         pl.setRegistration( dto.getRegistration() );
         pl.setTwoSeater( dto.getTwoSeater() );
+        pl.setMinutePrice( dto.getMinutePrice().setScale(2, RoundingMode.FLOOR) );
         pl.setPrivatePlane( dto.getPrivatePlane() );
         pl.setOwner( dto.getOwner() );
         pl.setTechnician( dto.getTechnician() );

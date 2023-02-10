@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -157,7 +158,6 @@ public class Plane {
         this.flights.add( flight );
     }
 
-
     public Person getOwner( ) {
         return this.owner;
     }
@@ -165,7 +165,6 @@ public class Plane {
     public void setOwner( Person owner ) {
         this.owner = owner;
     }
-
 
     public Person getTechnician() {
         return technician;

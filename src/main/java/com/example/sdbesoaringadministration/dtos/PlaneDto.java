@@ -11,12 +11,12 @@
 package com.example.sdbesoaringadministration.dtos;
 
 import com.example.sdbesoaringadministration.models.Person;
-import com.example.sdbesoaringadministration.models.Plane;
-;
+
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Validated
 public class PlaneDto {
@@ -49,11 +49,11 @@ public class PlaneDto {
         this.type = type;
         this.registration = registration;
         this.twoSeater = twoSeater;
-        this.minutePrice=minutePrice;
+        this.minutePrice = minutePrice;
         this.privatePlane = privatePlane;
         this.owner = owner;
         this.technician = technician;
-        this.flightStatus=flightStatus;
+        this.flightStatus = flightStatus;
     }
 
     public Long getId() {
@@ -97,12 +97,10 @@ public class PlaneDto {
     }
 
     public BigDecimal getMinutePrice() {
-        return minutePrice;
+        return minutePrice.setScale( 2, RoundingMode.FLOOR );
     }
 
-    public void setMinutePrice( BigDecimal minutePrice ) {
-        this.minutePrice = minutePrice;
-    }
+    public void setMinutePrice( BigDecimal minutePrice ) { this.minutePrice = minutePrice;  }
 
     public Boolean getTwoSeater() {
         return this.twoSeater;
@@ -119,6 +117,7 @@ public class PlaneDto {
     public void setPrivatePlane( Boolean privatePlane ) {
         this.privatePlane = privatePlane;
     }
+
     public byte[] getFlightStatus() {
         return flightStatus;
     }

@@ -24,6 +24,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
